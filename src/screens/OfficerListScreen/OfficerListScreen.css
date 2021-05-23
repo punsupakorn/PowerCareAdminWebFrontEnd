@@ -1,0 +1,72 @@
+.working-content {
+    padding: 2rem 3rem;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .head-officerlist{
+    text-align: center;
+  }
+
+  .btn-list{
+    width: 200px
+  }
+
+  .btn-officerlist{ 
+    margin-left: 3rem;
+    background-color: #577eab;
+    font-size: 18;
+    border-radius: 4px;
+    width: 200px;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .date-picker-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .table-content {
+    text-align: start;
+    overflow: scroll;
+  }
+  
+  .table-grid {
+    display: grid;
+    grid-template-columns: 20% 40% 20% calc(20% - 3rem);
+    grid-gap: 1rem;
+  }
+  
+  .table-grid:not(:first-child) {
+    margin-top: 1rem;
+  }
+  
+  .table-grid.header,
+  .body-table {
+    background-color: #a5c3df;
+    padding: 1rem;
+    margin-bottom: 2px;
+    border-radius: 8px;
+    min-width: 40rem;
+  }
+  
+  .body-table {
+    display: flex;
+    flex-direction: column;
+    background-color: #ccdbea;
+  }
+  .menu-row {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .menu-row > .icon-link {
+    cursor: pointer;
+  }
+  
+  
