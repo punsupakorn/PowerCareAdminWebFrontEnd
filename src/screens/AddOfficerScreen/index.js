@@ -72,7 +72,7 @@ const AddOfficerScreen = ()=> {
     <div className="content-body">
       <div className = "head-addofficer">
       <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
-      <h2>เพิ่มบุคคลากร</h2>
+      <h2>เพิ่มบุคลากร</h2>
       <Link to ="/officerlistscreen"><button className="btn btn-officerlistscreen"> รายชื่อเจ้าหน้าที่</button></Link>
       
       </div>
