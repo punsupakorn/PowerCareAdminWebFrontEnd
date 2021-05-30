@@ -3,24 +3,33 @@ import { Redirect } from 'react-router-dom'
 import Logo from "../../icons/logo";
 import LogOutIcon from "../../icons/exit";
 import NotificationIcon from "../../icons/bell";
-import firebaseConfig from "../../config"
 import { AuthContext } from "../../Auth"
 import { useState } from "react";
-
 import NotificationComponent, {
   NotificationItem,
 } from "../NotificationComponent";
-
 import "./TopBar.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import firebaseconfig from '../../config';
-// import { useState } from "react";
 
 
 const App = () => {
+  
   const [isShowNoti, setShowNoti] = useState(false);
-
   const { currentUser } = useContext(AuthContext);
+  const notificationMockupData = [
+    {
+      title: "การแจ้งเตือน",
+      detail: "ตัวอย่างการแจ้งเตือน",
+      readed: true,
+    },
+    {
+      title: "การแจ้งเตือน",
+      detail:
+        "ตัวอย่างการแจ้งเตือนที่ยังไม่ได้อ่าน",
+      readed: false,
+    }
+  ];
 
     if (!currentUser) {
         return <Redirect to="/" />;
@@ -85,17 +94,3 @@ const App = () => {
   };
   
   export default App;
-  
-  const notificationMockupData = [
-    {
-      title: "การแจ้งเตือน",
-      detail: "ตัวอย่างการแจ้งเตือน",
-      readed: true,
-    },
-    {
-      title: "การแจ้งเตือน",
-      detail:
-        "ตัวอย่างการแจ้งเตือนที่ยังไม่ได้อ่าน",
-      readed: false,
-    }
-  ];

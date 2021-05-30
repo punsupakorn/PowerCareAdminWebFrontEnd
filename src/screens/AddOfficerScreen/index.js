@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import Powercarepic from "../../img/Powerpuff.png";
 import "./AddOfficerScreen.css";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import firebaseConfig from "../../config";
 
-
-const AddOfficerScreen = ()=> {
-
+const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Phone, setPhone] = useState("");
@@ -70,42 +68,40 @@ const AddOfficerScreen = ()=> {
 
   return (
     <div className="content-body">
-      <div className = "head-addofficer">
-      <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
-      <h2>เพิ่มบุคลากร</h2>
-      <Link to ="/officerlistscreen"><button className="btn btn-officerlistscreen"> รายชื่อเจ้าหน้าที่</button></Link>
-      
+      <div className="head-addofficer">
+        <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
+        <h2>เพิ่มบุคลากร</h2>
+        <Link to="/officerlistscreen">
+          <button className="btn btn-officerlistscreen">
+            {" "}
+            รายชื่อเจ้าหน้าที่
+          </button>
+        </Link>
       </div>
-      
-      {/* Input Date */}
-    
       <div className="addofficer-content">
         <center>
-        <div className="mb-3">
-          <label for="doctor-name"> ชื่อจริง : </label>
-          <input
-            type="text"
-            name="FirstName"
-            className="form-control"
-            placeholder="โปรดกรอกชื่อจริง"
-            onChange={handleFirstName}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label for="doctor-name"> นามสกุล : </label>
-          <input
-            type="text"
-            name="LastName"
-            className="form-control"
-            placeholder="โปรดกรอกนามสกุล"
-            onChange={handleLastName}
-            required
-          />
-
+          <div className="mb-3">
+            <label for="doctor-name"> ชื่อจริง : </label>
+            <input
+              type="text"
+              name="FirstName"
+              className="form-control"
+              placeholder="โปรดกรอกชื่อจริง"
+              onChange={handleFirstName}
+              required
+            />
           </div>
-
+          <div className="mb-3">
+            <label for="doctor-name"> นามสกุล : </label>
+            <input
+              type="text"
+              name="LastName"
+              className="form-control"
+              placeholder="โปรดกรอกนามสกุล"
+              onChange={handleLastName}
+              required
+            />
+          </div>
           <div className="mb-3">
             <label for="doctor-name"> เบอร์ติดต่อ : </label>
             <input
@@ -119,7 +115,12 @@ const AddOfficerScreen = ()=> {
           </div>
           <div className="mb-3">
             <label for="position"> ตำแหน่ง : </label>
-            <select id="position" name='Position' className="form-control" onClick={handlePosition}>
+            <select
+              id="position"
+              name="Position"
+              className="form-control"
+              onClick={handlePosition}
+            >
               <option disabled selected value>
                 {" "}
                 โปรดระบุตำแหน่งงาน
@@ -129,7 +130,6 @@ const AddOfficerScreen = ()=> {
                 Doctor{" "}
               </option>
               <option className="option" value="Admin">
-
                 Admin
               </option>
             </select>
@@ -138,7 +138,7 @@ const AddOfficerScreen = ()=> {
             <label for="doctor-name"> Email : </label>
             <input
               type="email"
-              name = "Email"
+              name="Email"
               className="form-control"
               placeholder="โปรดกรอก Email"
               onChange={handleEmail}
@@ -150,17 +150,24 @@ const AddOfficerScreen = ()=> {
             <label for="doctor-name"> Password : </label>
             <input
               type="password"
-              name ="Password"
+              name="Password"
               className="form-control"
               placeholder="โปรดกรอก password (ไม่ต่ำกว่า 6 ตัวอักษร)"
               onChange={handlePassword}
               required
             />
           </div>
-          <button onClick={handleSubmit} type='submit' className="btn btn-addofficer"> เพิ่มบุคคลากร</button>
-          </center>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="btn btn-addofficer"
+          >
+            {" "}
+            เพิ่มบุคคลากร
+          </button>
+        </center>
       </div>
     </div>
   );
-}
-export default AddOfficerScreen ;
+};
+export default AddOfficerScreen;

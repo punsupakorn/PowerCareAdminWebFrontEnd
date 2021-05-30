@@ -1,9 +1,6 @@
 import { useState } from "react";
 import "./InputNumber.css";
 
-
-
-
 export default function InputNumber({
   max,
   min,
@@ -12,7 +9,10 @@ export default function InputNumber({
   style,
   disable,
 }) {
+
   const [number, setNumber] = useState(value || 0);
+  const styleDisable = { backgroundColor: "#777", color: "#999" };
+
   const increase = () => {
     onChange(number + 1);
     if (disable) return;
@@ -21,6 +21,7 @@ export default function InputNumber({
     } else if (number < max) setNumber(number + 1);
     else setNumber(number);
   };
+  
   const decrease = () => {
     onChange(number + 1);
     if (disable) return;
@@ -30,7 +31,6 @@ export default function InputNumber({
     else setNumber(number);
   };
 
-  const styleDisable = { backgroundColor: "#777", color: "#999" };
   return (
     <div className="input-number-content" style={style}>
       <span

@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import "./ScheduleScreen.css";
 import axios from "axios";
 
-export default function ScheduleScreen() {
-  const [doctor, setDoctor] = useState([]); //getAllDoctor จาก BackEnd
-  const [name, setName] = useState(""); //handleชื่อหมอเพื่องส่งไปหลังบ้าน
-  const [date, setDate] = useState(""); //handleวันที่
-  const [time, setTime] = useState(""); //handleเวลา
-
-
+const ScheduleScreen=()=> {
+  const [doctor, setDoctor] = useState([]); 
+  const [name, setName] = useState(""); 
+  const [date, setDate] = useState(""); 
+  const [time, setTime] = useState(""); 
   const timeList = [
     "08:30 - 09:00",
     "09:00 - 09:30",
@@ -21,6 +19,7 @@ export default function ScheduleScreen() {
     "14:00 - 14:30",
     "14:30 - 15:00",
     "15:00 - 15:00",
+    "15:00 - 15:30",
   ];
 
   useEffect(() => {
@@ -128,7 +127,7 @@ export default function ScheduleScreen() {
             <div className="time-picker">
               <p>คุณเลือก {thaiDate}</p>
               <div className="time-picker-content">
-                {timeList.map((item, key) => (
+                {timeList.map((item) => (
                   <label className="time-item">
                     <input
                       type="checkbox"
@@ -136,12 +135,13 @@ export default function ScheduleScreen() {
                       onChange={handleTime}
                       value={item}
                     />
-                    <span
+                    {item} 
+                    {/* <span
                       className="check"
                       key={key}
                       style={time === item ? styleActive : null}
-                    />
-                    {item}
+                    /> */}
+
                   </label>
                 ))}
               </div>
@@ -155,3 +155,4 @@ export default function ScheduleScreen() {
     </div>
   );
 }
+export default ScheduleScreen ;

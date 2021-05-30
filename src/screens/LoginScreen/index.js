@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import Powercarepic from "../../img/Powerpuff.png";
 import "./Login.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -6,9 +6,8 @@ import firebaseConfig from "../../config";
 import { AuthContext } from "../../Auth";
 import { Redirect } from "react-router-dom";
 
-// import {Link} from 'react-router-dom'
-
 const Login = () => {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
@@ -17,7 +16,7 @@ const Login = () => {
         .auth()
         .signInWithEmailAndPassword(email.value, password.value);
     } catch (error) {
-      alert(error);
+      alert(error);      
     }
   };
   const { currentUser } = useContext(AuthContext);
@@ -60,6 +59,7 @@ const Login = () => {
                   required
                 />
               </div>
+         
               <button className="btn btn-sc"> Login </button>
             </center>
           </form>

@@ -3,14 +3,14 @@ import SearchIcon from "../../icons/search-icon";
 import CloseIcon from "../../icons/close-icon";
 import { useState, useEffect } from "react";
 import axios from "axios";
-export default function AppointmentScreen() {
+
+const AppointmentScreen =()=> {
+
+  const [slot, setSlot] = useState([]);
+
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
-
-  const deleteDataTime =(e)=>{
-    console.log(e.target.value);
-  }
 
   // function search
   // function search(text) {
@@ -21,12 +21,12 @@ export default function AppointmentScreen() {
   //   setData(nData);
   // }
 
+
   // refresh page
-  function refreshPage() {
+  const refreshPage =()=> {
     window.location.reload();
   }
 
-  const [slot, setSlot] = useState([]);
 
   useEffect(() => {
     axios.get("/appointmentlist").then((res) => {
@@ -37,17 +37,9 @@ export default function AppointmentScreen() {
 
   console.log(slot);
 
-  // const d = new Date();
-  // const thaiDate = d.toLocaleDateString("th-TH", {
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  //   weekday: "long",
-  // });
-
   const displayTime = (time) =>{
     const timearray = []
-    for (let i = 0; i < time.length; i++) {
+    for (let i = 0; i < time.length ; i++) {
       const element = time[i];
      timearray.push(element)
     }
@@ -97,17 +89,13 @@ export default function AppointmentScreen() {
                   hieght="0.5rem"
                   className="close"
                   // value={i}
-                  onClick={deleteDataTime}
                 /></span>
-                ))}
-              {/* {data.Time.length} */}
-                
-              
+                ))}             
             </div>
           </div>
-    
       ))}
         </div>
     </div>
   );
 }
+export default AppointmentScreen ;
