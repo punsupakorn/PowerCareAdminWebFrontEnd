@@ -49,7 +49,6 @@ const AddOfficerScreen = () => {
   console.log(Position);
   console.log(Email);
   console.log(Password);
-
   const handleSubmit = () => {
     firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
     axios
@@ -79,93 +78,106 @@ const AddOfficerScreen = () => {
         </Link>
       </div>
       <div className="addofficer-content">
-        <center>
-          <div className="mb-3">
-            <label for="doctor-name"> ชื่อจริง : </label>
-            <input
-              type="text"
-              name="FirstName"
-              className="form-control"
-              placeholder="โปรดกรอกชื่อจริง"
-              onChange={handleFirstName}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label for="doctor-name"> นามสกุล : </label>
-            <input
-              type="text"
-              name="LastName"
-              className="form-control"
-              placeholder="โปรดกรอกนามสกุล"
-              onChange={handleLastName}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label for="doctor-name"> เบอร์ติดต่อ : </label>
-            <input
-              type="tel"
-              name="Phone"
-              className="form-control"
-              placeholder="โปรดกรอกหมายเลขโทรศัพท์"
-              onChange={handlePhone}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label for="position"> ตำแหน่ง : </label>
-            <select
-              id="position"
-              name="Position"
-              className="form-control"
-              onClick={handlePosition}
-            >
-              <option disabled selected value>
-                {" "}
-                โปรดระบุตำแหน่งงาน
-              </option>
-              <option className="option" value="Doctor">
-                {" "}
-                Doctor{" "}
-              </option>
-              <option className="option" value="Admin">
-                Admin
-              </option>
-            </select>
-          </div>
-          <div className="mb-3">
-            <label for="doctor-name"> Email : </label>
-            <input
-              type="email"
-              name="Email"
-              className="form-control"
-              placeholder="โปรดกรอก Email"
-              onChange={handleEmail}
-              required
-            />
-          </div>
+        <form>
+          <center>
+            <div className="mb-3">
+              <label for="doctor-name"> ชื่อจริง : </label>
+              <input
+                type="text"
+                name="FirstName"
+                className="form-control"
+                placeholder="โปรดกรอกชื่อจริง"
+                onChange={handleFirstName}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label for="doctor-name"> นามสกุล : </label>
+              <input
+                type="text"
+                name="LastName"
+                className="form-control"
+                placeholder="โปรดกรอกนามสกุล"
+                onChange={handleLastName}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label for="doctor-name"> เบอร์ติดต่อ : </label>
+              <input
+                type="tel"
+                name="Phone"
+                className="form-control"
+                placeholder="โปรดกรอกหมายเลขโทรศัพท์"
+                onChange={handlePhone}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label for="position"> ตำแหน่ง : </label>
+              <select
+                id="position"
+                name="Position"
+                className="form-control"
+                onClick={handlePosition}
+              >
+                <option disabled selected value>
+                  {" "}
+                  โปรดระบุตำแหน่งงาน
+                </option>
+                <option className="option" value="Doctor">
+                  {" "}
+                  Doctor{" "}
+                </option>
+                <option className="option" value="Admin">
+                  Admin
+                </option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label for="doctor-name"> Email : </label>
+              <input
+                type="email"
+                name="Email"
+                className="form-control"
+                placeholder="โปรดกรอก Email"
+                onChange={handleEmail}
+                required
+              />
+            </div>
 
-          <div className="mb-3">
-            <label for="doctor-name"> Password : </label>
-            <input
-              type="password"
-              name="Password"
-              className="form-control"
-              placeholder="โปรดกรอก password (ไม่ต่ำกว่า 6 ตัวอักษร)"
-              onChange={handlePassword}
-              required
-            />
-          </div>
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="btn btn-addofficer"
-          >
-            {" "}
-            เพิ่มบุคคลากร
-          </button>
-        </center>
+            <div className="mb-3">
+              <label for="doctor-name"> Password : </label>
+              <input
+                type="password"
+                name="Password"
+                className="form-control"
+                placeholder="โปรดกรอก password (ไม่ต่ำกว่า 6 ตัวอักษร)"
+                onChange={handlePassword}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label for="doctor-name"> Confirm Password : </label>
+              <input
+                type="password"
+                name="Password"
+                className="form-control"
+                placeholder="โปรดระบุให้ตรงกับ password ด้านบน"
+                onChange={handlePassword}
+                required
+              />
+            </div>
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="btn btn-addofficer"
+            >
+              {" "}
+              เพิ่มบุคคลากร
+            </button>
+          </center>
+        </form>
       </div>
     </div>
   );
