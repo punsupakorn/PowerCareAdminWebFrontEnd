@@ -23,7 +23,7 @@ const AppointmentScreen=()=> {
   ];
 
   useEffect(() => {
-    axios.get("/AddAppointment").then((res) => {
+    axios.get("/Appointment").then((res) => {
       console.log(res);
       setDoctor(res.data);
     });
@@ -66,7 +66,7 @@ const AppointmentScreen=()=> {
 
   function submit() {
     axios
-       .post("/AddAppointment", {
+       .post("/Appointment", {
          doctor: name,
          date: date,
          time: time,
