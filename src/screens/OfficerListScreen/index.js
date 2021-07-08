@@ -30,10 +30,10 @@ const OfficerListScreen=()=> {
         <p>{doctorlist.LastName}</p>
         <p>{doctorlist.Position}</p>
         <div className="menu-row">
-          <Edit
+          {/* <Edit
             {...iconOption}
             onClick={() => console.log("Click function edit ")}
-          />
+          /> */}
           <Delete
             {...iconOption}
             onClick={() => console.log("Click function delete ")}

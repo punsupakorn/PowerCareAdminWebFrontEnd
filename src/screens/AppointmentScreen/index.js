@@ -1,100 +1,156 @@
-import "./AppointmentScreen.css";
-import SearchIcon from "../../icons/search-icon";
-import CloseIcon from "../../icons/close-icon";
 import { useState, useEffect } from "react";
+import "./AppointmentScreen.css";
 import axios from "axios";
 
-const AppointmentScreen =()=> {
-
-  const [slot, setSlot] = useState([]);
-
-  // for search
-  const [searchInput, setSearchInput] = useState(null);
-  const [searched, setSearched] = useState(false);
-
-  // function search
-  // function search(text) {
-  //   let nData = [];
-  //   data.forEach((item, key) => {
-  //     if (item.name.search(text) != -1) nData.push(item);
-  //   });
-  //   setData(nData);
-  // }
-
-
-  // refresh page
-  const refreshPage =()=> {
-    window.location.reload();
-  }
-
+const AppointmentScreen=()=> {
+  const [doctor, setDoctor] = useState([]); 
+  const [name, setName] = useState(""); 
+  const [date, setDate] = useState(""); 
+  const [time, setTime] = useState(""); 
+  const timeList = [
+    "08:30 - 09:00",
+    "09:00 - 09:30",
+    "09:30 - 10:00",
+    "10:00 - 10:30",
+    "10:30 - 11:00",
+    "11:00 - 11:30",
+    "11:30 - 12:00",
+    "13:30 - 14:00",
+    "14:00 - 14:30",
+    "14:30 - 15:00",
+    "15:00 - 15:00",
+    "15:00 - 15:30",
+  ];
 
   useEffect(() => {
-    axios.get("/Schedule").then((res) => {
-      // console.log(res);
-      setSlot(res.data);
+    axios.get("/AddAppointment").then((res) => {
+      console.log(res);
+      setDoctor(res.data);
     });
   }, []);
 
-  // console.log(slot);
+  const handleName = (e) => {
+    const name = e.target.value;
+    setName(name);
+  };
 
-  const displayTime = (time) =>{
-    const timearray = []
-    for (let i = 0; i < time.length ; i++) {
-      const element = time[i];
-     timearray.push(element)
-    }
-    console.log(timearray);
-    return timearray;
+
+  const handleTime = (e) =>{
+    const time = e.target.value;
+    setTime(arr =>[...arr,time].sort());
   }
+
+  // console.log(doctor);
+  // console.log(name);
+  // console.log(date);
+  // console.log(time);
+
+  // Input Component
+  function InputSchedule({ title, children }) {
+    return (
+      <div className="input-schedule">
+        <p>{title}</p>
+        <div className="input-schedule-content">{children}</div>
+      </div>
+    );
+  }
+
+  // แปลง Date
+  const d = new Date(date);
+  const thaiDate = d.toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+  });
+
+  function submit() {
+    axios
+       .post("/AddAppointment", {
+         doctor: name,
+         date: date,
+         time: time,
+       })
+       .then((res) => {
+         console.log(res);
+      });
+    if (time && date && doctor) {
+      console.log({ name, date, time });
+    }
+  }
+  // style when time-item active
+  const styleActive = { backgroundColor: "#7e99b8", color: "white" };
 
   return (
     <div className="content-body">
-      <h1>ตารางเวลาการทำนัด</h1>
-      <div className="search-bar-conten">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="ค้นหา..."
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
-        />
-        {searched ? (
-          <span onClick={refreshPage} className="button-clear-date">
-            ล้าง
-          </span>
-        ) : (
-          <SearchIcon
-            width="1.5rem"
-            hieght="1.5rem"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              // search(searchInput);
-              setSearched(true);
+      <h2>จัดการตารางเวลา</h2>
+      {/* Input Doctor */}
+      <div className="schedule-content">
+        <InputSchedule title="เลือกหมอ" invalid>
+          <select
+            value={name}
+            name="doctor-select"
+            className="doctor-select"
+            // onChange={(e) => setDoctor(e.target.value)}
+            onChange={handleName}
+          >
+            <option value="" disabled selected>
+              เลือกหมอ...
+            </option>
+            {doctor.map((doctorname) => (
+              <option>
+                {doctorname.FirstName} {doctorname.LastName}
+              </option>
+            ))}
+          </select>
+          <h3 style={{ position: "absolute", right: "3rem", top: "3.2rem" }}>
+            ▼
+          </h3>
+        </InputSchedule>
+
+        {/* Input Date */}
+        <InputSchedule title="เลือกวันที่">
+          <input
+            type="date"
+            className="date-picker"
+            value={date || null}
+            onChange={(e) => {
+              setDate(e.target.value);
             }}
           />
-        )}
-      </div>
-      <div className="appointment-content">
-      {slot.map((data) => (
-          <div className="card-appointment">
-            <br></br>
-            <h3>ชื่อแพทย์ : {data.DoctorName}</h3>
-            <br></br>
-            <p>{data.Date}</p>
-            <div className="time-item-content">         
-                {(displayTime(data.Time)).map((t)=>(
-               <span className="time-item">{t}
-               <CloseIcon
-                  width="0.5rem"
-                  hieght="0.5rem"
-                  className="close"
-                  // value={i}
-                /></span>
-                ))}             
+        </InputSchedule>
+
+        {/* Input Time */}
+        {date ? (
+          <InputSchedule title="เลือกเวลา">
+            <div className="time-picker">
+              <p>คุณเลือก {thaiDate}</p>
+              <div className="time-picker-content">
+                {timeList.map((item) => (
+                  <label className="time-item">
+                    {/* <input
+                      type="checkbox"
+                      className="checkbox"
+                      onChange={handleTime}
+                      value={item}
+                    /> */}
+                    {item} 
+                    {/* <span
+                      className="check"
+                      key={key}
+                      style={time === item ? styleActive : null}
+                    /> */}
+
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
-      ))}
-        </div>
+            <span className="button-submit" onClick={submit}>
+              ยืนยัน
+            </span>
+          </InputSchedule>
+        ) : null}
+      </div>
     </div>
   );
 }

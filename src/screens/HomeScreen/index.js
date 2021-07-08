@@ -20,10 +20,10 @@ const HomeScreen = () => {
       <Card title="เพิ่มบุคลากร" direction="/addofficer">
         <AddUserIcon width="30%" height="30%" />
       </Card>
-      <Card title="จัดการตารางเวลา" direction="/schedule">
+      <Card title="จัดการตารางเวลา" direction="/appointment">
         <CalendarOutlineIcon width="30%" height="30%" />
       </Card>
-      <Card title="ตารางเวลา" direction="appointment">
+      <Card title="ตารางเวลา" direction="/schedule">
         <CalendarInlineIcon width="30%" height="30%" />
       </Card>
     </div>

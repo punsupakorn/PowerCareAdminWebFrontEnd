@@ -41,12 +41,12 @@ function App() {
             <Route path="/addofficer">
               <AddOfficerScreen/>
             </Route>
-            <Route path="/schedule">
-              <ScheduleScreen />
-            </Route>
             <Route path="/appointment">
               <AppointmentScreen />
             </Route>
+            <Route path="/schedule">
+              <ScheduleScreen />
+            </Route>   
             <Route path="/homescreen">
               <HomeScreen />
             </Route>
