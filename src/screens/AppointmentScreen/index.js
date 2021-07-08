@@ -29,13 +29,13 @@ const AppointmentScreen =()=> {
 
 
   useEffect(() => {
-    axios.get("/appointmentlist").then((res) => {
-      console.log(res);
+    axios.get("/Appointmentlist").then((res) => {
+      // console.log(res);
       setSlot(res.data);
     });
   }, []);
 
-  console.log(slot);
+  // console.log(slot);
 
   const displayTime = (time) =>{
     const timearray = []

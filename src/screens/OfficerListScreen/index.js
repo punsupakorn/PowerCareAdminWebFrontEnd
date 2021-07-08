@@ -11,7 +11,7 @@ const OfficerListScreen=()=> {
   const [doctor, setDoctor] = useState([]);
 
   useEffect(() => {
-    axios.get("/officerlist").then((res) => {
+    axios.get("/OfficerList").then((res) => {
       console.log(res);
       setDoctor(res.data);
     });

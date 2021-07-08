@@ -49,10 +49,11 @@ const AddOfficerScreen = () => {
   console.log(Position);
   console.log(Email);
   console.log(Password);
+  
   const handleSubmit = () => {
     firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
     axios
-      .post("/registration", {
+      .post("/AddOfficer", {
         FirstName: FirstName,
         LastName: LastName,
         Phone: Phone,
@@ -157,7 +158,7 @@ const AddOfficerScreen = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label for="doctor-name"> Confirm Password : </label>
               <input
                 type="password"
@@ -167,7 +168,7 @@ const AddOfficerScreen = () => {
                 onChange={handlePassword}
                 required
               />
-            </div>
+            </div> */}
             <button
               onClick={handleSubmit}
               type="submit"

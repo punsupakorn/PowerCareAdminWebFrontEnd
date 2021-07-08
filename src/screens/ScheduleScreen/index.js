@@ -23,7 +23,7 @@ const ScheduleScreen=()=> {
   ];
 
   useEffect(() => {
-    axios.get("/doctorslot").then((res) => {
+    axios.get("/AddAppointment").then((res) => {
       console.log(res);
       setDoctor(res.data);
     });
@@ -41,9 +41,9 @@ const ScheduleScreen=()=> {
   }
 
   // console.log(doctor);
-  console.log(name);
-  console.log(date);
-  console.log(time);
+  // console.log(name);
+  // console.log(date);
+  // console.log(time);
 
   // Input Component
   function InputSchedule({ title, children }) {
@@ -66,7 +66,7 @@ const ScheduleScreen=()=> {
 
   function submit() {
     axios
-       .post("/doctorslot", {
+       .post("/AddAppointment", {
          doctor: name,
          date: date,
          time: time,
@@ -75,7 +75,6 @@ const ScheduleScreen=()=> {
          console.log(res);
       });
     if (time && date && doctor) {
-      // กดปุ่มยืนยัน
       console.log({ name, date, time });
     }
   }
