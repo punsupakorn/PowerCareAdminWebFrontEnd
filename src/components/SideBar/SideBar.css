@@ -5,7 +5,7 @@
   padding: 2vh 2vw;
   /* overflow: scroll; */
   transition: 0.2s;
-  max-height: calc(100vh - 6rem);
+  max-height: calc(100vh - 2rem);
 
 }
 
