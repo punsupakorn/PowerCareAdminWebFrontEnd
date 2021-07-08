@@ -29,7 +29,7 @@ const AppointmentScreen =()=> {
 
 
   useEffect(() => {
-    axios.get("/Appointmentlist").then((res) => {
+    axios.get("/Schedule").then((res) => {
       // console.log(res);
       setSlot(res.data);
     });
