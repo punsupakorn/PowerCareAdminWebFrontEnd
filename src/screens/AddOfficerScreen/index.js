@@ -12,7 +12,7 @@ const AddOfficerScreen = () => {
   const [Position, setPosition] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-
+  const [ConfirmPassword, setConfirmPassword] = useState("");
   const handleFirstName = (e) => {
     const firstname = e.target.value;
     setFirstName(firstname);
@@ -43,27 +43,38 @@ const AddOfficerScreen = () => {
     setPassword(password);
   };
 
+  const handleConfirmPassword = (e) => {
+    const confirmPassword = e.target.value;
+    setConfirmPassword(confirmPassword);
+  };
+
   console.log(FirstName);
   console.log(LastName);
   console.log(Phone);
   console.log(Position);
   console.log(Email);
   console.log(Password);
-  
+
   const handleSubmit = () => {
-    firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
-    axios
-      .post("/AddOfficer", {
-        FirstName: FirstName,
-        LastName: LastName,
-        Phone: Phone,
-        Position: Position,
-        Email: Email,
-        Password: Password,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    try {
+      if (Password !== ConfirmPassword) {
+        console.log("Error : Password Is Not Match !");
+      } else {
+        firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
+        axios
+          .post("/AddOfficer", {
+            FirstName: FirstName,
+            LastName: LastName,
+            Phone: Phone,
+            Position: Position,
+            Email: Email,
+            Password: Password,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    } catch (error) {}
   };
 
   return (
@@ -158,17 +169,17 @@ const AddOfficerScreen = () => {
                 required
               />
             </div>
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <label for="doctor-name"> Confirm Password : </label>
               <input
                 type="password"
-                name="Password"
+                name="ConfirmPassword"
                 className="form-control"
                 placeholder="โปรดระบุให้ตรงกับ password ด้านบน"
-                onChange={handlePassword}
+                onChange={handleConfirmPassword}
                 required
               />
-            </div> */}
+            </div>
             <button
               onClick={handleSubmit}
               type="submit"

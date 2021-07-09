@@ -128,12 +128,12 @@ const AppointmentScreen=()=> {
               <div className="time-picker-content">
                 {timeList.map((item) => (
                   <label className="time-item">
-                    {/* <input
+                    <input
                       type="checkbox"
                       className="checkbox"
                       onChange={handleTime}
                       value={item}
-                    /> */}
+                    />
                     {item} 
                     {/* <span
                       className="check"
