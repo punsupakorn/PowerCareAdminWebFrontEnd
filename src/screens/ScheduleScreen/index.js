@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const ScheduleScreen = () => {
-  const [slot, setSlot] = useState([]);
+  const [schedule, setSchedule] = useState([]);
 
   // for search
   const [searchInput, setSearchInput] = useState(null);
@@ -28,21 +28,21 @@ const ScheduleScreen = () => {
   useEffect(() => {
     axios.get("/Schedule").then((res) => {
       // console.log(res);
-      setSlot(res.data);
+      setSchedule(res.data);
     });
   }, []);
 
-  // console.log(slot);
+  // console.log(schedule);
 
-  const displayTime = (time) => {
-    const timearray = [];
-    for (let i = 0; i < time.length; i++) {
-      const element = time[i];
-      timearray.push(element);
-    }
-    console.log(timearray);
-    return timearray;
-  };
+  // const displayTime = (time) => {
+  //   const timearray = [];
+  //   for (let i = 0; i < time.length; i++) {
+  //     const element = time[i];
+  //     timearray.push(element);
+  //   }
+  //   // console.log(timearray);
+  //   return timearray;
+  // };
 
   return (
     <div className="content-body">
@@ -72,14 +72,19 @@ const ScheduleScreen = () => {
         )}
       </div>
       <div className="appointment-content">
-        {slot.map((data) => (
+        {schedule.map((data) => (
           <div className="card-appointment">
             <br></br>
             <h3>ชื่อแพทย์ : {data.DoctorName}</h3>
             <br></br>
             <p>{data.Date}</p>
             <div className="time-item-content">
-              {displayTime(data.Time).map((t) => (
+              <span className="time-item">
+              {data.Time}
+                <CloseIcon width="0.5rem" hieght="0.5rem" className="close" />
+              </span>
+              {/* {data.Time} */}
+              {/* {displayTime(data.Time).map((t) => (
                 <span className="time-item">
                   {t}
                   <CloseIcon
@@ -89,7 +94,7 @@ const ScheduleScreen = () => {
                     // value={i}
                   />
                 </span>
-              ))}
+              ))} */}
             </div>
           </div>
         ))}

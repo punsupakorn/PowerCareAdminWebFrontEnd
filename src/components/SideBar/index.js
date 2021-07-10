@@ -26,12 +26,12 @@ function App() {
     {
       icon: <ScheduleIcon width="2rem" height="2rem" />,
       title: "จัดการตารางเวลา",
-      direction: "/schedule",
+      direction: "/appointment",
     },
     {
       icon: <AppointmentIcon width="2rem" height="2rem" />,
       title: "ตารางเวลาการทำนัด",
-      direction: "/appointment",
+      direction: "/schedule",
     },
   ];
   const username = ("Username");
