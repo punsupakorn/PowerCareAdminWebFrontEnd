@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import "./AppointmentScreen.css";
 import axios from "axios";
 
-const AppointmentScreen=()=> {
-  const [doctor, setDoctor] = useState([]); 
-  const [name, setName] = useState(""); 
-  const [date, setDate] = useState(""); 
-  const [time, setTime] = useState(""); 
+const AppointmentScreen = () => {
+  const [doctor, setDoctor] = useState([]);
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+
   const timeList = [
     "08:30 - 09:00",
     "09:00 - 09:30",
@@ -24,7 +25,7 @@ const AppointmentScreen=()=> {
 
   useEffect(() => {
     axios.get("/Appointment").then((res) => {
-      console.log(res);
+      // console.log(res);
       setDoctor(res.data);
     });
   }, []);
@@ -34,16 +35,15 @@ const AppointmentScreen=()=> {
     setName(name);
   };
 
-
-  const handleTime = (e) =>{
+  const handleTime = (e) => {
     const time = e.target.value;
-    setTime(arr =>[...arr,time].sort());
-  }
+    setTime((arr) => [...arr, time].sort());
+  };
 
-  // console.log(doctor);
-  // console.log(name);
-  // console.log(date);
-  // console.log(time);
+  console.log(doctor);
+  console.log(name);
+  console.log(date);
+  console.log(time);
 
   // Input Component
   function InputSchedule({ title, children }) {
@@ -66,13 +66,13 @@ const AppointmentScreen=()=> {
 
   function submit() {
     axios
-       .post("/Appointment", {
-         doctor: name,
-         date: date,
-         time: time,
-       })
-       .then((res) => {
-         console.log(res);
+      .post("/Appointment", {
+        doctor: name,
+        date: date,
+        time: time,
+      })
+      .then((res) => {
+        console.log(res);
       });
     if (time && date && doctor) {
       console.log({ name, date, time });
@@ -91,7 +91,6 @@ const AppointmentScreen=()=> {
             value={name}
             name="doctor-select"
             className="doctor-select"
-            // onChange={(e) => setDoctor(e.target.value)}
             onChange={handleName}
           >
             <option value="" disabled selected>
@@ -131,16 +130,10 @@ const AppointmentScreen=()=> {
                     <input
                       type="checkbox"
                       className="checkbox"
-                      onChange={handleTime}
                       value={item}
+                      onClick={handleTime}
                     />
-                    {item} 
-                    {/* <span
-                      className="check"
-                      key={key}
-                      style={time === item ? styleActive : null}
-                    /> */}
-
+                    {item}
                   </label>
                 ))}
               </div>
@@ -153,5 +146,5 @@ const AppointmentScreen=()=> {
       </div>
     </div>
   );
-}
-export default AppointmentScreen ;
+};
+export default AppointmentScreen;
