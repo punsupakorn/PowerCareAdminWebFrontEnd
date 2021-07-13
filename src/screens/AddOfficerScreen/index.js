@@ -82,12 +82,6 @@ const AddOfficerScreen = () => {
       <div className="head-addofficer">
         <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
         <h2>เพิ่มบุคลากร</h2>
-        <Link to="/officerlistscreen">
-          <button className="btn btn-officerlistscreen">
-            {" "}
-            รายชื่อเจ้าหน้าที่
-          </button>
-        </Link>
       </div>
       <div className="addofficer-content">
         <form>
@@ -195,3 +189,4 @@ const AddOfficerScreen = () => {
   );
 };
 export default AddOfficerScreen;
+

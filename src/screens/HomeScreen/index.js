@@ -4,7 +4,6 @@ import AddUserIcon from "../../icons/add-user";
 import CalendarOutlineIcon from "../../icons/calendar-outline";
 import CalendarInlineIcon from "../../icons/calendar-inline";
 
-
 const HomeScreen = () => {
   function Card({ children, title, direction }) {
     return (
@@ -17,7 +16,7 @@ const HomeScreen = () => {
 
   return (
     <div className="home-body">
-      <Card title="เพิ่มบุคลากร" direction="/addofficer">
+      <Card title="บุคคลากร" direction="/officerlistscreen">
         <AddUserIcon width="30%" height="30%" />
       </Card>
       <Card title="จัดการตารางเวลา" direction="/appointment">
@@ -26,7 +25,13 @@ const HomeScreen = () => {
       <Card title="ตารางเวลา" direction="/schedule">
         <CalendarInlineIcon width="30%" height="30%" />
       </Card>
+      <Card title="ข้อมูลคนไข้" direction="/schedule">
+        <CalendarInlineIcon width="30%" height="30%" />
+      </Card>
+      <Card title="การติดตามผล" direction="/schedule">
+        <CalendarInlineIcon width="30%" height="30%" />
+      </Card>
     </div>
   );
-}
+};
 export default HomeScreen;
