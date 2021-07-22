@@ -5,3 +5,4 @@ export { default as AddOfficerScreen } from "./AddOfficerScreen";
 export { default as WorkingScreen } from "./WorkingScreen";
 export { default as MedicineScreen } from "./MedicineScreen";
 export { default as OfficerListScreen } from "./OfficerListScreen";
+export { default as CalendarScreen} from "./CalendarScreen";

@@ -7,10 +7,18 @@
 
 .date-picker-content {
   display: flex;
-  justify-content: center;
+  align-self: flex-end;
+  margin-right: calc(10% - 2rem);
   align-items: center;
+  justify-content: flex-end
 }
 
+.search-bar {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: white;
+  border-radius: 4px;
+}
 .button-clear-date {
   background-color: #a5c3df;
   padding: 0.2rem 1rem;
@@ -20,6 +28,7 @@
 }
 
 .table-content {
+  margin-top: 2rem;
   text-align: start;
   overflow: scroll;
 }

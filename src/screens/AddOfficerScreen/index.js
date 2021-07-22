@@ -79,7 +79,7 @@ const AddOfficerScreen = () => {
 
   return (
     <div className="content-body">
-      <div className="head-addofficer">
+      {/* <div className="head-addofficer">
         <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
         <h2>เพิ่มบุคลากร</h2>
       </div>
@@ -184,9 +184,124 @@ const AddOfficerScreen = () => {
             </button>
           </center>
         </form>
+      </div> */}
+      <div>
+        {/* url('/img/hero-pattern.svg') */}
+        <div className="flex h-screen   bg-white">
+          <div
+            className="w-1/2 bg-cover h-screen"
+            style={{
+              backgroundImage:
+              "url(https://images.unsplash.com/photo-1520243947988-b7b79f7873e9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDd8fGJsYWNrJTIwZm9yZXN0fGVufDB8fDB8eWVsbG93&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60)",
+            }}
+          />
+          {/* <div class="bg-no-repeat bg-right bg-cover max-w-max max-h-8 h-12 overflow-hidden">
+      <img src="log_in.webp" alt="hey">
+  </div> */}
+          <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
+            <div className="text-center p-0">
+              <h1 className=" text-gray-800 text-3xl ">เพิ่มบุคคลากร</h1>
+              <h3 className="p-1 text-gray-700">สำหรับแอดมิน</h3>
+            </div>
+            <form >
+              <div className="mt-4">
+                {/* <label for="email" class="sc-bqyKva ePvcBv">Email</label> */}
+                <input
+                  type="text"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
+                  placeholder="ชื่อจริง"
+                  onChange={handleFirstName}
+                  required
+                />
+              </div>
+              <div className="mt-3">
+                {/* <label for="email" class="sc-bqyKva ePvcBv">Email</label> */}
+                <input
+                  type="text"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
+                  placeholder="นามสกุล"
+                  onChange={handleLastName}
+                  required
+                />
+              </div>
+              <div className="mt-3">
+                {/* <label for="email" class="sc-bqyKva ePvcBv">Email</label> */}
+                <input
+                  type="text"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
+                  placeholder="เบอร์โทรศัพท์"
+                  onChange={handlePhone}
+                  required
+                />
+              </div>
+              <div className="  mt-3">
+                <select class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
+                onClick={handlePosition}>
+                  <option disabled selected value>
+                  ตำแหน่ง
+                  </option>
+                  <option value="หมอ" >Doctor</option>
+                  <option value="เจ้าหน้าที">Admin</option>
+                </select>
+              </div>
+              <div className="mt-3">
+                <input
+                  type="email"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
+            placeholder="อีเมลล์"
+                  onChange={handleEmail}
+                  required
+                />
+              </div>
+              <div className="mt-3">
+                <input
+                  type="Password"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
+                  placeholder="รหัสผ่าน(ไม่ต่ำกว่า 6 ตัวอักษร)"
+                  onChange={handlePassword}
+                />
+              </div>
+              <div className="mt-3">
+                <input
+                  type="Password"
+                  className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
+                  placeholder="ยืนยันรหัสผ่าน "
+                  onChange={handleConfirmPassword}
+                  required
+                />
+              </div>
+              <div className="mt-1 block p-3 text-sm text-xs text-gray-800">
+                <input type="checkbox" className="inline-block border-0  " />
+                <span display="inline" className>
+                  ยอมรับ
+                  <a className target="_blank" data-test="Link">
+                    <span className="underline ">เงื่อนไข</span>{" "}
+                  </a>{" "}
+                  
+                </span>
+              </div>
+
+                {/* <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="py-3 bg-green-500 text-white w-full h-2 rounded hover:bg-green-600"
+                >
+                </button> */}
+                <div className="mt-2">
+                 <button
+              onClick={handleSubmit}
+              type="submit"
+              className="py-3 bg-blue-200 text-white w-full h-14 rounded hover:bg-blue-200"
+            >
+              {" "}
+              เพิ่มบุคคลากร
+            </button>
+            </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 export default AddOfficerScreen;
-

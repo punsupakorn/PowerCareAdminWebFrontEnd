@@ -2,7 +2,9 @@ import { useState } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Add from "../../icons/add-paper";
 import Edit from "../../icons/edit";
+import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
+
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
 export default function WorkingScreen() {
@@ -78,18 +80,40 @@ export default function WorkingScreen() {
       <h2>ตารางปฏิบัติการ</h2>
       <div className="working-content">
         <div className="date-picker-content">
-          <p>เลือกวันที่</p>
-          <input
+
+          {/* <input
             type="date"
             className="date-picker"
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
             }}
-          />
+          /> */}
+          
+           <div className="p-8 h-12 ">
+          <div className="bg-white flex items-center rounded-full shadow h-12">
+ 
+            <input
+              className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-600 leading-tight focus:outline-none"
+              id="search"
+              type="date"
+              value={date}
+              placeholder="Search"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+            <div className="p-4">
+              <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-200 focus:outline-none w-9 h-9 flex items-center justify-center">
+              
           {isSearch ? (
-            <span onClick={refreshPage} className="button-clear-date">
-              ล้าง
+            <span onClick={refreshPage} >
+              <CloseIcon
+                    width="1rem"
+                    hieght="1rem"
+                    className="close"
+                    // value={i}
+                  />
             </span>
           ) : (
             <SearchIcon
@@ -99,6 +123,11 @@ export default function WorkingScreen() {
               onClick={searchWithDate}
             />
           )}
+          </button>
+            </div>
+          </div>
+        </div>
+
         </div>
 
         <div className="table-content">

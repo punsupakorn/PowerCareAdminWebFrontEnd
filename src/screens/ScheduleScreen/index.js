@@ -3,6 +3,7 @@ import SearchIcon from "../../icons/search-icon";
 import CloseIcon from "../../icons/close-icon";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
@@ -45,32 +46,55 @@ const ScheduleScreen = () => {
   // };
 
   return (
-    <div className="content-body">
+    <div className="content-body ">
       <h1>ตารางเวลาการทำนัด</h1>
+
       <div className="search-bar-conten">
-        <input
+        {/* <input
           type="text"
           className="search-bar"
           placeholder="ค้นหา..."
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
-        />
-        {searched ? (
-          <span onClick={refreshPage} className="button-clear-date">
-            ล้าง
-          </span>
-        ) : (
-          <SearchIcon
-            width="1.5rem"
-            hieght="1.5rem"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              // search(searchInput);
-              setSearched(true);
-            }}
-          />
-        )}
+        /> */}
+        <div className="p-12 h-12 item-left">
+          <div className="bg-white flex items-center rounded-full shadow h-12">
+            <input
+              className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-600 leading-tight focus:outline-none"
+              id="search"
+              type="text"
+              placeholder="Search"
+            />
+            <div className="p-4">
+              <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-200 focus:outline-none w-9 h-9 flex items-center justify-center">
+                {searched ? (
+                  <span onClick={refreshPage}>
+                    <CloseIcon
+                      width="1rem"
+                      hieght="1rem"
+                      className="close"
+                      // value={i}
+                    />
+                  </span>
+                ) : (
+                  <SearchIcon
+                    width="1.5rem"
+                    hieght="1.5rem"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      // search(searchInput);
+                      setSearched(true);
+                    }}
+                  />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <Link to="/calendar">
+      <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
+      </Link>
       <div className="appointment-content">
         {schedule.map((data) => (
           <div className="card-appointment">
@@ -100,6 +124,8 @@ const ScheduleScreen = () => {
         ))}
       </div>
     </div>
+
+    
   );
 };
 export default ScheduleScreen;
