@@ -35,11 +35,14 @@ const OfficerListScreen = () => {
         <p>{doctorlist.FirstName}</p>
         <p>{doctorlist.LastName}</p>
         <p>{doctorlist.Position}</p>
+        <p>{doctorlist.Email}</p>
+        <p>{doctorlist.Phone}</p>
+        
         <div className="menu-row">
-          {/* <Edit
+          <Edit
             {...iconOption}
             onClick={() => console.log("Click function edit ")}
-          /> */}
+          />
           <Delete
             {...iconOption}
             onClick={() => console.log("Click function delete ")}
@@ -106,6 +109,8 @@ const OfficerListScreen = () => {
             <p>ชื่อ</p>
             <p>นามสกุล</p>
             <p>ตำแหน่ง</p>
+            <p>อีเมลล์ </p>
+            <p>เบอร์โทรศัพท์</p>
             <p>แก้ไข/ลบข้อมูล</p>
             {/* end header */}
           </div>

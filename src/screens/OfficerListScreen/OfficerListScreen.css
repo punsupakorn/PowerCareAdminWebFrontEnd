@@ -37,7 +37,7 @@
   
   .table-grid {
     display: grid;
-    grid-template-columns: 20% 40% 20% calc(20% - 3rem);
+    grid-template-columns: 12% 15% 10% 25% 20%  10%calc(10% - 3rem);
     grid-gap: 1rem;
   }
   
