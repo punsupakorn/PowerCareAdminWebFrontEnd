@@ -7,37 +7,62 @@ import { TableController } from "../../components";
 import axios from "axios";
 import SearchIcon from "../../icons/search-icon";
 import CloseIcon from "../../icons/close-icon";
+import firebaseConfig from "../../config";
 
 const OfficerListScreen = () => {
+  const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
-  const [doctor, setDoctor] = useState([]);
+  const Email = officer.map((data) => data.Email);
+  // const [doctor, setDoctor] = useState([]);
 
   useEffect(() => {
     axios.get("/OfficerList").then((res) => {
-      console.log(res);
-      setDoctor(res.data);
+      // console.log(res);
+      setOfficer(res.data);
     });
   }, []);
+
+  const handleDelete = (DocumentID, Position) => {
+    console.log("DocumentID : "+DocumentID+", Position : "+ Position)
+    try {
+      // axios
+      //   .delete("/OfficerList", {
+      //     Data:{DocumentID: DocumentID,
+      //     Position: Position}
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //   });
+      const res = axios.delete("/OfficerList", {
+            data:{DocumentID: DocumentID,
+            Position: Position}
+          });
+          console.log(JSON.stringify({res: res}))
+          refreshPage();
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   // option icon edit delete
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
   // data with table
-  const rowData = doctor
+  const rowData = officer
 
     // .slice(numberStartData, numberEndData)
-    .map((doctorlist) => (
+    .map((officerlist) => (
       <div className="table-grid">
-        <p>{doctorlist.FirstName}</p>
-        <p>{doctorlist.LastName}</p>
-        <p>{doctorlist.Position}</p>
-        <p>{doctorlist.Email}</p>
-        <p>{doctorlist.Phone}</p>
-        
+        <p>{officerlist.FirstName}</p>
+        <p>{officerlist.LastName}</p>
+        <p>{officerlist.Position}</p>
+        <p>{officerlist.Email}</p>
+        <p>{officerlist.Phone}</p>
+
         <div className="menu-row">
           <Edit
             {...iconOption}
@@ -45,7 +70,9 @@ const OfficerListScreen = () => {
           />
           <Delete
             {...iconOption}
-            onClick={() => console.log("Click function delete ")}
+            onClick={() =>
+              handleDelete(officerlist.DocumentID, officerlist.Position)
+            }
           />
         </div>
       </div>
@@ -97,11 +124,10 @@ const OfficerListScreen = () => {
           <button className="btn btn-officerlist"> รายชื่อหมอ</button>
           <Link to="/addofficer">
             <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
-       </Link>
+          </Link>
         </div>
       </div>
 
-      
       <div className="working-content">
         <div className="table-content">
           <div className="table-grid header">
