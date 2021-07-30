@@ -4,6 +4,8 @@ import Add from "../../icons/add-paper";
 import Edit from "../../icons/edit";
 import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
+import { Link } from "react-router-dom";
+
 
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
@@ -33,22 +35,30 @@ export default function WorkingScreen() {
     .slice(numberStartData, numberEndData)
     .map((item, key) => (
       <div className="table-grid" key={key}>
-        <p>{item.id}</p>
-        <p>{item.name}</p>
+        <p>{item.userid}</p>
+        <p>{item.firstname}</p>
+        <p>{item.lastname}</p>
         <p>{item.date}</p>
+        <p>{item.time}</p>
         <div className="menu-row">
+        <Link to="/workingdetail">
           <Add
             {...iconOption}
             onClick={() => console.log("Click function add " + item.id)}
           />
+           </Link>
+           <Link to="/postpone">
           <Edit
             {...iconOption}
             onClick={() => console.log("Click function edit " + item.id)}
           />
+          </Link>
+          <Link to="/cancel">
           <Delete
             {...iconOption}
             onClick={() => console.log("Click function delete " + item.id)}
           />
+          </Link>
         </div>
       </div>
     ));
@@ -135,8 +145,10 @@ export default function WorkingScreen() {
             {/* header table */}
             <p>รหัส</p>
             <p>ชื่อ</p>
+            <p>นามสกุล</p>
             <p>วันที่</p>
-            <p></p>
+            <p>เวลา</p>
+            <p>แก้ไข/ยกเลิกนัด</p>
             {/* end header */}
           </div>
           <div className="body-table">
@@ -169,133 +181,30 @@ function randomDate(start, end) {
 
 const mockup = [
   {
-    id: "A001",
-    name: "นาย A",
+    userid: "A001",
+    firstname: "นายคิมอัน",
+    lastname: "อุนจิอุนจิอุนจิอุนจิอุนจิอุนจิอุนจิอุนจิอุนจิ",
     date: randomDate(new Date(2021, 1, 2), new Date()),
+    time: "11.00-11.30" 
   },
-  {
-    id: "A002",
-    name: "นาย B",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A003",
-    name: "นาย C",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A004",
-    name: "นาย D",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A005",
-    name: "นาย E",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A006",
-    name: "นาย F",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A007",
-    name: "นาย G",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A008",
-    name: "นาย H",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A009",
-    name: "นาย I",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A010",
-    name: "นาย J",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A011",
-    name: "นาย K",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A012",
-    name: "นาย L",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A013",
-    name: "นาย M",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A014",
-    name: "นาย N",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A015",
-    name: "นาย O",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A016",
-    name: "นาย P",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A017",
-    name: "นาย Q",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A018",
-    name: "นาย R",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A019",
-    name: "นาย S",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A020",
-    name: "นาย T",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A021",
-    name: "นาย U",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A022",
-    name: "นาย V",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A023",
-    name: "นาย W",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A024",
-    name: "นาย X",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A025",
-    name: "นาย Y",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
-  {
-    id: "A026",
-    name: "นาย Z",
-    date: randomDate(new Date(2021, 1, 2), new Date()),
-  },
+  // {
+  //   id: "A002",
+  //   name: "นาย B",
+  //   date: randomDate(new Date(2021, 1, 2), new Date()),
+  // },
+  // {
+  //   id: "A003",
+  //   name: "นาย C",
+  //   date: randomDate(new Date(2021, 1, 2), new Date()),
+  // },
+  // {
+  //   id: "A004",
+  //   name: "นาย D",
+  //   date: randomDate(new Date(2021, 1, 2), new Date()),
+  // },
+  // {
+  //   id: "A005",
+  //   name: "นาย E",
+  //   date: randomDate(new Date(2021, 1, 2), new Date()),
+  // },
 ];

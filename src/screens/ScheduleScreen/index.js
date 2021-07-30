@@ -92,9 +92,9 @@ const ScheduleScreen = () => {
           </div>
         </div>
       </div>
-      <Link to="/calendar">
+      {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
-      </Link>
+      </Link> */}
       <div className="appointment-content">
         {schedule.map((data) => (
           <div className="card-appointment">

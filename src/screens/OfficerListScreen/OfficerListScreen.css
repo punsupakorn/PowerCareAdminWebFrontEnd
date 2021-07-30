@@ -13,6 +13,10 @@
     width: 200px
   }
 
+  .search-mb{
+    margin-bottom: 10px;
+  }
+
   .btn-officerlist{ 
     margin-left: 3rem;
     background-color: #577eab;
@@ -37,14 +41,14 @@
   
   .table-grid {
     display: grid;
-    grid-template-columns: 12% 15% 10% 25% 20%  10%calc(10% - 3rem);
+    grid-template-columns: 10% 12% 15% 20% 18%  10%calc(10% - 2rem);
     grid-gap: 1rem;
   }
   
   .table-grid:not(:first-child) {
     margin-top: 1rem;
   }
-  
+
   .table-grid.header,
   .body-table {
     background-color: #a5c3df;

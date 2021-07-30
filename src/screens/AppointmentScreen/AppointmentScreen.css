@@ -52,18 +52,19 @@ select option:disabled {
 
 .time-picker-content {
   margin-top: 2rem;
-  display: grid;
+  width: 100%;
+  /* display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 1rem 1rem;
+  grid-gap: 1rem 1rem; */
 }
 
-.time-item {
+/* .time-item {
   padding: 0.75rem;
   background-color: #ccdbea;
   border-radius: 4px;
   font-size: 0.75rem;
   text-align: center;
-}
+} */
 
 .button-submit {
   width: fit-content;

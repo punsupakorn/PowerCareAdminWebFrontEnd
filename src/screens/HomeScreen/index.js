@@ -22,14 +22,16 @@ const HomeScreen = () => {
       <Card title="จัดการตารางเวลา" direction="/appointment">
         <CalendarOutlineIcon width="30%" height="30%" />
       </Card>
-      <Card title="ตารางเวลา" direction="/schedule">
+      <Card title="ตารางปฏิบัติการ" direction="/working">
         <CalendarInlineIcon width="30%" height="30%" />
       </Card>
       <Card title="ข้อมูลคนไข้" direction="/schedule">
         <CalendarInlineIcon width="30%" height="30%" />
+        ยังไม่ได้ทำ
       </Card>
       <Card title="การติดตามผล" direction="/schedule">
         <CalendarInlineIcon width="30%" height="30%" />
+        ยังไม่ได้ทำ
       </Card>
     </div>
   );

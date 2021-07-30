@@ -294,7 +294,7 @@ const AddOfficerScreen = () => {
               <button
                 onClick={handleSubmit}
                 type="submit"
-                className="py-3 bg-blue-200 text-white w-full h-14 rounded hover:bg-blue-200"
+                className="button-done py-3 text-white w-full h-14 rounded"
               >
                 {" "}
                 เพิ่มบุคคลากร
