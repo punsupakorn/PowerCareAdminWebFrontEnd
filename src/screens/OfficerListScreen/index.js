@@ -12,35 +12,44 @@ import firebaseConfig from "../../config";
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
-  const Email = officer.map((data) => data.Email);
   // const [doctor, setDoctor] = useState([]);
 
-  useEffect(() => {
+  const getOfficerList = () => {
     axios.get("/OfficerList").then((res) => {
-      // console.log(res);
       setOfficer(res.data);
     });
+  };
+
+  const getDoctor = () => {
+    axios.get("/OfficerList").then((res) => {
+      const data = res.data;
+      const doctor = data.filter((data) => data.Position == "Doctor");
+      setOfficer(doctor);
+    });
+  };
+
+  const getAdmin = () => {
+    axios.get("/OfficerList").then((res) => {
+      const data = res.data;
+      const admin = data.filter((data) => data.Position == "Admin");
+      setOfficer(admin);
+    });
+  };
+
+  useEffect(() => {
+    getOfficerList();
   }, []);
 
   const handleDelete = (DocumentID, Position) => {
-    console.log("DocumentID : "+DocumentID+", Position : "+ Position)
+    // console.log("DocumentID : " + DocumentID + ", Position : " + Position);
     try {
-      // axios
-      //   .delete("/OfficerList", {
-      //     Data:{DocumentID: DocumentID,
-      //     Position: Position}
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   });
       const res = axios.delete("/OfficerList", {
-            data:{DocumentID: DocumentID,
-            Position: Position}
-          });
-          console.log(JSON.stringify({res: res}))
-          refreshPage();
+        data: { DocumentID: DocumentID, Position: Position },
+      });
+      console.log(JSON.stringify({ res: res }));
+      refreshPage();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -48,35 +57,7 @@ const OfficerListScreen = () => {
     window.location.reload();
   };
 
-  // option icon edit delete
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
-
-  // data with table
-  const rowData = officer
-
-    // .slice(numberStartData, numberEndData)
-    .map((officerlist) => (
-      <div className="table-grid">
-        <p>{officerlist.FirstName}</p>
-        <p>{officerlist.LastName}</p>
-        <p>{officerlist.Position}</p>
-        <p>{officerlist.Email}</p>
-        <p>{officerlist.Phone}</p>
-
-        <div className="menu-row">
-          <Edit
-            {...iconOption}
-            onClick={() => console.log("Click function edit ")}
-          />
-          <Delete
-            {...iconOption}
-            onClick={() =>
-              handleDelete(officerlist.DocumentID, officerlist.Position)
-            }
-          />
-        </div>
-      </div>
-    ));
 
   return (
     <div className="content-body">
@@ -119,9 +100,12 @@ const OfficerListScreen = () => {
           </div>
         </div>
         <div className="button-officelist">
-          <button className="btn btn-officerlist"> รายชื่อทั้งหมด</button>
-          <button className="btn btn-officerlist"> รายชื่อเจ้าหน้าที่</button>
-          <button className="btn btn-officerlist"> รายชื่อหมอ</button>
+          <button className="btn btn-officerlist" onClick={getOfficerList}> รายชื่อทั้งหมด</button>
+          <button className="btn btn-officerlist" onClick={getDoctor}>
+            {" "}
+            รายชื่อหมอ
+          </button>
+          <button className="btn btn-officerlist" onClick={getAdmin}> รายชื่อเจ้าหน้าที่</button>
           <Link to="/addofficer">
             <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
           </Link>
@@ -142,7 +126,31 @@ const OfficerListScreen = () => {
           </div>
           <div className="body-table">
             {/* body table */}
-            {rowData}
+            {officer.map((officerlist) => (
+              <div className="table-grid">
+                <p>{officerlist.FirstName}</p>
+                <p>{officerlist.LastName}</p>
+                <p>{officerlist.Position}</p>
+                <p>{officerlist.Email}</p>
+                <p>{officerlist.Phone}</p>
+
+                <div className="menu-row">
+                  <Edit
+                    {...iconOption}
+                    onClick={() => console.log("Click function edit ")}
+                  />
+                  <Delete
+                    {...iconOption}
+                    onClick={() =>
+                      handleDelete(officerlist.DocumentID, officerlist.Position)
+                    }
+                  />
+                </div>
+              </div>
+            ))}
+            {/* {officer
+              .filter((data) => !data.Position)
+              .map((officerlist) => officerlist.Doctor)} */}
             {/* end body table */}
           </div>
         </div>
