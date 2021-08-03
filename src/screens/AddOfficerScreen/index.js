@@ -48,144 +48,41 @@ const AddOfficerScreen = () => {
     setConfirmPassword(confirmPassword);
   };
 
-  console.log(FirstName);
-  console.log(LastName);
-  console.log(Phone);
-  console.log(Position);
-  console.log(Email);
-  console.log(Password);
+  const AddUserToFirbaseAuth = () => {
+    const user = firebaseConfig.auth().createUserWithEmailAndPassword(Email,Password);
+  }
 
-  const handleSubmit = () => {
-    try {
-      if (Password !== ConfirmPassword) {
-        console.log("Error : Password Is Not Match !");
-      } else {
-        firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
-        axios
-          .post("/AddOfficer", {
-            FirstName: FirstName,
-            LastName: LastName,
-            Phone: Phone,
-            Position: Position,
-            Email: Email,
-            Password: Password,
-          })
-          .then((res) => {
-            console.log(res);
-          });
-      }
-    } catch (error) {}
-  };
+  // console.log(FirstName);
+  // console.log(LastName);
+  // console.log(Phone);
+  // console.log(Position);
+  // console.log(Email);
+  // console.log(Password);
+
+  // const handleSubmit = () => {
+  //   try {
+  //     if (Password !== ConfirmPassword) {
+  //       console.log("Error : Password Is Not Match !");
+  //     } else {
+  //       firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
+  //       axios
+  //         .post("/AddOfficer", {
+  //           FirstName: FirstName,
+  //           LastName: LastName,
+  //           Phone: Phone,
+  //           Position: Position,
+  //           Email: Email,
+  //           Password: Password,
+  //         })
+  //         .then((res) => {
+  //           console.log(res);
+  //         });
+  //     }
+  //   } catch (error) {}
+  // };
 
   return (
     <div className="content-body">
-      {/* <div className="head-addofficer">
-        <img src={Powercarepic} alt="Powercare" className="Powercarepic" />
-        <h2>เพิ่มบุคลากร</h2>
-      </div>
-      <div className="addofficer-content">
-        <form>
-          <center>
-            <div className="mb-3">
-              <label for="doctor-name"> ชื่อจริง : </label>
-              <input
-                type="text"
-                name="FirstName"
-                className="form-control"
-                placeholder="โปรดกรอกชื่อจริง"
-                onChange={handleFirstName}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label for="doctor-name"> นามสกุล : </label>
-              <input
-                type="text"
-                name="LastName"
-                className="form-control"
-                placeholder="โปรดกรอกนามสกุล"
-                onChange={handleLastName}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label for="doctor-name"> เบอร์ติดต่อ : </label>
-              <input
-                type="tel"
-                name="Phone"
-                className="form-control"
-                placeholder="โปรดกรอกหมายเลขโทรศัพท์"
-                onChange={handlePhone}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label for="position"> ตำแหน่ง : </label>
-              <select
-                id="position"
-                name="Position"
-                className="form-control"
-                onClick={handlePosition}
-              >
-                <option disabled selected value>
-                  {" "}
-                  โปรดระบุตำแหน่งงาน
-                </option>
-                <option className="option" value="Doctor">
-                  {" "}
-                  Doctor{" "}
-                </option>
-                <option className="option" value="Admin">
-                  Admin
-                </option>
-              </select>
-            </div>
-            <div className="mb-3">
-              <label for="doctor-name"> Email : </label>
-              <input
-                type="email"
-                name="Email"
-                className="form-control"
-                placeholder="โปรดกรอก Email"
-                onChange={handleEmail}
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label for="doctor-name"> Password : </label>
-              <input
-                type="password"
-                name="Password"
-                className="form-control"
-                placeholder="โปรดกรอก password (ไม่ต่ำกว่า 6 ตัวอักษร)"
-                onChange={handlePassword}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label for="doctor-name"> Confirm Password : </label>
-              <input
-                type="password"
-                name="ConfirmPassword"
-                className="form-control"
-                placeholder="โปรดระบุให้ตรงกับ password ด้านบน"
-                onChange={handleConfirmPassword}
-                required
-              />
-            </div>
-            <button
-              onClick={handleSubmit}
-              type="submit"
-              className="btn btn-addofficer"
-            >
-              {" "}
-              เพิ่มบุคคลากร
-            </button>
-          </center>
-        </form>
-      </div> */}
-      {/* url('/img/hero-pattern.svg') */}
       <div className="flex h-screen   bg-white">
         <div
           className="w-1/2 bg-cover h-screen"
@@ -271,7 +168,6 @@ const AddOfficerScreen = () => {
               />
             </div>
             <div className="mt-3">
-
               <input
                 type="password"
                 name="ConfirmPassword"
@@ -292,7 +188,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-2">
               <button
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 type="submit"
                 className="button-done py-3 text-white w-full h-14 rounded"
               >

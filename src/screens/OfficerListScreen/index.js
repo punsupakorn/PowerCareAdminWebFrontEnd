@@ -41,7 +41,6 @@ const OfficerListScreen = () => {
   }, []);
 
   const handleDelete = (DocumentID, Position) => {
-    // console.log("DocumentID : " + DocumentID + ", Position : " + Position);
     try {
       const res = axios.delete("/OfficerList", {
         data: { DocumentID: DocumentID, Position: Position },
