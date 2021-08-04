@@ -10,6 +10,4 @@ export { default as OfficerListScreen } from "./OfficerListScreen";
 export { default as CalendarScreen} from "./CalendarScreen";
 export { default as PostponeScreen} from "./PostponeScreen";
 export { default as SummaryPostponeScreen} from "./SummaryPostponeScreen";
-export { default as CancelScreen} from "./CancelScreen";
 export { default as ConfirmCancelScreen} from "./ConfirmCancelScreen";
-export { default as AddMedicineScreen} from "./AddMedicineScreen";

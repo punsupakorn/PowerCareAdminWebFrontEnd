@@ -68,6 +68,7 @@ function MedicineDetailScreen() {
           </div>
           <br />
         </div>
+        <center>
         <div className="px-2 ">
           <button
             className="
@@ -99,6 +100,7 @@ function MedicineDetailScreen() {
             </button>
           </Link>
         </div>
+        </center>
       </div>
       {/* end */}
     </div>

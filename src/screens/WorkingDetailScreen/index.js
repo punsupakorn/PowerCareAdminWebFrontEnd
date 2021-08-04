@@ -4,38 +4,6 @@ import "./WorkingDetailScreen.css";
 function WorkingDetailScreen() {
   return (
     <div className="content-body">
-      {/* <div className="Datailworking-content">
-        <h5>รหัสผู้ป่วย : A001 </h5>
-        <h5>ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน 2542</h5>
-        <h5>
-          {" "}
-          ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี กรุงเทพ
-          10600{" "}
-        </h5>
-        <h5> เบอร์โทร : 083-046-3915 E-mail : - </h5>
-        <br />
-        <h5>ข้อมูลทำนัด : วันที่ 1/1/64  เวลา 10.30-11.00 </h5>
-        <h5>แพทย์ที่พบ : สมรวย ฉลาดแฉลม</h5>
-        <br />
-        <h5>สรุปผลอาการ : </h5>
-        <textarea
-          className="form-control Detail"
-          placeholder="กรุณากรอกอาการคนไข้..."
-          rows="5"
-          cols="50"
-        ></textarea>
-         <br />
-        <button className="btn btn-addofficer">เพิ่มยา</button> */}
-      {/* <Link to="/medicine">
-        <span className="button-submit">เพิ่มยา </span> </Link> */}
-      {/* <br />
-        <br />
-        <br />
-        <center>
-        <span className="button-submit">ยืนยัน</span>
-        <span className="button-back">ย้อนกลับ</span>
-      </center>
-      </div> */}
       <div className="mt-2">
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}

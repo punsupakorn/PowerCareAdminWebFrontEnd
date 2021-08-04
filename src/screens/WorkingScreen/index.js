@@ -53,7 +53,7 @@ export default function WorkingScreen() {
             onClick={() => console.log("Click function edit " + item.id)}
           />
           </Link>
-          <Link to="/cancel">
+          <Link to="/confirmcancel">
           <Delete
             {...iconOption}
             onClick={() => console.log("Click function delete " + item.id)}

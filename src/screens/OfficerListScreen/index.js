@@ -98,7 +98,7 @@ const OfficerListScreen = () => {
             </div>
           </div>
         </div>
-        {/* <div className="button-officelist">
+        <div className="button-officelist">
           <button className="btn btn-officerlist" onClick={getOfficerList}>
             {" "}
             รายชื่อทั้งหมด
@@ -112,69 +112,10 @@ const OfficerListScreen = () => {
             รายชื่อเจ้าหน้าที่
           </button>
           <Link to="/addofficer">
-            <button className="btn btn-officerlist-add "> เพิ่มบุคคลากร</button>
+            <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
           </Link>
-        </div> */}
+        </div>
       </div>
-
-          <div className="px-7  mt-4">
-            <div className="flex">
-              <span className="flex-1 group">
-                <div
-                  className="flex items-end justify-center text-center mx-auto px-4  w-full text-gray-500 group-hover:text-indigo-400 border-b-2 border-transparent group-hover:border-indigo-400"
-                >
-                  <span className=" px-1 pb-2 button-submit"  onClick={getOfficerList}>
-                    <i className="far fa-home text-2xl pt-1 mb-1 block" />
-                    <span className="block text-18 pb-1 "> รายชื่อทั้งหมด</span>
-                  </span>
-                </div>
-              </span>
-              <span className="flex-1 group">
-                <div
-                  className="flex items-end justify-center text-center mx-auto px-4  w-full text-gray-500 group-hover:text-indigo-400 border-b-2 border-transparent group-hover:border-indigo-400"
-                >
-                  <span className=" px-1 pb-2 button-submit"  onClick={getDoctor}>
-                    <i className="far fa-home text-2xl pt-1 mb-1 block" />
-                    <span className="block text-18 pb-1 "> รายชื่อหมอ</span>
-                  </span>
-                </div>
-              </span>
-              <span className="flex-1 group">
-                <div
-                  className="flex items-end justify-center text-center mx-auto px-4  w-full text-gray-500 group-hover:text-indigo-400 border-b-2 border-transparent group-hover:border-indigo-400"
-                >
-                  <span className=" px-1 pb-2 button-submit"  onClick={getAdmin}>
-                    <i className="far fa-home text-2xl pt-1 mb-1 block" />
-                    <span className="block text-18 pb-1 "> รายชื่อเจ้าหน้าที่</span>
-                  </span>
-                </div>
-              </span>
-              <Link to="/addofficer" >
-              <span className="flex-1 group">
-                <div
-                  className="flex items-end justify-center text-center mx-auto px-4  w-full text-gray-500 group-hover:text-indigo-400 border-b-2 border-transparent group-hover:border-indigo-400"
-                >
-                  <span className=" px-1 pb-2 button-submit"  onClick={getOfficerList}>
-                    <i className="far fa-home text-2xl pt-1 mb-1 block" />
-                    <span className="block text-18 pb-1 ">เพิ่มบุคคลากร</span>
-                  </span>
-                </div>
-              </span>
-              </Link>
-            </div>
-            {/* <div
-              className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-          border-b-2 border-indigo-400
-        "
-            >
-              </div> */}
-          </div>
-
       <div className="working-content">
         <div className="table-content">
           <div className="table-grid header">

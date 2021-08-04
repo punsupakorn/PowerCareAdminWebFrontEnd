@@ -13,9 +13,7 @@ import {
   CalendarScreen,
   PostponeScreen,
   SummaryPostponeScreen,
-  CancelScreen,
   ConfirmCancelScreen,
-  AddMedicineScreen,
 } from "./screens";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -68,14 +66,8 @@ function App() {
               <Route path="/summarypostpone">
                 <SummaryPostponeScreen/>
               </Route>
-              <Route path="/cancel">
-                <CancelScreen/>
-              </Route>
               <Route path="/confirmcancel">
                 <ConfirmCancelScreen/>
-              </Route>
-              <Route path="/addmedicine">
-                <AddMedicineScreen/>
               </Route>
             </Switch>
           </div>

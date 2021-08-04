@@ -4,8 +4,11 @@ import { InputNumber, TableController } from "../../components";
 import "./MedicineScreen.css";
 import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { AddMedicineScreen } from "../../components";
 
 export default function MedicineScreen() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -24,7 +27,7 @@ export default function MedicineScreen() {
   if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
 
   // function row data creating
-  const RowMedicine = ({ id, name, price,  numberinstock, index, amount   }) => {
+  const RowMedicine = ({ id, name, price, numberinstock, index, amount }) => {
     const [disable, setDisable] = useState(amount ? false : true);
     return (
       <div className="table-grid">
@@ -65,7 +68,7 @@ export default function MedicineScreen() {
     .slice(numberStartData, numberEndData)
     .map((item, key) => (
       <RowMedicine
-       id={item.id}
+        id={item.id}
         name={item.name}
         price={item.price}
         key={key}
@@ -161,10 +164,18 @@ export default function MedicineScreen() {
           </div>
         </div>
         <div className="button-officelist">
-        <Link to="/addmedicine">
-          <button className="btn btn-officerlist"> เพิ่มยา</button>
-          </Link>
-          </div>
+          {/* <Link to="/addmedicine"> */}
+            <button
+              className="btn btn-officerlist"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            >
+              {" "}
+              เพิ่มยา
+            </button>
+          {/* </Link> */}
+        </div>
         <div className="table-content">
           {/* header table */}
           <div className="table-grid header">
@@ -174,7 +185,6 @@ export default function MedicineScreen() {
             <p>จำนวน</p>
             <p>ราคา</p>
             <p>สต๊อกสินค้า</p>
-            
           </div>
           {/* end header */}
 
@@ -192,17 +202,44 @@ export default function MedicineScreen() {
           setNumOfRow={setNumOfRow}
           numOfRow={numOfRow}
         />
-      <Link to="/medicinedetail">
-        {/* <span
-          className="button-submit"
-          style={{ backgroundColor: "#7e99b8", color: "white" }}
-          onClick={submit}
-        >
-          บันทึกผล
-        </span> */}
+        <div className="px-2 ">
+          <button
+            className="
+            button-done
+            w-45
+            bg-blue-200
+            text-white
+            px-3
+            py-2
+            rounded-md
+          "
+          >
+            ยืนยัน
+          </button>
+          <Link to="/workingdetail">
+            <button
+              className="
+            button-back
+            w-30
+            bg-gray-400
+            text-white
+            px-2
+            py-2
+            margin-left-2vh
+            rounded-md
+          "
+            >
+              ย้อนกลับ
+            </button>
+          </Link>
+        </div>
+        {/* <Link to="/medicinedetail">
+
         <button className="btn btn-officerlist" onClick={submit} > เพิ่มยา</button>
-        </Link>
+        </Link> */}
       </div>
+      {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />}
+
     </div>
   );
 }
