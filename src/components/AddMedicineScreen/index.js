@@ -8,13 +8,13 @@ function AddMedicineScreen({ setOpenModal }) {
   UI Design Prototype
   Link : https://dribbble.com/shots/10452538-React-UI-Components
 */}
-      <div className=" py-2 flex flex-col justify-center ">
+      <div className=" py-8 flex flex-col justify-center ">
         <div className="relative py-1 sm:max-w-xl sm:mx-auto">
-          <div className="relative px-4 py-4 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+          <div className="relative px-8 py-8 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
             <div className="max-w-md mx-auto">
               <div className="flex items-center space-x-5">
                 {/* <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">i</div> */}
-                <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
+                <div className="block pl-5 font-semibold text-xl self-start text-gray-700">
                   <h2 className="leading-relaxed justify-center">เพิ่มยา</h2>
                 </div>
                 <div className="titleCloseBtn"></div>

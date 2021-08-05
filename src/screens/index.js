@@ -1,4 +1,5 @@
 export { default as HomeScreen } from "./HomeScreen";
+export { default as HomeScreenDoctor } from "./HomeScreenDoctor";
 export { default as ScheduleScreen } from "./ScheduleScreen";
 export { default as AppointmentScreen} from "./AppointmentScreen";
 export { default as AddOfficerScreen } from "./AddOfficerScreen";
