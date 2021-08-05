@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./PostponeScreen.css";
+import { useState } from "react";
 
 function PostponeScreen() {
+  const [date, setDate] = useState();
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -115,6 +117,12 @@ function PostponeScreen() {
                   <input
                     class="inline-flex  px-3"
                     placeholder="เลือกวันที่ทำนัด"
+                    type="date"
+                    value={date}
+                    placeholder="Search"
+                    onChange={(e) => {
+                      setDate(e.target.value);
+                    }}
                   ></input>
                 </div>
               </div>
@@ -125,10 +133,18 @@ function PostponeScreen() {
                   <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     เวลาทำนัดใหม่ :
                   </span>
-                  <input
+                  <select
                     class="inline-flex  px-3"
-                    placeholder="เลือกเวลาการทำนัด"
-                  ></input>
+                  >
+                    <option disabled selected value>
+                  {" "}
+                  เลือกเวลาการทำนัด
+                </option>
+                <option className="option" value="Doctor">
+                  {" "}
+                  11.00-12.00{" "}
+                </option>
+                  </select>
                 </div>
               </div>
             </div>
