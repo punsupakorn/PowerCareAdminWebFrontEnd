@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./WorkingDetailScreen.css";
+import { Button } from 'react-bootstrap';
+
 
 function WorkingDetailScreen() {
   return (
@@ -8,7 +10,7 @@ function WorkingDetailScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h6 className="text-black font-medium my-4">อาการคนไข้</h6>
+            <h3 className="text-black font-medium my-4">อาการคนไข้</h3>
             <div
               className="
           flex
@@ -107,14 +109,17 @@ function WorkingDetailScreen() {
           <br />
           <div className="px-2 py-2 ">
           <Link to="/medicine">
-            <button className=" button-done w-80  text-white px-2 py-2 rounded-md">
+            {/* <button className=" button-done w-80  text-white px-2 py-2 rounded-md">
               เพิ่มยา
-            </button>
+            </button> */}
+            <Button variant="primary" >
+            เพิ่มยา
+          </Button>
           </Link>
         </div>
         </div>
         <div className="px-2 ">
-          <button
+          {/* <button
             className="
             button-done
             w-45
@@ -143,6 +148,16 @@ function WorkingDetailScreen() {
           >
             ย้อนกลับ
           </button>
+          </Link> */}
+ <Link to="/medicine">
+           <Button variant="primary" >
+            บันทึกผล
+          </Button>
+          </Link>{" "}
+          <Link to="/working">
+          <Button variant="secondary" >
+            ย้อนกลับ
+          </Button>
           </Link>
         </div>
       </div>

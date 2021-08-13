@@ -39,9 +39,9 @@ const App = () => {
         {/* Logo */}
         <Link className="logo-content" to="/">
           <Logo width={"3rem"} height={"3rem"} className="logo-image" />
-          <h2 className="text-logo">
+          <h4 className="text-logo">
             Powercare&nbsp;<p className="color-white">Clinic</p>
-          </h2>
+          </h4>
         </Link>
   
         {/* Menu */}

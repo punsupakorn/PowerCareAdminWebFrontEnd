@@ -8,7 +8,7 @@ import axios from "axios";
 import SearchIcon from "../../icons/search-icon";
 import CloseIcon from "../../icons/close-icon";
 import firebaseConfig from "../../config";
-
+import { Button } from 'react-bootstrap';
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
@@ -61,7 +61,7 @@ const OfficerListScreen = () => {
   return (
     <div className="content-body">
       <div className="head-officerlist">
-        <h2>รายชื่อบุคลากร</h2>
+        <h4>รายชื่อบุคลากร</h4>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -99,7 +99,7 @@ const OfficerListScreen = () => {
           </div>
         </div>
         <div className="button-officelist">
-          <button className="btn btn-officerlist" onClick={getOfficerList}>
+          {/* <button className="btn btn-officerlist" onClick={getOfficerList}>
             {" "}
             รายชื่อทั้งหมด
           </button>
@@ -110,10 +110,25 @@ const OfficerListScreen = () => {
           <button className="btn btn-officerlist" onClick={getAdmin}>
             {" "}
             รายชื่อเจ้าหน้าที่
-          </button>
+          </button> */}
+           <Button variant="secondary" onClick={getOfficerList}>
+           รายชื่อทั้งหมด
+          </Button>{' '}{' '}
+          <Button variant="secondary" onClick={getDoctor}>
+          รายชื่อหมอ
+          </Button>{' '}{' '}
+          <Button variant="secondary" onClick={getAdmin}>
+          รายชื่อเจ้าหน้าที่
+          </Button>{' '}{' '}
           <Link to="/addofficer">
-            <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
+          <Button variant="outline-primary">
+          เพิ่มบุคคลากร
+          </Button>
           </Link>
+
+          {/* <Link to="/addofficer">
+            <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
+          </Link> */}
         </div>
       </div>
       <div className="working-content">

@@ -101,7 +101,7 @@ const AppointmentScreen = () => {
 
   return (
     <div className="content-body">
-      <h2>จัดการตารางเวลา</h2>
+      <h3>จัดการตารางเวลา</h3>
       <div className="button-officelist">
       <Link to="/schedule">
       <button className="btn btn-officerlist"> ตารางเวลาการทำนัด</button>

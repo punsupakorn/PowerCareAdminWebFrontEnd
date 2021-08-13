@@ -1,17 +1,16 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./PostponeScreen.css";
+import "./UserSummaryScreen.css";
 import { useState } from "react";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
-function PostponeScreen() {
-  const [date, setDate] = useState();
+function UserSummaryScreen() {
   return (
     <div className="content-body">
       <div className="mt-2">
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-black font-medium my-4">เลื่อนนัด</h3>
+            <h3 className="text-black font-medium my-4">ข้อมูลอาการคนไข้</h3>
             <div
               className="
         flex
@@ -78,8 +77,8 @@ function PostponeScreen() {
         border-b-2 border-gray-200
       "
             >
-              <p className="text-red-500 ml-4">
-                <b> วันที่ทำนัดเดิม : 1/1/64</b>
+              <p className="text-gray-500 ml-4">
+                <b> ข้อมูล ณ วันที่ 1/1/64 เวลา 10.30-11.00 </b>
               </p>
             </div>
             <div
@@ -92,8 +91,8 @@ function PostponeScreen() {
         border-b-2 border-gray-200
       "
             >
-              <p className="text-red-500 ml-4">
-                <b> เวลาที่ทำนัดเดิม : 10.30-11.00</b>
+              <p className="text-gray-500 ml-4">
+                <b> แพทย์ที่พบ : สมรวย ฉลาดแฉลม </b>
               </p>
             </div>
             <div
@@ -103,75 +102,34 @@ function PostponeScreen() {
         items-center
         w-full
         py-3
+        border-b-2 border-gray-200
       "
             >
-               <p className="text-black ml-4">
-                 กรุณากรอกวัน และเวลาที่ต้องการทำนัดใหม่
+              <p className="text-gray-500 ml-4">
+                สรุปผลอาการ : นายศุภากร สองห้องนายศุภากร สองห้องนายศุภากร
+                สองห้องนายศุภากร สองห้องนายศุภากร สองห้องนายศุภากร นายศุภากร
+                สองห้องนายศุภากร สองห้องนายศุภากร สองห้อง
               </p>
             </div>
-            <div class=" -m-2 text-center">
-              <div class=" p-2">
-                <div class="  inline-flex items-center bg-white  text-black rounded-full p-2 ">
-                  <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
-                    วันที่ทำนัดใหม่ :
-                  </span>
-                  <input
-                    class="inline-flex  px-3"
-                    placeholder="เลือกวันที่ทำนัด"
-                    type="date"
-                    value={date}
-                    placeholder="Search"
-                    onChange={(e) => {
-                      setDate(e.target.value);
-                    }}
-                  ></input>
-                </div>
-              </div>
-            </div>
-            <div class=" -m-2 text-center">
-              <div class="p-2">
-                <div class=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
-                  <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
-                    เวลาทำนัดใหม่ :
-                  </span>
-                  <select
-                    class="inline-flex  px-3"
-                  >
-                    <option disabled selected value>
-                  {" "}
-                  เลือกเวลาการทำนัด
-                </option>
-                <option className="option" value="Doctor">
-                  {" "}
-                  11.00-12.00{" "}
-                </option>
-                  </select>
-                </div>
-              </div>
+            <div
+              className="
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
+            >
+              <p className="text-gray-500 ml-4">
+                ข้อมูลการให้ยา :
+                ยายายายายยายายายายายยายายายายายยายายายายายยายายายายายยายายายายายยายายายายายยายายายายายยา
+              </p>
             </div>
           </div>
         </div>
         <div className="px-4 ">
-        <Link to="/summarypostpone">
-          {/* <button
-            className="
-          button-done
-          w-45
-          bg-blue-200
-          text-white
-          px-3
-          py-2
-          rounded-md
-        "
-          >
-              
-            ถัดไป
-          </button> */}
-          <Button variant="primary" >
-           ถัดไป
-          </Button>
-          </Link>{" "}
-          <Link to="/working">
+          <Link to="/userdetail">
             {/* <button
               className="
           button-back
@@ -186,9 +144,7 @@ function PostponeScreen() {
             >
               ย้อนกลับ
             </button> */}
-             <Button variant="secondary" >
-           ย้อนกลับ
-          </Button>
+            <Button variant="secondary">ย้อนกลับ</Button>
           </Link>
         </div>
       </div>
@@ -197,4 +153,4 @@ function PostponeScreen() {
   );
 }
 
-export default PostponeScreen;
+export default UserSummaryScreen;

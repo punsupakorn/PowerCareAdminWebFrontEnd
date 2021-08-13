@@ -6,8 +6,16 @@ import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AddMedicineScreen } from "../../components";
 
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+
 export default function MedicineScreen() {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // for search
   const [searchInput, setSearchInput] = useState(null);
@@ -101,31 +109,8 @@ export default function MedicineScreen() {
     <div className="content-body">
       <div className="medicine-content">
         <div className="search-bar-container">
-          <h2 style={{ alignSelf: "flex-start" }}> ยา </h2>
-          {/* <div>
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="ค้นหา..."
-              onChange={(e) => setSearchInput(e.target.value)}
-              value={searchInput}
-            />
-            {searched ? (
-              <span onClick={refreshPage} className="button-clear-date">
-                ล้าง
-              </span>
-            ) : (
-              <SearchIcon
-                width="1.5rem"
-                hieght="1.5rem"
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  search(searchInput);
-                  setSearched(true);
-                }}
-              />
-            )}
-          </div> */}
+          <h3 style={{ alignSelf: "flex-start" }}> ยา </h3>
+
           <div className="search-bar-conten">
             <div className="p-12 h-12">
               <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -165,7 +150,7 @@ export default function MedicineScreen() {
         </div>
         <div className="button-officelist">
           {/* <Link to="/addmedicine"> */}
-            <button
+          {/* <button
               className="btn btn-officerlist"
               onClick={() => {
                 setModalOpen(true);
@@ -173,7 +158,83 @@ export default function MedicineScreen() {
             >
               {" "}
               เพิ่มยา
-            </button>
+            </button> */}
+          <Button variant="primary" onClick={handleShow}>
+            เพิ่มยา
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>เพิ่มยา</Modal.Title>
+            </Modal.Header>
+
+            <center>
+              <Modal.Body>
+                <div className="divide-y divide-gray-200">
+                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                    <div className="flex flex-col">
+                      <label className="leading-loose">ชื่อยา</label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกชื่อยา"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="leading-loose">
+                        คำอธิบายเกี่ยวกับยา
+                      </label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกคำอธิบาย"
+                      />
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ราคา</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกราคา"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ประเภท</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกประเภท"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">สต๊อกสินค้า</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกจำนวน"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal.Body>
+            </center>
+            <Modal.Footer>
+              <Button variant="primary" >
+                เพิ่มยา
+              </Button>
+              <Button variant="secondary" >
+                ย้อนกลับ
+              </Button>
+            </Modal.Footer>
+          </Modal>
           {/* </Link> */}
         </div>
         <div className="table-content">
@@ -203,7 +264,7 @@ export default function MedicineScreen() {
           numOfRow={numOfRow}
         />
         <div className="px-2 ">
-          <button
+          {/* <button
             className="
             button-done
             w-45
@@ -231,15 +292,20 @@ export default function MedicineScreen() {
             >
               ย้อนกลับ
             </button>
+          </Link> */}
+          <Link to="/medicinedetail">
+          <Button variant="primary" >
+            บันทึกผล
+          </Button>
+          </Link>{" "}
+          <Link to="/workingdetail">
+          <Button variant="secondary" >
+            ย้อนกลับ
+          </Button>
           </Link>
         </div>
-        {/* <Link to="/medicinedetail">
-
-        <button className="btn btn-officerlist" onClick={submit} > เพิ่มยา</button>
-        </Link> */}
       </div>
-      {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />}
-
+      {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}
     </div>
   );
 }

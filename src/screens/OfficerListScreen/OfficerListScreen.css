@@ -18,7 +18,7 @@
   }
 
   .btn-officerlist{ 
-    margin-left: 3rem;
+    margin-left: 2rem;
     background-color: #577eab;
     font-size: 18;
     border-radius: 4px;
@@ -41,7 +41,7 @@
   
   .table-grid {
     display: grid;
-    grid-template-columns: 10% 12% 15% 20% 18%  10%calc(10% - 2rem);
+    grid-template-columns: 10% 12% 10% 28% 15%  15%calc(10% - 1rem);
     grid-gap: 1rem;
   }
   

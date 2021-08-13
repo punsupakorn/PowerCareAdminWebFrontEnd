@@ -33,17 +33,17 @@
   overflow: scroll;
 }
 
-.table-grid {
+.table-grid-working {
   display: grid;
-  grid-template-columns: 20% 40% 20% calc(20% - 3rem);
+  grid-template-columns: 2% 10% 12% 10% 15%  20%  15%calc(10% - 1rem);
   grid-gap: 1rem;
 }
 
-.table-grid:not(:first-child) {
+.table-grid-working:not(:first-child) {
   margin-top: 1rem;
 }
 
-.table-grid.header,
+.table-grid-working.header,
 .body-table {
   background-color: #a5c3df;
   padding: 1rem;

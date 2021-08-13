@@ -5,7 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #908D8D; */
+    background-color: #908D8D;
+    
   }
   
   .modalContainer {

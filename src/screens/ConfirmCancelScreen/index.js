@@ -1,10 +1,19 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./ConfirmCancelScreen.css";
 import React, { useState } from "react";
-import { Modal } from "../../components";
+// import { Modal } from "../../components";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 function ConfirmCancelScreen() {
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -97,8 +106,8 @@ function ConfirmCancelScreen() {
           </div>
         </div>
       </div>
-      <div className="px-4 ">
-        <button
+      <div className="mb-2 ">
+        {/* <button
           className="
             button-done
             w-45
@@ -114,9 +123,32 @@ function ConfirmCancelScreen() {
             setModalOpen(true);
           }}
         > ยกเลิกการทำนัด
-        </button>
+        </button> */}
+              <Button variant="danger" onClick={handleShow} className=" button-back">
+     ยกเลิกการทำนัด
+      </Button>{' '}
+      <Button variant="secondary" className=" button-back" >
+        ย้อนกลับ
+      </Button>
+     
+      <Modal show={show} onHide={handleClose} >
+        <Modal.Header closeButton>
+          <Modal.Title>คำเตือน</Modal.Title>
+        </Modal.Header>
+        
+        <center><Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            ย้อนกลับ
+          </Button>
+          <Button variant="danger" onClick={handleClose}>
+            ยืนยันยกเลิกการทำนัด
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-        <Link to="/working">
+
+        {/* <Link to="/working">
           <button
             className="
           button-back
@@ -132,9 +164,9 @@ function ConfirmCancelScreen() {
           >
             ย้อนกลับ
           </button>
-        </Link>
+        </Link> */}
       </div>
-      {modalOpen && <Modal setOpenModal={setModalOpen} />}
+      {/* {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
     </div>
   );
 }

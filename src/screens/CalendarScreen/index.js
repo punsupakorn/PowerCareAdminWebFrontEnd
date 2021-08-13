@@ -4,9 +4,22 @@ import "./CalendarScreen.css";
 // import CloseIcon from "../../icons/close-icon";
 // import { useState, useEffect } from "react";
 // import axios from "axios";
+import {
+    ScheduleComponent,
+    ViewsDirective,
+    ViewDirective,
+    Day,
+    Week,
+    WorkWeek,
+    Month,
+    Agenda,
+    Inject,
+    Resize,
+    DragAndDrop
+  } from "@syncfusion/ej2-react-schedule";
 
-
-const CalendarScreen = (props) => (
+function CalendarScreen ()  {
+    return(
     <div className ="content-body">
 
         <div className="calendarscreen">
@@ -212,5 +225,10 @@ const CalendarScreen = (props) => (
         </div>
     </div>
     </div>
-);
+    // {/* <ScheduleComponent>
+    //     <Inject services ={[Day,Week,WorkWeek,Month,Agenda]}/>
+    // </ScheduleComponent>
+    // </div> */}
+    );
+}
 export default CalendarScreen;

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./SummaryPostponeScreen.css";
+import { Button } from "react-bootstrap";
 
 function SummaryPostponeScreen() {
   return (
@@ -8,7 +9,7 @@ function SummaryPostponeScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h6 className="text-black font-medium my-4">สรุปข้อมูลการนัด</h6>
+            <h3 className="text-black font-medium my-4">สรุปข้อมูลการนัด</h3>
             <div
               className="
           flex
@@ -91,10 +92,10 @@ function SummaryPostponeScreen() {
             >
               <p className=" text-gray-500 ml-4">แพทย์ที่พบ : สมรวย ฉลาดแฉลม</p>
             </div>
-            </div>
-            </div>
+          </div>
+        </div>
         <div className="px-4 ">
-          <button
+          {/* <button
             className="
           button-done
           w-45
@@ -122,6 +123,14 @@ function SummaryPostponeScreen() {
             >
               ย้อนกลับ
             </button>
+          </Link> */}
+          <br/>
+           <Link to="/postpone">
+          <Button variant="primary " className="
+          button-done">บันทึกผล</Button>
+          </Link>{" "}
+          <Link to="/postpone">
+            <Button variant="secondary">ย้อนกลับ</Button>
           </Link>
         </div>
       </div>

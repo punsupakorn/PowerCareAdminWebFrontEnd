@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./MedicineDetailScreen.css";
-
+import { Button } from "react-bootstrap";
 
 function MedicineDetailScreen() {
   return (
@@ -46,12 +46,11 @@ function MedicineDetailScreen() {
           border-b-2 border-gray-200
         "
             >
-              
               <p className="medicine-dt text-gray-500 ml-4 ">
                 ยา A จำนวน 1 ขวด หน่วยละ 350 คิดเป็นเงิน 350 บาท
               </p>
             </div>
-          <div
+            <div
               className="
           flex
           justify-between
@@ -69,8 +68,8 @@ function MedicineDetailScreen() {
           <br />
         </div>
         <center>
-        <div className="px-2 ">
-          <button
+          <div className="px-2 ">
+            {/* <button
             className="
             button-done
             w-45
@@ -82,9 +81,11 @@ function MedicineDetailScreen() {
           "
           >
             บันทึกผล
-          </button>
-          <Link to="/medicine">
-            <button
+          </button> */}
+            <Button variant="primary">บันทึกผล</Button>{" "}
+            <Link to="/medicine">
+              <Button variant="secondary">ย้อนกลับ</Button>
+              {/* <button
               className="
             button-back
             w-30
@@ -97,9 +98,9 @@ function MedicineDetailScreen() {
           "
             >
               ย้อนกลับ
-            </button>
-          </Link>
-        </div>
+            </button> */}
+            </Link>
+          </div>
         </center>
       </div>
       {/* end */}

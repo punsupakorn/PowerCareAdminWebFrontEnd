@@ -15,6 +15,9 @@ import {
   PostponeScreen,
   SummaryPostponeScreen,
   ConfirmCancelScreen,
+  UserScreen,
+  UserDetailScreen,
+  UserSummaryScreen,
 } from "./screens";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -72,6 +75,15 @@ function App() {
               </Route>
               <Route path="/confirmcancel">
                 <ConfirmCancelScreen/>
+              </Route>
+              <Route path="/user">
+                <UserScreen/>
+              </Route>
+              <Route path="/userdetail">
+                <UserDetailScreen/>
+              </Route>
+              <Route path="/usersummary">
+                <UserSummaryScreen />
               </Route>
             </Switch>
           </div>
