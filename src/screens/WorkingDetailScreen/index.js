@@ -109,12 +109,13 @@ function WorkingDetailScreen() {
           <br />
           <div className="px-2 py-2 ">
           <Link to="/medicine">
-            {/* <button className=" button-done w-80  text-white px-2 py-2 rounded-md">
-              เพิ่มยา
-            </button> */}
-            <Button variant="primary" >
-            เพิ่มยา
-          </Button>
+          <Button variant="primary" 
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
+        เพิ่มยา
+          </Button>{' '}{' '}
           </Link>
         </div>
         </div>
@@ -150,12 +151,20 @@ function WorkingDetailScreen() {
           </button>
           </Link> */}
  <Link to="/medicine">
-           <Button variant="primary" >
+ <Button variant="primary" 
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
             บันทึกผล
           </Button>
           </Link>{" "}
           <Link to="/working">
-          <Button variant="secondary" >
+          <Button variant="primary" 
+          style={
+            { borderColor: "#bdbdbd",
+              backgroundColor: "#bdbdbd" }
+         }>
             ย้อนกลับ
           </Button>
           </Link>

@@ -51,7 +51,7 @@
 
   .table-grid.header,
   .body-table {
-    background-color: #a5c3df;
+    background-color: #C7D2FE;
     padding: 1rem;
     margin-bottom: 2px;
     border-radius: 8px;
@@ -61,7 +61,7 @@
   .body-table {
     display: flex;
     flex-direction: column;
-    background-color: #ccdbea;
+    background-color: #C7D2FE;
   }
   .menu-row {
     display: flex;
@@ -87,3 +87,6 @@
     flex-grow: 1;
 }
 
+.done{
+  background-color: turquoise;
+}

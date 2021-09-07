@@ -126,11 +126,19 @@ function SummaryPostponeScreen() {
           </Link> */}
           <br/>
            <Link to="/postpone">
-          <Button variant="primary " className="
-          button-done">บันทึกผล</Button>
+          <Button variant="primary " 
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
+           บันทึกผล</Button>
           </Link>{" "}
           <Link to="/postpone">
-            <Button variant="secondary">ย้อนกลับ</Button>
+            <Button variant="secondary"
+             style={
+              { borderColor: "#bdbdbd",
+                backgroundColor: "#bdbdbd" }
+           }>ย้อนกลับ</Button>
           </Link>
         </div>
       </div>

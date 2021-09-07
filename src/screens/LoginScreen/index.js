@@ -23,7 +23,7 @@ const Login = () => {
     return <Redirect to="/homescreen" />;
   }
   return (
-     <div className="bg-blue-100 h-screen w-screen">
+     <div className="bg-indigo-200 h-screen w-screen">
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
         <div
           className="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
@@ -42,15 +42,27 @@ const Login = () => {
                     <input
                       id="email"
                       type="text"
+                      className="flex-grow h-8 px-2 rounded border border-grey-400"
+                      name="email"
+                      required
+                      placeholder="Email"
+                      pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                      required
+                    />
+                  </div>
+                  {/* <div className="flex flex-col mt-4">
+                    <input
+                      id="email"
+                      type="text"
                       className="flex-grow h-8 px-2 border rounded border-grey-400"
                       // name="email"
                       defaultValue
                       placeholder="Email"
                       pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
                       required
-                      title="Must contain correct email form."
+                     
                     />
-                  </div>
+                  </div> */}
                   <div className="flex flex-col mt-4">
                     <input
                       id="password"

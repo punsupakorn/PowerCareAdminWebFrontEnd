@@ -128,7 +128,7 @@ function PostponeScreen() {
                 </div>
               </div>
             </div>
-            <div class=" -m-2 text-center">
+            <div class=" m-2 text-center">
               <div class="p-2">
                 <div class=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
                   <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
@@ -167,26 +167,20 @@ function PostponeScreen() {
               
             ถัดไป
           </button> */}
-          <Button variant="primary" >
+          <Button variant="primary" 
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
            ถัดไป
           </Button>
           </Link>{" "}
           <Link to="/working">
-            {/* <button
-              className="
-          button-back
-          w-30
-          bg-gray-400
-          text-white
-          px-2
-          py-2
-          margin-left-2vh
-          rounded-md
-        "
-            >
-              ย้อนกลับ
-            </button> */}
-             <Button variant="secondary" >
+             <Button variant="secondary" 
+              style={
+                { borderColor: "#bdbdbd",
+                  backgroundColor: "#bdbdbd" }
+             }>
            ย้อนกลับ
           </Button>
           </Link>

@@ -111,17 +111,35 @@ const OfficerListScreen = () => {
             {" "}
             รายชื่อเจ้าหน้าที่
           </button> */}
-           <Button variant="secondary" onClick={getOfficerList}>
+           <Button variant="secondary" onClick={getOfficerList}
+             style={
+               { borderColor: "#818CF8",
+                 backgroundColor: "#818CF8" }
+            }>
            รายชื่อทั้งหมด
+           
           </Button>{' '}{' '}
-          <Button variant="secondary" onClick={getDoctor}>
+          <Button variant="secondary" onClick={getDoctor}
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
           รายชื่อหมอ
           </Button>{' '}{' '}
-          <Button variant="secondary" onClick={getAdmin}>
+          <Button variant="secondary" onClick={getAdmin}
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
           รายชื่อเจ้าหน้าที่
           </Button>{' '}{' '}
           <Link to="/addofficer">
-          <Button variant="outline-primary">
+          <Button variant="secondary"
+           style={
+            { borderColor: "#C7D2FE",
+              backgroundColor: "#C7D2FE",
+            color: "black"}
+         }>
           เพิ่มบุคคลากร
           </Button>
           </Link>

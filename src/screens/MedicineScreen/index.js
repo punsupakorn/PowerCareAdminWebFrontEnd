@@ -159,7 +159,11 @@ export default function MedicineScreen() {
               {" "}
               เพิ่มยา
             </button> */}
-          <Button variant="primary" onClick={handleShow}>
+          <Button variant="primary" onClick={handleShow}
+            style={
+              { borderColor: "#818CF8",
+                backgroundColor: "#818CF8" }
+           }>
             เพิ่มยา
           </Button>
 
@@ -227,10 +231,18 @@ export default function MedicineScreen() {
               </Modal.Body>
             </center>
             <Modal.Footer>
-              <Button variant="primary" >
+              <Button variant="primary" 
+                style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
                 เพิ่มยา
               </Button>
-              <Button variant="secondary" >
+              <Button variant="secondary" 
+              style={
+                { borderColor: "#bdbdbd",
+                  backgroundColor: "#bdbdbd" }
+             }>
                 ย้อนกลับ
               </Button>
             </Modal.Footer>
@@ -294,15 +306,24 @@ export default function MedicineScreen() {
             </button>
           </Link> */}
           <Link to="/medicinedetail">
-          <Button variant="primary" >
+          <Button variant="primary" 
+          style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }>
             บันทึกผล
           </Button>
           </Link>{" "}
           <Link to="/workingdetail">
-          <Button variant="secondary" >
+          <Button variant="secondary" 
+           style={
+            { borderColor: "#bdbdbd",
+              backgroundColor: "#bdbdbd" }
+         }>
             ย้อนกลับ
           </Button>
           </Link>
+
         </div>
       </div>
       {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}

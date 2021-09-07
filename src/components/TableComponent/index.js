@@ -36,7 +36,7 @@ export default function TableComponent({
             className="number-table-item"
             style={
               indexTable == item
-                ? { backgroundColor: "#a5c3df", color: "white" }
+                ? { backgroundColor: "#C7D2FE", color: "white" }
                 : null
             }
             onClick={() => {

@@ -107,27 +107,14 @@ function ConfirmCancelScreen() {
         </div>
       </div>
       <div className="mb-2 ">
-        {/* <button
-          className="
-            button-done
-            w-45
-            bg-red-800
-            text-white
-            px-3
-            py-2
-            rounded-md
-          "
-          id="cancelBtn"
-          onClick=
-          {() => {
-            setModalOpen(true);
-          }}
-        > ยกเลิกการทำนัด
-        </button> */}
               <Button variant="danger" onClick={handleShow} className=" button-back">
      ยกเลิกการทำนัด
       </Button>{' '}
-      <Button variant="secondary" className=" button-back" >
+      <Button variant="secondary" className=" button-back"
+      style={
+        { borderColor: "#bdbdbd",
+          backgroundColor: "#bdbdbd" }
+     } >
         ย้อนกลับ
       </Button>
      
@@ -138,7 +125,11 @@ function ConfirmCancelScreen() {
         
         <center><Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose}
+          style={
+            { borderColor: "#bdbdbd",
+              backgroundColor: "#bdbdbd" }
+         }>
             ย้อนกลับ
           </Button>
           <Button variant="danger" onClick={handleClose}>

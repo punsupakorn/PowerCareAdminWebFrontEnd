@@ -82,23 +82,19 @@ function MedicineDetailScreen() {
           >
             บันทึกผล
           </button> */}
-            <Button variant="primary">บันทึกผล</Button>{" "}
+            <Button variant="primary"
+             style={
+              { borderColor: "#818CF8",
+                backgroundColor: "#818CF8" }
+           }
+           >บันทึกผล</Button>{" "}
             <Link to="/medicine">
-              <Button variant="secondary">ย้อนกลับ</Button>
-              {/* <button
-              className="
-            button-back
-            w-30
-            bg-gray-400
-            text-white
-            px-2
-            py-2
-            margin-left-2vh
-            rounded-md
-          "
-            >
-              ย้อนกลับ
-            </button> */}
+              <Button variant="secondary"
+               style={
+                { borderColor: "#bdbdbd",
+                  backgroundColor: "#bdbdbd" }
+             }>
+               ย้อนกลับ</Button>
             </Link>
           </div>
         </center>
