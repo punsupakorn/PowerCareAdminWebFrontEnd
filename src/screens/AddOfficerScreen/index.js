@@ -49,7 +49,6 @@ const AddOfficerScreen = () => {
     setConfirmPassword(confirmPassword);
   };
 
-<<<<<<< Updated upstream
   // console.log(FirstName);
   // console.log(LastName);
   // console.log(Phone);
@@ -107,11 +106,6 @@ const AddOfficerScreen = () => {
   //     }
   //   } catch (error) {}
   // };
-=======
-  const AddUserToFirbaseAuth = () => {
-    const user = firebaseConfig.auth().createUserWithEmailAndPassword(Email,Password);
-  }
->>>>>>> Stashed changes
 
   return (
     <div className="content-body">
