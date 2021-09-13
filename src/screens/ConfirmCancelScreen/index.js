@@ -3,16 +3,16 @@ import "./ConfirmCancelScreen.css";
 import React, { useState } from "react";
 // import { Modal } from "../../components";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 
 function ConfirmCancelScreen() {
   // const [modalOpen, setModalOpen] = useState(false);
-  const [show, setShow] = useState(false);
+ const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true); 
 
   return (
     <div className="content-body">
@@ -125,37 +125,22 @@ function ConfirmCancelScreen() {
         
         <center><Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}
+          <Button variant="secondary" 
           style={
             { borderColor: "#bdbdbd",
               backgroundColor: "#bdbdbd" }
          }>
             ย้อนกลับ
           </Button>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="danger" onClick={handleClose}
+          style={
+            { borderColor: "danger",
+              backgroundColor: "danger" }
+         }>
             ยืนยันยกเลิกการทำนัด
           </Button>
         </Modal.Footer>
       </Modal>
-
-
-        {/* <Link to="/working">
-          <button
-            className="
-          button-back
-          w-30
-          bg-gray-400
-          text-white
-          px-2
-          py-2
-          margin-left-2vh
-          rounded-md
-        "
-        
-          >
-            ย้อนกลับ
-          </button>
-        </Link> */}
       </div>
       {/* {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
     </div>

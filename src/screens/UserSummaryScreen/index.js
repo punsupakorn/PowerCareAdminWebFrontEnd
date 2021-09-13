@@ -128,24 +128,17 @@ function UserSummaryScreen() {
             </div>
           </div>
         </div>
-        <div className="px-4 ">
+        <div className="px-4 mt-4 ">
           <Link to="/userdetail">
-            {/* <button
-              className="
-          button-back
-          w-30
-          bg-gray-400
-          text-white
-          px-2
-          py-2
-          margin-left-2vh
-          rounded-md
-        "
-            >
-              ย้อนกลับ
-            </button> */}
-            <Button variant="secondary">ย้อนกลับ</Button>
-          </Link>
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#bdbdbd",
+              backgroundColor: "#bdbdbd"
+            }}
+          >
+            ย้อนกลับ
+          </Button>{" "}  </Link>
         </div>
       </div>
       {/* end */}

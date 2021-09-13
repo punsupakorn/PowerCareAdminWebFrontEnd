@@ -49,6 +49,7 @@ const AddOfficerScreen = () => {
     setConfirmPassword(confirmPassword);
   };
 
+<<<<<<< Updated upstream
   // console.log(FirstName);
   // console.log(LastName);
   // console.log(Phone);
@@ -106,6 +107,11 @@ const AddOfficerScreen = () => {
   //     }
   //   } catch (error) {}
   // };
+=======
+  const AddUserToFirbaseAuth = () => {
+    const user = firebaseConfig.auth().createUserWithEmailAndPassword(Email,Password);
+  }
+>>>>>>> Stashed changes
 
   return (
     <div className="content-body">
@@ -120,7 +126,7 @@ const AddOfficerScreen = () => {
         <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
           <div className="text-center p-0">
             <h1 className=" text-gray-800 text-3xl ">เพิ่มบุคคลากร</h1>
-            <h3 className="p-1 text-gray-700">สำหรับแอดมิน</h3>
+            <h4 className="p-1 text-gray-700">สำหรับเจ้าหน้าที่</h4>
           </div>
           <form>
             <div className="mt-4">

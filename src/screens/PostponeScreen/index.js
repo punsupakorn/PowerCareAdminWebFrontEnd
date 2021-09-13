@@ -109,10 +109,10 @@ function PostponeScreen() {
                  กรุณากรอกวัน และเวลาที่ต้องการทำนัดใหม่
               </p>
             </div>
-            <div class=" -m-2 text-center">
-              <div class=" p-2">
-                <div class="  inline-flex items-center bg-white  text-black rounded-full p-2 ">
-                  <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
+            <div className=" -m-2 text-center">
+              <div className=" p-2">
+                <div className="  inline-flex items-center bg-white  text-black rounded-full p-2 ">
+                  <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     วันที่ทำนัดใหม่ :
                   </span>
                   <input
@@ -120,7 +120,6 @@ function PostponeScreen() {
                     placeholder="เลือกวันที่ทำนัด"
                     type="date"
                     value={date}
-                    placeholder="Search"
                     onChange={(e) => {
                       setDate(e.target.value);
                     }}
@@ -128,14 +127,14 @@ function PostponeScreen() {
                 </div>
               </div>
             </div>
-            <div class=" m-2 text-center">
-              <div class="p-2">
-                <div class=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
-                  <span class="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
+            <div className=" m-2 text-center">
+              <div className="p-2">
+                <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
+                  <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     เวลาทำนัดใหม่ :
                   </span>
                   <select
-                    class="inline-flex  px-3"
+                    className="inline-flex  px-3"
                   >
                     <option disabled selected value>
                   {" "}

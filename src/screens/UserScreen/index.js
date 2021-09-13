@@ -85,10 +85,12 @@ export default function UserScreen() {
                     // onClick={() => console.log("Click function add " + item.id)}
                   />
                 </Link>
+                <Link to="/edituser">
                 <Edit
                   {...iconOption}
                   // onClick={() => console.log("Click function edit ")}
                 />
+                </Link>
                 <Delete
                   {...iconOption}
                   // onClick={() =>

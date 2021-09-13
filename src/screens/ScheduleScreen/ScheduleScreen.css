@@ -3,7 +3,7 @@
   flex-direction: column;
   margin-top: 1rem;
   border-radius: 8px;
-  background-color: #a5c3df;
+  background-color: #c7d2fe;
   padding: 1rem 2rem;
   padding-top: 2rem;
   width: 90%;
@@ -51,7 +51,8 @@
 
 .time-item {
   padding: 0.75rem;
-  background-color: #ccdbea;
+  background-color: #a5b4fc;
+  color: white;
   border-radius: 4px;
   font-size: 0.75rem;
   text-align: center;

@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./WorkingDetailScreen.css";
-import { Button } from 'react-bootstrap';
-
+import { Button } from "react-bootstrap";
 
 function WorkingDetailScreen() {
   return (
@@ -108,65 +107,32 @@ function WorkingDetailScreen() {
           </div>
           <br />
           <div className="px-2 py-2 ">
-          <Link to="/medicine">
-          <Button variant="primary" 
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-        เพิ่มยา
-          </Button>{' '}{' '}
-          </Link>
-        </div>
+            <Link to="/medicine">
+              <Button
+                variant="primary"
+                style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+              >
+                เพิ่มยา
+              </Button>{" "}
+            </Link>
+          </div>
         </div>
         <div className="px-2 ">
-          {/* <button
-            className="
-            button-done
-            w-45
-            bg-blue-200
-            text-white
-            px-3
-            py-2
-            rounded-md
-          "
-          >
-            ยืนยัน
-          </button>
-          <Link to="/working">
-          <button
-          
-            className="
-            button-back
-            w-30
-            bg-gray-400
-            text-white
-            px-2
-            py-2
-            margin-left-2vh
-            rounded-md
-          "
-          >
-            ย้อนกลับ
-          </button>
-          </Link> */}
- <Link to="/medicine">
- <Button variant="primary" 
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-            บันทึกผล
-          </Button>
+          <Link to="/medicine">
+            <Button
+              variant="primary"
+              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+            >
+              บันทึกผล
+            </Button>
           </Link>{" "}
           <Link to="/working">
-          <Button variant="primary" 
-          style={
-            { borderColor: "#bdbdbd",
-              backgroundColor: "#bdbdbd" }
-         }>
-            ย้อนกลับ
-          </Button>
+            <Button
+              variant="primary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
           </Link>
         </div>
       </div>

@@ -4,13 +4,12 @@ import { InputNumber, TableController } from "../../components";
 import "./MedicineScreen.css";
 import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { AddMedicineScreen } from "../../components";
 
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
 export default function MedicineScreen() {
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
   const [show, setShow] = useState(false);
 

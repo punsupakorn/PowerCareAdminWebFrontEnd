@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import "./AppointmentScreen.css";
 import axios from "axios";
-import Select from "react-select";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
+import Select from "react-select";
 
 const AppointmentScreen = () => {
   const [doctor, setDoctor] = useState([]);
@@ -11,35 +13,34 @@ const AppointmentScreen = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
+  // const timeList = [
+  //   "08:30 - 09:00",
+  //   "09:00 - 09:30",
+  //   "09:30 - 10:00",
+  //   "10:00 - 10:30",
+  //   "10:30 - 11:00",
+  //   "11:00 - 11:30",
+  //   "11:30 - 12:00",
+  //   "13:30 - 14:00",
+  //   "14:00 - 14:30",
+  //   "14:30 - 15:00",
+  //   "15:00 - 15:00",
+  //   "15:00 - 15:30",
+  // ];
 
   const timeList = [
-    "08:30 - 09:00",
-    "09:00 - 09:30",
-    "09:30 - 10:00",
-    "10:00 - 10:30",
-    "10:30 - 11:00",
-    "11:00 - 11:30",
-    "11:30 - 12:00",
-    "13:30 - 14:00",
-    "14:00 - 14:30",
-    "14:30 - 15:00",
-    "15:00 - 15:00",
-    "15:00 - 15:30",
+    {value: "08:30 - 09:00" , label: "08:30 - 09:00" },
+    {value: "09:00 - 09:30" , label: "09:00 - 09:30"},
+    {value: "09:30 - 10:00" , label: "09:30 - 10:00"},
+    {value: "10:00 - 10:30" , label: "10:00 - 10:30"},
+    {value: "10:30 - 11:00" , label: "10:30 - 11:00"},
+    {value: "11:00 - 11:30" , label: "11:00 - 11:30"},
+    {value: "11:30 - 12:00" , label: "11:30 - 12:00"},
+    {value: "13:30 - 14:00" , label: "13:30 - 14:00"},
+    {value: "14:00 - 14:30" , label: "14:00 - 14:30"},
+    {value: "14:30 - 15:00" , label: "14:30 - 15:00"},
+    {value: "15:00 - 15:30" , label: "15:00 - 15:30"},
   ];
-
-  // const timeList = [
-  //   {value: "08:30 - 09:00" , label: "08:30 - 09:00"},
-  //   {value: "09:00 - 09:30" , label: "09:00 - 09:30"},
-  //   {value: "09:30 - 10:00" , label: "09:30 - 10:00"},
-  //   {value: "10:00 - 10:30" , label: "10:00 - 10:30"},
-  //   {value: "10:30 - 11:00" , label: "10:30 - 11:00"},
-  //   {value: "11:00 - 11:30" , label: "11:00 - 11:30"},
-  //   {value: "11:30 - 12:00" , label: "11:30 - 12:00"},
-  //   {value: "13:30 - 14:00" , label: "13:30 - 14:00"},
-  //   {value: "14:00 - 14:30" , label: "14:00 - 14:30"},
-  //   {value: "14:30 - 15:00" , label: "14:30 - 15:00"},
-  //   {value: "15:00 - 15:30" , label: "15:00 - 15:30"},
-  // ];
 
   useEffect(() => {
     axios.get("/Appointment").then((res) => {
@@ -103,12 +104,30 @@ const AppointmentScreen = () => {
     <div className="content-body">
       <h3>จัดการตารางเวลา</h3>
       <div className="button-officelist">
-      <Link to="/schedule">
-      <button className="btn btn-officerlist"> ตารางเวลาการทำนัด</button>
-      </Link>
-      <Link to="/calendar">
-      <button className="btn btn-officerlist"> ปฏิทินเวลาการทำนัด</button>
-      </Link>
+        <Link to="/schedule">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            ตารางเวลาการทำนัด
+          </Button>
+        </Link>{" "}
+        <Link to="/calendar">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            ปฏิทินเวลาการทำนัด
+          </Button>{" "}
+        </Link>
       </div>
       {/* Input Doctor */}
       <div className="schedule-content">
@@ -151,29 +170,29 @@ const AppointmentScreen = () => {
             <div className="time-picker">
               <p>คุณเลือก {thaiDate}</p>
               <div className="time-picker-content">
-                {timeList.map((item) => (
-                  <label className="time-item">
+                {/* {timeList.map((item) => (
+                  <label className="time-item ">
                     <input
                       type="checkbox"
-                      className="checkbox"
+                      className="checkbox "
                       value={item}
                       onClick={handleTime}
                     />
                     {item}
                   </label>
-                ))}
-                {/* <Select
+                ))} */}
+                <Select
                       // Value={handleTime}
                       onClick={handleTime}
                       isMulti
                       name="timeList"
                       options={timeList}
                       styles = "w-full"
-                      type="checkbox"
+                      // type="checkbox"
                       className="basic-multi-select"
                       // classNamePrefix="select"
                       // onClick={handleTime}
-                    /> */}
+                    />
               </div>
             </div>
             <span className="button-submit" onClick={submit}>

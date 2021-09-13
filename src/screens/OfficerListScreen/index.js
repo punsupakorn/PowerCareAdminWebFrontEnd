@@ -8,11 +8,18 @@ import axios from "axios";
 import SearchIcon from "../../icons/search-icon";
 import CloseIcon from "../../icons/close-icon";
 import firebaseConfig from "../../config";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+
+
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
   // const [doctor, setDoctor] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getOfficerList = () => {
     axios.get("/OfficerList").then((res) => {
@@ -63,7 +70,7 @@ const OfficerListScreen = () => {
       <div className="head-officerlist">
         <h4>รายชื่อบุคลากร</h4>
         <div className="search-bar-conten">
-          <div className="p-12 h-12 ">
+          <div className="p-12 h-12 w-50 alight-selft-center">
             <div className="bg-white flex items-center rounded-full shadow h-12">
               <input
                 className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
@@ -72,7 +79,7 @@ const OfficerListScreen = () => {
                 placeholder="Search"
               />
               <div className="  p-4">
-                <button className=" bg-blue-500 text-white rounded-full p-2 hover:bg-blue-200 focus:outline-none w-9 h-9 flex items-center justify-center">
+                <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
                   {searched ? (
                     <span onClick={refreshPage}>
                       <CloseIcon
@@ -99,51 +106,39 @@ const OfficerListScreen = () => {
           </div>
         </div>
         <div className="button-officelist">
-          {/* <button className="btn btn-officerlist" onClick={getOfficerList}>
-            {" "}
+          <Button
+            variant="secondary"
+            onClick={getOfficerList}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
             รายชื่อทั้งหมด
-          </button>
-          <button className="btn btn-officerlist" onClick={getDoctor}>
-            {" "}
+          </Button>{" "}
+          <Button
+            variant="secondary"
+            onClick={getDoctor}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
             รายชื่อหมอ
-          </button>
-          <button className="btn btn-officerlist" onClick={getAdmin}>
-            {" "}
+          </Button>{" "}
+          <Button
+            variant="secondary"
+            onClick={getAdmin}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
             รายชื่อเจ้าหน้าที่
-          </button> */}
-           <Button variant="secondary" onClick={getOfficerList}
-             style={
-               { borderColor: "#818CF8",
-                 backgroundColor: "#818CF8" }
-            }>
-           รายชื่อทั้งหมด
-           
-          </Button>{' '}{' '}
-          <Button variant="secondary" onClick={getDoctor}
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-          รายชื่อหมอ
-          </Button>{' '}{' '}
-          <Button variant="secondary" onClick={getAdmin}
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-          รายชื่อเจ้าหน้าที่
-          </Button>{' '}{' '}
+          </Button>{" "}
           <Link to="/addofficer">
-          <Button variant="secondary"
-           style={
-            { borderColor: "#C7D2FE",
-              backgroundColor: "#C7D2FE",
-            color: "black"}
-         }>
-          เพิ่มบุคคลากร
-          </Button>
+            <Button
+              variant="secondary"
+              style={{
+                borderColor: "#C7D2FE",
+                backgroundColor: "#C7D2FE",
+                color: "black",
+              }}
+            >
+              เพิ่มบุคคลากร
+            </Button>
           </Link>
-
           {/* <Link to="/addofficer">
             <button className="btn btn-officerlist "> เพิ่มบุคคลากร</button>
           </Link> */}
@@ -172,23 +167,52 @@ const OfficerListScreen = () => {
                 <p>{officerlist.Phone}</p>
 
                 <div className="menu-row">
-                  <Edit
-                    {...iconOption}
-                    onClick={() => console.log("Click function edit ")}
-                  />
+                  <Link to="/editofficer">
+                    <Edit
+                      {...iconOption}
+                      onClick={() => console.log("Click function edit ")}
+                    />
+                  </Link>
+                  {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
                   <Delete
                     {...iconOption}
-                    onClick={() =>
-                      handleDelete(officerlist.DocumentID, officerlist.Position)
-                    }
+                    // onClick={() =>
+                    //   handleDelete(officerlist.DocumentID, officerlist.Position)
+                    // }
+                    onClick={handleShow}
+                    
                   />
+                   <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button variant="danger" onClick={handleClose}>
+                      ยืนยันยกเลิกการทำนัด
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                 
                 </div>
+                
               </div>
             ))}
-            {/* {officer
-              .filter((data) => !data.Position)
-              .map((officerlist) => officerlist.Doctor)} */}
-            {/* end body table */}
           </div>
         </div>
       </div>
