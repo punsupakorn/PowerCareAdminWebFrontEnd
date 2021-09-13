@@ -4,6 +4,7 @@ import "./AddOfficerScreen.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import firebaseConfig from "../../config";
+import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState("");
@@ -48,10 +49,6 @@ const AddOfficerScreen = () => {
     setConfirmPassword(confirmPassword);
   };
 
-  const AddUserToFirbaseAuth = () => {
-    const user = firebaseConfig.auth().createUserWithEmailAndPassword(Email,Password);
-  }
-
   // console.log(FirstName);
   // console.log(LastName);
   // console.log(Phone);
@@ -59,12 +56,41 @@ const AddOfficerScreen = () => {
   // console.log(Email);
   // console.log(Password);
 
+  const handleSubmit = () => {
+    try {
+      if (Password !== ConfirmPassword) {
+        console.log("Password Is Not Match !");
+      } else if (!regEmail.test(Email)) {
+        console.log("Wrong Pattern Enail !");
+      } else if (!regThaiChar.test(FirstName)) {
+        console.log("FirstName Is Wrong Pattern !");
+      } else if (!regThaiChar.test(LastName)) {
+        console.log("LastName Is Wrong Pattern !");
+      } else if (!regPhoneNumber.test(Phone)) {
+        console.log("Invalid Phone Number Pattern !");
+      } else {
+        axios
+          .post("/AddOfficer", {
+            FirstName: FirstName,
+            LastName: LastName,
+            Phone: Phone,
+            Position: Position,
+            Email: Email,
+            Password: Password,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    } catch (error) {}
+  };
+
   // const handleSubmit = () => {
   //   try {
   //     if (Password !== ConfirmPassword) {
   //       console.log("Error : Password Is Not Match !");
   //     } else {
-  //       firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
+  //       // firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
   //       axios
   //         .post("/AddOfficer", {
   //           FirstName: FirstName,
@@ -102,7 +128,7 @@ const AddOfficerScreen = () => {
                 type="text"
                 name="FirstName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกชื่อจริง"
+                placeholder="โปรดกรอกชื่อจริง (ภาษาไทย)"
                 onChange={handleFirstName}
                 required
               />
@@ -112,7 +138,7 @@ const AddOfficerScreen = () => {
                 type="text"
                 name="LastName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกนามสกุล"
+                placeholder="โปรดกรอกนามสกุล (ภาษาไทย)"
                 onChange={handleLastName}
                 required
               />
@@ -129,6 +155,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="  mt-3">
               <select
+                required={require}
                 id="position"
                 name="Position"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
@@ -188,8 +215,8 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-2">
               <button
-                // onClick={handleSubmit}
-                type="submit"
+                onClick={handleSubmit}
+                type="button"
                 className="button-done py-3 text-white w-full h-14 rounded"
               >
                 {" "}
