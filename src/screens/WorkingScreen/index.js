@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Add from "../../icons/add-paper";
 import Edit from "../../icons/edit";
 import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
-
-
+import axios from "axios";
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
 export default function WorkingScreen() {
@@ -84,8 +83,14 @@ export default function WorkingScreen() {
   // function refreshPage() {
   //   window.location.reload();
   // }
-
   const [searched, setSearched] = useState(false);
+  const [working, setWorking] = useState([]);
+
+  useEffect(() => {
+    axios.get("/Working").then((res) => {
+      setWorking(res.data);
+    });
+  }, []);
 
   const refreshPage = () => {
     window.location.reload();
@@ -96,7 +101,7 @@ export default function WorkingScreen() {
   return (
     <div className="content-body">
       <div className="head-officerlist">
-        <h4>ระเบียนคนไข้</h4>
+        <h4>ตารางปฏิบัติการ</h4>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -150,41 +155,43 @@ export default function WorkingScreen() {
           <div className="body-table">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
-            <div className="table-grid-working">
-            <p></p>
-              <p>1001</p>
-              <p>10-03-69</p>
-              <p>11.00-12.00</p>
-              <p>ดาริส</p>
-              <p>ปิณฑรัตนวิบูลย์</p>
 
+            {working.map((working) => (
+              <div className="table-grid-working">
+                <p></p>
+                <p>1001</p>
+                <p>{working.Date}</p>
+                <p>{working.Time}</p>
+                <p>ดาริส</p>
+                <p>ปิณฑรัตนวิบูลย์</p>
 
-              <div className="menu-row">
-                <Link to="/workingdetail">
-                  <Add
-                    {...iconOption}
-                    // onClick={() => console.log("Click function add " + item.id)}
-                  />
-                </Link>
-                <Link to="/postpone">
-                <Edit
-                  {...iconOption}
-                  // onClick={() => console.log("Click function edit ")}
-                />
-                </Link>
-                <Link to="/confirmcancel">
-                <Delete
-                  {...iconOption}
-                  // onClick={() =>
-                  //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                  // }
-                />
-                </Link>
+                <div className="menu-row">
+                  <Link to="/workingdetail">
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
+                  </Link>
+                  <Link to="/postpone">
+                    <Edit
+                      {...iconOption}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                  </Link>
+                  <Link to="/confirmcancel">
+                    <Delete
+                      {...iconOption}
+                      // onClick={() =>
+                      //   handleDelete(officerlist.DocumentID, officerlist.Position)
+                      // }
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-            }
+}
