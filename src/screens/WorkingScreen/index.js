@@ -112,7 +112,7 @@ export default function WorkingScreen() {
                 placeholder="Search"
               />
               <div className="  p-4">
-                <button className=" bg-blue-500 text-white rounded-full p-2 hover:bg-blue-200 focus:outline-none w-9 h-9 flex items-center justify-center">
+                <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
                   {searched ? (
                     <span onClick={refreshPage}>
                       <CloseIcon

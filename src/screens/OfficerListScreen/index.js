@@ -70,7 +70,7 @@ const OfficerListScreen = () => {
       <div className="head-officerlist">
         <h4>รายชื่อบุคลากร</h4>
         <div className="search-bar-conten">
-          <div className="p-12 h-12 w-50 alight-selft-center">
+          <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
               <input
                 className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"

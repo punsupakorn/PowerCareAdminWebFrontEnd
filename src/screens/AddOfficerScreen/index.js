@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import firebaseConfig from "../../config";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState("");
@@ -213,16 +215,17 @@ const AddOfficerScreen = () => {
                 </a>{" "}
               </span>
             </div>
+            <Link to="/confirmaddofficer">
             <div className="mt-2">
-              <button
-                onClick={handleSubmit}
-                type="button"
-                className="button-done py-3 text-white w-full h-14 rounded"
-              >
-                {" "}
-                เพิ่มบุคคลากร
-              </button>
+                <Button
+                  variant="secondary"
+                  style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc"  }}
+                  onClick={handleSubmit}
+                >
+                                  เพิ่มบุคคลากร
+                </Button>{" "}
             </div>
+            </Link>
           </form>
         </div>
       </div>

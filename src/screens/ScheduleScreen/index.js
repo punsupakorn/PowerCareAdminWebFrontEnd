@@ -129,7 +129,7 @@ const ScheduleScreen = () => {
             ย้อนกลับ
           </Button>
           <Button variant="danger" onClick={handleClose}>
-            ยืนยันยกเลิกการทำนัด
+            ยืนยันยกเลิกเวลานี้หรือไม่ ? 
           </Button>
         </Modal.Footer>
       </Modal>

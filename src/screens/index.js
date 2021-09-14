@@ -17,5 +17,5 @@ export { default as UserScreen} from "./UserScreen";
 export { default as UserDetailScreen} from "./UserDetailScreen";
 export { default as UserSummaryScreen } from "./UserSummaryScreen";
 export { default as EditUserScreen } from "./EditUserScreen";
-
+export { default as ConfirmAddOfficer} from "./ConfirmAddOfficer";
 
