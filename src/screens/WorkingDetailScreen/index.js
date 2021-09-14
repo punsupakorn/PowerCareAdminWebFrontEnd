@@ -107,7 +107,7 @@ function WorkingDetailScreen() {
           </div>
           <br />
           <div className="px-2 py-2 ">
-            <Link to="/medicine">
+            <Link to="/givemedicine">
               <Button
                 variant="primary"
                 style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}

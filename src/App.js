@@ -21,6 +21,7 @@ import {
   UserSummaryScreen,
   EditUserScreen,
   ConfirmAddOfficer,
+  GiveMedicineScreen,
 
 } from "./screens";
 import { Switch, Route, HashRouter } from "react-router-dom";
@@ -97,6 +98,9 @@ function App() {
               </Route>
               <Route path="/confirmaddofficer">
                 <ConfirmAddOfficer/>
+              </Route>
+              <Route path="/givemedicine">
+                <GiveMedicineScreen/>
               </Route>
               
               

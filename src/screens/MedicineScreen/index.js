@@ -4,12 +4,60 @@ import { InputNumber, TableController } from "../../components";
 import "./MedicineScreen.css";
 import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
 export default function MedicineScreen() {
   // const [modalOpen, setModalOpen] = useState(false);
+  const [Name, setName] = useState("");
+  const [Description, setDescription] = useState("");
+  const [Price, setPrice] = useState("");
+  const [Type, setType] = useState("");
+  const [Stock, setStock] = useState("");
+
+  const handleName= (e) => {
+    const name = e.target.value;
+    setName(name);
+  };
+
+  const handleDescription = (e) => {
+    const description = e.target.value;
+    setDescription(description);
+  };
+
+  const handlePrice = (e) => {
+    const price = e.target.value;
+    setPrice(price);
+  };
+
+  const handleType = (e) => {
+    const type = e.target.value;
+    setType(type);
+  };
+
+  const handleStock = (e) => {
+    const stock = e.target.value;
+    setStock(stock);
+  };
+
+  const handleSubmit = () => {
+    try {
+      axios
+        .post("/Medicine", {
+          Name: Name,
+          Description: Description,
+          Price: Price,
+          Type: Type,
+          Stock: Stock,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (error) {}
+  };
+
 
   const [show, setShow] = useState(false);
 
@@ -39,16 +87,7 @@ export default function MedicineScreen() {
     return (
       <div className="table-grid">
         <div className="menu-row">
-          <input
-            type="checkbox"
-            checked={!disable}
-            onChange={(e) => {
-              let nData = data;
-              nData[index] = { ...data[index], amount: undefined };
-              setDisable(!e.target.checked);
-              setData(nData);
-            }}
-          />
+        {" "}
         </div>
         <p>{id}</p>
         <p>{name}</p>
@@ -98,11 +137,11 @@ export default function MedicineScreen() {
     setData(nData);
   }
 
-  // function submit
-  const submit = () => {
-    const report = data.filter((item) => item.amount != undefined);
-    console.log({ report });
-  };
+  // // function submit
+  // const submit = () => {
+  //   const report = data.filter((item) => item.amount != undefined);
+  //   console.log({ report });
+  // };
 
   return (
     <div className="content-body">
@@ -147,107 +186,7 @@ export default function MedicineScreen() {
             </div>
           </div>
         </div>
-        <div className="button-officelist">
-          {/* <Link to="/addmedicine"> */}
-          {/* <button
-              className="btn btn-officerlist"
-              onClick={() => {
-                setModalOpen(true);
-              }}
-            >
-              {" "}
-              เพิ่มยา
-            </button> */}
-          <Button variant="primary" onClick={handleShow}
-            style={
-              { borderColor: "#818CF8",
-                backgroundColor: "#818CF8" }
-           }>
-            เพิ่มยา
-          </Button>
 
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>เพิ่มยา</Modal.Title>
-            </Modal.Header>
-
-            <center>
-              <Modal.Body>
-                <div className="divide-y divide-gray-200">
-                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="flex flex-col">
-                      <label className="leading-loose">ชื่อยา</label>
-                      <input
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกชื่อยา"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="leading-loose">
-                        คำอธิบายเกี่ยวกับยา
-                      </label>
-                      <input
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกคำอธิบาย"
-                      />
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ราคา</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกราคา"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ประเภท</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกประเภท"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="leading-loose">สต๊อกสินค้า</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกจำนวน"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Modal.Body>
-            </center>
-            <Modal.Footer>
-              <Button variant="primary" 
-                style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-                เพิ่มยา
-              </Button>
-              <Button variant="secondary" 
-              style={
-                { borderColor: "#bdbdbd",
-                  backgroundColor: "#bdbdbd" }
-             }>
-                ย้อนกลับ
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          {/* </Link> */}
-        </div>
         <div className="table-content">
           {/* header table */}
           <div className="table-grid header">
@@ -275,44 +214,6 @@ export default function MedicineScreen() {
           numOfRow={numOfRow}
         />
         <div className="px-2 ">
-          {/* <button
-            className="
-            button-done
-            w-45
-            bg-blue-200
-            text-white
-            px-3
-            py-2
-            rounded-md
-          "
-          >
-            ยืนยัน
-          </button>
-          <Link to="/workingdetail">
-            <button
-              className="
-            button-back
-            w-30
-            bg-gray-400
-            text-white
-            px-2
-            py-2
-            margin-left-2vh
-            rounded-md
-          "
-            >
-              ย้อนกลับ
-            </button>
-          </Link> */}
-          <Link to="/medicinedetail">
-          <Button variant="primary" 
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-            บันทึกผล
-          </Button>
-          </Link>{" "}
           <Link to="/workingdetail">
           <Button variant="secondary" 
            style={
@@ -321,8 +222,106 @@ export default function MedicineScreen() {
          }>
             ย้อนกลับ
           </Button>
-          </Link>
+          </Link>{" "}
 
+          <Button variant="primary" onClick={handleShow}
+            style={
+              { borderColor: "#818CF8",
+                backgroundColor: "#818CF8", 
+              }
+           }>
+            เพิ่มยา
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>เพิ่มยา</Modal.Title>
+            </Modal.Header>
+
+            <center>
+              <Modal.Body>
+                <div className="divide-y divide-gray-200">
+                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                    <div className="flex flex-col">
+                      <label className="leading-loose">ชื่อยา</label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกชื่อยา"
+                        onChange={handleName}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="leading-loose">
+                        คำอธิบายเกี่ยวกับยา
+                      </label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกคำอธิบาย"
+                        onChange={handleDescription}
+                      />
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ราคา</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกราคา"
+                            onChange={handlePrice}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ประเภท</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกประเภท"
+                            onChange={handleType}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">สต๊อกสินค้า</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกจำนวน"
+                            onChange={handleStock}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal.Body>
+            </center>
+            <Modal.Footer>
+            <Link to="medicine" >
+              <Button variant="primary" 
+                style={
+            { borderColor: "#818CF8",
+              backgroundColor: "#818CF8" }
+         }
+         onClick={handleSubmit}>
+                เพิ่มยา
+              </Button>
+              </Link>
+              <Button variant="secondary" 
+              style={
+                { borderColor: "#bdbdbd",
+                  backgroundColor: "#bdbdbd" }
+             }>
+                ย้อนกลับ
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          {/* </Link> */}
         </div>
       </div>
       {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}
