@@ -119,7 +119,7 @@ const AddOfficerScreen = () => {
         />
         <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
           <div className="text-center p-0">
-            <h1 className=" text-gray-800 text-3xl ">เพิ่มบุคคลากร</h1>
+            <h1 className=" text-gray-800 text-3xl ">เพิ่มบุคลากร</h1>
             <h4 className="p-1 text-gray-700">สำหรับเจ้าหน้าที่</h4>
           </div>
           <form>
