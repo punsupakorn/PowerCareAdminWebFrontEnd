@@ -3,6 +3,8 @@ import "./WorkingDetailScreen.css";
 import { Button } from "react-bootstrap";
 
 function WorkingDetailScreen() {
+
+
   return (
     <div className="content-body">
       <div className="mt-2">

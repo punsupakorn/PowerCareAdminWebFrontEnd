@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import { InputNumber, TableController } from "../../components";
 import "./MedicineScreen.css";
@@ -16,8 +16,19 @@ export default function MedicineScreen() {
   const [Price, setPrice] = useState("");
   const [Type, setType] = useState("");
   const [Stock, setStock] = useState("");
+  const [medicine, setMedicine] = useState([]);
 
-  const handleName= (e) => {
+  const getMedicine = () => {
+    axios.get("/Medicine").then((res) => {
+      setMedicine(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getMedicine();
+  }, []);
+
+  const handleName = (e) => {
     const name = e.target.value;
     setName(name);
   };
@@ -42,9 +53,9 @@ export default function MedicineScreen() {
     setStock(stock);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      axios
+      await axios
         .post("/Medicine", {
           Name: Name,
           Description: Description,
@@ -57,7 +68,6 @@ export default function MedicineScreen() {
         });
     } catch (error) {}
   };
-
 
   const [show, setShow] = useState(false);
 
@@ -82,30 +92,34 @@ export default function MedicineScreen() {
   if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
 
   // function row data creating
-  const RowMedicine = ({ id, name, price, numberinstock, index, amount }) => {
-    const [disable, setDisable] = useState(amount ? false : true);
+  const RowMedicine = () => {
+    // const [disable, setDisable] = useState(amount ? false : true);
     return (
-      <div className="table-grid">
-        <div className="menu-row">
-        {" "}
-        </div>
-        <p>{id}</p>
-        <p>{name}</p>
-        <div className="menu-row">
-          <InputNumber
-            disable={disable}
-            value={amount}
-            min={0}
-            onChange={(number) => {
-              let nData = data;
-              nData[index] = { ...data[index], amount: number };
-              setData(nData);
-            }}
-          />
-        </div>
-        <p>{price}</p>
-        <p>{numberinstock}</p>
+      <div>
+        {medicine.map((med) => (
+          <div className="table-grid">
+            <p> </p>
+            <p>{med.MedicineName}</p>
+            <p>{med.Price}</p>
+            <p>{med.MedicineDescription}</p>
+            <p>{med.Type}</p>
+            <p>{med.Stock}</p>
+          </div>
+        ))}
       </div>
+
+      // <div className="menu-row">
+      // <p>{" "}</p>
+      // <p>{Medicine.Type}</p>
+      // {/* <p>{Description}</p>
+      // <p>{name}</p>
+      // <p>{price}</p>
+      // <p>{"111"}</p> */}
+      // </div>
+
+      // ))}
+      // </div>
+      // );
     );
   };
 
@@ -191,10 +205,10 @@ export default function MedicineScreen() {
           {/* header table */}
           <div className="table-grid header">
             <p></p>
-            <p>รหัส</p>
             <p>ชื่อยา</p>
-            <p>จำนวน</p>
             <p>ราคา</p>
+            <p>คำอธิบาย</p>
+            <p>ประเภท</p>
             <p>สต๊อกสินค้า</p>
           </div>
           {/* end header */}
@@ -215,24 +229,20 @@ export default function MedicineScreen() {
         />
         <div className="px-2 ">
           <Link to="/workingdetail">
-          <Button variant="secondary" 
-           style={
-            { borderColor: "#bdbdbd",
-              backgroundColor: "#bdbdbd" }
-         }>
-            ย้อนกลับ
-          </Button>
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
           </Link>{" "}
-
-          <Button variant="primary" onClick={handleShow}
-            style={
-              { borderColor: "#818CF8",
-                backgroundColor: "#818CF8", 
-              }
-           }>
+          <Button
+            variant="primary"
+            onClick={handleShow}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
             เพิ่มยา
           </Button>
-
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>เพิ่มยา</Modal.Title>
@@ -302,21 +312,19 @@ export default function MedicineScreen() {
               </Modal.Body>
             </center>
             <Modal.Footer>
-            <Link to="medicine" >
-              <Button variant="primary" 
-                style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }
-         onClick={handleSubmit}>
-                เพิ่มยา
-              </Button>
+              <Link to="medicine">
+                <Button
+                  variant="primary"
+                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+                  onClick={handleSubmit}
+                >
+                  เพิ่มยา
+                </Button>
               </Link>
-              <Button variant="secondary" 
-              style={
-                { borderColor: "#bdbdbd",
-                  backgroundColor: "#bdbdbd" }
-             }>
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
                 ย้อนกลับ
               </Button>
             </Modal.Footer>
