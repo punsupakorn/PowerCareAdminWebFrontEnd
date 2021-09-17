@@ -79,10 +79,6 @@ export default function WorkingScreen() {
   //   setData(nDate);
   // }
 
-  // // refresh page
-  // function refreshPage() {
-  //   window.location.reload();
-  // }
   const [searched, setSearched] = useState(false);
   const [working, setWorking] = useState([]);
 
@@ -91,6 +87,18 @@ export default function WorkingScreen() {
       setWorking(res.data);
     });
   }, []);
+
+  const handleData = (AppointmentID) => {
+    try {
+      axios
+        .post("/Working", {
+          AppointmentID: AppointmentID,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (error) {}
+  };
 
   const refreshPage = () => {
     window.location.reload();
@@ -181,9 +189,7 @@ export default function WorkingScreen() {
                   <Link to="/confirmcancel">
                     <Delete
                       {...iconOption}
-                      // onClick={() =>
-                      //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                      // }
+                      onClick={() => handleData(working.AppointmentID)}
                     />
                   </Link>
                 </div>
