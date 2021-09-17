@@ -102,6 +102,32 @@ const ScheduleScreen = () => {
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
       </Link> */}
+      <div className="button-officelist">
+        <Link to="/appointment">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            เพิ่มตารางเวลาการทำนัด
+          </Button>
+        </Link>{" "}
+        <Link to="/calendar">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            ปฏิทินเวลาการทำนัด
+          </Button>{" "}
+        </Link>
+      </div>
       <div className="appointment-content">
         {schedule.map((data) => (
           <div className="card-appointment">

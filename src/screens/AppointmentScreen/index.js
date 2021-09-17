@@ -101,36 +101,11 @@ const AppointmentScreen = () => {
   const styleActive = { backgroundColor: "#7e99b8", color: "white" };
 
   return (
-    <div className="content-body">
+    <div className="content-body mt-6">
       <h3>จัดการตารางเวลา</h3>
-      <div className="button-officelist">
-        <Link to="/schedule">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            ตารางเวลาการทำนัด
-          </Button>
-        </Link>{" "}
-        <Link to="/calendar">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            ปฏิทินเวลาการทำนัด
-          </Button>{" "}
-        </Link>
-      </div>
+      
       {/* Input Doctor */}
-      <div className="schedule-content">
+      <div className="schedule-content mt-4">
         <InputSchedule title="เลือกหมอ" invalid>
           <select
             value={name}

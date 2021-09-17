@@ -323,7 +323,7 @@ export default function MedicineScreen() {
               </Link>
               <Button
                 variant="secondary"
-                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }} 
               >
                 ย้อนกลับ
               </Button>
