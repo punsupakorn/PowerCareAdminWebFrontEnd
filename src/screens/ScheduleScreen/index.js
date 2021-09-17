@@ -119,8 +119,8 @@ const ScheduleScreen = () => {
           <Button
             variant="secondary"
             style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
+              borderColor: "#a5b4fe",
+              backgroundColor: "#a5b4fe",
               color: "white",
             }}
           >
