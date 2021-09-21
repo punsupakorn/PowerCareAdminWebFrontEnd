@@ -93,3 +93,7 @@
 .done{
   background-color: turquoise;
 }
+
+.modal-backdrop.show {
+  opacity: .2 !important;
+}
