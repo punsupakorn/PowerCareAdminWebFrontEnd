@@ -14,6 +14,7 @@ import { Modal } from "react-bootstrap";
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [state, setstate] = useState();
   // const [doctor, setDoctor] = useState([]);
 
   const [show, setShow] = useState(false);
@@ -47,18 +48,6 @@ const OfficerListScreen = () => {
     getOfficerList();
   }, []);
 
-  const handleDelete = (DocumentID, Position) => {
-    try {
-      axios.delete("/OfficerList", {
-        data: { DocumentID: DocumentID, Position: Position }
-      });
-      // console.log(JSON.stringify({ res: res }));
-      refreshPage();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const refreshPage = () => {
     window.location.reload();
   };
@@ -69,6 +58,23 @@ const OfficerListScreen = () => {
       // console.log(res);
       // axios.get('/EditOfficer/'+Position+'/'+DocumentID+'')
     } catch (error) {}
+  };
+
+  const handleToConfirmDelete = (DocumentID, Position) => {
+    setstate({ DocumentID, Position });
+    handleShow();
+  };
+
+  const handleDelete = (DocumentID, Position) => {
+    try {
+      axios.delete("/OfficerList", {
+        data: { DocumentID: DocumentID, Position: Position },
+      });
+      handleClose();
+      refreshPage();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
@@ -189,10 +195,12 @@ const OfficerListScreen = () => {
                   {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
                   <Delete
                     {...iconOption}
-                    // onClick={() =>
-                    //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                    // }
-                    onClick={handleShow}
+                    onClick={() =>
+                      handleToConfirmDelete(
+                        officerlist.DocumentID,
+                        officerlist.Position
+                      )
+                    }
                   />
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -200,9 +208,7 @@ const OfficerListScreen = () => {
                     </Modal.Header>
 
                     <center>
-                      <Modal.Body>
-                        คุณต้องการลบรายชื่อนี้หรือไม่ ?
-                      </Modal.Body>
+                      <Modal.Body>คุณต้องการลบรายชื่อนี้หรือไม่ ?</Modal.Body>
                     </center>
                     <Modal.Footer>
                       <Button
@@ -215,7 +221,12 @@ const OfficerListScreen = () => {
                       >
                         ย้อนกลับ
                       </Button>
-                      <Button variant="danger" onClick={()=>handleDelete(officerlist.DocumentID,officerlist.Position)}>
+                      <Button
+                        variant="danger"
+                        onClick={() =>
+                          handleDelete(state.DocumentID, state.Position)
+                        }
+                      >
                         ตกลง
                       </Button>
                     </Modal.Footer>
