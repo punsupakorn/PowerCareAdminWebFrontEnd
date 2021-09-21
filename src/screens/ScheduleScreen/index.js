@@ -4,8 +4,8 @@ import CloseIcon from "../../icons/close-icon";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Modal } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
@@ -54,8 +54,7 @@ const ScheduleScreen = () => {
 
   return (
     <div className="content-body ">
-      <h1>ตารางเวลาการทำนัด</h1>
-
+      <p class="text-xl mt-3 font-semibold">ตารางเวลาการทำนัด</p>
       <div className="search-bar-conten">
         {/* <input
           type="text"
@@ -102,32 +101,7 @@ const ScheduleScreen = () => {
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
       </Link> */}
-      <div className="button-officelist">
-        <Link to="/appointment">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            เพิ่มตารางเวลาการทำนัด
-          </Button>
-        </Link>{" "}
-        <Link to="/calendar">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#a5b4fe",
-              backgroundColor: "#a5b4fe",
-              color: "white",
-            }}
-          >
-            ปฏิทินเวลาการทำนัด
-          </Button>{" "}
-        </Link>
-      </div>
+
       <div className="appointment-content">
         {schedule.map((data) => (
           <div className="card-appointment">
@@ -137,28 +111,41 @@ const ScheduleScreen = () => {
             <p>{data.Date}</p>
             <div className="time-item-content">
               <span className="time-item">
-              {data.Time}
+                {data.Time}
 
-                <CloseIcon width="0.5rem" hieght="0.5rem" className="close" onClick={handleShow} />
-                <Modal show={show} onHide={handleClose} >
-        <Modal.Header closeButton>
-          <Modal.Title>คำเตือน</Modal.Title>
-        </Modal.Header>
-        
-        <center><Modal.Body> คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}
-          style={
-            { borderColor: "#bdbdbd",
-              backgroundColor: "#bdbdbd" }
-         }>
-            ย้อนกลับ
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-            ยืนยันยกเลิกเวลานี้หรือไม่ ? 
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                <CloseIcon
+                  width="0.5rem"
+                  hieght="0.5rem"
+                  className="close"
+                  onClick={handleShow}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+
+                  <center>
+                    <Modal.Body>
+                      {" "}
+                      คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button variant="danger" onClick={handleClose}>
+                      ยืนยันยกเลิกเวลานี้หรือไม่ ?
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </span>
               {/* {data.Time} */}
               {/* {displayTime(data.Time).map((t) => (
@@ -177,8 +164,6 @@ const ScheduleScreen = () => {
         ))}
       </div>
     </div>
-
-    
   );
 };
 export default ScheduleScreen;

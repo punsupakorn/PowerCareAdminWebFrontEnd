@@ -14,8 +14,7 @@ function  EditUserScreen ()  {
           />
           <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
             <div className="text-center p-0">
-              <h1 className=" text-gray-800 text-3xl ">แก้ไขข้อมูลระเบียนคนไข้</h1>
-          
+              <h1 className=" text-gray-800 text-2xl font-semibold ">แก้ไขข้อมูลระเบียนคนไข้</h1>
             </div>
             <form>
               <div className="mt-4">

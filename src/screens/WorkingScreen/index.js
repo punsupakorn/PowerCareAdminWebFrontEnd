@@ -6,6 +6,7 @@ import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Button } from 'react-bootstrap';
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
 export default function WorkingScreen() {
@@ -109,7 +110,7 @@ export default function WorkingScreen() {
   return (
     <div className="content-body">
       <div className="head-officerlist">
-        <h4>ตารางปฏิบัติการ</h4>
+      <p class="text-xl mt-3 font-semibold">ตารางปฏิบัติการ</p>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -146,6 +147,44 @@ export default function WorkingScreen() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="button-officelist ">
+        <Link to="/appointment">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            เพิ่มตารางเวลาการทำนัด
+          </Button>
+        </Link>{" "}
+        <Link to="/schedule">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            ตารางเวลาการทำนัด
+          </Button>
+        </Link>{" "}
+        <Link to="/calendar">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#a5b4fe",
+              backgroundColor: "#a5b4fe",
+              color: "white",
+            }}
+          >
+            ปฏิทินเวลาการทำนัด
+          </Button>{" "}
+        </Link>
       </div>
       <div className="working-content">
         <div className="table-content">

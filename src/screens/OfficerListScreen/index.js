@@ -68,7 +68,7 @@ const OfficerListScreen = () => {
   return (
     <div className="content-body">
       <div className="head-officerlist">
-        <h4>รายชื่อบุคลากร</h4>
+        <p class="text-xl mt-3 font-semibold">รายชื่อบุคลากร</p>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">

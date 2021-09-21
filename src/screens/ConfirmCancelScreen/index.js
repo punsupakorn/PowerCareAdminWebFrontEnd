@@ -125,7 +125,7 @@ function ConfirmCancelScreen() {
         
         <center><Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
         <Modal.Footer>
-          <Button variant="secondary" 
+          <Button variant="secondary" onClick={handleClose}
           style={
             { borderColor: "#bdbdbd",
               backgroundColor: "#bdbdbd" }

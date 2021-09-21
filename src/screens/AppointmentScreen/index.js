@@ -122,7 +122,7 @@ const AppointmentScreen = () => {
               </option>
             ))}
           </select>
-          <h3 style={{ position: "absolute", right: "3rem", top: "3.2rem" }}>
+          <h3 style={{ position: "absolute", right: "3rem", top: "4rem" }}>
             ▼
           </h3>
         </InputSchedule>

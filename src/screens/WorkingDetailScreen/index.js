@@ -11,7 +11,7 @@ function WorkingDetailScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-black font-medium my-4">อาการคนไข้</h3>
+            <p class="text-xl mt-3 font-semibold">อาการคนไข้</p>
             <div
               className="
           flex
@@ -120,7 +120,7 @@ function WorkingDetailScreen() {
           </div>
         </div>
         <div className="px-2 ">
-          <Link to="/medicine">
+          <Link to="/medicinedetail">
             <Button
               variant="primary"
               style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}

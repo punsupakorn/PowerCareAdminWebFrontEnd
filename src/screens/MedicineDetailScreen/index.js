@@ -9,7 +9,7 @@ function MedicineDetailScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h6 className="text-black font-medium my-4">สรุปค่าบริการ</h6>
+            <p class="text-xl mt-3 font-semibold">สรุปค่าบริการ</p>
             <div
               className="
           flex
@@ -82,19 +82,19 @@ function MedicineDetailScreen() {
           >
             บันทึกผล
           </button> */}
-            <Button variant="primary"
-             style={
-              { borderColor: "#818CF8",
-                backgroundColor: "#818CF8" }
-           }
-           >บันทึกผล</Button>{" "}
+            <Button
+              variant="primary"
+              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+            >
+              บันทึกผล
+            </Button>{" "}
             <Link to="/medicine">
-              <Button variant="secondary"
-               style={
-                { borderColor: "#bdbdbd",
-                  backgroundColor: "#bdbdbd" }
-             }>
-               ย้อนกลับ</Button>
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                ย้อนกลับ
+              </Button>
             </Link>
           </div>
         </center>

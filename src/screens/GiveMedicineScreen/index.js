@@ -104,8 +104,8 @@ export default function GiveMedicineScreen() {
     <div className="content-body">
       <div className="medicine-content">
         <div className="search-bar-container">
-          <h3 style={{ alignSelf: "flex-start" }}> ยา </h3>
-
+          {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+          <p class="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
           <div className="search-bar-conten">
             <div className="p-12 h-12">
               <div className="bg-white flex items-center rounded-full shadow h-12">

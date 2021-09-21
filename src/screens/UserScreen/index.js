@@ -5,6 +5,8 @@ import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import Add from "../../icons/add-paper";
 import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function UserScreen() {
   const [searched, setSearched] = useState(false);
@@ -13,12 +15,17 @@ export default function UserScreen() {
     window.location.reload();
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
   return (
     <div className="content-body">
       <div className="head-officerlist">
-        <h4>ระเบียนคนไข้</h4>
+        <p class="text-xl mt-3 font-semibold">ระเบียนคนไข้</p>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -86,17 +93,50 @@ export default function UserScreen() {
                   />
                 </Link>
                 <Link to="/edituser">
-                <Edit
-                  {...iconOption}
-                  // onClick={() => console.log("Click function edit ")}
-                />
+                  <Edit
+                    {...iconOption}
+                    // onClick={() => console.log("Click function edit ")}
+                  />
                 </Link>
                 <Delete
                   {...iconOption}
+                  onClick={handleShow}
                   // onClick={() =>
                   //   handleDelete(officerlist.DocumentID, officerlist.Position)
                   // }
                 />
+
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+
+                  <center>
+                    <Modal.Body>คุณต้องการลบคนไข้ท่านนี้หรือไม่ ?</Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "danger",
+                        backgroundColor: "danger",
+                      }}
+                    >
+                      ยืนยันลบคนไข้
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
           </div>
