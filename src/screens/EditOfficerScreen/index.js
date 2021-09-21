@@ -1,6 +1,15 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 
+function EditOfficerScreen() {
+  const [profile, setprofile] = useState();
 
-function  EditOfficerScreen ()  {
+  // useEffect(() => {
+  //   // axios.get("/EditOfficer/:position/:documentid").then((res) => {
+  //   //   const data = res.data();
+  //   //   console.log(data);
+  //   // });
+  // });
 
   return (
     <div className="content-body">
@@ -15,7 +24,6 @@ function  EditOfficerScreen ()  {
         <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
           <div className="text-center p-0">
             <h1 className=" text-gray-800 text-3xl ">แก้ไขข้อมูลเจ้าหน้าที่</h1>
-        
           </div>
           <form>
             <div className="mt-4">
@@ -122,5 +130,5 @@ function  EditOfficerScreen ()  {
       </div>
     </div>
   );
-};
+}
 export default EditOfficerScreen;

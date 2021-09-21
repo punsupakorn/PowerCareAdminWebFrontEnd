@@ -11,11 +11,11 @@ import firebaseConfig from "../../config";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 
-
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
   // const [doctor, setDoctor] = useState([]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -49,10 +49,10 @@ const OfficerListScreen = () => {
 
   const handleDelete = (DocumentID, Position) => {
     try {
-      const res = axios.delete("/OfficerList", {
-        data: { DocumentID: DocumentID, Position: Position },
+      axios.delete("/OfficerList", {
+        data: { DocumentID: DocumentID, Position: Position }
       });
-      console.log(JSON.stringify({ res: res }));
+      // console.log(JSON.stringify({ res: res }));
       refreshPage();
     } catch (error) {
       console.log(error);
@@ -61,6 +61,14 @@ const OfficerListScreen = () => {
 
   const refreshPage = () => {
     window.location.reload();
+  };
+
+  const handleToEditOfficer = (DocumentID, Position) => {
+    try {
+      axios.get(`/OfficerList/${Position}/${DocumentID}`);
+      // console.log(res);
+      // axios.get('/EditOfficer/'+Position+'/'+DocumentID+'')
+    } catch (error) {}
   };
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
@@ -170,7 +178,12 @@ const OfficerListScreen = () => {
                   <Link to="/editofficer">
                     <Edit
                       {...iconOption}
-                      onClick={() => console.log("Click function edit ")}
+                      onClick={() =>
+                        handleToEditOfficer(
+                          officerlist.DocumentID,
+                          officerlist.Position
+                        )
+                      }
                     />
                   </Link>
                   {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
@@ -180,37 +193,34 @@ const OfficerListScreen = () => {
                     //   handleDelete(officerlist.DocumentID, officerlist.Position)
                     // }
                     onClick={handleShow}
-                    
                   />
-                   <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>คำเตือน</Modal.Title>
-                  </Modal.Header>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>คำเตือน</Modal.Title>
+                    </Modal.Header>
 
-                  <center>
-                    <Modal.Body>
-                      คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?
-                    </Modal.Body>
-                  </center>
-                  <Modal.Footer>
-                    <Button
-                      variant="secondary"
-                      onClick={handleClose}
-                      style={{
-                        borderColor: "#bdbdbd",
-                        backgroundColor: "#bdbdbd",
-                      }}
-                    >
-                      ย้อนกลับ
-                    </Button>
-                    <Button variant="danger" onClick={handleClose}>
-                      ยืนยันยกเลิกการทำนัด
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-                 
+                    <center>
+                      <Modal.Body>
+                        คุณต้องการลบรายชื่อนี้หรือไม่ ?
+                      </Modal.Body>
+                    </center>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={handleClose}
+                        style={{
+                          borderColor: "#bdbdbd",
+                          backgroundColor: "#bdbdbd",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </Button>
+                      <Button variant="danger" onClick={()=>handleDelete(officerlist.DocumentID,officerlist.Position)}>
+                        ตกลง
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
-                
               </div>
             ))}
           </div>
