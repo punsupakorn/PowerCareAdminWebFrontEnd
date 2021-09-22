@@ -1,24 +1,14 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./HomeScreenDoctor.css";
-import AddUserIcon from "../../icons/add-user";
-import CalendarOutlineIcon from "../../icons/calendar-outline";
 import CalendarInlineIcon from "../../icons/calendar-inline";
 
 const HomeScreenDoctor = () => {
-  // function Card({ children, title, direction }) {
-  //   return (
-  //     <Link className="card-home-screen-doctor" to={direction}>
-  //       {children}
-  //       <p>{title}</p>
-  //     </Link>
-  //   );
-  // }
 
   return (
     <div className="content-body">
     <div class="mt-10 text-center">
       <h1 class="text-4xl font-bold text-gray-800">PowerCare Clinic</h1>
-      <p class="text-lg mt-3 font-semibold">สำหรับ Admin</p>
+      <p class="text-lg mt-3 font-semibold">สำหรับหมอ</p>
       <div
               className="
         flex
@@ -55,16 +45,16 @@ const HomeScreenDoctor = () => {
       </div>
       
       <div className>
-        <div className="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-indigo-300 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+        <div className="bg-white w-150 h-150 max-w-xs shadow-lg   mx-auto border-b-4 border-indigo-300 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
           <div className="bg-indigo-300  flex h-20  items-center justify-center">
          <CalendarInlineIcon width="50%" height="50%" />
           </div>
           <p className="py-6 px-6 text-lg tracking-wide text-center">
-          ข้อมูลคนไข้
+          จัดการยา
           </p>
           {/* <hr > */}          
           <div className="flex justify-center px-5 mb-2 text-sm ">
-          <Link to="/user">
+          <Link to="/medicine">
             <button
               type="button"
               className="border border-indigo-300 text-indigo-300 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-400 focus:outline-none focus:shadow-outline"

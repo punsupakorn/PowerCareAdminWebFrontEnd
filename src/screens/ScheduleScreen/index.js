@@ -54,7 +54,7 @@ const ScheduleScreen = () => {
 
   return (
     <div className="content-body ">
-      <p class="text-xl mt-3 font-semibold">ตารางเวลาการทำนัด</p>
+      <p class="text-xl mt-3 font-semibold">ตารางเวลาทำการของแพทย์</p>
       <div className="search-bar-conten">
         {/* <input
           type="text"
@@ -101,7 +101,32 @@ const ScheduleScreen = () => {
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
       </Link> */}
-
+      <div className="button-officelist ">
+        <Link to="/appointment">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
+          >
+            เพิ่มตารางเวลาทำการของแพทย์
+          </Button>
+        </Link>{" "}
+        <Link to="/calendar">
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#a5b4fe",
+              backgroundColor: "#a5b4fe",
+              color: "white",
+            }}
+          >
+            ปฏิทินเวลาการทำนัด
+          </Button>{" "}
+        </Link>
+      </div>
       <div className="appointment-content">
         {schedule.map((data) => (
           <div className="card-appointment">

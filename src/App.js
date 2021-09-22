@@ -22,6 +22,7 @@ import {
   EditUserScreen,
   ConfirmAddOfficer,
   GiveMedicineScreen,
+  HomeScreenAddmin,
 
 } from "./screens";
 import { Switch, Route, HashRouter } from "react-router-dom";
@@ -102,7 +103,9 @@ function App() {
               <Route path="/givemedicine">
                 <GiveMedicineScreen/>
               </Route>
-              
+              <Route path="/homescreenaddmin">
+                <HomeScreenAddmin/>
+              </Route>
               
             </Switch>
           </div>

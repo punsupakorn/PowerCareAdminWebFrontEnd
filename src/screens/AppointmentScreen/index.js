@@ -102,7 +102,7 @@ const AppointmentScreen = () => {
 
   return (
     <div className="content-body mt-6">
-      <h3>จัดการตารางเวลา</h3>
+      <p class="text-xl mt-3 font-semibold">จัดการตารางเวลา</p>
       
       {/* Input Doctor */}
       <div className="schedule-content mt-4">

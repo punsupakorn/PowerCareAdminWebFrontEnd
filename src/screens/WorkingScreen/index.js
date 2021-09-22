@@ -148,44 +148,7 @@ export default function WorkingScreen() {
           </div>
         </div>
       </div>
-      <div className="button-officelist ">
-        <Link to="/appointment">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            เพิ่มตารางเวลาการทำนัด
-          </Button>
-        </Link>{" "}
-        <Link to="/schedule">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            ตารางเวลาการทำนัด
-          </Button>
-        </Link>{" "}
-        <Link to="/calendar">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#a5b4fe",
-              backgroundColor: "#a5b4fe",
-              color: "white",
-            }}
-          >
-            ปฏิทินเวลาการทำนัด
-          </Button>{" "}
-        </Link>
-      </div>
+
       <div className="working-content">
         <div className="table-content">
           <div className="table-grid-working header">
