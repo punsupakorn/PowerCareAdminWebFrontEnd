@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import firebaseConfig from "../../config";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
-import { Button } from 'react-bootstrap';
-import { Modal } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState("");
@@ -16,30 +16,65 @@ const AddOfficerScreen = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const handleFirstName = (e) => {
-    const firstname = e.target.value;
-    setFirstName(firstname);
+
+  const CheckFirstName = (fisrtname) => {
+    const data = fisrtname.target.value;
+    setFirstName(data);
+    let result = regThaiChar(FirstName);
+    if (result == true) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
-  const handleLastName = (e) => {
-    const lastname = e.target.value;
-    setLastName(lastname);
+  const CheckLastName = (lastname) => {
+    const data = lastname.target.value;
+    setLastName(data);
+    let result = regThaiChar(LastName);
+    if (result == true) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+ 
+  const CheckPhone = (phone) => {
+    const data = phone.target.value;
+    setPhone(data);
+    let result = regThaiChar(Phone);
+    if (result == true) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
-  const handlePhone = (e) => {
-    const phone = e.target.value;
-    setPhone(phone);
-  };
+ 
+  // const handleFirstName = (e) => {
+  //   const firstname = e.target.value;
+  //   setFirstName(firstname);
+  // };
+
+  // const handleLastName = (e) => {
+  //   const lastname = e.target.value;
+  //   setLastName(lastname);
+  // };
+
+  // const handlePhone = (e) => {
+  //   const phone = e.target.value;
+  //   setPhone(phone);
+  // };
 
   const handlePosition = (e) => {
     const position = e.target.value;
     setPosition(position);
   };
 
-  const handleEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-  };
+  // const handleEmail = (e) => {
+  //   const email = e.target.value;
+  //   setEmail(email);
+  // };
 
   const handlePassword = (e) => {
     const password = e.target.value;
@@ -59,32 +94,37 @@ const AddOfficerScreen = () => {
   // console.log(Password);
 
   const handleSubmit = () => {
-    try {
-      if (Password !== ConfirmPassword) {
-        console.log("Password Is Not Match !");
-      } else if (!regEmail.test(Email)) {
-        console.log("Wrong Pattern Enail !");
-      } else if (!regThaiChar.test(FirstName)) {
-        console.log("FirstName Is Wrong Pattern !");
-      } else if (!regThaiChar.test(LastName)) {
-        console.log("LastName Is Wrong Pattern !");
-      } else if (!regPhoneNumber.test(Phone)) {
-        console.log("Invalid Phone Number Pattern !");
-      } else {
-        axios
-          .post("/AddOfficer", {
-            FirstName: FirstName,
-            LastName: LastName,
-            Phone: Phone,
-            Position: Position,
-            Email: Email,
-            Password: Password,
-          })
-          .then((res) => {
-            console.log(res);
-          });
-      }
-    } catch (error) {}
+    // try {
+    //   if (Password !== ConfirmPassword) {
+    //     console.log("Password Is Not Match !");
+    //     return false;
+    //   } else if (!regEmail.test(Email)) {
+    //     console.log("Wrong Pattern Email !");
+    //     return false;
+    //   } else if (!regThaiChar.test(FirstName)) {
+    //     console.log("FirstName Is Wrong Pattern !");
+    //     return false;
+    //   } else if (!regThaiChar.test(LastName)) {
+    //     console.log("LastName Is Wrong Pattern !");
+    //     return false;
+    //   } else if (!regPhoneNumber.test(Phone)) {
+    //     console.log("Invalid Phone Number Pattern !");
+    //     return false;
+    //   } else {
+    //     axios
+    //       .post("/AddOfficer", {
+    //         FirstName: FirstName,
+    //         LastName: LastName,
+    //         Phone: Phone,
+    //         Position: Position,
+    //         Email: Email,
+    //         Password: Password,
+    //       })
+    //       .then((res) => {
+    //         console.log(res);
+    //       });
+    //   }
+    // } catch (error) {}
   };
 
   // const handleSubmit = () => {
@@ -216,15 +256,15 @@ const AddOfficerScreen = () => {
               </span>
             </div>
             <Link to="/confirmaddofficer">
-            <div className="mt-2">
+              <div className="mt-2">
                 <Button
                   variant="secondary"
-                  style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc"  }}
+                  style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc" }}
                   onClick={handleSubmit}
                 >
-                                  เพิ่มบุคคลากร
+                  เพิ่มบุคคลากร
                 </Button>{" "}
-            </div>
+              </div>
             </Link>
           </form>
         </div>
