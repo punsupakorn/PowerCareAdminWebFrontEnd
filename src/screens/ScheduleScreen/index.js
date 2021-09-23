@@ -13,9 +13,8 @@ const ScheduleScreen = () => {
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
-
   const [show, setShow] = useState(false);
-
+  const [state, setstate] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -42,15 +41,33 @@ const ScheduleScreen = () => {
 
   // console.log(schedule);
 
-  // const displayTime = (time) => {
-  //   const timearray = [];
-  //   for (let i = 0; i < time.length; i++) {
-  //     const element = time[i];
-  //     timearray.push(element);
-  //   }
-  //   // console.log(timearray);
-  //   return timearray;
-  // };
+  const displayTime = (time) => {
+    const timearray = [];
+    for (let i = 0; i < time.length; i++) {
+      const element = time[i];
+      timearray.push(element);
+    }
+    // console.log(timearray);
+    return timearray;
+  };
+
+  const handleToConfirmDelete = (TimeTableID) => {
+    const result = setstate({ TimeTableID });
+    console.log(result);
+    handleShow();
+  };
+
+  const handleDelete = (TimeTableID, Time) => {
+    try {
+      axios.delete("/Schedule", {
+        data: { TimeTableID: TimeTableID, Time: Time },
+      });
+      handleClose();
+      refreshPage();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="content-body ">
@@ -135,7 +152,7 @@ const ScheduleScreen = () => {
             <br></br>
             <p>{data.Date}</p>
             <div className="time-item-content">
-              <span className="time-item">
+              {/* <span className="time-item">
                 {data.Time}
 
                 <CloseIcon
@@ -171,19 +188,51 @@ const ScheduleScreen = () => {
                     </Button>
                   </Modal.Footer>
                 </Modal>
-              </span>
-              {/* {data.Time} */}
-              {/* {displayTime(data.Time).map((t) => (
+              </span> */}
+              {displayTime(data.Time).map((t) => (
                 <span className="time-item">
                   {t}
                   <CloseIcon
                     width="0.5rem"
                     hieght="0.5rem"
                     className="close"
-                    // value={i}
+                    onClick={() => handleToConfirmDelete()}
+                    value={t}
                   />
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>คำเตือน</Modal.Title>
+                    </Modal.Header>
+
+                    <center>
+                      <Modal.Body>
+                        {" "}
+                        คุณต้องการลบช่วงเวลาที่เลือกใช่หรือไม่ ?
+                      </Modal.Body>
+                    </center>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={handleClose}
+                        style={{
+                          borderColor: "#bdbdbd",
+                          backgroundColor: "#bdbdbd",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() =>
+                          handleDelete(state.TimeTableID, state.Time)
+                        }
+                      >
+                        ตกลง
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </span>
-              ))} */}
+              ))}
             </div>
           </div>
         ))}
