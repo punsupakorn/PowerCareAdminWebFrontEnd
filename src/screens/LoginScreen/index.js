@@ -1,29 +1,44 @@
 import React, { useContext, useState } from "react";
 import Powercarepic from "../../img/Powerpuff.png";
 import "./Login.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import firebaseConfig from "../../config";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import firebaseConfig from "../../config";
 import { AuthContext } from "../../Auth";
 import { Redirect } from "react-router-dom";
+import firebaseconfig from "../../config";
 
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     try {
-      firebaseConfig
+      firebaseconfig
         .auth()
         .signInWithEmailAndPassword(email.value, password.value);
     } catch (error) {
       alert(error);
     }
   };
+
+  const CheckRole = (email) => {
+    const doctorRef = firebaseconfig.firestore().collection("Doctor");
+    const adminRef = firebaseconfig.firestore().collection("Admin");
+    const snapshotDoctor = doctorRef.where("Email", "==", email).get();
+    const snapshoAdmin = adminRef.where("Email", "==", email).get();
+
+    if (snapshotDoctor) {
+        return
+    } else {
+      
+    }
+  };
+
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
     return <Redirect to="/homescreen" />;
   }
   return (
-     <div className="bg-indigo-200 h-screen w-screen">
+    <div className="bg-indigo-200 h-screen w-screen">
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
         <div
           className="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
@@ -31,7 +46,9 @@ const Login = () => {
         >
           <div className="flex flex-col w-full md:w-1/2 p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center font-thin">Power Care Clinic</h1>
+              <h1 className="text-4xl text-center font-thin">
+                Power Care Clinic
+              </h1>
               <div className="w-full mt-4">
                 <form
                   className="form-horizontal w-3/4 mx-auto"

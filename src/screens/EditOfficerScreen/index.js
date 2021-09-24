@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation } from "react-router";
 
 function EditOfficerScreen() {
-  const [profile, setprofile] = useState();
+  // const [profile, setprofile] = useState();
 
+  const query = new URLSearchParams(useLocation().search);
+  const Position = query.get("position");
+  const DocumentID = query.get("documentid");
+  // console.log(Position);
   // useEffect(() => {
-  //   // axios.get("/EditOfficer/:position/:documentid").then((res) => {
-  //   //   const data = res.data();
-  //   //   console.log(data);
-  //   // });
+  //   axios.get("/EditOfficer/:position/:documentid").then((res) => {
+  //     const data = res.data();
+  //     console.log(data);
+  //   });
   // });
+
+
 
   return (
     <div className="content-body">
@@ -32,6 +39,7 @@ function EditOfficerScreen() {
                 name="FirstName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกชื่อจริง"
+                // value={document.FirstName}
                 // onChange={handleFirstName}
                 required
               />

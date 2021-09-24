@@ -57,7 +57,7 @@ function App() {
               <Route path="/addofficer">
                 <AddOfficerScreen />
               </Route>             
-              <Route path="/editofficer">
+              <Route path="/editofficer/">
                 <EditOfficerScreen />
               </Route>
               <Route path="/appointment">

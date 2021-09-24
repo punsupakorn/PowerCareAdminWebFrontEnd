@@ -1,153 +1,126 @@
 import React, { useState } from "react";
-import Powercarepic from "../../img/Powerpuff.png";
+// import Powercarepic from "../../img/Powerpuff.png";
 import "./AddOfficerScreen.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import firebaseConfig from "../../config";
+// import firebaseConfig from "../../config";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 
 const AddOfficerScreen = () => {
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [Phone, setPhone] = useState("");
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [Phone, setPhone] = useState();
   const [Position, setPosition] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
-  const CheckFirstName = (fisrtname) => {
-    const data = fisrtname.target.value;
+  const checkFirstName = (firstname) => {
+    const data = firstname.target.value;
     setFirstName(data);
-    let result = regThaiChar(FirstName);
-    if (result == true) {
-      return true;
-    } else {
-      return false;
-    }
+    const result = regThaiChar.test(FirstName);
+    console.log(result);
+    return result;
   };
 
-  const CheckLastName = (lastname) => {
+  const checkLastName = (lastname) => {
     const data = lastname.target.value;
     setLastName(data);
-    let result = regThaiChar(LastName);
-    if (result == true) {
-      return true;
-    } else {
-      return false;
-    }
+    const result = regThaiChar.test(LastName);
+    console.log(result);
+    return result;
   };
- 
-  const CheckPhone = (phone) => {
+
+  const checkPhone = (phone) => {
     const data = phone.target.value;
     setPhone(data);
-    let result = regThaiChar(Phone);
-    if (result == true) {
-      return true;
-    } else {
-      return false;
-    }
+    const result = regPhoneNumber.test(Phone);
+    console.log(result);
+    return result;
   };
 
- 
-  // const handleFirstName = (e) => {
-  //   const firstname = e.target.value;
-  //   setFirstName(firstname);
-  // };
-
-  // const handleLastName = (e) => {
-  //   const lastname = e.target.value;
-  //   setLastName(lastname);
-  // };
-
-  // const handlePhone = (e) => {
-  //   const phone = e.target.value;
-  //   setPhone(phone);
-  // };
+  const checkEmail = (email) => {
+    const data = email.target.value;
+    setEmail(data);
+    const result = regEmail.test(Email);
+    return result;
+    console.log(result);
+  };
 
   const handlePosition = (e) => {
     const position = e.target.value;
     setPosition(position);
+    console.log(position);
   };
-
-  // const handleEmail = (e) => {
-  //   const email = e.target.value;
-  //   setEmail(email);
-  // };
 
   const handlePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
+    console.log(Password);
   };
 
   const handleConfirmPassword = (e) => {
     const confirmPassword = e.target.value;
     setConfirmPassword(confirmPassword);
+    console.log(confirmPassword);
   };
-
-  // console.log(FirstName);
-  // console.log(LastName);
-  // console.log(Phone);
-  // console.log(Position);
-  // console.log(Email);
-  // console.log(Password);
 
   const handleSubmit = () => {
-    // try {
-    //   if (Password !== ConfirmPassword) {
-    //     console.log("Password Is Not Match !");
-    //     return false;
-    //   } else if (!regEmail.test(Email)) {
-    //     console.log("Wrong Pattern Email !");
-    //     return false;
-    //   } else if (!regThaiChar.test(FirstName)) {
-    //     console.log("FirstName Is Wrong Pattern !");
-    //     return false;
-    //   } else if (!regThaiChar.test(LastName)) {
-    //     console.log("LastName Is Wrong Pattern !");
-    //     return false;
-    //   } else if (!regPhoneNumber.test(Phone)) {
-    //     console.log("Invalid Phone Number Pattern !");
-    //     return false;
-    //   } else {
-    //     axios
-    //       .post("/AddOfficer", {
-    //         FirstName: FirstName,
-    //         LastName: LastName,
-    //         Phone: Phone,
-    //         Position: Position,
-    //         Email: Email,
-    //         Password: Password,
-    //       })
-    //       .then((res) => {
-    //         console.log(res);
-    //       });
-    //   }
-    // } catch (error) {}
+    try {
+      if (Password !== ConfirmPassword) {
+        console.log("Password Is Not Match !");
+      } else if (FirstName || LastName || Phone || Email == false) {
+        return false;
+        //     axios
+        //       .post("/AddOfficer", {
+        //         FirstName: FirstName,
+        //         LastName: LastName,
+        //         Phone: Phone,
+        //         Position: Position,
+        //         Email: Email,
+        //         Password: Password,
+        //       })
+        //       .then((res) => {
+        //         console.log(res);
+        //       });
+        //   }
+        // } catch (error) {
+        //   return error;
+      }
+      // try {
+      //   if (Password !== ConfirmPassword) {
+      //     console.log("Password Is Not Match !");
+      //     return false;
+      //   } else if (!regEmail.test(Email)) {
+      //     console.log("Wrong Pattern Email !");
+      //     return false;
+      //   } else if (!regThaiChar.test(FirstName)) {
+      //     console.log("FirstName Is Wrong Pattern !");
+      //     return false;
+      //   } else if (!regThaiChar.test(LastName)) {
+      //     console.log("LastName Is Wrong Pattern !");
+      //     return false;
+      //   } else if (!regPhoneNumber.test(Phone)) {
+      //     console.log("Invalid Phone Number Pattern !");
+      //     return false;
+      //   } else {
+      //     axios
+      //       .post("/AddOfficer", {
+      //         FirstName: FirstName,
+      //         LastName: LastName,
+      //         Phone: Phone,
+      //         Position: Position,
+      //         Email: Email,
+      //         Password: Password,
+      //       })
+      //       .then((res) => {
+      //         console.log(res);
+      //       });
+      //   }
+    } catch (error) {}
   };
-
-  // const handleSubmit = () => {
-  //   try {
-  //     if (Password !== ConfirmPassword) {
-  //       console.log("Error : Password Is Not Match !");
-  //     } else {
-  //       // firebaseConfig.auth().createUserWithEmailAndPassword(Email, Password);
-  //       axios
-  //         .post("/AddOfficer", {
-  //           FirstName: FirstName,
-  //           LastName: LastName,
-  //           Phone: Phone,
-  //           Position: Position,
-  //           Email: Email,
-  //           Password: Password,
-  //         })
-  //         .then((res) => {
-  //           console.log(res);
-  //         });
-  //     }
-  //   } catch (error) {}
-  // };
 
   return (
     <div className="content-body">
@@ -171,7 +144,7 @@ const AddOfficerScreen = () => {
                 name="FirstName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกชื่อจริง (ภาษาไทย)"
-                onChange={handleFirstName}
+                onChange={checkFirstName}
                 required
               />
             </div>
@@ -181,7 +154,7 @@ const AddOfficerScreen = () => {
                 name="LastName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกนามสกุล (ภาษาไทย)"
-                onChange={handleLastName}
+                onChange={checkLastName}
                 required
               />
             </div>
@@ -191,7 +164,7 @@ const AddOfficerScreen = () => {
                 name="Phone"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกหมายเลขโทรศัพท์"
-                onChange={handlePhone}
+                onChange={checkPhone}
                 required
               />
             </div>
@@ -222,7 +195,7 @@ const AddOfficerScreen = () => {
                 name="Email"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
                 placeholder="โปรดกรอก อีเมลล์"
-                onChange={handleEmail}
+                onChange={checkEmail}
                 required
               />
             </div>
