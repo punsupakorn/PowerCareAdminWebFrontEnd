@@ -54,7 +54,7 @@ const OfficerListScreen = () => {
 
   const handleToEditOfficer = (DocumentID, Position) => {
     try {
-      axios.get(`/OfficerList/${Position}/${DocumentID}`);
+      axios.get(`/EditOfficer/${Position}/${DocumentID}`);
       // console.log(res);
       // axios.get('/EditOfficer/'+Position+'/'+DocumentID+'')
     } catch (error) {}
@@ -181,15 +181,15 @@ const OfficerListScreen = () => {
                 <p>{officerlist.Phone}</p>
 
                 <div className="menu-row">
-                  <Link to="/editofficer">
-                    <Edit
-                      {...iconOption}
-                      onClick={() =>
-                        handleToEditOfficer(
-                          officerlist.DocumentID,
-                          officerlist.Position
-                        )
-                      }
+                  <Link to={`/EditOfficer/&position=${officerlist.Position}&documentid=${officerlist.DocumentID}`}>
+                    <Edit 
+                       {...iconOption}
+                      // onClick={() =>
+                      //   handleToEditOfficer(
+                      //     officerlist.DocumentID,
+                      //     officerlist.Position
+                      //   )
+                      // }
                     />
                   </Link>
                   {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
