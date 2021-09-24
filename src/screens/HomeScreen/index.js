@@ -62,8 +62,7 @@ const HomeScreen = () => {
          <CalendarInlineIcon width="50%" height="50%" />
           </div>
           <p className="py-6 px-6 text-lg tracking-wide text-center">
-          <p>เวลาทำการ</p>
-          <p>แพทย์</p>
+          <p>เวลาทำการแพทย์</p>
           </p>
           {/* <hr > */}          
           <div className="flex justify-center px-5 mb-2 text-sm ">

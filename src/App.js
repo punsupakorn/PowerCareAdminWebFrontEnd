@@ -23,6 +23,7 @@ import {
   ConfirmAddOfficer,
   GiveMedicineScreen,
   HomeScreenAddmin,
+  ManageMedicineScreen,
 
 } from "./screens";
 import { Switch, Route, HashRouter } from "react-router-dom";
@@ -105,6 +106,9 @@ function App() {
               </Route>
               <Route path="/homescreenaddmin">
                 <HomeScreenAddmin/>
+              </Route>
+              <Route path="/managemedicine">
+                <ManageMedicineScreen/>
               </Route>
               
             </Switch>

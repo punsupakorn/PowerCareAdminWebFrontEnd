@@ -122,7 +122,7 @@ const AddOfficerScreen = () => {
         <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
           <div className="text-center p-0">
             <h1 className=" text-gray-800 text-3xl ">เพิ่มบุคลากร</h1>
-            <h4 className="p-1 text-gray-700">สำหรับเจ้าหน้าที่</h4>
+            <h4 className="p-1 text-gray-700">สำหรับผู้ดูแลระบบ</h4>
           </div>
           <form>
             <div className="mt-4">
@@ -205,15 +205,6 @@ const AddOfficerScreen = () => {
                 onChange={handleConfirmPassword}
                 required
               />
-            </div>
-            <div className="mt-1 block p-3 text-sm text-xs text-gray-800">
-              <input type="checkbox" className="inline-block border-0  " />
-              <span display="inline" className>
-                ยอมรับ
-                <a className target="_blank" data-test="Link">
-                  <span className="underline ">เงื่อนไข</span>{" "}
-                </a>{" "}
-              </span>
             </div>
             <Link to="/confirmaddofficer">
             <div className="mt-2">
