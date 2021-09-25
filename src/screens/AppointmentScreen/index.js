@@ -1,45 +1,27 @@
 import { useState, useEffect } from "react";
 import "./AppointmentScreen.css";
 import axios from "axios";
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
-
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
 import Select from "react-select";
 
 const AppointmentScreen = () => {
   const [doctor, setDoctor] = useState([]);
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-
-  // const timeList = [
-  //   "08:30 - 09:00",
-  //   "09:00 - 09:30",
-  //   "09:30 - 10:00",
-  //   "10:00 - 10:30",
-  //   "10:30 - 11:00",
-  //   "11:00 - 11:30",
-  //   "11:30 - 12:00",
-  //   "13:30 - 14:00",
-  //   "14:00 - 14:30",
-  //   "14:30 - 15:00",
-  //   "15:00 - 15:00",
-  //   "15:00 - 15:30",
-  // ];
+  const [name, setName] = useState();
+  const [date, setDate] = useState([]);
 
   const timeList = [
-    { value: "09:00 - 10:00", label: "09:00 - 10:00" },
-    { value: "10:00 - 11:00", label: "10:00 - 11:00" },
-    { value: "13:00 - 14:00", label: "13:00 - 14:00" },
-    { value: "14:00 - 15:00", label: "14:00 - 15:00" },
+    "09:00 - 10:00",
+    "10:00 - 11:00",
+    "13:00 - 14:00",
+    "13:00 - 14:00",
+    "14:00 - 15:00",
   ];
 
   useEffect(() => {
     axios.get("/Appointment").then((res) => {
-      // console.log(res);
       setDoctor(res.data);
     });
   }, []);
@@ -49,15 +31,11 @@ const AppointmentScreen = () => {
     setName(name);
   };
 
-  const handleTime = (e) => {
-    const time = e.target.value;
-    setTime((arr) => [...arr, time].sort());
-  };
+  // const onChooseDate = (e) => {};
 
-  // console.log(doctor);
-  console.log(name);
-  console.log(date);
-  console.log(time);
+  // const onCancelDate = (e) => {};
+
+  console.log("date : ", date);
 
   // Input Component
   function InputSchedule({ title, children }) {
@@ -70,30 +48,32 @@ const AppointmentScreen = () => {
   }
 
   // แปลง Date
-  const d = new Date(date);
-  const thaiDate = d.toLocaleDateString("th-TH", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  });
+  // const d = new Date(date);
+  // const thaiDate = d.toLocaleDateString("th-TH", {
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  //   weekday: "long",
+  // });
 
-  function submit() {
+  // style when time-item active
+  // const styleActive = { backgroundColor: "#7e99b8", color: "white" };
+
+  // const transferDate = (date) => {
+  //   new Date(date).toLocaleDateString();
+  // };
+
+  const submit = () => {
     axios
       .post("/Appointment", {
         doctor: name,
         date: date,
-        time: time,
+        time: timeList,
       })
       .then((res) => {
         console.log(res);
       });
-    if (time && date && doctor) {
-      console.log({ name, date, time });
-    }
-  }
-  // style when time-item active
-  const styleActive = { backgroundColor: "#7e99b8", color: "white" };
+  };
 
   return (
     <div className="content-body mt-6">
@@ -124,79 +104,26 @@ const AppointmentScreen = () => {
 
         {/* Input Date */}
         <InputSchedule title="เลือกวันที่">
-          
-        <DatePicker
-        // value={date || null}
-        //  onChange={(e) => {
-        //   setDate(e.target.value);
-         
-        // }}
-        style={{ //input style
-          width: "100%",
-          height: "50px",
-          boxSizing: "border-box"
-        }} 
-       
-        placeholder=" กรุณาเลือกวันที่"
-        value={date || null}
-        // onChange={(e) => {
-        //   setDate(e.target.value);}}
-        multiple plugins={[<DatePanel />]}  
-        />
-        
-          <input
-            type="date"
-            className="date-picker"
-            value={date || null}
-            onChange={(e) => {
-              setDate(e.target.value);
-             
+          <DatePicker
+            value={date}
+            onChange={setDate}
+            format={"DD/MM/YYYY"}
+            style={{
+              width: "100%",
+              height: "50px",
+              boxSizing: "border-box",
             }}
+            placeholder=" กรุณาเลือกวันที่"
+            multiple
+            plugins={[<DatePanel />]}
           />
-         
-
-{/* 
-          <DatePicker multiple plugins={[<DatePanel />]} /> */}
-          {/* /> */}
         </InputSchedule>
 
-        {/* Input Time */}
-        {date ? (
-          <InputSchedule title="เลือกเวลา">
-            <div className="time-picker">
-              <p>คุณเลือก {thaiDate}</p>
-              <div className="time-picker-content">
-                {/* {timeList.map((item) => (
-                  <label className="time-item ">
-                    <input
-                      type="checkbox"
-                      className="checkbox "
-                      value={item}
-                      onClick={handleTime}
-                    />
-                    {item}
-                  </label>
-                ))} */}
-                <Select
-                  // Value={handleTime}
-                  onClick={handleTime}
-                  isMulti
-                  name="timeList"
-                  options={timeList}
-                  styles="w-full"
-                  // type="checkbox"
-                  className="basic-multi-select"
-                  // classNamePrefix="select"
-                  // onClick={handleTime}
-                />
-              </div>
-            </div>
-            <span className="button-submit" onClick={submit}>
-              ยืนยัน
-            </span>
-          </InputSchedule>
-        ) : null}
+        <span className="button-submit" onClick={submit}>
+          ยืนยัน
+        </span>
       </div>
+      <div>{/* {new Date(1631969687470).toLocaleDateString()} */}</div>
     </div>
   );
 };

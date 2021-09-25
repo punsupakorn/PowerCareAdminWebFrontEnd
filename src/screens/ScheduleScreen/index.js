@@ -41,6 +41,16 @@ const ScheduleScreen = () => {
 
   // console.log(schedule);
 
+  const displayDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
   const displayTime = (time) => {
     const timearray = [];
     for (let i = 0; i < time.length; i++) {
@@ -150,7 +160,10 @@ const ScheduleScreen = () => {
             <br></br>
             <h3>ชื่อแพทย์ : {data.DoctorName}</h3>
             <br></br>
-            <p>{data.Date}</p>
+            {/* {displayDate(data.Date).map((d)=>(
+              <p>{d}</p>
+            ))} */}
+            <p>{displayDate(data.Date)}</p>
             <div className="time-item-content">
               {/* <span className="time-item">
                 {data.Time}
