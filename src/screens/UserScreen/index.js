@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Edit from "../../icons/edit";
 import CloseIcon from "../../icons/close-icon";
@@ -7,18 +7,52 @@ import Add from "../../icons/add-paper";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { server } from "../../constants/constant";
+import axios from "axios";
 
 export default function UserScreen() {
   const [searched, setSearched] = useState(false);
+  const [user, setuser] = useState([]);
+  const [show, setShow] = useState(false);
+  // const [state, setstate] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const getAllOfficer = () => {
+    axios.get(server.USER).then((res) => {
+      setuser(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getAllOfficer();
+  }, []);
 
   const refreshPage = () => {
     window.location.reload();
   };
 
-  const [show, setShow] = useState(false);
+  // const handleToConfirmDelete = (UserID) => {
+  //   setstate(UserID);
+  //   handleShow();
+  // };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleDelete = (UserID) => {
+  //   try {
+  //     axios.delete(server.USER, {
+  //       data: { UserID: UserID },
+  //     });
+  //     handleClose();
+  //     refreshPage();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // console.log(state);
+
+  // console.log(state);
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
@@ -72,73 +106,72 @@ export default function UserScreen() {
             <p>นามสกุล</p>
             <p>อีเมลล์ </p>
             <p>เบอร์โทรศัพท์</p>
-            <p>ดูข้อมูล/ลบข้อมูล</p>
+            <p>ดูข้อมูล / แก้ไขข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
-            <div className="table-grid">
-              <p></p>
-              <p>ดาริส</p>
-              <p>ปิณฑรัตนวิบูลย์</p>
-              <p>see_nong@hotmail.com</p>
-              <p>093849586</p>
+            {user.map((data) => (
+              <div className="table-grid">
+                <p></p>
+                <p>{data.FirstName}</p>
+                <p>{data.LastName}</p>
+                <p>{data.Email}</p>
+                <p>{data.Phone}</p>
 
-              <div className="menu-row">
-                <Link to="/userdetail">
-                  <Add
+                <div className="menu-row">
+                  <Link to="/userdetail">
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
+                  </Link>
+                  <Link to="/edituser">
+                    <Edit
+                      {...iconOption}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                  </Link>
+                  {/* <Delete
                     {...iconOption}
-                    // onClick={() => console.log("Click function add " + item.id)}
-                  />
-                </Link>
-                <Link to="/edituser">
-                  <Edit
-                    {...iconOption}
-                    // onClick={() => console.log("Click function edit ")}
-                  />
-                </Link>
-                <Delete
-                  {...iconOption}
-                  onClick={handleShow}
-                  // onClick={() =>
-                  //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                  // }
-                />
+                    // onClick={() => handleToConfirmDelete(data.UserID)}
+                  /> */}
 
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>คำเตือน</Modal.Title>
-                  </Modal.Header>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>คำเตือน</Modal.Title>
+                    </Modal.Header>
 
-                  <center>
-                    <Modal.Body>คุณต้องการลบคนไข้ท่านนี้หรือไม่ ?</Modal.Body>
-                  </center>
-                  <Modal.Footer>
-                    <Button
-                      variant="secondary"
-                      onClick={handleClose}
-                      style={{
-                        borderColor: "#bdbdbd",
-                        backgroundColor: "#bdbdbd",
-                      }}
-                    >
-                      ย้อนกลับ
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={handleClose}
-                      style={{
-                        borderColor: "danger",
-                        backgroundColor: "danger",
-                      }}
-                    >
-                      ยืนยันลบคนไข้
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+                    <center>
+                      <Modal.Body>คุณต้องการลบคนไข้ท่านนี้หรือไม่ ?</Modal.Body>
+                    </center>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={handleClose}
+                        style={{
+                          borderColor: "#bdbdbd",
+                          backgroundColor: "#bdbdbd",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </Button>
+                      <Button
+                        variant="danger"
+                        style={{
+                          borderColor: "danger",
+                          backgroundColor: "danger",
+                        }}
+                        // onClick={() => handleDelete(state)}
+                      >
+                        ยืนยันลบคนไข้
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

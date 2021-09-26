@@ -2,7 +2,6 @@
   "name": "powercare-clinic",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@syncfusion/ej2-react-schedule": "^19.2.55",

@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { server } from "../../constants/constant";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
@@ -33,7 +34,7 @@ const ScheduleScreen = () => {
   };
 
   useEffect(() => {
-    axios.get("/Schedule").then((res) => {
+    axios.get(server.SCHEDULE).then((res) => {
       // console.log(res);
       setSchedule(res.data);
     });
@@ -69,7 +70,7 @@ const ScheduleScreen = () => {
 
   const handleDelete = (TimeTableID, Time) => {
     try {
-      axios.delete("/Schedule", {
+      axios.delete(server.SCHEDULE, {
         data: { TimeTableID: TimeTableID, Time: Time },
       });
       handleClose();

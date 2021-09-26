@@ -6,6 +6,7 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Select from "react-select";
+import { server } from "../../constants/constant";
 
 const AppointmentScreen = () => {
   const [doctor, setDoctor] = useState([]);
@@ -21,7 +22,7 @@ const AppointmentScreen = () => {
   ];
 
   useEffect(() => {
-    axios.get("/Appointment").then((res) => {
+    axios.get(server.APPOINTMENT).then((res) => {
       setDoctor(res.data);
     });
   }, []);
@@ -65,7 +66,7 @@ const AppointmentScreen = () => {
 
   const submit = () => {
     axios
-      .post("/Appointment", {
+      .post(server.APPOINTMENT, {
         doctor: name,
         date: date,
         time: timeList,

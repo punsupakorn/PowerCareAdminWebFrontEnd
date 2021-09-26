@@ -10,6 +10,7 @@ import CloseIcon from "../../icons/close-icon";
 import firebaseConfig from "../../config";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
+import { server } from "../../constants/constant";
 
 const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
@@ -23,13 +24,13 @@ const OfficerListScreen = () => {
   const handleShow = () => setShow(true);
 
   const getOfficerList = () => {
-    axios.get("/OfficerList").then((res) => {
+    axios.get(server.OFFICER_LIST).then((res) => {
       setOfficer(res.data);
     });
   };
 
   const getDoctor = () => {
-    axios.get("/OfficerList").then((res) => {
+    axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
       const doctor = data.filter((data) => data.Position == "Doctor");
       setOfficer(doctor);
@@ -37,7 +38,7 @@ const OfficerListScreen = () => {
   };
 
   const getAdmin = () => {
-    axios.get("/OfficerList").then((res) => {
+    axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
       const admin = data.filter((data) => data.Position == "Admin");
       setOfficer(admin);
@@ -181,9 +182,11 @@ const OfficerListScreen = () => {
                 <p>{officerlist.Phone}</p>
 
                 <div className="menu-row">
-                  <Link to={`/EditOfficer/&position=${officerlist.Position}&documentid=${officerlist.DocumentID}`}>
-                    <Edit 
-                       {...iconOption}
+                  <Link
+                    to={`/EditOfficer/&position=${officerlist.Position}&documentid=${officerlist.DocumentID}`}
+                  >
+                    <Edit
+                      {...iconOption}
                       // onClick={() =>
                       //   handleToEditOfficer(
                       //     officerlist.DocumentID,

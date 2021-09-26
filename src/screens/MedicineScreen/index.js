@@ -5,6 +5,7 @@ import "./MedicineScreen.css";
 import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { server } from "../../constants/constant";
 
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -19,7 +20,7 @@ export default function MedicineScreen() {
   const [medicine, setMedicine] = useState([]);
 
   const getMedicine = () => {
-    axios.get("/Medicine").then((res) => {
+    axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
     });
   };
@@ -56,7 +57,7 @@ export default function MedicineScreen() {
   const handleSubmit = async () => {
     try {
       await axios
-        .post("/Medicine", {
+        .post(server.MEDICINE, {
           Name: Name,
           Description: Description,
           Price: Price,

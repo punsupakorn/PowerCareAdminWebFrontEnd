@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useHistory } from "react";
 // import Powercarepic from "../../img/Powerpuff.png";
 import "./AddOfficerScreen.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import axios from "axios";
 // import firebaseConfig from "../../config";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
-import { Button } from 'react-bootstrap';
-import { Modal } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { server } from "../../constants/constant";
 
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState();
@@ -68,58 +69,44 @@ const AddOfficerScreen = () => {
   };
 
   const handleSubmit = () => {
+    let user = {
+      firstname: FirstName,
+      lastname: LastName,
+      phone: Phone,
+      position: Position,
+      email: Email,
+      password: Password,
+      confirmpassword: ConfirmPassword,
+    };
+
+    let data = Object.values(user).every((value) => value);
     try {
-      if (Password !== ConfirmPassword) {
-        console.log("Password Is Not Match !");
-      } else if (FirstName || LastName || Phone || Email == false) {
-        return false;
-        //     axios
-        //       .post("/AddOfficer", {
-        //         FirstName: FirstName,
-        //         LastName: LastName,
-        //         Phone: Phone,
-        //         Position: Position,
-        //         Email: Email,
-        //         Password: Password,
-        //       })
-        //       .then((res) => {
-        //         console.log(res);
-        //       });
-        //   }
-        // } catch (error) {
-        //   return error;
+      if (data == false) {
+        window.alert("โปรดกรอกข้อมูลให้ครบทุกช่อง");
+      } else if (Password !== ConfirmPassword) {
+        window.alert("โปรดกรอกรหัสผ่านให้ตรงกัน");
+      } else if (!regPhoneNumber.test(Phone)) {
+        window.alert("โปรดกรอกหมายเลขโทรศัพท์เป็นตัวเลข");
+      } else if (!regEmail.test(Email)) {
+        window.alert("โปรดกรอกอีเมลล์ให้ถูกต้อง");
+      } else if (!regThaiChar.test(FirstName)) {
+        window.alert("โปรดกรอกชื่อจริงเป็นภาษาไทย");
+      } else if (!regThaiChar.test(LastName)) {
+        window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
+      } else {
+        axios.post(server.ADD_OFFICER, {
+          FirstName: FirstName,
+          LastName: LastName,
+          Phone: Phone,
+          Position: Position,
+          Email: Email,
+          Password: Password,
+        });
+        return <Redirect to="/confirmaddofficer" />;
       }
-      // try {
-      //   if (Password !== ConfirmPassword) {
-      //     console.log("Password Is Not Match !");
-      //     return false;
-      //   } else if (!regEmail.test(Email)) {
-      //     console.log("Wrong Pattern Email !");
-      //     return false;
-      //   } else if (!regThaiChar.test(FirstName)) {
-      //     console.log("FirstName Is Wrong Pattern !");
-      //     return false;
-      //   } else if (!regThaiChar.test(LastName)) {
-      //     console.log("LastName Is Wrong Pattern !");
-      //     return false;
-      //   } else if (!regPhoneNumber.test(Phone)) {
-      //     console.log("Invalid Phone Number Pattern !");
-      //     return false;
-      //   } else {
-      //     axios
-      //       .post("/AddOfficer", {
-      //         FirstName: FirstName,
-      //         LastName: LastName,
-      //         Phone: Phone,
-      //         Position: Position,
-      //         Email: Email,
-      //         Password: Password,
-      //       })
-      //       .then((res) => {
-      //         console.log(res);
-      //       });
-      //   }
-    } catch (error) {}
+    } catch (error) {
+      return error;
+    }
   };
 
   return (
@@ -219,17 +206,18 @@ const AddOfficerScreen = () => {
                 required
               />
             </div>
-            <Link to="/confirmaddofficer">
+            {/* <Link to="/confirmaddofficer"> */}
             <div className="mt-2">
-                <Button
-                  variant="secondary"
-                  style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc"  }}
-                  onClick={handleSubmit}
-                >
-                                  เพิ่มบุคคลากร
-                </Button>{" "}
+              {/* <Link> */}
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc" }}
+                onClick={handleSubmit}
+              >
+                เพิ่มบุคคลากร
+              </Button>{" "}
+              {/* </Link> */}
             </div>
-            </Link>
           </form>
         </div>
       </div>

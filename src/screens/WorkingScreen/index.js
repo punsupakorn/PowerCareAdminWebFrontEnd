@@ -6,9 +6,10 @@ import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
+import { server } from "../../constants/constant";
 export default function WorkingScreen() {
   // // for search
   // const [data, setData] = useState(mockup);
@@ -84,7 +85,7 @@ export default function WorkingScreen() {
   const [working, setWorking] = useState([]);
 
   useEffect(() => {
-    axios.get("/Working").then((res) => {
+    axios.get(server.WORKING).then((res) => {
       setWorking(res.data);
     });
   }, []);
@@ -92,7 +93,7 @@ export default function WorkingScreen() {
   const handleData = (AppointmentID) => {
     try {
       axios
-        .post("/Working", {
+        .post(server.WORKING, {
           AppointmentID: AppointmentID,
         })
         .then((res) => {
@@ -110,7 +111,7 @@ export default function WorkingScreen() {
   return (
     <div className="content-body">
       <div className="head-officerlist">
-      <p class="text-xl mt-3 font-semibold">ตารางปฏิบัติการ</p>
+        <p class="text-xl mt-3 font-semibold">ตารางปฏิบัติการ</p>
         <div className="search-bar-conten">
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -176,7 +177,7 @@ export default function WorkingScreen() {
                 <p>ปิณฑรัตนวิบูลย์</p>
 
                 <div className="menu-row">
-                  <Link to="/workingdetail">
+                  <Link to={`/workingdetail/&id=${working.AppointmentID}`}>
                     <Add
                       {...iconOption}
                       // onClick={() => console.log("Click function add " + item.id)}
@@ -191,7 +192,7 @@ export default function WorkingScreen() {
                   <Link to="/confirmcancel">
                     <Delete
                       {...iconOption}
-                      onClick={() => handleData(working.AppointmentID)}
+                      // onClick={() => handleData(working.AppointmentID)}
                     />
                   </Link>
                 </div>
