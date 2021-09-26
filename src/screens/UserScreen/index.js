@@ -67,7 +67,7 @@ export default function UserScreen() {
         <div className="table-content">
           <div className="table-grid header">
             {/* header table */}
-            <p>รหัสผู้ป่วย</p>
+            <p></p>
             <p>ชื่อ</p>
             <p>นามสกุล</p>
             <p>อีเมลล์ </p>
@@ -79,7 +79,7 @@ export default function UserScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
             <div className="table-grid">
-              <p>1001</p>
+              <p></p>
               <p>ดาริส</p>
               <p>ปิณฑรัตนวิบูลย์</p>
               <p>see_nong@hotmail.com</p>

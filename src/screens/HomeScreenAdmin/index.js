@@ -55,7 +55,7 @@ const HomeScreenAdmin= () => {
           </p>
           {/* <hr > */}          
           <div className="flex justify-center px-5 mb-2 text-sm ">
-          <Link to="/medicine">
+          <Link to="/managemedicine">
             <button
               type="button"
               className="border border-indigo-300 text-indigo-300 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-400 focus:outline-none focus:shadow-outline"

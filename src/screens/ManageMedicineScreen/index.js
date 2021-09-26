@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
-import { InputNumber, TableController } from "../../components";
+import {  TableController } from "../../components";
 import CloseIcon from "../../icons/close-icon";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as    Link } from "react-router-dom";
 import axios from "axios";
 import Edit from "../../icons/edit";
 import Delete from "../../icons/delete";
@@ -118,94 +118,6 @@ export default function ManageMedicineScreen() {
                     //     )
                     //   }
                     />
-                  {/* </Link> */}
-                  <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>เพิ่มยา</Modal.Title>
-            </Modal.Header>
-
-            <center>
-              <Modal.Body>
-                <div className="divide-y divide-gray-200">
-                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="flex flex-col">
-                      <label className="leading-loose">ชื่อยา</label>
-                      <input
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกชื่อยา"
-                        onChange={handleName}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="leading-loose">
-                        คำอธิบายเกี่ยวกับยา
-                      </label>
-                      <input
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกคำอธิบาย"
-                        onChange={handleDescription}
-                      />
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ราคา</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกราคา"
-                            onChange={handlePrice}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ประเภท</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกประเภท"
-                            onChange={handleType}
-                          />
-                        </div>
-                      </div>
-                      {/* <div className="flex flex-col">
-                        <label className="leading-loose">สต๊อกสินค้า</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกจำนวน"
-                            onChange={handleStock}
-                          />
-                        </div>
-                      </div> */}
-                    </div>
-                  </div>
-                </div>
-              </Modal.Body>
-            </center>
-            <Modal.Footer>
-              <Link to="medicine">
-                <Button
-                  variant="primary"
-                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-                  onClick={handleSubmit}
-                >
-                  เพิ่มยา
-                </Button>
-              </Link>
-              <Button
-                variant="secondary"
-                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }} 
-              >
-                ย้อนกลับ
-              </Button>
-            </Modal.Footer>
-          </Modal>
-                  {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
                   <Delete
                     {...iconOption}
                     // onClick={() =>
@@ -219,19 +131,6 @@ export default function ManageMedicineScreen() {
           </div>
         ))}
       </div>
-
-      // <div className="menu-row">
-      // <p>{" "}</p>
-      // <p>{Medicine.Type}</p>
-      // {/* <p>{Description}</p>
-      // <p>{name}</p>
-      // <p>{price}</p>
-      // <p>{"111"}</p> */}
-      // </div>
-
-      // ))}
-      // </div>
-      // );
     );
   };
 
