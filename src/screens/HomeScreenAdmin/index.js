@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { HomeScreenAdmin } from "..";
 import AddUserIcon from "../../icons/add-user";
 import CalendarInlineIcon from "../../icons/calendar-inline";
 
-const HomeScreenAddmin= () => {
+const HomeScreenAdmin= () => {
 
   return (
 
@@ -73,4 +72,4 @@ const HomeScreenAddmin= () => {
     </div>
   );
 };
-export default HomeScreenAddmin;
+export default HomeScreenAdmin;

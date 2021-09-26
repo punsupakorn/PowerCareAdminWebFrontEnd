@@ -19,7 +19,7 @@ export { default as UserSummaryScreen } from "./UserSummaryScreen";
 export { default as EditUserScreen } from "./EditUserScreen";
 export { default as ConfirmAddOfficer} from "./ConfirmAddOfficer";
 export { default as GiveMedicineScreen} from "./GiveMedicineScreen";
-export { default as HomeScreenAddmin} from "./HomeScreenAddmin";
+export { default as HomeScreenAdmin} from "./HomeScreenAdmin";
 export { default as ManageMedicineScreen} from "./ManageMedicineScreen";
 
 

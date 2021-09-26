@@ -22,7 +22,7 @@ import {
   EditUserScreen,
   ConfirmAddOfficer,
   GiveMedicineScreen,
-  HomeScreenAddmin,
+  HomeScreenAdmin,
   ManageMedicineScreen,
 
 } from "./screens";
@@ -104,8 +104,8 @@ function App() {
               <Route path="/givemedicine">
                 <GiveMedicineScreen/>
               </Route>
-              <Route path="/homescreenaddmin">
-                <HomeScreenAddmin/>
+              <Route path="/homescreenadmin">
+                <HomeScreenAdmin/>
               </Route>
               <Route path="/managemedicine">
                 <ManageMedicineScreen/>
