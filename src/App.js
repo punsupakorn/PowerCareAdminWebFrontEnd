@@ -1,7 +1,7 @@
 import "./App.css";
 import { TopBar, SideBar } from "./components";
 import {
-  HomeScreen,
+  HomeScreenStaff,
   HomeScreenDoctor,
   AppointmentScreen,
   ScheduleScreen,
@@ -68,8 +68,8 @@ function App() {
               <Route path="/schedule">
                 <ScheduleScreen />
               </Route>
-              <Route path="/homescreen">
-                <HomeScreen />
+              <Route path="/homescreenstaff">
+                <HomeScreenStaff />
               </Route>
               <Route path="/homescreendoctor">
                 <HomeScreenDoctor />

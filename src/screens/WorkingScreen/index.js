@@ -11,76 +11,6 @@ import "./WorkingScreen.css";
 import { TableController } from "../../components";
 import { server } from "../../constants/constant";
 export default function WorkingScreen() {
-  // // for search
-  // const [data, setData] = useState(mockup);
-  // const [isSearch, setIsSearch] = useState(false);
-  // // data
-  // const [date, setDate] = useState();
-  // // table
-  // const [indexTable, setIndexTable] = useState(0);
-  // const [numOfRow, setNumOfRow] = useState(10);
-  // const numOfTable = Math.ceil(data.length / numOfRow);
-  // const numberStartData = indexTable * numOfRow;
-  // const dataLength = +numOfRow;
-  // const numberEndData =
-  //   numberStartData + dataLength > data.length
-  //     ? data.length
-  //     : numberStartData + dataLength;
-  // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
-
-  // // option icon ad edit delete
-  // const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
-
-  // // data slice with table
-  // const rowData = data
-  //   .slice(numberStartData, numberEndData)
-  //   .map((item, key) => (
-  //     <div className="table-grid" key={key}>
-  //       <p>{item.userid}</p>
-  //       <p>{item.firstname}</p>
-  //       <p>{item.lastname}</p>
-  //       <p>{item.date}</p>
-  //       <p>{item.time}</p>
-  //       <div className="menu-row">
-  //       <Link to="/workingdetail">
-  //         <Add
-  //           {...iconOption}
-  //           onClick={() => console.log("Click function add " + item.id)}
-  //         />
-  //          </Link>
-  //          <Link to="/postpone">
-  //         <Edit
-  //           {...iconOption}
-  //           onClick={() => console.log("Click function edit " + item.id)}
-  //         />
-  //         </Link>
-  //         <Link to="/confirmcancel">
-  //         <Delete
-  //           {...iconOption}
-  //           onClick={() => console.log("Click function delete " + item.id)}
-  //         />
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   ));
-
-  // // function search
-  // function searchWithDate() {
-  //   let nDate = [];
-  //   if (!date) {
-  //     return null;
-  //   }
-  //   data.forEach((item, index) => {
-  //     console.log(new Date(item.date).getTime() === new Date(date).getTime());
-  //     if (new Date(item.date).getTime() === new Date(date).getTime()) {
-  //       console.log(item);
-  //       nDate.push(item);
-  //     }
-  //   });
-  //   setIsSearch(true);
-  //   setData(nDate);
-  // }
-
   const [searched, setSearched] = useState(false);
   const [working, setWorking] = useState([]);
 
@@ -90,21 +20,21 @@ export default function WorkingScreen() {
     });
   }, []);
 
-  const handleData = (AppointmentID) => {
-    try {
-      axios
-        .post(server.WORKING, {
-          AppointmentID: AppointmentID,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    } catch (error) {}
-  };
-
   const refreshPage = () => {
     window.location.reload();
   };
+
+  // const handleData = (AppointmentID) => {
+  //   try {
+  //     axios
+  //       .post(server.WORKING, {
+  //         AppointmentID: AppointmentID,
+  //       })
+  //       .then((res) => {
+  //         console.log(res);
+  //       });
+  //   } catch (error) {}
+  // };
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
@@ -155,11 +85,11 @@ export default function WorkingScreen() {
           <div className="table-grid-working header">
             {/* header table */}
             <p></p>
-            <p>รหัสผู้ป่วย</p>
+            <p></p>
             <p>วันที่</p>
             <p>เวลา</p>
-            <p>ชื่อ</p>
-            <p>นามสกุล</p>
+            <p>ชื่อคนไข้</p>
+            <p></p>
             <p>ดูข้อมูล/ลบข้อมูล</p>
             {/* end header */}
           </div>
@@ -170,11 +100,11 @@ export default function WorkingScreen() {
             {working.map((working) => (
               <div className="table-grid-working">
                 <p></p>
-                <p>1001</p>
+                <p></p>
                 <p>{working.Date}</p>
                 <p>{working.Time}</p>
-                <p>ดาริส</p>
-                <p>ปิณฑรัตนวิบูลย์</p>
+                <p>{working.UserID}</p>
+                <p></p>
 
                 <div className="menu-row">
                   <Link to={`/workingdetail/&id=${working.AppointmentID}`}>

@@ -14,11 +14,16 @@ const AppointmentScreen = () => {
   const [date, setDate] = useState([]);
 
   const timeList = [
-    "09:00 - 10:00",
-    "10:00 - 11:00",
-    "13:00 - 14:00",
-    "13:00 - 14:00",
-    "14:00 - 15:00",
+    "09.00 - 09.30",
+    "09.30 - 10.00",
+    "10.00 - 10.30",
+    "10.30 - 11.00",
+    "11.00 - 11.30",
+    "11.30 - 12.00",
+    "13.00 - 13.30",
+    "13.30 - 14.00",
+    "14.00 - 14.30",
+    "14.30 - 15.00",
   ];
 
   useEffect(() => {
@@ -63,6 +68,9 @@ const AppointmentScreen = () => {
   // const transferDate = (date) => {
   //   new Date(date).toLocaleDateString();
   // };
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   const submit = () => {
     axios
@@ -74,6 +82,8 @@ const AppointmentScreen = () => {
       .then((res) => {
         console.log(res);
       });
+    window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
+    refreshPage();
   };
 
   return (

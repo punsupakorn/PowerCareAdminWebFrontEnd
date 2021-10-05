@@ -53,13 +53,13 @@ const OfficerListScreen = () => {
     window.location.reload();
   };
 
-  const handleToEditOfficer = (DocumentID, Position) => {
-    try {
-      axios.get(`/EditOfficer/${Position}/${DocumentID}`);
-      // console.log(res);
-      // axios.get('/EditOfficer/'+Position+'/'+DocumentID+'')
-    } catch (error) {}
-  };
+  // const handleToEditOfficer = (DocumentID, Position) => {
+  //   try {
+  //     axios.get(`/EditOfficer/${Position}/${DocumentID}`);
+  //     // console.log(res);
+  //     // axios.get('/EditOfficer/'+Position+'/'+DocumentID+'')
+  //   } catch (error) {}
+  // };
 
   const handleToConfirmDelete = (DocumentID, Position) => {
     setstate({ DocumentID, Position });
@@ -68,7 +68,7 @@ const OfficerListScreen = () => {
 
   const handleDelete = (DocumentID, Position) => {
     try {
-      axios.delete("/OfficerList", {
+      axios.delete(server.OFFICER_LIST, {
         data: { DocumentID: DocumentID, Position: Position },
       });
       handleClose();

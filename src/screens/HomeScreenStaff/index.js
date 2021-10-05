@@ -4,7 +4,7 @@ import AddUserIcon from "../../icons/add-user";
 import CalendarOutlineIcon from "../../icons/calendar-outline";
 import CalendarInlineIcon from "../../icons/calendar-inline";
 
-const HomeScreen = () => {
+const HomeScreenStaff = () => {
   // function Card({ children, title, direction }) {
   //   return (
   //     <Link className="card-home-screen" to={direction}>
@@ -149,4 +149,4 @@ const HomeScreen = () => {
     </div>
   );
 };
-export default HomeScreen;
+export default HomeScreenStaff;

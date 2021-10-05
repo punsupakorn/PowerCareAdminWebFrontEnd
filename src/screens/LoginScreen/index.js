@@ -6,8 +6,19 @@ import "./Login.css";
 import { AuthContext } from "../../Auth";
 import { Redirect } from "react-router-dom";
 import firebaseconfig from "../../config";
+import axios from "axios";
 
 const Login = () => {
+  // const [user, setuser] = useState();
+
+  // const checkRole = (email) => {
+  //   try {
+  //     axios.get()
+  //   } catch (error) {
+      
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
@@ -15,28 +26,14 @@ const Login = () => {
       firebaseconfig
         .auth()
         .signInWithEmailAndPassword(email.value, password.value);
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const CheckRole = (email) => {
-    const doctorRef = firebaseconfig.firestore().collection("Doctor");
-    const adminRef = firebaseconfig.firestore().collection("Admin");
-    const snapshotDoctor = doctorRef.where("Email", "==", email).get();
-    const snapshoAdmin = adminRef.where("Email", "==", email).get();
-
-    if (snapshotDoctor) {
-        return
-    } else {
-      
-    }
+    } catch (error) {}
   };
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Redirect to="/homescreen" />;
+    return <Redirect to="/homescreenstaff" />;
   }
+
   return (
     <div className="bg-indigo-200 h-screen w-screen">
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">

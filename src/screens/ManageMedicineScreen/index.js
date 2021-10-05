@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
-import {  TableController } from "../../components";
+import { TableController } from "../../components";
 import CloseIcon from "../../icons/close-icon";
-import { BrowserRouter as    Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import axios from "axios";
 import Edit from "../../icons/edit";
 import Delete from "../../icons/delete";
+import { server } from "../../constants/constant";
 
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -20,7 +21,7 @@ export default function ManageMedicineScreen() {
   const [medicine, setMedicine] = useState([]);
 
   const getMedicine = () => {
-    axios.get("/Medicine").then((res) => {
+    axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
     });
   };
@@ -49,17 +50,12 @@ export default function ManageMedicineScreen() {
     setType(type);
   };
 
-  const handleStock = (e) => {
-    const stock = e.target.value;
-    setStock(stock);
-  };
-
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
   const handleSubmit = async () => {
     try {
       await axios
-        .post("/Medicine", {
+        .post(server.MEDICINE, {
           Name: Name,
           Description: Description,
           Price: Price,
@@ -69,13 +65,19 @@ export default function ManageMedicineScreen() {
         .then((res) => {
           console.log(res);
         });
+        window.alert("เพื่มยาสำเร็จ");
+        refreshPage();
     } catch (error) {}
   };
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
 
   // for search
   const [searchInput, setSearchInput] = useState(null);
@@ -94,61 +96,6 @@ export default function ManageMedicineScreen() {
       : numberStartData + dataLength;
   if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
 
-  // function row data creating
-  const RowMedicine = () => {
-    // const [disable, setDisable] = useState(amount ? false : true);
-    return (
-      <div>
-        {medicine.map((med) => (
-          <div className="table-grid">
-            <p> </p>
-            <p>{med.MedicineName}</p>
-            <p>{med.Price}</p>
-            <p>{med.MedicineDescription}</p>
-            <p>{med.Type}</p>
-            <div className="menu-row">
-                  {/* <Link to="/editofficer"> */}
-                    <Edit
-                      {...iconOption}
-                      onClick={handleShow}
-                    //   onClick={() =>
-                    //     handleToEditOfficer(
-                    //       officerlist.DocumentID,
-                    //       officerlist.Position
-                    //     )
-                    //   }
-                    />
-                  <Delete
-                    {...iconOption}
-                    // onClick={() =>
-                    //   handleToConfirmDelete(
-                    //     officerlist.DocumentID,
-                    //     officerlist.Position
-                    //   )
-                    // }
-                  />
-                  </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  // data slice with table
-  const rowData = data
-    .slice(numberStartData, numberEndData)
-    .map((item, key) => (
-      <RowMedicine
-        id={item.id}
-        name={item.name}
-        price={item.price}
-        key={key}
-        index={numberStartData + key}
-        amount={item.amount}
-        numberinstock={item.numberinstock}
-      />
-    ));
-
   // refresh page
   function refreshPage() {
     window.location.reload();
@@ -161,12 +108,6 @@ export default function ManageMedicineScreen() {
     });
     setData(nData);
   }
-
-  // // function submit
-  // const submit = () => {
-  //   const report = data.filter((item) => item.amount != undefined);
-  //   console.log({ report });
-  // };
 
   return (
     <div className="content-body">
@@ -226,7 +167,69 @@ export default function ManageMedicineScreen() {
 
           <div className="body-table">
             {/* body table */}
-            {rowData}
+            {/* {rowData} */}
+            <div>
+        {medicine.map((med) => (
+          <div className="table-grid">
+            <p> </p>
+            <p>{med.MedicineName}</p>
+            <p>{med.Price}</p>
+            <p>{med.MedicineDescription}</p>
+            <p>{med.Type}</p>
+            <div className="menu-row">
+              {/* <Link to="/editofficer"> */}
+              <Edit
+                {...iconOption}
+                onClick={handleShow}
+                //   onClick={() =>
+                //     handleToEditOfficer(
+                //       officerlist.DocumentID,
+                //       officerlist.Position
+                //     )
+                //   }
+              />
+              <Delete
+                {...iconOption}
+                // onClick={() =>
+                //   handleToConfirmDelete(
+                //     officerlist.DocumentID,
+                //     officerlist.Position
+                //   )
+                // }
+              />
+                    <Modal show={showDelete} onHide={handleCloseDelete}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>คำเตือน</Modal.Title>
+                    </Modal.Header>
+
+                    <center>
+                      <Modal.Body>คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?</Modal.Body>
+                    </center>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={handleCloseDelete}
+                        style={{
+                          borderColor: "#bdbdbd",
+                          backgroundColor: "#bdbdbd",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </Button>
+                      <Button
+                        variant="danger"
+                        // onClick={() =>
+                        //   handleDelete(state.DocumentID, state.Position)
+                        // }
+                      >
+                        ตกลง
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+            </div>
+          </div>
+        ))}
+      </div>
             {/* end body table */}
           </div>
         </div>
@@ -334,7 +337,7 @@ export default function ManageMedicineScreen() {
               </Link>
               <Button
                 variant="secondary"
-                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }} 
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
               >
                 ย้อนกลับ
               </Button>

@@ -114,7 +114,7 @@ function EditOfficerScreen() {
                 required
               />
             </div>
-            <div className="mt-1 block p-3 text-sm text-xs text-gray-800">
+            {/* <div className="mt-1 block p-3 text-sm text-xs text-gray-800">
               <input type="checkbox" className="inline-block border-0  " />
               <span display="inline" className>
                 ยอมรับ
@@ -122,7 +122,7 @@ function EditOfficerScreen() {
                   <span className="underline ">เงื่อนไข</span>{" "}
                 </a>{" "}
               </span>
-            </div>
+            </div> */}
             <div className="mt-2">
               <button
                 // onClick={handleSubmit}

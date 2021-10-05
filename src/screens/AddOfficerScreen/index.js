@@ -47,7 +47,7 @@ const AddOfficerScreen = () => {
     setEmail(data);
     const result = regEmail.test(Email);
     return result;
-    console.log(result);
+    // console.log(result);
   };
 
   const handlePosition = (e) => {
@@ -82,7 +82,7 @@ const AddOfficerScreen = () => {
     let data = Object.values(user).every((value) => value);
     try {
       if (data == false) {
-        window.alert("โปรดกรอกข้อมูลให้ครบทุกช่อง");
+        window.alert("โปรดกรอกข้อมูลให้ครบถ้วนทุกช่อง");
       } else if (Password !== ConfirmPassword) {
         window.alert("โปรดกรอกรหัสผ่านให้ตรงกัน");
       } else if (!regPhoneNumber.test(Phone)) {
@@ -102,7 +102,7 @@ const AddOfficerScreen = () => {
           Email: Email,
           Password: Password,
         });
-        return <Redirect to="/confirmaddofficer" />;
+        // return <Redirect to="/confirmaddofficer" />;
       }
     } catch (error) {
       return error;
@@ -171,8 +171,8 @@ const AddOfficerScreen = () => {
                   {" "}
                   หมอ{" "}
                 </option>
-                <option className="option" value="Admin">
-                  เจ้าหน้าที่
+                <option className="option" value="Staff">
+                  พนักงาน
                 </option>
               </select>
             </div>
