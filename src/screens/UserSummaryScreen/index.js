@@ -11,18 +11,7 @@ function UserSummaryScreen() {
           {/* first */}
           <div className="flex flex-col justify-center items-center">
             <p class="text-xl mt-3 font-semibold">ข้อมูลอาการคนไข้</p>
-            <div
-              className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
-            >
-              <p className="text-gray-500 ml-4"> รหัสผู้ป่วย : A001</p>
-            </div>
+
             <div
               className="
         flex
