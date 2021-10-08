@@ -32,15 +32,15 @@ const OfficerListScreen = () => {
   const getDoctor = () => {
     axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
-      const doctor = data.filter((data) => data.Position == "Doctor");
+      const doctor = data.filter((data) => data.Position == "แพทย์");
       setOfficer(doctor);
     });
   };
 
-  const getAdmin = () => {
+  const getStaff = () => {
     axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
-      const admin = data.filter((data) => data.Position == "Admin");
+      const admin = data.filter((data) => data.Position == "เจ้าหน้าที่");
       setOfficer(admin);
     });
   };
@@ -133,11 +133,11 @@ const OfficerListScreen = () => {
             onClick={getDoctor}
             style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
           >
-            รายชื่อหมอ
+            รายชื่อแพทย์
           </Button>{" "}
           <Button
             variant="secondary"
-            onClick={getAdmin}
+            onClick={getStaff}
             style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
           >
             รายชื่อเจ้าหน้าที่

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router";
+import { server } from "../../constants/constant";
 
 function EditOfficerScreen() {
   // const [profile, setprofile] = useState();
@@ -15,8 +16,6 @@ function EditOfficerScreen() {
   //     console.log(data);
   //   });
   // });
-
-
 
   return (
     <div className="content-body">

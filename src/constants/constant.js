@@ -9,4 +9,6 @@ export const server = {
   USER: `${apiURL}User`,
   WORKING: `${apiURL}Working`,
   MEDICINE: `${apiURL}Medicine`,
+  EDIT_OFFICER: `${apiURL}EditOfficer`,
+  MANAGE_MEDICINE:`${apiURL}ManageMedicine`
 };
