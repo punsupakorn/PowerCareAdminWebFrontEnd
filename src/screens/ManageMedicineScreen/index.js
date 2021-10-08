@@ -55,7 +55,7 @@ export default function ManageMedicineScreen() {
   const handleSubmit = async () => {
     try {
       await axios
-        .post(server.MEDICINE, {
+        .post(server.MANAGE_MEDICINE, {
           Name: Name,
           Description: Description,
           Price: Price,
