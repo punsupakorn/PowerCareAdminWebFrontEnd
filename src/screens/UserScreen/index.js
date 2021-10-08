@@ -106,7 +106,7 @@ export default function UserScreen() {
             <p>นามสกุล</p>
             <p>อีเมลล์ </p>
             <p>เบอร์โทรศัพท์</p>
-            <p>ดูข้อมูล / แก้ไขข้อมูล</p>
+            <p>ดูข้อมูลคนไข้</p>
             {/* end header */}
           </div>
           <div className="body-table">
@@ -125,12 +125,6 @@ export default function UserScreen() {
                     <Add
                       {...iconOption}
                       // onClick={() => console.log("Click function add " + item.id)}
-                    />
-                  </Link>
-                  <Link to="/edituser">
-                    <Edit
-                      {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
                     />
                   </Link>
                   {/* <Delete
