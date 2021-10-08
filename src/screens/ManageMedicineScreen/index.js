@@ -208,7 +208,7 @@ export default function ManageMedicineScreen() {
                 onClick={handleShow}
                 onClick={() =>
                   handleToConfirmDelete(
-                    medicine.MedicineID
+                    med.MedicineID
                   )
                 }
               />
