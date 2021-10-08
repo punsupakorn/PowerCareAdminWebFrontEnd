@@ -100,7 +100,7 @@ export default function UserDetailScreen() {
               <p>แพทย์ที่พบ</p>
               <p>เบอร์โทรศัพท์</p>
               <p>สถานะ</p>
-              <p>แก้ไข/ลบข้อมูล</p>
+              <p>ดูข้อมูล/ลบข้อมูล</p>
 
               {/* end header */}
             </div>
