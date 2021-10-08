@@ -19,6 +19,7 @@ export default function ManageMedicineScreen() {
   const [Type, setType] = useState("");
   const [Stock, setStock] = useState("");
   const [medicine, setMedicine] = useState([]);
+  const [state, setstate] = useState();
 
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
@@ -69,15 +70,29 @@ export default function ManageMedicineScreen() {
         refreshPage();
     } catch (error) {}
   };
-
+//  Modal delete
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+// Modal add
+  const [lgShow, setLgShow] = useState(false);
 
-  
-  const [showDelete, setShowDelete] = useState(false);
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
+  const handleToConfirmDelete = (MedicineID) => {
+    setstate({ MedicineID });
+    handleShow();
+  };
+
+  const handleDelete = (MedicineID) => {
+    try {
+      axios.delete(server.MANAGE_MEDICINE, {
+        data: { MedicineID: MedicineID },
+      });
+      handleClose();
+      refreshPage();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // for search
   const [searchInput, setSearchInput] = useState(null);
@@ -114,7 +129,7 @@ export default function ManageMedicineScreen() {
       <div className="medicine-content">
         <div className="search-bar-container">
           {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-          <p class="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
+          <p className="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
           <div className="search-bar-conten">
             <div className="p-12 h-12">
               <div className="bg-white flex items-center rounded-full shadow h-12">
@@ -180,7 +195,7 @@ export default function ManageMedicineScreen() {
               {/* <Link to="/editofficer"> */}
               <Edit
                 {...iconOption}
-                onClick={handleShow}
+                
                 //   onClick={() =>
                 //     handleToEditOfficer(
                 //       officerlist.DocumentID,
@@ -190,14 +205,14 @@ export default function ManageMedicineScreen() {
               />
               <Delete
                 {...iconOption}
-                // onClick={() =>
-                //   handleToConfirmDelete(
-                //     officerlist.DocumentID,
-                //     officerlist.Position
-                //   )
-                // }
+                onClick={handleShow}
+                onClick={() =>
+                  handleToConfirmDelete(
+                    medicine.MedicineID
+                  )
+                }
               />
-                    <Modal show={showDelete} onHide={handleCloseDelete}>
+                    <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>คำเตือน</Modal.Title>
                     </Modal.Header>
@@ -208,7 +223,7 @@ export default function ManageMedicineScreen() {
                     <Modal.Footer>
                       <Button
                         variant="secondary"
-                        onClick={handleCloseDelete}
+                        onClick={handleClose}
                         style={{
                           borderColor: "#bdbdbd",
                           backgroundColor: "#bdbdbd",
@@ -218,9 +233,9 @@ export default function ManageMedicineScreen() {
                       </Button>
                       <Button
                         variant="danger"
-                        // onClick={() =>
-                        //   handleDelete(state.DocumentID, state.Position)
-                        // }
+                        onClick={() =>
+                          handleDelete(state.MedicineID)
+                        }
                       >
                         ตกลง
                       </Button>
@@ -252,14 +267,18 @@ export default function ManageMedicineScreen() {
           </Link>{" "}
           <Button
             variant="primary"
-            onClick={handleShow}
+            onClick={() => setLgShow(true)}
             style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
           >
             เพิ่มยา
           </Button>
-          <Modal show={show} onHide={handleClose}>
+          <Modal size="md"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg">
+
             <Modal.Header closeButton>
-              <Modal.Title>เพิ่มยา</Modal.Title>
+              <Modal.Title id="example-modal-sizes-title-lg" > เพิ่มยา</Modal.Title>
             </Modal.Header>
 
             <center>
@@ -309,17 +328,6 @@ export default function ManageMedicineScreen() {
                           />
                         </div>
                       </div>
-                      {/* <div className="flex flex-col">
-                        <label className="leading-loose">สต๊อกสินค้า</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกจำนวน"
-                            onChange={handleStock}
-                          />
-                        </div>
-                      </div> */}
                     </div>
                   </div>
                 </div>
