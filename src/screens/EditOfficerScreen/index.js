@@ -1,21 +1,49 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { server } from "../../constants/constant";
 
 function EditOfficerScreen() {
-  // const [profile, setprofile] = useState();
+  const [firstname, setfirstname] = useState();
+  const [lastname, setlastname] = useState();
+  const [phone, setphone] = useState();
+  const [password, setpassword] = useState();
+  const [confirmpassword, setconfirmpassword] = useState();
+  const location = useLocation();
+  const { position, documentid } = location.state;
 
-  const query = new URLSearchParams(useLocation().search);
-  const Position = query.get("position");
-  const DocumentID = query.get("documentid");
-  // console.log(Position);
-  // useEffect(() => {
-  //   axios.get("/EditOfficer/:position/:documentid").then((res) => {
-  //     const data = res.data();
-  //     console.log(data);
-  //   });
-  // });
+  useEffect(() => {
+    getOfficerProfile();
+  });
+
+  const getOfficerProfile = () => {
+    try {
+      axios
+        .get(`${server.EDIT_OFFICER}/${position}/${documentid}`)
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (error) {}
+  };
+
+  // const getOfficerProfile = () => {
+  //   try {
+  //     axios
+  //       .get(server.EDIT_OFFICER, {
+  //         params: {
+  //           Position: position,
+  //           DocumentID: documentid,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //       });
+  //   } catch (error) {}
+  // };
+
+  // console.log(position, documentid);
+  // console.log(props.location.query.position);
 
   return (
     <div className="content-body">
@@ -38,7 +66,7 @@ function EditOfficerScreen() {
                 name="FirstName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกชื่อจริง"
-                // value={document.FirstName}
+                value={firstname}
                 // onChange={handleFirstName}
                 required
               />

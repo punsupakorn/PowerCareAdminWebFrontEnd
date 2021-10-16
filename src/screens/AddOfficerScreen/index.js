@@ -1,4 +1,4 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 // import Powercarepic from "../../img/Powerpuff.png";
 import "./AddOfficerScreen.css";
 import { Link, Redirect, Route } from "react-router-dom";
@@ -8,6 +8,7 @@ import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { server } from "../../constants/constant";
+import { useHistory } from "react-router";
 
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState();
@@ -17,6 +18,7 @@ const AddOfficerScreen = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+  const history = useHistory();
 
   const checkFirstName = (firstname) => {
     const data = firstname.target.value;
@@ -82,7 +84,7 @@ const AddOfficerScreen = () => {
     let data = Object.values(user).every((value) => value);
     try {
       if (data == false) {
-        window.alert("โปรดกรอกข้อมูลให้ครบถ้วนทุกช่อง");
+        window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
       } else if (Password !== ConfirmPassword) {
         window.alert("โปรดกรอกรหัสผ่านให้ตรงกัน");
       } else if (!regPhoneNumber.test(Phone)) {
@@ -94,15 +96,18 @@ const AddOfficerScreen = () => {
       } else if (!regThaiChar.test(LastName)) {
         window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
       } else {
-        axios.post(server.ADD_OFFICER, {
-          FirstName: FirstName,
-          LastName: LastName,
-          Phone: Phone,
-          Position: Position,
-          Email: Email,
-          Password: Password,
-        });
-        // return <Redirect to="/confirmaddofficer" />;
+        axios
+          .post(server.ADD_OFFICER, {
+            FirstName: FirstName,
+            LastName: LastName,
+            Phone: Phone,
+            Position: Position,
+            Email: Email,
+            Password: Password,
+          })
+          .then(() => {
+            history.push("/confirmaddofficer");
+          });
       }
     } catch (error) {
       return error;

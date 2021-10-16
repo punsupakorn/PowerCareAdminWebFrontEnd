@@ -24,16 +24,15 @@ import {
   GiveMedicineScreen,
   HomeScreenAdmin,
   ManageMedicineScreen,
-
 } from "./screens";
-import { Switch, Route, HashRouter } from "react-router-dom";
+import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
 import LogIn from "./screens/LoginScreen/index";
 
 function App() {
   return (
-    <HashRouter>
-      <AuthProvider>
+    <AuthProvider>
+      <BrowserRouter>
         <div className="App">
           <TopBar />
           <div className="content">
@@ -58,8 +57,8 @@ function App() {
               </Route>
               <Route path="/addofficer">
                 <AddOfficerScreen />
-              </Route>             
-              <Route path="/editofficer/">
+              </Route>
+              <Route path="/editofficer">
                 <EditOfficerScreen />
               </Route>
               <Route path="/appointment">
@@ -78,19 +77,19 @@ function App() {
                 <CalendarScreen />
               </Route>
               <Route path="/postpone">
-                <PostponeScreen/>
+                <PostponeScreen />
               </Route>
               <Route path="/summarypostpone">
-                <SummaryPostponeScreen/>
+                <SummaryPostponeScreen />
               </Route>
               <Route path="/confirmcancel">
-                <ConfirmCancelScreen/>
+                <ConfirmCancelScreen />
               </Route>
               <Route path="/user">
-                <UserScreen/>
+                <UserScreen />
               </Route>
               <Route path="/userdetail">
-                <UserDetailScreen/>
+                <UserDetailScreen />
               </Route>
               <Route path="/usersummary">
                 <UserSummaryScreen />
@@ -99,23 +98,22 @@ function App() {
                 <EditUserScreen />
               </Route>
               <Route path="/confirmaddofficer">
-                <ConfirmAddOfficer/>
+                <ConfirmAddOfficer />
               </Route>
               <Route path="/givemedicine">
-                <GiveMedicineScreen/>
+                <GiveMedicineScreen />
               </Route>
               <Route path="/homescreenadmin">
-                <HomeScreenAdmin/>
+                <HomeScreenAdmin />
               </Route>
               <Route path="/managemedicine">
-                <ManageMedicineScreen/>
+                <ManageMedicineScreen />
               </Route>
-              
             </Switch>
           </div>
         </div>
-      </AuthProvider>
-    </HashRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

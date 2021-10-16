@@ -11,7 +11,7 @@ import { server } from "../../constants/constant";
 const AppointmentScreen = () => {
   const [doctor, setDoctor] = useState([]);
   const [name, setName] = useState();
-  const [date, setDate] = useState([]);
+  const [date, setDate] = useState();
 
   const timeList = [
     "09.00 - 09.30",
@@ -41,7 +41,7 @@ const AppointmentScreen = () => {
 
   // const onCancelDate = (e) => {};
 
-  console.log("date : ", date);
+  console.log("result : ", date);
 
   // Input Component
   function InputSchedule({ title, children }) {
@@ -73,17 +73,31 @@ const AppointmentScreen = () => {
   };
 
   const submit = () => {
-    axios
-      .post(server.APPOINTMENT, {
-        doctor: name,
-        date: date,
-        time: timeList,
-      })
-      .then((res) => {
-        console.log(res);
-      });
-    window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
-    refreshPage();
+    let slot = {
+      name: name,
+      date: date,
+      timeList: timeList,
+    };
+
+    let data = Object.values(slot).every((value) => value);
+    console.log(data);
+    try {
+      if (data == false) {
+        window.alert("โปรดกรอกชื่อแพทย์และวันที่ให้ครบ");
+      } else {
+        axios
+          .post(server.APPOINTMENT, {
+            doctor: name,
+            date: date,
+            time: timeList,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
+        refreshPage();
+      }
+    } catch (error) {}
   };
 
   return (
@@ -134,7 +148,6 @@ const AppointmentScreen = () => {
           ยืนยัน
         </span>
       </div>
-      <div>{/* {new Date(1631969687470).toLocaleDateString()} */}</div>
     </div>
   );
 };

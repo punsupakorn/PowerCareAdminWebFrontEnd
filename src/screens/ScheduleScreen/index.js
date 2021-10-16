@@ -32,11 +32,12 @@ const ScheduleScreen = () => {
   const refreshPage = () => {
     window.location.reload();
   };
+  
 
   useEffect(() => {
     axios.get(server.SCHEDULE).then((res) => {
-      // console.log(res);
-      setSchedule(res.data);
+      console.log(res.data);
+      // setSchedule(res.data);
     });
   }, []);
 
@@ -62,23 +63,23 @@ const ScheduleScreen = () => {
     return timearray;
   };
 
-  const handleToConfirmDelete = (TimeTableID) => {
-    const result = setstate({ TimeTableID });
-    console.log(result);
-    handleShow();
-  };
+  // const handleToConfirmDelete = (TimeTableID) => {
+  //   const result = setstate({ TimeTableID });
+  //   console.log(result);
+  //   handleShow();
+  // };
 
-  const handleDelete = (TimeTableID, Time) => {
-    try {
-      axios.delete(server.SCHEDULE, {
-        data: { TimeTableID: TimeTableID, Time: Time },
-      });
-      handleClose();
-      refreshPage();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleDelete = (TimeTableID, Time) => {
+  //   try {
+  //     axios.delete(server.SCHEDULE, {
+  //       data: { TimeTableID: TimeTableID, Time: Time },
+  //     });
+  //     handleClose();
+  //     refreshPage();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="content-body ">
@@ -142,7 +143,7 @@ const ScheduleScreen = () => {
             เพิ่มตารางเวลาทำการของแพทย์
           </Button>
         </Link>{" "}
-        <Link to="/calendar">
+        {/* <Link to="/calendar">
           <Button
             variant="secondary"
             style={{
@@ -153,18 +154,18 @@ const ScheduleScreen = () => {
           >
             ปฏิทินเวลาการทำนัด
           </Button>{" "}
-        </Link>
+        </Link> */}
       </div>
       <div className="appointment-content">
-        {schedule.map((data) => (
+        {/* {schedule.map((data) => ( */}
           <div className="card-appointment">
             <br></br>
-            <h3>ชื่อแพทย์ : {data.DoctorName}</h3>
+            {/* <h3>ชื่อแพทย์ : {data.DoctorName}</h3> */}
             <br></br>
             {/* {displayDate(data.Date).map((d)=>(
               <p>{d}</p>
             ))} */}
-            <p>{displayDate(data.Date)}</p>
+            {/* <p>{displayDate(data.Date)}</p> */}
             <div className="time-item-content">
               {/* <span className="time-item">
                 {data.Time}
@@ -203,16 +204,16 @@ const ScheduleScreen = () => {
                   </Modal.Footer>
                 </Modal>
               </span> */}
-              {displayTime(data.Time).map((t) => (
+              {/* {displayTime(data.Time).map((t) => ( */}
                 <span className="time-item">
-                  {t}
-                  <CloseIcon
+                
+                  {/* <CloseIcon
                     width="0.5rem"
                     hieght="0.5rem"
                     className="close"
-                    onClick={() => handleToConfirmDelete()}
+                    // onClick={() => handleToConfirmDelete()}
                     value={t}
-                  />
+                  /> */}
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>คำเตือน</Modal.Title>
@@ -237,19 +238,19 @@ const ScheduleScreen = () => {
                       </Button>
                       <Button
                         variant="danger"
-                        onClick={() =>
-                          handleDelete(state.TimeTableID, state.Time)
-                        }
+                        // onClick={() =>
+                        //   handleDelete(state.TimeTableID, state.Time)
+                        // }
                       >
                         ตกลง
                       </Button>
                     </Modal.Footer>
                   </Modal>
                 </span>
-              ))}
+              {/* ))} */}
             </div>
           </div>
-        ))}
+        {/* ))} */}
       </div>
     </div>
   );

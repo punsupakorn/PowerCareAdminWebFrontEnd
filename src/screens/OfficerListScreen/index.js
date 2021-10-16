@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import Edit from "../../icons/edit";
 import { Link } from "react-router-dom";
@@ -183,7 +184,20 @@ const OfficerListScreen = () => {
 
                 <div className="menu-row">
                   <Link
-                    to={`/EditOfficer/&position=${officerlist.Position}&documentid=${officerlist.DocumentID}`}
+                    to={{
+                      pathname: `/EditOfficer`,
+                      state: {
+                        position: officerlist.Position,
+                        documentid: officerlist.DocumentID
+                      },
+                    }}
+                    // to={{
+                    //   pathname: "/EditOfficer",
+                    //   state: {
+                    //     position: "pun",
+
+                    //   },
+                    // }}
                   >
                     <Edit
                       {...iconOption}
