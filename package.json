@@ -52,7 +52,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@craco/craco": "^6.2.0"
+  },
   "engines": {
     "node": "12.x",
     "npm": "6.x"
