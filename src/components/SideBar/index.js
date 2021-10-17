@@ -40,7 +40,7 @@ function App() {
 
     <aside className="side-bar">
       {/* profile */}
-      <ProfileComponent name={username} />
+      {/* <ProfileComponent name={username} /> */}
       {/* cut dai  */}
       <MoreMenuIcon width="2rem" height="2rem" className="moremenu-icon" />
       <div className="content-menu-side-bar">
@@ -52,14 +52,14 @@ function App() {
   );
 }
 
-function ProfileComponent({ imageProfile, name }) {
-  return (
-    <div className="profile-content">
-      <p >สวัสดี</p>
-      <p className="color-white">คุณ {name}</p>
-    </div>
-  );
-}
+// function ProfileComponent({ imageProfile, name }) {
+//   return (
+//     <div className="profile-content">
+//       <p >สวัสดี</p>
+//       <p className="color-white">คุณ {name}</p>
+//     </div>
+//   );
+// }
 
 function MenuSideBar({ title, icon, direction = "/" }) {
   return (

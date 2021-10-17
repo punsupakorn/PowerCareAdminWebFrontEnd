@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom'
 import Logo from "../../icons/logo";
 import LogOutIcon from "../../icons/exit";
-import NotificationIcon from "../../icons/bell";
+import User from "../../icons/user";
 import { AuthContext } from "../../Auth"
 import { useState } from "react";
-import NotificationComponent, {
-  NotificationItem,
-} from "../NotificationComponent";
+// import NotificationComponent, {
+//   NotificationItem,
+// } from "../NotificationComponent";
 import "./TopBar.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import firebaseconfig from '../../config';
@@ -17,19 +17,19 @@ const App = () => {
   
   const [isShowNoti, setShowNoti] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const notificationMockupData = [
-    {
-      title: "การแจ้งเตือน",
-      detail: "ตัวอย่างการแจ้งเตือน",
-      readed: true,
-    },
-    {
-      title: "การแจ้งเตือน",
-      detail:
-        "ตัวอย่างการแจ้งเตือนที่ยังไม่ได้อ่าน",
-      readed: false,
-    }
-  ];
+  // const notificationMockupData = [
+  //   {
+  //     title: "การแจ้งเตือน",
+  //     detail: "ตัวอย่างการแจ้งเตือน",
+  //     readed: true,
+  //   },
+  //   {
+  //     title: "การแจ้งเตือน",
+  //     detail:
+  //       "ตัวอย่างการแจ้งเตือนที่ยังไม่ได้อ่าน",
+  //     readed: false,
+  //   }
+  // ];
 
     if (!currentUser) {
         return <Redirect to="/" />;
@@ -48,12 +48,12 @@ const App = () => {
         <div className="menu-top-bar">
           <div className="dropdown">
             <MenuTopBar
-              title="การแจ้งเตือน"
+              title="สวัสดี คุณ Username"
               onClick={() => setShowNoti(!isShowNoti)}
             >
-              <NotificationIcon width="1.5rem" height="1.5rem" />
+              <User width="1.5rem" height="1.5rem" />
             </MenuTopBar>
-            <NotificationComponent isShow={isShowNoti}>
+            {/* <NotificationComponent isShow={isShowNoti}>
               {notificationMockupData.map((item, key) => (
                 <NotificationItem
                   key={key}
@@ -62,7 +62,7 @@ const App = () => {
                   readed={item.readed}
                 />
               ))}
-            </NotificationComponent>
+            </NotificationComponent> */}
           </div>
           <MenuTopBar title="ลงชื่อออก" onClick={()=>firebaseconfig.auth().signOut()} styleText={{ color: "black" }} >
             <LogOutIcon width="1.2rem" height="1.2rem" />
