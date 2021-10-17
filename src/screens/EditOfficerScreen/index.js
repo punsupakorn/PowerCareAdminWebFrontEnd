@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect ,Link} from "react";
 import axios from "axios";
 import { useLocation, useParams } from "react-router";
 import { server } from "../../constants/constant";
@@ -171,6 +171,7 @@ function EditOfficerScreen() {
               </span>
             </div> */}
             <div className="mt-2">
+            <Link to="/confirmeditofficer">
               <button
                 // onClick={handleSubmit}
                 type="submit"
@@ -179,6 +180,7 @@ function EditOfficerScreen() {
                 {" "}
                 ยืนยันการแก้ไข
               </button>
+              </Link>
             </div>
           </form>
         </div>

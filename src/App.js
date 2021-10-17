@@ -25,6 +25,7 @@ import {
   HomeScreenAdmin,
   ManageMedicineScreen,
   WorkingDetailStaffScreen,
+  ConfirmEditOfficerScreen,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -112,6 +113,9 @@ function App() {
               </Route>
               <Route path="/workingdetailstaff">
                 <WorkingDetailStaffScreen />
+              </Route>
+              <Route path="/confirmeditofficer">
+                <ConfirmEditOfficerScreen />
               </Route>
             </Switch>
           </div>

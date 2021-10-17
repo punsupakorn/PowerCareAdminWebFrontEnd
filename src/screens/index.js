@@ -22,4 +22,5 @@ export { default as GiveMedicineScreen} from "./GiveMedicineScreen";
 export { default as HomeScreenAdmin} from "./HomeScreenAdmin";
 export { default as ManageMedicineScreen} from "./ManageMedicineScreen";
 export { default as WorkingDetailStaffScreen } from "./WorkingDetailStaffScreen";
+export { default as ConfirmEditOfficerScreen } from "./ConfirmEditOfficerScreen";
 
