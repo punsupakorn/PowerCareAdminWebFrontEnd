@@ -24,6 +24,11 @@ import {
   GiveMedicineScreen,
   HomeScreenAdmin,
   ManageMedicineScreen,
+<<<<<<< Updated upstream
+=======
+  WorkingDetailStaffScreen,
+
+>>>>>>> Stashed changes
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -109,6 +114,13 @@ function App() {
               <Route path="/managemedicine">
                 <ManageMedicineScreen />
               </Route>
+<<<<<<< Updated upstream
+=======
+              <Route path="/workingdetailstaff">
+                <WorkingDetailStaffScreen/>
+              </Route>
+              
+>>>>>>> Stashed changes
             </Switch>
           </div>
         </div>

@@ -206,7 +206,11 @@ const ScheduleScreen = () => {
               </span> */}
               {/* {displayTime(data.Time).map((t) => ( */}
                 <span className="time-item">
+<<<<<<< Updated upstream
                 
+=======
+                  {t}
+>>>>>>> Stashed changes
                   {/* <CloseIcon
                     width="0.5rem"
                     hieght="0.5rem"
