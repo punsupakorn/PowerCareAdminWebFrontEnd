@@ -5,12 +5,15 @@ import { useLocation, useParams } from "react-router";
 import { server } from "../../constants/constant";
 
 function EditOfficerScreen() {
-  const [firstname, setfirstname] = useState();
-  const [lastname, setlastname] = useState();
-  const [phone, setphone] = useState();
-  const [password, setpassword] = useState();
-  const [confirmpassword, setconfirmpassword] = useState();
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [phone, setphone] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [Position, setPosition] = useState("");
+  const [confirmpassword, setconfirmpassword] = useState("");
   const location = useLocation();
+
   const { position, documentid } = location.state;
 
   useEffect(() => {
@@ -22,7 +25,13 @@ function EditOfficerScreen() {
       axios
         .get(`${server.EDIT_OFFICER}/${position}/${documentid}`)
         .then((res) => {
-          console.log(res);
+          const data = res.data;
+          setfirstname(data.FirstName);
+          setlastname(data.LastName);
+          setphone(data.Phone);
+          setemail(data.Email);
+          setPosition(data.Position);
+          setpassword(data.Password);
         });
     } catch (error) {}
   };
@@ -77,6 +86,7 @@ function EditOfficerScreen() {
                 name="LastName"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกนามสกุล"
+                value={lastname}
                 // onChange={handleLastName}
                 required
               />
@@ -87,12 +97,22 @@ function EditOfficerScreen() {
                 name="Phone"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
                 placeholder="โปรดกรอกหมายเลขโทรศัพท์"
+                value={phone}
                 // onChange={handlePhone}
                 required
               />
             </div>
             <div className="  mt-3">
-              <select
+            <input
+                type="tel"
+                name="Phone"
+                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
+                placeholder="โปรดกรอกหมายเลขโทรศัพท์"
+                value={position}
+                disabled
+                // onChange={handlePhone}
+              />
+              {/* <select
                 id="position"
                 name="Position"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
@@ -106,10 +126,10 @@ function EditOfficerScreen() {
                   {" "}
                   หมอ{" "}
                 </option>
-                <option className="option" value="Admin">
-                  เจ้าหน้าที่
+                <option className="option" value={position}>
+                  {position}
                 </option>
-              </select>
+              </select> */}
             </div>
             <div className="mt-3">
               <input
@@ -117,6 +137,7 @@ function EditOfficerScreen() {
                 name="Email"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
                 placeholder="โปรดกรอก อีเมลล์"
+                value={email}
                 // onChange={handleEmail}
                 required
               />
@@ -157,7 +178,7 @@ function EditOfficerScreen() {
                 className="button-done py-3 text-white w-full h-14 rounded"
               >
                 {" "}
-                เพิ่มบุคคลากร
+                ยืนยันการแก้ไข
               </button>
             </div>
           </form>

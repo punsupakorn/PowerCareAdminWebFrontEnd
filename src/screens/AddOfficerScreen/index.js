@@ -183,6 +183,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-3">
               <input
+                value=""
                 type="email"
                 name="Email"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
@@ -193,6 +194,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-3">
               <input
+                value=""
                 type="password"
                 name="Password"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
@@ -206,7 +208,7 @@ const AddOfficerScreen = () => {
                 type="password"
                 name="ConfirmPassword"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
-                placeholder="ยืนยันรหัสผ่าน"
+                placeholder="โปรดยืนยันรหัสผ่านอีกครั้ง"
                 onChange={handleConfirmPassword}
                 required
               />
