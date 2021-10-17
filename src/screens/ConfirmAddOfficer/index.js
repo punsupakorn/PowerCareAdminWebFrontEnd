@@ -1,8 +1,25 @@
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Check from "../../icons/check";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { server } from "../../constants/constant";
+import { useLocation } from "react-router";
 
 function ConfirmAddOfficer() {
+  // const [profile, setprofile] = useState("");
+  const location = useLocation();
+  const { firstname, lastname, phone, position, email } = location.state;
+
+  // const getProfile = () => {
+  //   try {
+  //   } catch (error) {}
+  // };
+
+  // useEffect(() => {
+  //   // getProfile();
+  // });
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
@@ -19,7 +36,7 @@ function ConfirmAddOfficer() {
               กรุณาตรวจสอบความถูกต้อง
             </p>
             <div
-                    className="
+              className="
           flex
           justify-between
           items-center
@@ -27,56 +44,51 @@ function ConfirmAddOfficer() {
           py-3
           border-b-2 border-white
         "
-                  >
-                      </div>
+            ></div>
 
             {/* <div className="flex justify-between">
             </div> */}
             <div className="mt-2">
-                <div className="flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-gray-500 ml-4 mt-4">
+                  ชื่อ - สกุล : {firstname} {lastname}
+                </p>
+                <p className="text-gray-500 ml-4 mt-2">
+                  หมายเลขโทรศัพท์ : {phone}
+                </p>
+                <p className="text-gray-500 ml-4 mt-2  ">ตำแหน่งงาน : {position}</p>
 
-                    <p className="text-gray-500 ml-4 mt-4" >
-                      ชื่อ - สกุล : สมชาย ใจดี
-                    </p>
-                    <p className="text-gray-500 ml-4 mt-2">
-                      หมายเลขโทรศัพท์ : 081-581-7128
-                    </p>
-                    <p className="text-gray-500 ml-4 mt-2  ">ตำแหน่งงาน : หมอ
-                    </p>
-                
-   
-                    <p className="text-gray-500 ml-4 mt-2 ">
-                      อีเมลล์ : see_nong@hotmail.com
-                    </p>
-                  
-                </div>
-              </div>
-              <div className="px-2 mt-4">
-                <Link to="/addofficer">
-                  <Button
-                    variant="primary"
-                    style={{
-                      borderColor: "#818CF8",
-                      backgroundColor: "#818CF8",
-                    }}
-                  >
-                  เพิ่มบุคคลากรเพิ่มเติม
-                  </Button>
-                </Link>{" "}
-                <Link to="/homescreenadmin">
-                  <Button
-                    variant="primary"
-                    style={{
-                      borderColor: "#bdbdbd",
-                      backgroundColor: "#bdbdbd",
-                    }}
-                  >
-                    กลับสู่หน้าหลัก
-                  </Button>
-                </Link>
+                <p className="text-gray-500 ml-4 mt-2 ">
+                  อีเมลล์ : {email}
+                </p>
               </div>
             </div>
+            <div className="px-2 mt-4">
+              <Link to="/addofficer">
+                <Button
+                  variant="primary"
+                  style={{
+                    borderColor: "#818CF8",
+                    backgroundColor: "#818CF8",
+                  }}
+                >
+                  เพิ่มบุคคลากรเพิ่มเติม
+                </Button>
+              </Link>{" "}
+              <Link to="/homescreenadmin">
+                <Button
+                  variant="primary"
+                  style={{
+                    borderColor: "#bdbdbd",
+                    backgroundColor: "#bdbdbd",
+                  }}
+                >
+                  กลับสู่หน้าหลัก
+                </Button>
+              </Link>
+            </div>
           </div>
+        </div>
       </div>
       {/* end */}
     </div>

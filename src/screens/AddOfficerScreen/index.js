@@ -105,8 +105,18 @@ const AddOfficerScreen = () => {
             Email: Email,
             Password: Password,
           })
-          .then(() => {
-            history.push("/confirmaddofficer");
+          .then((res) => {
+            const profile = res.data;
+            history.push({
+              pathname: `/confirmaddofficer`,
+              state: {
+                firstname: profile.FirstName,
+                lastname: profile.LastName,
+                phone: profile.Phone,
+                position: profile.Position,
+                email: profile.Email,
+              },
+            });
           });
       }
     } catch (error) {
@@ -183,7 +193,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-3">
               <input
-                value=""
+                // value=""
                 type="email"
                 name="Email"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
@@ -194,7 +204,7 @@ const AddOfficerScreen = () => {
             </div>
             <div className="mt-3">
               <input
-                value=""
+                // value=""
                 type="password"
                 name="Password"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "

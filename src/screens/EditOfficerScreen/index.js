@@ -13,7 +13,6 @@ function EditOfficerScreen() {
   const [Position, setPosition] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
   const location = useLocation();
-
   const { position, documentid } = location.state;
 
   useEffect(() => {
