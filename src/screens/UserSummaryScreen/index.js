@@ -2,8 +2,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./UserSummaryScreen.css";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useLocation } from "react-router";
 
 function UserSummaryScreen() {
+  const location = useLocation();
+  const { firstname, lastname, sex, address, phone, dateOfBirth, email } =
+    location.state;
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -23,8 +27,7 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                2542
+               <b>ชื่อ-สกุล :</b>  {firstname} {lastname} <b>เพศ :</b> {sex} <b>วัน/เดือน/ปีเกิด :</b> {dateOfBirth}
               </p>
             </div>
             <div
@@ -38,8 +41,7 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                กรุงเทพ 10600
+              <b>ที่อยู่ :</b> {address}
               </p>
             </div>
             <div
@@ -53,7 +55,7 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                เบอร์โทร : 083-046-3915 E-mail : -
+              <b>เบอร์โทรศัพท์ :</b> {phone} <b>E-mail :</b> {email}
               </p>
             </div>
             <div
@@ -119,15 +121,16 @@ function UserSummaryScreen() {
         </div>
         <div className="px-4 mt-4 ">
           <Link to="/userdetail">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#bdbdbd",
-              backgroundColor: "#bdbdbd"
-            }}
-          >
-            ย้อนกลับ
-          </Button>{" "}  </Link>
+            <Button
+              variant="secondary"
+              style={{
+                borderColor: "#bdbdbd",
+                backgroundColor: "#bdbdbd",
+              }}
+            >
+              ย้อนกลับ
+            </Button>{" "}
+          </Link>
         </div>
       </div>
       {/* end */}

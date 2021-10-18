@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Add from "../../icons/add-paper";
 import Edit from "../../icons/edit";
@@ -7,9 +7,10 @@ import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-
+import { useLocation, useParams } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
 import "./UserDetailScreen.css";
-
 import { TableController } from "../../components";
 export default function UserDetailScreen() {
   // for search
@@ -25,14 +26,40 @@ export default function UserDetailScreen() {
   //     ? data.length
   //     : numberStartData + dataLength;
   // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
-
-  // option icon ad edit delete
-  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [phone, setphone] = useState("");
+  const [email, setemail] = useState("");
+  const [sex, setsex] = useState("");
+  const [dateOfBirth, setdateOfBirth] = useState("");
+  const [address, setaddress] = useState("");
 
   const [show, setShow] = useState(false);
+  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+  const location = useLocation();
+  const { userid } = location.state;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const getUserProfile = () => {
+    try {
+      axios.get(`${server.USER_DETAIL}/${userid}`).then((res) => {
+        const data = res.data;
+        setfirstname(data.FirstName);
+        setlastname(data.LastName);
+        setsex(data.Sex);
+        setdateOfBirth(data.DateOfBirth);
+        setaddress(data.Address);
+        setphone(data.Phone);
+        setemail(data.Email);
+      });
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  });
 
   return (
     <div className="content-body">
@@ -53,8 +80,9 @@ export default function UserDetailScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                  2542
+                  <b>ชื่อ-สกุล :</b> {firstname} {lastname} <b>เพศ : </b>
+                  {sex} <b>วัน/เดือน/ปีเกิด : </b>
+                  {dateOfBirth}
                 </p>
               </div>
               <div
@@ -68,8 +96,7 @@ export default function UserDetailScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                  กรุงเทพ 10600
+                  <b>ที่อยู่ :</b> {address}
                 </p>
               </div>
               <div
@@ -83,7 +110,7 @@ export default function UserDetailScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  เบอร์โทร : 083-046-3915 E-mail : -
+                  <b> เบอร์โทรศัพท์ :</b> {phone} <b>E-mail :</b> {email}
                 </p>
               </div>
             </div>
@@ -115,7 +142,20 @@ export default function UserDetailScreen() {
                 <p>เสร็จสิ้น</p>
 
                 <div className="menu-row">
-                  <Link to="/usersummary">
+                  <Link
+                    to={{
+                      pathname: `/usersummary`,
+                      state: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        sex: sex,
+                        address: address,
+                        phone: phone,
+                        dateOfBirth: dateOfBirth,
+                        email: email,
+                      },
+                    }}
+                  >
                     <Edit
                       {...iconOption}
                       // onClick={() => console.log("Click function edit ")}

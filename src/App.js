@@ -36,12 +36,12 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <div className="App">
+          <Route exact path="/" component={LogIn} />
           <TopBar />
           <div className="content">
             <SideBar />
             {/* Screen Routing */}
             <Switch>
-              <Route exact path="/" component={LogIn} />
               <Route path="/working">
                 <WorkingScreen />
               </Route>

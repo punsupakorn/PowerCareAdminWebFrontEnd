@@ -87,16 +87,16 @@ function WorkingDetailScreen() {
                   id="code"
                   className="w-full py-2 border mt-3 border-gray-300 rounded-md"
                 /> */}
-            <br /> <h5>สรุปผลอาการ : </h5> <br />
+            {/* <br /> <h5>สรุปผลอาการ : </h5> <br />
             <textarea
               className="form-control Detail"
               placeholder="กรุณากรอกอาการคนไข้..."
               rows="5"
               cols="50"
-            ></textarea>
+            ></textarea> */}
           </div>
           <br />
-          <div className="px-2 py-2 ">
+          {/* <div className="px-2 py-2 ">
             <Link to="/givemedicine">
               <Button
                 variant="primary"
@@ -105,17 +105,17 @@ function WorkingDetailScreen() {
                 เพิ่มยา
               </Button>{" "}
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="px-2 ">
-          <Link to="/medicinedetail">
+          {/* <Link to="/medicinedetail">
             <Button
               variant="primary"
               style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
             >
               บันทึกผล
             </Button>
-          </Link>{" "}
+          </Link>{" "} */}
           <Link to="/working">
             <Button
               variant="primary"

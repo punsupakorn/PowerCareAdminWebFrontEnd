@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect ,Link} from "react";
 import axios from "axios";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 import { server } from "../../constants/constant";
 
 function EditOfficerScreen() {
@@ -9,9 +9,9 @@ function EditOfficerScreen() {
   const [lastname, setlastname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [Position, setPosition] = useState("");
-  const [confirmpassword, setconfirmpassword] = useState("");
+  // const [password, setpassword] = useState("");
+  // const [Position, setPosition] = useState("");
+  // const [confirmpassword, setconfirmpassword] = useState("");
   const location = useLocation();
   const { position, documentid } = location.state;
 
@@ -29,29 +29,11 @@ function EditOfficerScreen() {
           setlastname(data.LastName);
           setphone(data.Phone);
           setemail(data.Email);
-          setPosition(data.Position);
-          setpassword(data.Password);
+          // setPosition(data.Position);
+          // setpassword(data.Password);
         });
     } catch (error) {}
   };
-
-  // const getOfficerProfile = () => {
-  //   try {
-  //     axios
-  //       .get(server.EDIT_OFFICER, {
-  //         params: {
-  //           Position: position,
-  //           DocumentID: documentid,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         console.log(res.data);
-  //       });
-  //   } catch (error) {}
-  // };
-
-  // console.log(position, documentid);
-  // console.log(props.location.query.position);
 
   return (
     <div className="content-body">
@@ -102,7 +84,7 @@ function EditOfficerScreen() {
               />
             </div>
             <div className="  mt-3">
-            <input
+              <input
                 type="tel"
                 name="Phone"
                 className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "

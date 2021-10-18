@@ -8,7 +8,7 @@ const HomeScreenDoctor = () => {
     <div className="content-body">
     <div class="mt-10 text-center">
       <h1 class="text-4xl font-bold text-gray-800">PowerCare Clinic</h1>
-      <p class="text-lg mt-3 font-semibold">สำหรับหมอ</p>
+      <p class="text-lg mt-3 font-semibold">สำหรับแพทย์</p>
       <div
               className="
         flex
@@ -50,7 +50,7 @@ const HomeScreenDoctor = () => {
          <CalendarInlineIcon width="50%" height="50%" />
           </div>
           <p className="py-6 px-6 text-lg tracking-wide text-center">
-          จัดการยา
+          ยาและผลิตภัณฑ์
           </p>
           {/* <hr > */}          
           <div className="flex justify-center px-5 mb-2 text-sm ">

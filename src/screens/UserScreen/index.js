@@ -121,7 +121,14 @@ export default function UserScreen() {
                 <p>{data.Phone}</p>
 
                 <div className="menu-row">
-                  <Link to="/userdetail">
+                  <Link
+                    to={{
+                      pathname: `/userdetail`,
+                      state: {
+                        userid: data.UserID,
+                      },
+                    }}
+                  >
                     <Add
                       {...iconOption}
                       // onClick={() => console.log("Click function add " + item.id)}
@@ -132,7 +139,7 @@ export default function UserScreen() {
                     // onClick={() => handleToConfirmDelete(data.UserID)}
                   /> */}
 
-                  <Modal show={show} onHide={handleClose}>
+                  {/* <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>คำเตือน</Modal.Title>
                     </Modal.Header>
@@ -162,7 +169,7 @@ export default function UserScreen() {
                         ยืนยันลบคนไข้
                       </Button>
                     </Modal.Footer>
-                  </Modal>
+                  </Modal> */}
                 </div>
               </div>
             ))}
