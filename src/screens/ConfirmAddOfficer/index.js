@@ -8,17 +8,8 @@ import { useLocation } from "react-router";
 function ConfirmAddOfficer() {
   const location = useLocation();
   const { firstname, lastname, phone, position, email } = location.state;
+  // console.log(firstname,lastname);
 
-
-  console.log(firstname,lastname);
-  // const getProfile = () => {
-  //   try {
-  //   } catch (error) {}
-  // };
-
-  // useEffect(() => {
-  //   // getProfile();
-  // });
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
