@@ -37,51 +37,38 @@ function EditOfficerScreen() {
 
   return (
     <div className="content-body">
-      <div className="flex h-screen   bg-white">
-        <div
-          className="w-1/2 bg-cover h-screen"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1520243947988-b7b79f7873e9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDd8fGJsYWNrJTIwZm9yZXN0fGVufDB8fDB8eWVsbG93&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60)",
-          }}
-        />
-        <div className="md:w-1/2 max-w-lg mx-auto my-3 shadow-none">
-          <div className="text-center p-0">
-            <h1 className=" text-gray-800 text-3xl ">แก้ไขข้อมูลเจ้าหน้าที่</h1>
-          </div>
-          <form>
-            <div className="mt-4">
-              <input
-                type="text"
-                name="FirstName"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกชื่อจริง"
-                value={firstname}
-                // onChange={handleFirstName}
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <input
-                type="text"
-                name="LastName"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกนามสกุล"
-                value={lastname}
-                // onChange={handleLastName}
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <input
-                type="tel"
-                name="Phone"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกหมายเลขโทรศัพท์"
-                value={phone}
-                // onChange={handlePhone}
-                required
-              />
+      <div className="grid min-h-screen place-items-center ">
+        <div className="w-11/12 p-12 bg-indigo-100 sm:w-8/12 md:w-1/2 lg:w-5/12">
+          <h1 className="text-xl font-semibold">แก้ไขข้อมูลส่วนตัว </h1>
+          <hr className="mt-6 border-b-1 border-blueGray-300" />
+          <form className="mt-6">
+            <div className="flex justify-between gap-3">
+              <span className="w-1/2">
+                <label className="block text-xs font-semibold text-gray-600 uppercase">
+                  ชื่อจริง
+                </label>
+                <input
+                  type="text"
+                  name="FirstName"
+                  placeholder="daris"
+                  // onChange={checkFirstName}
+                  className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+                  required
+                />
+              </span>
+              <span className="w-1/2">
+                <label className="block text-xs font-semibold text-gray-600 uppercase">
+                  นามสกุล
+                </label>
+                <input
+                  type="text"
+                  name="LastName"
+                  placeholder="Pinta"
+                  // onChange={checkLastName}
+                  className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+                  required
+                />
+              </span>
             </div>
             <div className="  mt-3">
               <input
@@ -153,16 +140,15 @@ function EditOfficerScreen() {
               </span>
             </div> */}
             <div className="mt-2">
-            <Link to="/confirmeditofficer">
+              {/* <Link to="/confirmaddofficer"> */}
               <button
+                variant="secondary"
+                className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
                 // onClick={handleSubmit}
-                type="submit"
-                className="button-done py-3 text-white w-full h-14 rounded"
               >
-                {" "}
-                ยืนยันการแก้ไข
+                แก้ไขข้อมูลส่วนตัว
               </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </form>
         </div>

@@ -1,17 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import Check from "../../icons/check";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { server } from "../../constants/constant";
+import Success from "../../icons/success";
+
 import { useLocation } from "react-router";
 
 function ConfirmAddOfficer() {
-  // const [profile, setprofile] = useState("");
   const location = useLocation();
   const { firstname, lastname, phone, position, email } = location.state;
 
+
+  console.log(firstname,lastname);
   // const getProfile = () => {
   //   try {
   //   } catch (error) {}
@@ -23,14 +22,10 @@ function ConfirmAddOfficer() {
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
-        {/* <!-- 1 card --> */}
         <div className="relative bg-indigo-50 py-6 px-6 rounded-3xl w-4/6 my-4 shadow-xl ">
-          {/* <div className=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl bg-indigo-200 left-4 -top-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-            </div> */}
           <div className="mt-8">
+          <center><Success /></center>
+          <br/>
             <p className="text-xl  font-semibold my-2">เพิ่มบุคคลากรสำเร็จ</p>
             <p className="text-l  font-semibold my-2">
               กรุณาตรวจสอบความถูกต้อง

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import Powercarepic from "../../img/Powerpuff.png";
 import "./Login.css";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import firebaseConfig from "../../config";

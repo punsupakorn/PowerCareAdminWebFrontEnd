@@ -16,11 +16,12 @@ export { default as ConfirmCancelScreen} from "./ConfirmCancelScreen";
 export { default as UserScreen} from "./UserScreen";
 export { default as UserDetailScreen} from "./UserDetailScreen";
 export { default as UserSummaryScreen } from "./UserSummaryScreen";
-export { default as EditUserScreen } from "./EditUserScreen";
 export { default as ConfirmAddOfficer} from "./ConfirmAddOfficer";
 export { default as GiveMedicineScreen} from "./GiveMedicineScreen";
 export { default as HomeScreenAdmin} from "./HomeScreenAdmin";
 export { default as ManageMedicineScreen} from "./ManageMedicineScreen";
 export { default as WorkingDetailStaffScreen } from "./WorkingDetailStaffScreen";
 export { default as ConfirmEditOfficerScreen } from "./ConfirmEditOfficerScreen";
+export { default as ProfileScreen } from "./ProfileScreen";
+
 

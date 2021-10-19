@@ -50,8 +50,9 @@ const App = () => {
             // title="สวัสดี คุณ"
             onClick={() => setShowNoti(!isShowNoti)}
           >
-            สวัสดี คุณ{currentUser.displayName}
             <User width="1.5rem" height="1.5rem" />
+             <p>&nbsp; สวัสดี คุณ{currentUser.displayName} </p> 
+            
           </MenuTopBar>
           {/* <NotificationComponent isShow={isShowNoti}>
               {notificationMockupData.map((item, key) => (

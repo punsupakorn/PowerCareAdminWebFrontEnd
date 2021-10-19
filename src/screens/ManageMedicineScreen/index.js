@@ -192,16 +192,11 @@ export default function ManageMedicineScreen() {
             <p>{med.MedicineDescription}</p>
             <p>{med.Type}</p>
             <div className="menu-row">
-              {/* <Link to="/editofficer"> */}
+          
               <Edit
                 {...iconOption}
                 
-                //   onClick={() =>
-                //     handleToEditOfficer(
-                //       officerlist.DocumentID,
-                //       officerlist.Position
-                //     )
-                //   }
+
               />
               <Delete
                 {...iconOption}
@@ -343,12 +338,6 @@ export default function ManageMedicineScreen() {
                   เพิ่มยา
                 </Button>
               </Link>
-              <Button
-                variant="secondary"
-                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-              >
-                ย้อนกลับ
-              </Button>
             </Modal.Footer>
           </Modal>
           {/* </Link> */}

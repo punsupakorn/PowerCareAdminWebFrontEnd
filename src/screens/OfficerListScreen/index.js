@@ -169,7 +169,7 @@ const OfficerListScreen = () => {
             <p>ตำแหน่ง</p>
             <p>อีเมลล์ </p>
             <p>เบอร์โทรศัพท์</p>
-            <p>ลบ</p>
+            <p>แก้ไข/ลบข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table">
@@ -183,7 +183,7 @@ const OfficerListScreen = () => {
                 <p>{officerlist.Phone}</p>
 
                 <div className="menu-row">
-                  {/* <Link
+                  <Link
                     to={{
                       pathname: `/EditOfficer`,
                       state: {
@@ -208,7 +208,7 @@ const OfficerListScreen = () => {
                       //   )
                       // }
                     />
-                  </Link> */}
+                  </Link>
                   {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
                   <Delete
                     {...iconOption}

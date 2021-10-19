@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Success from "../../icons/success";
 // import { useLocation } from "react-router";
 
 function ConfirmEditOfficerScreen() {
@@ -28,6 +29,8 @@ function ConfirmEditOfficerScreen() {
                 </svg>
             </div> */}
           <div className="mt-8">
+          <center><Success /></center>
+          <br/>
             <p className="text-xl  font-semibold my-2">แก้ไขข้อมูลบุคคลากรสำเร็จ</p>
             <p className="text-l  font-semibold my-2">
               กรุณาตรวจสอบความถูกต้อง

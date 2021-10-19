@@ -19,12 +19,13 @@ import {
   UserScreen,
   UserDetailScreen,
   UserSummaryScreen,
-  EditUserScreen,
   ConfirmAddOfficer,
   GiveMedicineScreen,
   HomeScreenAdmin,
   ManageMedicineScreen,
   WorkingDetailStaffScreen,
+  ConfirmEditOfficerScreen,
+  ProfileScreen,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -95,9 +96,6 @@ function App() {
               <Route path="/usersummary">
                 <UserSummaryScreen />
               </Route>
-              <Route path="/edituser">
-                <EditUserScreen />
-              </Route>
               <Route path="/confirmaddofficer">
                 <ConfirmAddOfficer />
               </Route>
@@ -112,6 +110,12 @@ function App() {
               </Route>
               <Route path="/workingdetailstaff">
                 <WorkingDetailStaffScreen />
+              </Route>
+              <Route path="/confirmeditofficer">
+                <ConfirmEditOfficerScreen />
+              </Route>
+              <Route path="/profile">
+                <ProfileScreen />
               </Route>
             </Switch>
           </div>
