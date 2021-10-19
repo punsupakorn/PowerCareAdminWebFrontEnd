@@ -41,7 +41,15 @@ const OfficerListScreen = () => {
   const getStaff = () => {
     axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
-      const admin = data.filter((data) => data.Position == "เจ้าหน้าที่");
+      const staff = data.filter((data) => data.Position == "เจ้าหน้าที่");
+      setOfficer(staff);
+    });
+  };
+
+  const getAdmin = () => {
+    axios.get(server.OFFICER_LIST).then((res) => {
+      const data = res.data;
+      const admin = data.filter((data) => data.Position == "ผู้ดูแลระบบ");
       setOfficer(admin);
     });
   };
@@ -143,6 +151,13 @@ const OfficerListScreen = () => {
           >
             รายชื่อเจ้าหน้าที่
           </Button>{" "}
+          <Button
+            variant="secondary"
+            onClick={getAdmin}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
+            รายชื่อผู้ดูแลระบบ
+          </Button>{" "}
           <Link to="/addofficer">
             <Button
               variant="secondary"
@@ -188,7 +203,7 @@ const OfficerListScreen = () => {
                       pathname: `/EditOfficer`,
                       state: {
                         position: officerlist.Position,
-                        documentid: officerlist.DocumentID
+                        documentid: officerlist.DocumentID,
                       },
                     }}
                     // to={{
