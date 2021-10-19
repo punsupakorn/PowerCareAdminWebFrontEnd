@@ -11,68 +11,45 @@ import { server } from "../../constants/constant";
 import { useHistory } from "react-router";
 
 const Login = () => {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [role, setrole] = useState("");
   const history = useHistory();
-  // const [user, setuser] = useState();
-
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
-  const handleEmail = (e) => {
-    const email = e.target.value;
-    setemail(email);
-    console.log(email);
-  };
-
-  const handlePassword = (e) => {
-    const password = e.target.value;
-    setpassword(password);
-    console.log(password);
-  };
-
-  // const checkRole = (email) => {
-  //   try {
-  //     axios.get()
-  //   } catch (error) {
-
-  //   }
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = e.target.elements;
-  //   try {
-  //     firebaseconfig
-  //       .auth()
-  //       .signInWithEmailAndPassword(email.value, password.value);
-  //   } catch (error) {}
-  // };
-
-  // const { currentUser } = useContext(AuthContext);
-  // if (currentUser) {
-  //   return <Redirect to="/homescreenstaff" />;
-  // }
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = e.target.elements;
     try {
-      axios.get(`${server.LOGIN}/${email}/${password}`).then((res) => {
-        const data = res.data;
-        if (data == "แพทย์") {
-          history.push("/homescreendoctor");
-        } else if (data == "ผู้ดูแลระบบ") {
-          history.push("/homescreenadmin");
-        } else if (data == "เจ้าหน้าที่") {
-          history.push("/homescreenstaff");
-        } else {
-          window.alert("ลงชื่อเข้าใช้ไม่สำเร็จ โปรดลองใหม่อีกครั้ง");
-          refreshPage();
-        }
-
-        // console.log(res.data);
-      });
+      firebaseconfig
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value);
     } catch (error) {}
   };
+
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    axios.get(`${server.LOGIN}/${currentUser.email}`).then((res) => {
+      if (res.data == "เจ้าหน้าที่") {
+        setrole(history.push("/homescreenstaff"));
+        // return <Redirect to="/homescreenstaff" />;
+      } else if (res.data == "แพทย์") {
+        setrole(history.push("/homescreendoctor"));
+        // return <Redirect to="/homescreendoctor" />;
+      } else if (res.data == "ผู้ดูแลระบบ") {
+        setrole(history.push("/homescreenadmin"));
+        // return <Redirect to="/homescreenadmin" />;
+      }
+    });
+    return role;
+    // return <Redirect to="/homescreenstaff" />;
+  }
+  
+
+  // const user = checkRole(currentUser.Email);
+  // if (user == "เจ้าหน้าที่") {
+  //   return <Redirect to="/homescreenstaff" />;
+  // } else if (user == "แพทย์") {
+  //   return <Redirect to="/homescreendoctor" />;
+  // } else if (user == "ผู้ดูแลระบบ") {
+  //   return <Redirect to="/homescreenadmin" />;
+  // }
 
   return (
     <div className="bg-indigo-200 h-screen w-screen">
@@ -86,25 +63,26 @@ const Login = () => {
               <h1 className="text-4xl text-center font-thin">
                 Power Care Clinic
               </h1>
+
               <div className="w-full mt-4">
-                {/* <form
+                <form
                   className="form-horizontal w-3/4 mx-auto"
-                  // method="GET"
+                  method="POST"
                   onSubmit={handleSubmit}
-                > */}
-                <div className="flex flex-col mt-4">
-                  <input
-                    id="email"
-                    type="text"
-                    className="flex-grow h-8 px-2 rounded border border-grey-400"
-                    name="email"
-                    required
-                    placeholder="Email"
-                    pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
-                    onChange={handleEmail}
-                  />
-                </div>
-                {/* <div className="flex flex-col mt-4">
+                >
+                  <div className="flex flex-col mt-4">
+                    <input
+                      id="email"
+                      type="text"
+                      className="flex-grow h-8 px-2 rounded border border-grey-400"
+                      name="email"
+                      required
+                      placeholder="Email"
+                      pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                      required
+                    />
+                  </div>
+                  {/* <div className="flex flex-col mt-4">
                     <input
                       id="email"
                       type="text"
@@ -117,45 +95,46 @@ const Login = () => {
                      
                     />
                   </div> */}
-                <div className="flex flex-col mt-4">
-                  <input
-                    id="password"
-                    type="password"
-                    className="flex-grow h-8 px-2 rounded border border-grey-400"
-                    name="password"
-                    required
-                    placeholder="Password"
-                    onChange={handlePassword}
-                  />
-                </div>
-                <div className="flex items-center mt-4">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                    className="mr-2"
-                  />{" "}
-                  <label htmlFor="remember" className="text-sm text-grey-dark">
-                    Remember Me
-                  </label>
-                </div>
-                <div className="flex flex-col mt-8">
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="button-done hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
-                  >
-                    Login
-                  </button>
-                </div>
-                {/* </form> */}
+                  <div className="flex flex-col mt-4">
+                    <input
+                      id="password"
+                      type="password"
+                      className="flex-grow h-8 px-2 rounded border border-grey-400"
+                      name="password"
+                      required
+                      placeholder="Password"
+                    />
+                  </div>
+                  {/* <div className="flex items-center mt-4">
+                    <input
+                      type="checkbox"
+                      name="remember"
+                      id="remember"
+                      className="mr-2"
+                    />{" "}
+                    <label
+                      htmlFor="remember"
+                      className="text-sm text-grey-dark"
+                    >
+                      Remember Me
+                    </label>
+                  </div> */}
+                  <div className="flex flex-col mt-8">
+                    <button
+                      type="submit"
+                      className="button-done hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </form>
                 <div className="text-center mt-4">
-                  <a
+                  {/* <a
                     className="no-underline hover:underline text-blue-dark text-xs"
                     // Link หน้าไป
                   >
                     Forgot Your Password?
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
