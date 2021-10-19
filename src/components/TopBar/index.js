@@ -16,19 +16,6 @@ const App = () => {
   const [isShowNoti, setShowNoti] = useState(false);
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser)
-  // const notificationMockupData = [
-  //   {
-  //     title: "การแจ้งเตือน",
-  //     detail: "ตัวอย่างการแจ้งเตือน",
-  //     readed: true,
-  //   },
-  //   {
-  //     title: "การแจ้งเตือน",
-  //     detail:
-  //       "ตัวอย่างการแจ้งเตือนที่ยังไม่ได้อ่าน",
-  //     readed: false,
-  //   }
-  // ];
 
   if (!currentUser) {
     return <Redirect to="/" />;
@@ -46,14 +33,12 @@ const App = () => {
       {/* Menu */}
       <div className="menu-top-bar">
         <div className="dropdown">
-          <MenuTopBar
-            // title="สวัสดี คุณ"
-            onClick={() => setShowNoti(!isShowNoti)}
-          >
+          <Link to="/profile">
+          <MenuTopBar>
             <User width="1.5rem" height="1.5rem" />
-             <p>&nbsp; สวัสดี คุณ{currentUser.displayName} </p> 
-            
+             <p className="username">&nbsp; สวัสดี คุณ{currentUser.displayName} </p>            
           </MenuTopBar>
+          </Link>
           {/* <NotificationComponent isShow={isShowNoti}>
               {notificationMockupData.map((item, key) => (
                 <NotificationItem

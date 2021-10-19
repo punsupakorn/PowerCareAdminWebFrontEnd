@@ -70,75 +70,40 @@ function EditOfficerScreen() {
                 />
               </span>
             </div>
-            <div className="  mt-3">
-              <input
-                type="tel"
-                name="Phone"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                placeholder="โปรดกรอกหมายเลขโทรศัพท์"
-                value={position}
-                disabled
-                // onChange={handlePhone}
-              />
-              {/* <select
-                id="position"
-                name="Position"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent "
-                // onClick={handlePosition}
-              >
-                <option disabled selected value>
-                  {" "}
-                  โปรดระบุตำแหน่งงาน
-                </option>
-                <option className="option" value="Doctor">
-                  {" "}
-                  หมอ{" "}
-                </option>
-                <option className="option" value={position}>
-                  {position}
-                </option>
-              </select> */}
-            </div>
-            <div className="mt-3">
-              <input
-                type="email"
-                name="Email"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
-                placeholder="โปรดกรอก อีเมลล์"
-                value={email}
-                // onChange={handleEmail}
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <input
-                type="password"
-                name="Password"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
-                placeholder="โปรดกรอก รหัสผ่าน (ไม่ต่ำกว่า 6 ตัวอักษร)"
-                // onChange={handlePassword}
-                required
-              />
-            </div>
-            <div className="mt-3">
-              <input
-                type="password"
-                name="ConfirmPassword"
-                className="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  "
-                placeholder="ยืนยันรหัสผ่าน"
-                // onChange={handleConfirmPassword}
-                required
-              />
-            </div>
-            {/* <div className="mt-1 block p-3 text-sm text-xs text-gray-800">
-              <input type="checkbox" className="inline-block border-0  " />
-              <span display="inline" className>
-                ยอมรับ
-                <a className target="_blank" data-test="Link">
-                  <span className="underline ">เงื่อนไข</span>{" "}
-                </a>{" "}
-              </span>
-            </div> */}
+            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+              หมายเลขโทรศัพท์{" "}
+            </label>
+            <input
+              type="tel"
+              name="Phone"
+              placeholder="0999999999"
+              // onChange={checkPhone}
+              required
+              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+            />
+            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+              ตำแหน่งงาน
+            </label>
+            <input
+              placeholder="หมอ"
+              id="position"
+              name="Position"
+              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+              // onClick={handlePosition}
+              required
+            />
+            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+              อีเมลล์{" "}
+            </label>
+            <input
+              type="email"
+              name="Email"
+              placeholder="daris.pb@mail.kmutt.ac.th"
+              // onChange={checkEmail}
+              required
+              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+            />
+
             <div className="mt-2">
               {/* <Link to="/confirmaddofficer"> */}
               <button

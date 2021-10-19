@@ -7,6 +7,10 @@
   height: fit-content;
 }
 
+.username{
+ color:white;
+}
+
 .logo-content {
   display: flex;
   flex-direction: row;

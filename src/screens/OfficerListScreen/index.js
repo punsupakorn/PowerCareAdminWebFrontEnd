@@ -25,7 +25,7 @@ const OfficerListScreen = () => {
   const handleShow = () => setShow(true);
 
   const getOfficerList = () => {
-    axios.get(server.OFFICER_LIST).then((res) => {
+    axios.get(server.OFFICER_LIST).then((res) => {  
       setOfficer(res.data);
     });
   };
@@ -119,7 +119,7 @@ const OfficerListScreen = () => {
                       hieght="1.5rem"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        // search(searchInput);
+                        // search(searchInput);  
                         setSearched(true);
                       }}
                     />
