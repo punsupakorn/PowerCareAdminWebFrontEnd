@@ -50,7 +50,7 @@ const App = () => {
             // title="สวัสดี คุณ"
             onClick={() => setShowNoti(!isShowNoti)}
           >
-            สวัสดีคุณ {currentUser.displayName}
+            สวัสดี คุณ{currentUser.displayName}
             <User width="1.5rem" height="1.5rem" />
           </MenuTopBar>
           {/* <NotificationComponent isShow={isShowNoti}>
