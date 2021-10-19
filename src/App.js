@@ -25,7 +25,6 @@ import {
   HomeScreenAdmin,
   ManageMedicineScreen,
   WorkingDetailStaffScreen,
-  ConfirmEditOfficerScreen,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -36,12 +35,12 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <div className="App">
-          <Route exact path="/" component={LogIn} />
           <TopBar />
           <div className="content">
             <SideBar />
             {/* Screen Routing */}
             <Switch>
+              <Route exact path="/" component={LogIn} />
               <Route path="/working">
                 <WorkingScreen />
               </Route>
@@ -113,9 +112,6 @@ function App() {
               </Route>
               <Route path="/workingdetailstaff">
                 <WorkingDetailStaffScreen />
-              </Route>
-              <Route path="/confirmeditofficer">
-                <ConfirmEditOfficerScreen />
               </Route>
             </Switch>
           </div>

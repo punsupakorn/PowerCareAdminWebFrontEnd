@@ -47,7 +47,6 @@ const Login = () => {
   //     firebaseconfig
   //       .auth()
   //       .signInWithEmailAndPassword(email.value, password.value);
-
   //   } catch (error) {}
   // };
 
