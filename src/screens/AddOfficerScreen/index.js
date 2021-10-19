@@ -189,6 +189,10 @@ const AddOfficerScreen = () => {
                 <option className="option" value="เจ้าหน้าที่">
                   เจ้าหน้าที่
                 </option>
+                <option className="option" value="ผู้ดูแลระบบ">
+                  {" "}
+                  ผู้ดูแลระบบ{" "}
+                </option>
               </select>
             </div>
             <div className="mt-3">

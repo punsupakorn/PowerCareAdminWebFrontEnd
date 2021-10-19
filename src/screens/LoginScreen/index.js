@@ -19,8 +19,13 @@ const Login = () => {
     try {
       firebaseconfig
         .auth()
-        .signInWithEmailAndPassword(email.value, password.value);
-    } catch (error) {}
+        .signInWithEmailAndPassword(email.value, password.value)
+        .catch((error) =>
+          window.alert("ลงชื่อเข้าใช้ผิดพลาด โปรดลองใหม่อีกครั้ง")
+        );
+    } catch (error) {
+      window.alert("ลงชื่อเข้าใช้ผิดพลาด โปรดลองใหม่อีกครั้ง");
+    }
   };
 
   const { currentUser } = useContext(AuthContext);
@@ -40,7 +45,6 @@ const Login = () => {
     return role;
     // return <Redirect to="/homescreenstaff" />;
   }
-  
 
   // const user = checkRole(currentUser.Email);
   // if (user == "เจ้าหน้าที่") {
