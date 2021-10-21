@@ -25,7 +25,7 @@ const OfficerListScreen = () => {
   const handleShow = () => setShow(true);
 
   const getOfficerList = () => {
-    axios.get(server.OFFICER_LIST).then((res) => {  
+    axios.get(server.OFFICER_LIST).then((res) => {
       setOfficer(res.data);
     });
   };
@@ -119,7 +119,7 @@ const OfficerListScreen = () => {
                       hieght="1.5rem"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        // search(searchInput);  
+                        // search(searchInput);
                         setSearched(true);
                       }}
                     />
@@ -198,7 +198,7 @@ const OfficerListScreen = () => {
                 <p>{officerlist.Phone}</p>
 
                 <div className="menu-row">
-                  <Link
+                  {/* <Link
                     to={{
                       pathname: `/EditOfficer`,
                       state: {
@@ -223,7 +223,7 @@ const OfficerListScreen = () => {
                       //   )
                       // }
                     />
-                  </Link>
+                  </Link> */}
                   {/* ตรงนี้ยังใส่ Modal ไม่ได้  */}
                   <Delete
                     {...iconOption}

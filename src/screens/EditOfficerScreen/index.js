@@ -6,42 +6,50 @@ import { server } from "../../constants/constant";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 
 function EditOfficerScreen() {
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
-  const [phone, setphone] = useState("");
-  const [email, setemail] = useState("");
-  // const [password, setpassword] = useState("");
-  const [Position, setPosition] = useState("");
+  // const [firstname, setfirstname] = useState("");
+  // const [lastname, setlastname] = useState("");
+  // const [phone, setphone] = useState("");
+  // const [email, setemail] = useState("");
+  // const [position, setposition] = useState("");
   // const [confirmpassword, setconfirmpassword] = useState("");
+  // const [password, setpassword] = useState("");
   const location = useLocation();
-  const { position, documentid } = location.state;
-  useEffect(() => {
-    getOfficerProfile();
-  });
+  const {
+    state_DocumentID,
+    state_FirstName,
+    state_LastName,
+    state_Phone,
+    state_Position,
+    state_Email,
+  } = location.state;
 
-  const getOfficerProfile = () => {
-    try {
-      axios
-        .get(`${server.EDIT_OFFICER}/${position}/${documentid}`)
-        .then((res) => {
-          const data = res.data;
-          setfirstname(data.FirstName);
-          setlastname(data.LastName);
-          setphone(data.Phone);
-          setemail(data.Email);
-          setPosition(data.Position);
-          // setpassword(data.Password);
-        });
-    } catch (error) {}
-  };
+  // useEffect(() => {
+  //   getOfficerProfile();
+  // });
 
-  const checkFirstName = (firstname) => {
-    const data = firstname.target.value;
-    setfirstname(data);
-    const result = regThaiChar.test(firstname);
-    console.log(result);
-    return result;
-  };
+  // const getOfficerProfile = () => {
+  //   try {
+  //     // axios
+  //     //   .get(`${server.EDIT_OFFICER}/${position}/${documentid}`)
+  //     //   .then((res) => {
+  //     //     const data = res.data;
+  //     //     setfirstname(data.FirstName);
+  //     //     setlastname(data.LastName);
+  //     //     setphone(data.Phone);
+  //     //     setemail(data.Email);
+  //     //     setPosition(data.Position);
+  //     // setpassword(data.Password);
+  //     // });
+  //   } catch (error) {}
+  // };
+
+  // const checkFirstName = (firstname) => {
+  //   const data = firstname.target.value;
+  //   setfirstname(data);
+  //   const result = regThaiChar.test(firstname);
+  //   console.log(result);
+  //   return result;
+  // };
 
   return (
     <div className="content-body">
@@ -56,11 +64,10 @@ function EditOfficerScreen() {
                   ชื่อจริง
                 </label>
                 <input
-                  // value={firstname}
                   type="text"
                   name="FirstName"
-                  placeholder={firstname}
-                  onChange={checkFirstName}
+                  placeholder={state_FirstName}
+                  // onChange={checkFirstName}
                   className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
                 />
@@ -73,7 +80,7 @@ function EditOfficerScreen() {
                   type="text"
                   // value={lastname}
                   name="LastName"
-                  placeholder={lastname}
+                  placeholder={state_LastName}
                   // onChange={checkLastName}
                   className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
@@ -87,7 +94,7 @@ function EditOfficerScreen() {
               // value={phone}
               type="tel"
               name="Phone"
-              placeholder={phone}
+              placeholder={state_Phone}
               // onChange={checkPhone}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -96,8 +103,9 @@ function EditOfficerScreen() {
               ตำแหน่งงาน
             </label>
             <input
+              disabled
               // value={Position}
-              placeholder={Position}
+              placeholder={state_Position}
               id="position"
               name="Position"
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -111,7 +119,7 @@ function EditOfficerScreen() {
               // value={email}
               type="email"
               name="Email"
-              placeholder={email}
+              placeholder={state_Email}
               // onChange={checkEmail}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"

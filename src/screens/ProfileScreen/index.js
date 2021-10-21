@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProfileScreen.css";
 import { useLocation } from "react-router";
@@ -11,6 +11,7 @@ function ProfileScreen() {
   const [phone, setphone] = useState("");
   const [position, setposition] = useState("");
   const [email, setemail] = useState("");
+  const [documentid, setdocumentid] = useState("");
   const location = useLocation();
   const { uid } = location.state;
 
@@ -23,6 +24,7 @@ function ProfileScreen() {
         setposition(data.Position);
         setemail(data.Email);
         setphone(data.Phone);
+        setdocumentid(data.DocumentID);
         // console.log(res.data);
       });
     } catch (error) {}
@@ -150,87 +152,99 @@ function ProfileScreen() {
             <h6 className="text-blueGray-700 text-xl font-bold">
               ข้อมูลส่วนตัว
             </h6>
-            {/* <Link to ="/editofficer"> */}
-            <button className="bg-indigo-300 text-white active:bg-indigo-300 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-              แก้ไขข้อมูลส่วนตัว
-            </button>
-            {/* </Link> */}
+            <Link
+              to={{
+                pathname: `/editofficer`,
+                state: {
+                  state_DocumentID : documentid,
+                  state_FirstName: firstname,
+                  state_LastName: lastname,
+                  state_Phone: phone,
+                  state_Position: position,
+                  state_Email: email,
+                },
+              }}
+            >
+              <button className="bg-indigo-300 text-white active:bg-indigo-300 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+                แก้ไขข้อมูลส่วนตัว
+              </button>
+            </Link>
           </div>
           <hr className="mt-6 border-b-1 border-blueGray-300" />
           {/* <form className="mt-6"> */}
-            <div className="flex justify-between gap-3">
-              <span className="w-1/2">
-                <label className="block text-xs font-semibold text-gray-600 uppercase">
-                  ชื่อจริง
-                </label>
-                <input
-                  type="text"
-                  name="FirstName"
-                  value={firstname}
-                  // onChange={checkFirstName}
-                  className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-                  readOnly
-                />
-              </span>
-              <span className="w-1/2">
-                <label className="block text-xs font-semibold text-gray-600 uppercase">
-                  นามสกุล
-                </label>
-                <input
-                  type="text"
-                  name="LastName"
-                  value={lastname}
-                  // onChange={checkLastName}
-                  className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-                  readOnly
-                />
-              </span>
-            </div>
-            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              หมายเลขโทรศัพท์{" "}
-            </label>
-            <input
-              type="tel"
-              name="Phone"
-              value={phone}
-              // onChange={checkPhone}
-              readOnly
-              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-            />
-            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              ตำแหน่งงาน
-            </label>
-            <input
-              value={position}
-              id="position"
-              name="Position"
-              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-              // onClick={handlePosition}
-              readOnly
-            />
-            <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              อีเมลล์{" "}
-            </label>
-            <input
-              type="email"
-              name="Email"
-              value={email}
-              // onChange={checkEmail}
-              className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-              readOnly
-            />
+          <div className="flex justify-between gap-3">
+            <span className="w-1/2">
+              <label className="block text-xs font-semibold text-gray-600 uppercase">
+                ชื่อจริง
+              </label>
+              <input
+                type="text"
+                name="FirstName"
+                value={firstname}
+                // onChange={checkFirstName}
+                className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+                readOnly
+              />
+            </span>
+            <span className="w-1/2">
+              <label className="block text-xs font-semibold text-gray-600 uppercase">
+                นามสกุล
+              </label>
+              <input
+                type="text"
+                name="LastName"
+                value={lastname}
+                // onChange={checkLastName}
+                className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+                readOnly
+              />
+            </span>
+          </div>
+          <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+            หมายเลขโทรศัพท์{" "}
+          </label>
+          <input
+            type="tel"
+            name="Phone"
+            value={phone}
+            // onChange={checkPhone}
+            readOnly
+            className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+          />
+          <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+            ตำแหน่งงาน
+          </label>
+          <input
+            value={position}
+            id="position"
+            name="Position"
+            className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+            // onClick={handlePosition}
+            readOnly
+          />
+          <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+            อีเมลล์{" "}
+          </label>
+          <input
+            type="email"
+            name="Email"
+            value={email}
+            // onChange={checkEmail}
+            className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
+            readOnly
+          />
 
-            {/* <div className="mt-2"> */}
-              {/* <Link to="/confirmaddofficer"> */}
-              {/* <button
+          {/* <div className="mt-2"> */}
+          {/* <Link to="/confirmaddofficer"> */}
+          {/* <button
                 variant="secondary"
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
                 // onClick={handleSubmit}
               >
                 เพิ่มบุคคลากร
               </button> */}
-              {/* </Link> */}
-            {/* </div> */}
+          {/* </Link> */}
+          {/* </div> */}
           {/* </form> */}
         </div>
       </div>
