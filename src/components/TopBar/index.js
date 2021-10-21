@@ -33,7 +33,9 @@ const App = () => {
       {/* Menu */}
       <div className="menu-top-bar">
         <div className="dropdown">
-          <Link to="/profile">
+          <Link to={{pathname:`/profile`,state:{
+            uid : currentUser.uid
+          }}}>
           <MenuTopBar>
             <User width="1.5rem" height="1.5rem" />
              <p className="username">&nbsp; สวัสดี คุณ{currentUser.displayName} </p>            

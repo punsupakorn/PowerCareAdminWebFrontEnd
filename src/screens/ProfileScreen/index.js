@@ -1,9 +1,36 @@
 import React from "react";
 import { Link } from "react";
-
+import { useState, useEffect } from "react";
 import "./ProfileScreen.css";
-
+import { useLocation } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
 function ProfileScreen() {
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [phone, setphone] = useState("");
+  const [position, setposition] = useState("");
+  const [email, setemail] = useState("");
+  const location = useLocation();
+  const { uid } = location.state;
+
+  const getProfile = () => {
+    try {
+      axios.get(`${server.PROFILE}/${uid}`).then((res) => {
+        const data = res.data;
+        setfirstname(data.FirstName);
+        setlastname(data.LastName);
+        setposition(data.Position);
+        setemail(data.Email);
+        setphone(data.Phone);
+        // console.log(res.data);
+      });
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getProfile();
+  });
   return (
     // <div className="content-body">
     //   <section className=" py-1 bg-blueGray-20">
@@ -130,7 +157,7 @@ function ProfileScreen() {
             {/* </Link> */}
           </div>
           <hr className="mt-6 border-b-1 border-blueGray-300" />
-          <form className="mt-6">
+          {/* <form className="mt-6"> */}
             <div className="flex justify-between gap-3">
               <span className="w-1/2">
                 <label className="block text-xs font-semibold text-gray-600 uppercase">
@@ -139,7 +166,7 @@ function ProfileScreen() {
                 <input
                   type="text"
                   name="FirstName"
-                  value="daris"
+                  value={firstname}
                   // onChange={checkFirstName}
                   className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   readOnly
@@ -152,7 +179,7 @@ function ProfileScreen() {
                 <input
                   type="text"
                   name="LastName"
-                  value="Pinta"
+                  value={lastname}
                   // onChange={checkLastName}
                   className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   readOnly
@@ -165,7 +192,7 @@ function ProfileScreen() {
             <input
               type="tel"
               name="Phone"
-              value="0999999999"
+              value={phone}
               // onChange={checkPhone}
               readOnly
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -174,7 +201,7 @@ function ProfileScreen() {
               ตำแหน่งงาน
             </label>
             <input
-              value="หมอ"
+              value={position}
               id="position"
               name="Position"
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -187,24 +214,24 @@ function ProfileScreen() {
             <input
               type="email"
               name="Email"
-              value="daris.pb@mail.kmutt.ac.th"
+              value={email}
               // onChange={checkEmail}
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
               readOnly
             />
 
-            <div className="mt-2">
+            {/* <div className="mt-2"> */}
               {/* <Link to="/confirmaddofficer"> */}
-              <button
+              {/* <button
                 variant="secondary"
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
                 // onClick={handleSubmit}
               >
                 เพิ่มบุคคลากร
-              </button>
+              </button> */}
               {/* </Link> */}
-            </div>
-          </form>
+            {/* </div> */}
+          {/* </form> */}
         </div>
       </div>
     </div>
