@@ -1,8 +1,9 @@
 import React from "react";
-import { useState, useEffect ,Link} from "react";
+import { useState, useEffect, Link } from "react";
 import axios from "axios";
 import { useLocation } from "react-router";
 import { server } from "../../constants/constant";
+import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 
 function EditOfficerScreen() {
   const [firstname, setfirstname] = useState("");
@@ -10,11 +11,10 @@ function EditOfficerScreen() {
   const [phone, setphone] = useState("");
   const [email, setemail] = useState("");
   // const [password, setpassword] = useState("");
-  // const [Position, setPosition] = useState("");
+  const [Position, setPosition] = useState("");
   // const [confirmpassword, setconfirmpassword] = useState("");
   const location = useLocation();
   const { position, documentid } = location.state;
-
   useEffect(() => {
     getOfficerProfile();
   });
@@ -29,10 +29,18 @@ function EditOfficerScreen() {
           setlastname(data.LastName);
           setphone(data.Phone);
           setemail(data.Email);
-          // setPosition(data.Position);
+          setPosition(data.Position);
           // setpassword(data.Password);
         });
     } catch (error) {}
+  };
+
+  const checkFirstName = (firstname) => {
+    const data = firstname.target.value;
+    setfirstname(data);
+    const result = regThaiChar.test(firstname);
+    console.log(result);
+    return result;
   };
 
   return (
@@ -48,10 +56,11 @@ function EditOfficerScreen() {
                   ชื่อจริง
                 </label>
                 <input
+                  // value={firstname}
                   type="text"
                   name="FirstName"
-                  placeholder="daris"
-                  // onChange={checkFirstName}
+                  placeholder={firstname}
+                  onChange={checkFirstName}
                   className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
                 />
@@ -62,8 +71,9 @@ function EditOfficerScreen() {
                 </label>
                 <input
                   type="text"
+                  // value={lastname}
                   name="LastName"
-                  placeholder="Pinta"
+                  placeholder={lastname}
                   // onChange={checkLastName}
                   className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
@@ -74,9 +84,10 @@ function EditOfficerScreen() {
               หมายเลขโทรศัพท์{" "}
             </label>
             <input
+              // value={phone}
               type="tel"
               name="Phone"
-              placeholder="0999999999"
+              placeholder={phone}
               // onChange={checkPhone}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -85,7 +96,8 @@ function EditOfficerScreen() {
               ตำแหน่งงาน
             </label>
             <input
-              placeholder="หมอ"
+              // value={Position}
+              placeholder={Position}
               id="position"
               name="Position"
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -96,9 +108,10 @@ function EditOfficerScreen() {
               อีเมลล์{" "}
             </label>
             <input
+              // value={email}
               type="email"
               name="Email"
-              placeholder="daris.pb@mail.kmutt.ac.th"
+              placeholder={email}
               // onChange={checkEmail}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"

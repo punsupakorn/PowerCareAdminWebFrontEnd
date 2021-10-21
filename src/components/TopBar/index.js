@@ -15,7 +15,7 @@ import firebaseconfig from "../../config";
 const App = () => {
   const [isShowNoti, setShowNoti] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser)
+  // console.log(currentUser)
 
   if (!currentUser) {
     return <Redirect to="/" />;
