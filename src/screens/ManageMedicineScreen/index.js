@@ -328,7 +328,7 @@ export default function ManageMedicineScreen() {
           numOfRow={numOfRow}
         />
         <div className="px-2 ">
-          <Link to="/workingdetail">
+          <Link to="/">
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}

@@ -198,7 +198,7 @@ function EditOfficerScreen() {
                     <div className="flex flex-col">
                       <label className="leading-loose">รหัสผ่านเดิม</label>
                       <input
-                        type="text"
+                        type="password"
                         className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="กรุณากรอกรหัสผ่านเดิม"
                         // onChange={handleName}
@@ -209,7 +209,7 @@ function EditOfficerScreen() {
                         <label className="leading-loose">รหัสผ่านใหม่</label>
                         <div className="relative focus-within:text-gray-600 text-gray-400">
                           <input
-                            type="text"
+                            type="password"
                             className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                             placeholder="กรุณากรอกรหัสผ่านใหม่"
                             // onChange={handlePrice}
@@ -220,7 +220,7 @@ function EditOfficerScreen() {
                         <label className="leading-loose">ยืนยันรหัสผ่าน</label>
                         <div className="relative focus-within:text-gray-600 text-gray-400">
                           <input
-                            type="text"
+                            type="password"
                             className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                             placeholder="กรุณากรอกยืนยันรหัสผ่าน"
                             // onChange={handleType}

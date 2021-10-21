@@ -192,7 +192,7 @@ const OfficerListScreen = () => {
             <p>ตำแหน่ง</p>
             <p>อีเมลล์ </p>
             <p>เบอร์โทรศัพท์</p>
-            <p>แก้ไข/ลบข้อมูล</p>
+            <p>ลบข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table">
