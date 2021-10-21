@@ -205,7 +205,7 @@ export default function ManageMedicineScreen() {
                       <Modal.Header closeButton>
                         <Modal.Title id="example-modal-sizes-title-lg">
                           {" "}
-                          เพิ่มยา
+                          แก้ไขยาและผลิตภัณฑ์
                         </Modal.Title>
                       </Modal.Header>
 
