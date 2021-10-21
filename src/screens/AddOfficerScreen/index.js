@@ -71,17 +71,17 @@ const AddOfficerScreen = () => {
     console.log(confirmPassword);
   };
 
-  const isEmailExist = (Email) => {
-    try {
-      axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
-        setexist(res.data);
-      });
-    } catch (error) {
-      return error;
-    }
-  };
+  // const isEmailExist = (Email) => {
+  //   try {
+  //     axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
+  //       setexist(res.data);
+  //     });
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let user = {
       firstname: FirstName,
       lastname: LastName,
@@ -107,36 +107,70 @@ const AddOfficerScreen = () => {
       } else if (!regThaiChar.test(LastName)) {
         window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
       } else {
-        isEmailExist(Email);
-        if (exist == false) {
-          window.alert(
-            "ลงทะเบียนผิดพลาด เนื่องจากอีเมล์นี้มีบัญชีผู้ใช้ในระบบแล้ว"
-          );
-          refreshPage();
-        } else {
-          axios
-            .post(server.ADD_OFFICER, {
-              FirstName: FirstName,
-              LastName: LastName,
-              Phone: Phone,
-              Position: Position,
-              Email: Email,
-              Password: Password,
-            })
-            .then((res) => {
-              const profile = res.data;
-              history.push({
-                pathname: `/confirmaddofficer`,
-                state: {
-                  firstname: profile.FirstName,
-                  lastname: profile.LastName,
-                  phone: profile.Phone,
-                  position: profile.Position,
-                  email: profile.Email,
-                },
+        // isEmailExist(Email);
+        try {
+          await axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
+            setexist(res.data);
+          });
+
+          if (exist == false) {
+            window.alert(
+              "ลงทะเบียนผิดพลาด เนื่องจากอีเมล์นี้มีบัญชีผู้ใช้ในระบบแล้ว"
+            );
+          } else {
+            await axios
+              .post(server.ADD_OFFICER, {
+                FirstName: FirstName,
+                LastName: LastName,
+                Phone: Phone,
+                Position: Position,
+                Email: Email,
+                Password: Password,
+              })
+              .then((res) => {
+                const profile = res.data;
+                history.push({
+                  pathname: `/confirmaddofficer`,
+                  state: {
+                    firstname: profile.FirstName,
+                    lastname: profile.LastName,
+                    phone: profile.Phone,
+                    position: profile.Position,
+                    email: profile.Email,
+                  },
+                });
               });
-            });
-        }
+          }
+        } catch (error) {}
+        console.log(exist);
+
+        // if (exist !== true) {
+
+        //   refreshPage();
+        // } else {
+        //   axios
+        //     .post(server.ADD_OFFICER, {
+        //       FirstName: FirstName,
+        //       LastName: LastName,
+        //       Phone: Phone,
+        //       Position: Position,
+        //       Email: Email,
+        //       Password: Password,
+        //     })
+        //     .then((res) => {
+        //       const profile = res.data;
+        //       history.push({
+        //         pathname: `/confirmaddofficer`,
+        //         state: {
+        //           firstname: profile.FirstName,
+        //           lastname: profile.LastName,
+        //           phone: profile.Phone,
+        //           position: profile.Position,
+        //           email: profile.Email,
+        //         },
+        //       });
+        //     });
+        // }
       }
     } catch (error) {
       return error;

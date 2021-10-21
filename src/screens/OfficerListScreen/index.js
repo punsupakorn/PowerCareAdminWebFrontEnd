@@ -77,9 +77,17 @@ const OfficerListScreen = () => {
 
   const handleDelete = (DocumentID, Position) => {
     try {
-      axios.delete(server.OFFICER_LIST, {
-        data: { DocumentID: DocumentID, Position: Position },
-      });
+      axios
+        .delete(server.OFFICER_LIST, {
+          data: { DocumentID: DocumentID, Position: Position },
+        })
+        .then((res) => {
+          if (res.data == true) {
+            window.alert("ลบข้อมูลใช้สำเร็จ");
+          } else {
+            window.alert("มีบางอย่างผิดพลาดโปรดลองใหม่อีกครั้ง");
+          }
+        });
       handleClose();
       refreshPage();
     } catch (error) {
