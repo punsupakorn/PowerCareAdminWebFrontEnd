@@ -229,7 +229,7 @@ export default function MedicineScreen() {
           numOfRow={numOfRow}
         />
         <div className="px-2 ">
-          <Link to="/workingdetail">
+          <Link to="/">
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}

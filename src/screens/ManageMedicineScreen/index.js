@@ -66,16 +66,18 @@ export default function ManageMedicineScreen() {
         .then((res) => {
           console.log(res);
         });
-        window.alert("เพื่มยาสำเร็จ");
-        refreshPage();
+      window.alert("เพื่มยาสำเร็จ");
+      refreshPage();
     } catch (error) {}
   };
-//  Modal delete
+  //  Modal delete
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-// Modal add
+  // Modal add
   const [lgShow, setLgShow] = useState(false);
+  // Modal Edit
+  const [smShow, setSmShow] = useState(false);
 
   const handleToConfirmDelete = (MedicineID) => {
     setstate({ MedicineID });
@@ -184,62 +186,136 @@ export default function ManageMedicineScreen() {
             {/* body table */}
             {/* {rowData} */}
             <div>
-        {medicine.map((med) => (
-          <div className="table-grid">
-            <p> </p>
-            <p>{med.MedicineName}</p>
-            <p>{med.Price}</p>
-            <p>{med.MedicineDescription}</p>
-            <p>{med.Type}</p>
-            <div className="menu-row">
-          
-              <Edit
-                {...iconOption}
-                
+              {medicine.map((med) => (
+                <div className="table-grid">
+                  <p> </p>
+                  <p>{med.MedicineName}</p>
+                  <p>{med.Price}</p>
+                  <p>{med.MedicineDescription}</p>
+                  <p>{med.Type}</p>
+                  <div className="menu-row">
+                    <Edit {...iconOption} onClick={() => setSmShow(true)} />
 
-              />
-              <Delete
-                {...iconOption}
-                onClick={handleShow}
-                onClick={() =>
-                  handleToConfirmDelete(
-                    med.MedicineID
-                  )
-                }
-              />
+                    <Modal
+                      size="md"
+                      show={smShow}
+                      onHide={() => setSmShow(false)}
+                      aria-labelledby="example-modal-sizes-title-lg"
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-lg">
+                          {" "}
+                          เพิ่มยา
+                        </Modal.Title>
+                      </Modal.Header>
+
+                      <center>
+                        <Modal.Body>
+                          <div className="divide-y divide-gray-200">
+                            <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                              <div className="flex flex-col">
+                                <label className="leading-loose">ชื่อยา</label>
+                                <input
+                                  type="text"
+                                  className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder="กรุณากรอกชื่อยา"
+                                  onChange={handleName}
+                                />
+                              </div>
+                              <div className="flex flex-col">
+                                <label className="leading-loose">
+                                  คำอธิบายเกี่ยวกับยา
+                                </label>
+                                <input
+                                  type="text"
+                                  className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder="กรุณากรอกคำอธิบาย"
+                                  onChange={handleDescription}
+                                />
+                              </div>
+                              <div className="flex items-center space-x-4">
+                                <div className="flex flex-col">
+                                  <label className="leading-loose">ราคา</label>
+                                  <div className="relative focus-within:text-gray-600 text-gray-400">
+                                    <input
+                                      type="text"
+                                      className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                      placeholder="กรอกราคา"
+                                      onChange={handlePrice}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="flex flex-col">
+                                  <label className="leading-loose">
+                                    ประเภท
+                                  </label>
+                                  <div className="relative focus-within:text-gray-600 text-gray-400">
+                                    <input
+                                      type="text"
+                                      className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                      placeholder="กรอกประเภท"
+                                      onChange={handleType}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Modal.Body>
+                      </center>
+                      <Modal.Footer>
+                        <Link to="medicine">
+                          <Button
+                            variant="primary"
+                            style={{
+                              borderColor: "#818CF8",
+                              backgroundColor: "#818CF8",
+                            }}
+                            onClick={handleSubmit}
+                          >
+                            เพิ่มยา
+                          </Button>
+                        </Link>
+                      </Modal.Footer>
+                    </Modal>
+                    <Delete
+                      {...iconOption}
+                      onClick={handleShow}
+                      onClick={() => handleToConfirmDelete(med.MedicineID)}
+                    />
                     <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>คำเตือน</Modal.Title>
-                    </Modal.Header>
+                      <Modal.Header closeButton>
+                        <Modal.Title>คำเตือน</Modal.Title>
+                      </Modal.Header>
 
-                    <center>
-                      <Modal.Body>คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?</Modal.Body>
-                    </center>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={handleClose}
-                        style={{
-                          borderColor: "#bdbdbd",
-                          backgroundColor: "#bdbdbd",
-                        }}
-                      >
-                        ย้อนกลับ
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() =>
-                          handleDelete(state.MedicineID)
-                        }
-                      >
-                        ตกลง
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                      <center>
+                        <Modal.Body>
+                          คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                        </Modal.Body>
+                      </center>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={handleClose}
+                          style={{
+                            borderColor: "#bdbdbd",
+                            backgroundColor: "#bdbdbd",
+                          }}
+                        >
+                          ย้อนกลับ
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDelete(state.MedicineID)}
+                        >
+                          ตกลง
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
-      </div>
             {/* end body table */}
           </div>
         </div>
@@ -267,13 +343,17 @@ export default function ManageMedicineScreen() {
           >
             เพิ่มยา
           </Button>
-          <Modal size="md"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg">
-
+          <Modal
+            size="md"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
             <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-lg" > เพิ่มยา</Modal.Title>
+              <Modal.Title id="example-modal-sizes-title-lg">
+                {" "}
+                เพิ่มยา
+              </Modal.Title>
             </Modal.Header>
 
             <center>
