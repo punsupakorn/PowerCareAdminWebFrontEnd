@@ -273,7 +273,7 @@ export default function ManageMedicineScreen() {
                             }}
                             onClick={handleSubmit}
                           >
-                            เพิ่มยา
+                            ยืนยันการแก้ไข
                           </Button>
                         </Link>
                       </Modal.Footer>
