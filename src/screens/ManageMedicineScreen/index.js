@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import { TableController } from "../../components";
 import CloseIcon from "../../icons/close-icon";
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import Edit from "../../icons/edit";
 import Delete from "../../icons/delete";
 import { server } from "../../constants/constant";
-
+import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 

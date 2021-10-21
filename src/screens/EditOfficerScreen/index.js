@@ -3,20 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router";
 import { server } from "../../constants/constant";
-import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
+import { regThaiChar, regPhoneNumber } from "../../regex";
 
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
 function EditOfficerScreen() {
+  const [lgShow, setLgShow] = useState(false);
+  const [oldPassword, setoldPassword] = useState("");
+  const [Password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Phone, setPhone] = useState("");
-  const [Position, setPosition] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  // const history = useHistory();
+  const history = useHistory();
   const location = useLocation();
   const {
     state_DocumentID,
@@ -31,7 +31,7 @@ function EditOfficerScreen() {
     const data = firstname.target.value;
     setFirstName(data);
     const result = regThaiChar.test(FirstName);
-    console.log(result);
+    // console.log(result);
     return result;
   };
 
@@ -39,7 +39,7 @@ function EditOfficerScreen() {
     const data = lastname.target.value;
     setLastName(data);
     const result = regThaiChar.test(LastName);
-    console.log(result);
+    // console.log(result);
     return result;
   };
 
@@ -47,55 +47,102 @@ function EditOfficerScreen() {
     const data = phone.target.value;
     setPhone(data);
     const result = regPhoneNumber.test(Phone);
-    console.log(result);
+    // console.log(result);
     return result;
   };
 
-  const checkEmail = (email) => {
-    const data = email.target.value;
-    setEmail(data);
-    const result = regEmail.test(Email);
-    return result;
-    // console.log(result);
+  const handleOldPassword = (e) => {
+    const oldpassword = e.target.value;
+    setoldPassword(oldpassword);
+    // console.log(oldPassword);
   };
 
   const handlePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
-    console.log(Password);
+    // console.log(Password);
   };
 
   const handleConfirmPassword = (e) => {
     const confirmPassword = e.target.value;
     setConfirmPassword(confirmPassword);
-    console.log(confirmPassword);
+    // console.log(confirmPassword);
   };
 
-  const [lgShow, setLgShow] = useState(false);
+  const handleSubmitData = () => {
+    let user = {
+      firstname: FirstName,
+      lastname: LastName,
+      phone: Phone,
+    };
 
-  // const getOfficerProfile = () => {
-  //   try {
-  //     // axios
-  //     //   .get(`${server.EDIT_OFFICER}/${position}/${documentid}`)
-  //     //   .then((res) => {
-  //     //     const data = res.data;
-  //     //     setfirstname(data.FirstName);
-  //     //     setlastname(data.LastName);
-  //     //     setphone(data.Phone);
-  //     //     setemail(data.Email);
-  //     //     setPosition(data.Position);
-  //     // setpassword(data.Password);
-  //     // });
-  //   } catch (error) {}
-  // };
+    let data = Object.values(user).every((value) => value);
+    if (data == false) {
+      window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+    } else {
+      try {
+        axios
+          .put(server.EDIT_OFFICER, {
+            FirstName: FirstName,
+            LastName: LastName,
+            Phone: Phone,
+            Position: state_Position,
+            DocumentID: state_DocumentID,
+          })
+          .then((res) => {
+            const data = res.data;
+            if (data == true) {
+              window.alert("แก้ไขข้อมูลสำเร็จ");
+              history.push("/profile");
+            }
+          });
+      } catch (error) {}
+    }
+  };
 
-  // const checkFirstName = (firstname) => {
-  //   const data = firstname.target.value;
-  //   setfirstname(data);
-  //   const result = regThaiChar.test(firstname);
-  //   console.log(result);
-  //   return result;
-  // };
+  const handleSubmitPassword = () => {
+    let password = {
+      oldPasseord: oldPassword,
+      password: Password,
+    };
+    let data = Object.values(password).every((value) => value);
+    try {
+      if (data == false) {
+        window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+      } else if (Password !== ConfirmPassword) {
+        window.alert("โปรดกรอกรหัสผ่านใหม่ และยืนยันรหัสผ่านให้ตรงกัน");
+      } else {
+        try {
+          axios
+            .get(
+              `${server.EDIT_OFFICER}/${state_Position}/${state_DocumentID}/${oldPassword}`
+            )
+            .then((res) => {
+              const data = res.data;
+              if (data == false) {
+                window.alert("โปรดกรอกรหัสผ่านเดิมให้ถูกต้อง");
+              } else {
+                axios
+                  .put(server.EDIT_OFFICER, {
+                    DocumentID: state_DocumentID,
+                    Position: state_Position,
+                    Password: Password,
+                  })
+                  .then((res) => {
+                    const data = res.data;
+                    if (data == true) {
+                      window.alert("แก้ไขรหัสผ่านสำเร็จ");
+                      setLgShow(false);
+                    }
+                  });
+              }
+            });
+        } catch (error) {
+          return error;
+        }
+      }
+    } catch (error) {}
+  };
 
   return (
     <div className="content-body">
@@ -162,7 +209,7 @@ function EditOfficerScreen() {
               อีเมลล์{" "}
             </label>
             <input
-            disabled
+              disabled
               // value={email}
               type="email"
               name="Email"
@@ -182,70 +229,81 @@ function EditOfficerScreen() {
               >
                 เปลี่ยนรหัสผ่าน
               </Button>
-              <Modal size="md"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg">
-
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-lg" > เปลี่ยนรหัสผ่าน</Modal.Title>
-            </Modal.Header>
-
-            <center>
-              <Modal.Body>
-                <div className="divide-y divide-gray-200">
-                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="flex flex-col">
-                      <label className="leading-loose">รหัสผ่านเดิม</label>
-                      <input
-                        type="password"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกรหัสผ่านเดิม"
-                        // onChange={handleName}
-                      />
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex flex-col">
-                        <label className="leading-loose">รหัสผ่านใหม่</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
+              <Modal
+                size="md"
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="example-modal-sizes-title-lg">
+                    {" "}
+                    เปลี่ยนรหัสผ่าน
+                  </Modal.Title>
+                </Modal.Header>
+                <center>
+                  <Modal.Body>
+                    <div className="divide-y divide-gray-200">
+                      <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                        <div className="flex flex-col">
+                          <label className="leading-loose">รหัสผ่านเดิม</label>
                           <input
                             type="password"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรุณากรอกรหัสผ่านใหม่"
-                            // onChange={handlePrice}
+                            className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรุณากรอกรหัสผ่านเดิม"
+                            onChange={handleOldPassword}
                           />
                         </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ยืนยันรหัสผ่าน</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="password"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรุณากรอกยืนยันรหัสผ่าน"
-                            // onChange={handleType}
-                          />
+                        <div className="flex items-center space-x-4">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              รหัสผ่านใหม่
+                            </label>
+                            <div className="relative focus-within:text-gray-600 text-gray-400">
+                              <input
+                                type="password"
+                                className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                placeholder="กรุณากรอกรหัสผ่านใหม่"
+                                onChange={handlePassword}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              ยืนยันรหัสผ่าน
+                            </label>
+                            <div className="relative focus-within:text-gray-600 text-gray-400">
+                              <input
+                                type="password"
+                                className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                placeholder="กรุณากรอกยืนยันรหัสผ่าน"
+                                onChange={handleConfirmPassword}
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </Modal.Body>
-            </center>
-            <Modal.Footer>
-              {/* <Link to="medicine"> */}
-                <Button
-                  variant="primary"
-                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8"  }}
-                  // onClick={handleSubmit}
-                >
-                  ยืนยันการเปลี่ยนรหัสผ่าน
-                </Button>
-              {/* </Link> */}
-            </Modal.Footer>
-          </Modal>
+                  </Modal.Body>
+                </center>
+                <Modal.Footer>
+                  {/* <Link to="medicine"> */}
+                  <Button
+                    onClick={handleSubmitPassword}
+                    variant="primary"
+                    style={{
+                      borderColor: "#818CF8",
+                      backgroundColor: "#818CF8",
+                    }}
+                    // onClick={handleSubmit}
+                  >
+                    ยืนยันการเปลี่ยนรหัสผ่าน
+                  </Button>
+                  {/* </Link> */}
+                </Modal.Footer>
+              </Modal>
               <Button
-              
+                onClick={handleSubmitData}
                 variant="secondary"
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
                 // onClick={handleSubmit}
