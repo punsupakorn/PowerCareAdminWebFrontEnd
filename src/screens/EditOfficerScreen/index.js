@@ -1,18 +1,19 @@
 import React from "react";
-import { useState, useEffect, Link } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import { server } from "../../constants/constant";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 
 function EditOfficerScreen() {
-  // const [firstname, setfirstname] = useState("");
-  // const [lastname, setlastname] = useState("");
-  // const [phone, setphone] = useState("");
-  // const [email, setemail] = useState("");
-  // const [position, setposition] = useState("");
-  // const [confirmpassword, setconfirmpassword] = useState("");
-  // const [password, setpassword] = useState("");
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [Position, setPosition] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
+  // const history = useHistory();
   const location = useLocation();
   const {
     state_DocumentID,
@@ -23,9 +24,50 @@ function EditOfficerScreen() {
     state_Email,
   } = location.state;
 
-  // useEffect(() => {
-  //   getOfficerProfile();
-  // });
+  const checkFirstName = (firstname) => {
+    const data = firstname.target.value;
+    setFirstName(data);
+    const result = regThaiChar.test(FirstName);
+    console.log(result);
+    return result;
+  };
+
+  const checkLastName = (lastname) => {
+    const data = lastname.target.value;
+    setLastName(data);
+    const result = regThaiChar.test(LastName);
+    console.log(result);
+    return result;
+  };
+
+  const checkPhone = (phone) => {
+    const data = phone.target.value;
+    setPhone(data);
+    const result = regPhoneNumber.test(Phone);
+    console.log(result);
+    return result;
+  };
+
+  const checkEmail = (email) => {
+    const data = email.target.value;
+    setEmail(data);
+    const result = regEmail.test(Email);
+    return result;
+    // console.log(result);
+  };
+
+  const handlePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+    console.log(Password);
+  };
+
+  const handleConfirmPassword = (e) => {
+    const confirmPassword = e.target.value;
+    setConfirmPassword(confirmPassword);
+    console.log(confirmPassword);
+  };
+
 
   // const getOfficerProfile = () => {
   //   try {
@@ -67,7 +109,7 @@ function EditOfficerScreen() {
                   type="text"
                   name="FirstName"
                   placeholder={state_FirstName}
-                  // onChange={checkFirstName}
+                  onChange={checkFirstName}
                   className="block b-2 w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
                 />
@@ -81,7 +123,7 @@ function EditOfficerScreen() {
                   // value={lastname}
                   name="LastName"
                   placeholder={state_LastName}
-                  // onChange={checkLastName}
+                  onChange={checkLastName}
                   className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
                   required
                 />
@@ -95,7 +137,7 @@ function EditOfficerScreen() {
               type="tel"
               name="Phone"
               placeholder={state_Phone}
-              // onChange={checkPhone}
+              onChange={checkPhone}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
             />
@@ -116,6 +158,7 @@ function EditOfficerScreen() {
               อีเมลล์{" "}
             </label>
             <input
+            disabled
               // value={email}
               type="email"
               name="Email"
