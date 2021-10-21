@@ -5,6 +5,9 @@ import { useLocation, useHistory } from "react-router";
 import { server } from "../../constants/constant";
 import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+
 function EditOfficerScreen() {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -68,6 +71,7 @@ function EditOfficerScreen() {
     console.log(confirmPassword);
   };
 
+  const [lgShow, setLgShow] = useState(false);
 
   // const getOfficerProfile = () => {
   //   try {
@@ -170,13 +174,84 @@ function EditOfficerScreen() {
 
             <div className="mt-2">
               {/* <Link to="/confirmaddofficer"> */}
-              <button
+              <Button
+                variant="secondary"
+                onClick={() => setLgShow(true)}
+                className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray-900shadow-lg "
+                // onClick={handleSubmit}
+              >
+                เปลี่ยนรหัสผ่าน
+              </Button>
+              <Modal size="md"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg">
+
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg" > เปลี่ยนรหัสผ่าน</Modal.Title>
+            </Modal.Header>
+
+            <center>
+              <Modal.Body>
+                <div className="divide-y divide-gray-200">
+                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                    <div className="flex flex-col">
+                      <label className="leading-loose">รหัสผ่านเดิม</label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกรหัสผ่านเดิม"
+                        // onChange={handleName}
+                      />
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex flex-col">
+                        <label className="leading-loose">รหัสผ่านใหม่</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรุณากรอกรหัสผ่านใหม่"
+                            // onChange={handlePrice}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ยืนยันรหัสผ่าน</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรุณากรอกยืนยันรหัสผ่าน"
+                            // onChange={handleType}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal.Body>
+            </center>
+            <Modal.Footer>
+              {/* <Link to="medicine"> */}
+                <Button
+                  variant="primary"
+                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8"  }}
+                  // onClick={handleSubmit}
+                >
+                  ยืนยันการเปลี่ยนรหัสผ่าน
+                </Button>
+              {/* </Link> */}
+            </Modal.Footer>
+          </Modal>
+              <Button
+              
                 variant="secondary"
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
                 // onClick={handleSubmit}
               >
                 แก้ไขข้อมูลส่วนตัว
-              </button>
+              </Button>
               {/* </Link> */}
             </div>
           </form>

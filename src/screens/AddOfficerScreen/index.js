@@ -6,6 +6,8 @@ import { regEmail, regThaiChar, regPhoneNumber } from "../../regex";
 import { server } from "../../constants/constant";
 import { useHistory } from "react-router";
 
+import { Button } from "react-bootstrap";
+
 const AddOfficerScreen = () => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
@@ -185,7 +187,7 @@ const AddOfficerScreen = () => {
           <p className="text-xl font-semibold">สำหรับผู้ดูแลระบบ </p>
           <hr className="mt-6 border-b-1 border-blueGray-300" />
           {/* <form className="mt-6"> */}
-          <div className="flex justify-between gap-3">
+          <div className="mt-6 flex justify-between gap-3">
             <span className="w-1/2">
               <label className="block text-xs font-semibold text-gray-600 uppercase">
                 ชื่อจริง
@@ -292,13 +294,13 @@ const AddOfficerScreen = () => {
 
           <div className="mt-2">
             {/* <Link to="/confirmaddofficer"> */}
-            <button
+            <Button
               variant="secondary"
               className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
               onClick={handleSubmit}
             >
               เพิ่มบุคคลากร
-            </button>
+            </Button>
             {/* </Link> */}
           </div>
           {/* </form> */}
