@@ -21,6 +21,11 @@ export default function ManageMedicineScreen() {
   const [medicine, setMedicine] = useState([]);
   const [state, setstate] = useState();
 
+  const [ReMedicine, setReMedicine] = useState("");
+  const [Redescription, setRedescription] = useState("");
+  const [RePrice, setRePrice] = useState("");
+  const [Retype, setRetype] = useState("");
+
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
@@ -126,6 +131,22 @@ export default function ManageMedicineScreen() {
     setData(nData);
   }
 
+  const EditMedicine = (MedicineID) => {
+    try {
+      setSmShow(true);
+      axios.get(`${server.MANAGE_MEDICINE}/${MedicineID}`).then((res) => {
+        // console.log(res.data);
+        const data = res.data;
+        setReMedicine(data.MedicineName);
+        setRedescription(data.MedicineDescription);
+        setRePrice(data.Price);
+        setRetype(data.Type);
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+
   return (
     <div className="content-body">
       <div className="medicine-content">
@@ -194,7 +215,10 @@ export default function ManageMedicineScreen() {
                   <p>{med.MedicineDescription}</p>
                   <p>{med.Type}</p>
                   <div className="menu-row">
-                    <Edit {...iconOption} onClick={() => setSmShow(true)} />
+                    <Edit
+                      {...iconOption}
+                      onClick={() => EditMedicine(med.MedicineID)}
+                    />
 
                     <Modal
                       size="md"
@@ -218,7 +242,7 @@ export default function ManageMedicineScreen() {
                                 <input
                                   type="text"
                                   className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                  placeholder="กรุณากรอกชื่อยา"
+                                  placeholder={ReMedicine}
                                   onChange={handleName}
                                 />
                               </div>
@@ -229,7 +253,7 @@ export default function ManageMedicineScreen() {
                                 <input
                                   type="text"
                                   className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                  placeholder="กรุณากรอกคำอธิบาย"
+                                  placeholder={Redescription}
                                   onChange={handleDescription}
                                 />
                               </div>
@@ -240,7 +264,7 @@ export default function ManageMedicineScreen() {
                                     <input
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      placeholder="กรอกราคา"
+                                      placeholder={RePrice}
                                       onChange={handlePrice}
                                     />
                                   </div>
@@ -253,7 +277,7 @@ export default function ManageMedicineScreen() {
                                     <input
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      placeholder="กรอกประเภท"
+                                      placeholder={Retype}
                                       onChange={handleType}
                                     />
                                   </div>

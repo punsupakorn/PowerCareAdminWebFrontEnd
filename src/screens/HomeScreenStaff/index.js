@@ -19,7 +19,7 @@ const HomeScreenStaff = () => {
     <div className="content-body">
     <div class="mt-10 text-center">
       <h1 class="text-4xl font-bold text-gray-800">PowerCare Clinic</h1>
-      <p class="text-lg mt-3 font-semibold">สำหรับพนักงาน</p>
+      <p class="text-lg mt-3 font-semibold">สำหรับเจ้าหน้าที่</p>
       <div
               className="
         flex
