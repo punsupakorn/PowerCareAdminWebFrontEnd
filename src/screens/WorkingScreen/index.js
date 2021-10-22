@@ -13,16 +13,26 @@ import { server } from "../../constants/constant";
 export default function WorkingScreen() {
   const [searched, setSearched] = useState(false);
   const [working, setWorking] = useState([]);
+  const [patient, setpatient] = useState("");
 
   useEffect(() => {
     axios.get(server.WORKING).then((res) => {
-      setWorking(res.data);
+      // console.log(res.data);
+      const data = res.data.arr;
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i];
+        setWorking(element);
+      }
+      
+      // setWorking(res.data);
     });
   }, []);
 
   const refreshPage = () => {
     window.location.reload();
   };
+
+  // get
 
   // const handleData = (AppointmentID) => {
   //   try {
@@ -97,37 +107,37 @@ export default function WorkingScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {working.map((working) => (
-              <div className="table-grid-working">
-                <p></p>
-                <p></p>
-                <p>{working.Date}</p>
-                <p>{working.Time}</p>
-                <p>{working.UserID}</p>
-                <p></p>
+            {/* {working.map((working) => ( */}
+            <div className="table-grid-working">
+              <p></p>
+              <p></p>
+              <p>{working.Date}</p>
+              <p>{working.Time}</p>
+              <p>{working.UserID}</p>
+              <p></p>
 
-                <div className="menu-row">
-                  <Link to={`/workingdetail/&id=${working.AppointmentID}`}>
-                    <Add
-                      {...iconOption}
-                      // onClick={() => console.log("Click function add " + item.id)}
-                    />
-                  </Link>
-                  <Link to="/postpone">
-                    <Edit
-                      {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                  </Link>
-                  <Link to="/confirmcancel">
-                    <Delete
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
-                    />
-                  </Link>
-                </div>
+              <div className="menu-row">
+                <Link to={`/workingdetail/&id=${working.AppointmentID}`}>
+                  <Add
+                    {...iconOption}
+                    // onClick={() => console.log("Click function add " + item.id)}
+                  />
+                </Link>
+                <Link to="/postpone">
+                  <Edit
+                    {...iconOption}
+                    // onClick={() => console.log("Click function edit ")}
+                  />
+                </Link>
+                <Link to="/confirmcancel">
+                  <Delete
+                    {...iconOption}
+                    // onClick={() => handleData(working.AppointmentID)}
+                  />
+                </Link>
               </div>
-            ))}
+            </div>
+            {/* ))} */}
           </div>
         </div>
       </div>

@@ -10,16 +10,21 @@ import { server } from "../../constants/constant";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { regPhoneNumber } from "../../regex";
 
 export default function ManageMedicineScreen() {
+  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+  const [medicine, setMedicine] = useState([]);
   // const [modalOpen, setModalOpen] = useState(false);
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState("");
   const [Type, setType] = useState("");
-  const [medicine, setMedicine] = useState([]);
+
   const [state, setstate] = useState();
+
   const [MedicineID, setMedicineID] = useState("");
+
   const [ReMedicine, setReMedicine] = useState("");
   const [Redescription, setRedescription] = useState("");
   const [RePrice, setRePrice] = useState("");
@@ -30,6 +35,46 @@ export default function ManageMedicineScreen() {
   const [PostPrice, setPostPrice] = useState("");
   const [PostType, setPostType] = useState("");
 
+  // for search
+  const [searchInput, setSearchInput] = useState(null);
+  const [searched, setSearched] = useState(false);
+  // data
+  const [data, setData] = useState(mockup);
+  //  Modal delete
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // Modal add
+  const [lgShow, setLgShow] = useState(false);
+  // Modal Edit
+  const [smShow, setSmShow] = useState(false);
+  // table
+  const [indexTable, setIndexTable] = useState(0);
+  const [numOfRow, setNumOfRow] = useState(10);
+  const numOfTable = Math.ceil(data.length / numOfRow);
+  const numberStartData = indexTable * numOfRow;
+  const dataLength = +numOfRow;
+  const numberEndData =
+    numberStartData + dataLength > data.length
+      ? data.length
+      : numberStartData + dataLength;
+  if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
+
+  // refresh page
+  function refreshPage() {
+    window.location.reload();
+  }
+
+  // function search
+  function search(text) {
+    let nData = [];
+    data.forEach((item, key) => {
+      if (item.name.search(text) != -1) nData.push(item);
+    });
+    setData(nData);
+  }
+
+  //// ตารางยา ////
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
@@ -40,6 +85,7 @@ export default function ManageMedicineScreen() {
     getMedicine();
   }, []);
 
+  //// สำหรับเพิ่มยา ////
   const handleName = (e) => {
     const name = e.target.value;
     setName(name);
@@ -58,35 +104,47 @@ export default function ManageMedicineScreen() {
   const handleType = (e) => {
     const type = e.target.value;
     setType(type);
+    const result = regPhoneNumber.test(Type);
+    return result;
   };
 
-  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
-
-  const handleSubmit = async () => {
+  const handleSubmitNewMicine = async () => {
     try {
-      await axios
-        .post(server.MANAGE_MEDICINE, {
-          MedicineName: Name,
-          MedicineDescription: Description,
-          Price: Price,
-          Type: Type,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      window.alert("เพื่มยาสำเร็จ");
-      refreshPage();
-    } catch (error) {}
+      let medicine = {
+        MedicineName: Name,
+        MedicineDescription: Description,
+        Price: Price,
+        Type: Type,
+      };
+      let data = Object.values(medicine).every((value) => value);
+      try {
+        if (data == false) {
+          window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+        } else if (!regPhoneNumber.test(Price)) {
+          window.alert("โปรดกรอกราคาผลิตภัณฑ์ยาเป็นตัวเลข");
+        } else {
+          await axios
+            .post(server.MANAGE_MEDICINE, {
+              MedicineName: Name,
+              MedicineDescription: Description,
+              Price: Price,
+              Type: Type,
+            })
+            .then((res) => {
+              console.log(res);
+            });
+          window.alert("เพิ่มยาสำเร็จ");
+          refreshPage();
+        }
+      } catch (error) {
+        return error;
+      }
+    } catch (error) {
+      return error;
+    }
   };
-  //  Modal delete
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  // Modal add
-  const [lgShow, setLgShow] = useState(false);
-  // Modal Edit
-  const [smShow, setSmShow] = useState(false);
 
+  //// ลบยา ////
   const handleToConfirmDelete = (MedicineID) => {
     setstate({ MedicineID });
     handleShow();
@@ -104,41 +162,12 @@ export default function ManageMedicineScreen() {
     }
   };
 
-  // for search
-  const [searchInput, setSearchInput] = useState(null);
-  const [searched, setSearched] = useState(false);
-  // data
-  const [data, setData] = useState(mockup);
-  // table
-  const [indexTable, setIndexTable] = useState(0);
-  const [numOfRow, setNumOfRow] = useState(10);
-  const numOfTable = Math.ceil(data.length / numOfRow);
-  const numberStartData = indexTable * numOfRow;
-  const dataLength = +numOfRow;
-  const numberEndData =
-    numberStartData + dataLength > data.length
-      ? data.length
-      : numberStartData + dataLength;
-  if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
+  /// แก้ไขยาใหม่ ////
 
-  // refresh page
-  function refreshPage() {
-    window.location.reload();
-  }
-  // function search
-  function search(text) {
-    let nData = [];
-    data.forEach((item, key) => {
-      if (item.name.search(text) != -1) nData.push(item);
-    });
-    setData(nData);
-  }
-
-  const EditMedicine = (MedicineID) => {
+  const showOldMedicine = (MedicineID) => {
     try {
       setSmShow(true);
       axios.get(`${server.MANAGE_MEDICINE}/${MedicineID}`).then((res) => {
-        // console.log(res.data);
         const data = res.data;
         setReMedicine(data.MedicineName);
         setRedescription(data.MedicineDescription);
@@ -151,48 +180,46 @@ export default function ManageMedicineScreen() {
     }
   };
 
-  const handleNewName = (name) => {
-    const data = name.target.value;
+  const handleNewName = (e) => {
+    const data = e.target.value;
     setPostMedicine(data);
   };
 
-  const handleNewDescription = (description) => {
-    const data = description.target.value;
+  const handleNewDescription = (e) => {
+    const data = e.target.value;
     setPostDescription(data);
   };
 
-  const handleNewPrice = (price) => {
-    const data = price.target.value;
+  const handleNewPrice = (e) => {
+    const data = e.target.value;
     setPostPrice(data);
   };
 
-  const handleNewType = (type) => {
-    const data = type.target.value;
+  const handleNewType = (e) => {
+    const data = e.target.value;
     setPostType(data);
   };
+
   const handleEdit = () => {
     try {
-      // console.log(MedicineID);
-      // console.log(Name);
-      // console.log(Description);
-      // console.log(Price);
-      // console.log(Type);
       axios
         .put(server.MANAGE_MEDICINE, {
           MedicineID: MedicineID,
-          Name: PostMedicine,
-          Description: PostDescription,
+          MedicineName: PostMedicine,
+          MedicineDescription: PostDescription,
           Price: PostPrice,
           Type: PostType,
+        })
+        .then((res) => {
+          const data = res.data;
+          if (data == true) {
+            window.alert("แก้ไขข้อมูลสำเร็จ");
+            refreshPage();
+          }
         });
-        // .then((res) => {
-        //   const data = res.data;
-        //   if (data == true) {
-        //     window.alert("แก้ไขข้อมูลสำเร็จ");
-        //     // history.push("/profile");
-        //   }
-        // });
-    } catch (error) {}
+    } catch (error) {
+      return error;
+    }
   };
 
   return (
@@ -265,7 +292,7 @@ export default function ManageMedicineScreen() {
                   <div className="menu-row">
                     <Edit
                       {...iconOption}
-                      onClick={() => EditMedicine(med.MedicineID)}
+                      onClick={() => showOldMedicine(med.MedicineID)}
                     />
 
                     <Modal
@@ -352,18 +379,18 @@ export default function ManageMedicineScreen() {
                         </Modal.Body>
                       </center>
                       <Modal.Footer>
-                        <Link to="medicine">
-                          <Button
-                            variant="primary"
-                            style={{
-                              borderColor: "#818CF8",
-                              backgroundColor: "#818CF8",
-                            }}
-                            onClick={handleEdit}
-                          >
-                            ยืนยันการแก้ไข
-                          </Button>
-                        </Link>
+                        {/* <Link to="medicine"> */}
+                        <Button
+                          variant="primary"
+                          style={{
+                            borderColor: "#818CF8",
+                            backgroundColor: "#818CF8",
+                          }}
+                          onClick={handleEdit}
+                        >
+                          ยืนยันการแก้ไข
+                        </Button>
+                        {/* </Link> */}
                       </Modal.Footer>
                     </Modal>
                     <Delete
@@ -507,21 +534,17 @@ export default function ManageMedicineScreen() {
               </Modal.Body>
             </center>
             <Modal.Footer>
-              <Link to="medicine">
-                <Button
-                  variant="primary"
-                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-                  onClick={handleSubmit}
-                >
-                  เพิ่มยา
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+                onClick={handleSubmitNewMicine}
+              >
+                เพิ่มยา
+              </Button>
             </Modal.Footer>
           </Modal>
-          {/* </Link> */}
         </div>
       </div>
-      {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}
     </div>
   );
 }

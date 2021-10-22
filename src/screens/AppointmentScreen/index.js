@@ -10,8 +10,9 @@ import { server } from "../../constants/constant";
 
 const AppointmentScreen = () => {
   const [doctor, setDoctor] = useState([]);
-  const [name, setName] = useState();
-  const [date, setDate] = useState();
+  const [id, setid] = useState("");
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
 
   const timeList = [
     "09.00 - 09.30",
@@ -32,16 +33,18 @@ const AppointmentScreen = () => {
     });
   }, []);
 
-  const handleName = (e) => {
+  const handleData = (e) => {
     const name = e.target.value;
-    setName(name);
+    const data = JSON.parse(name);
+    setName(data.name);
+    setid(data.id);
   };
 
   // const onChooseDate = (e) => {};
 
   // const onCancelDate = (e) => {};
 
-  console.log("result : ", date);
+  // console.log("result : ", date);
 
   // Input Component
   function InputSchedule({ title, children }) {
@@ -85,20 +88,30 @@ const AppointmentScreen = () => {
       if (data == false) {
         window.alert("โปรดกรอกชื่อแพทย์และวันที่ให้ครบ");
       } else {
-        axios
-          .post(server.APPOINTMENT, {
-            doctor: name,
-            date: date,
-            time: timeList,
-          })
-          .then((res) => {
-            console.log(res);
-          });
-        window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
-        refreshPage();
+        axios.get(`${server.APPOINTMENT}/check/${id}/${date}`).then((res) => {
+          console.log(res.data);
+        });
+        // axios
+        //   .post(server.APPOINTMENT, {
+        //     doctor: name,
+        //     date: date,
+        //     time: timeList,
+        //     id: id,
+        //   })
+        //   .then((res) => {
+        //     console.log(res);
+        //   });
+        // window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
+        // refreshPage();
       }
     } catch (error) {}
   };
+
+  const handleId = (documentid) => {
+    setid(documentid);
+  };
+
+  console.log("name : ", name, "id : ", id);
 
   return (
     <div className="content-body mt-6">
@@ -108,16 +121,21 @@ const AppointmentScreen = () => {
       <div className="schedule-content mt-4">
         <InputSchedule title="เลือกหมอ" invalid>
           <select
-            value={name}
+            // value={name}
             name="doctor-select"
             className="doctor-select"
-            onChange={handleName}
+            onChange={handleData}
           >
             <option value="" disabled selected>
               เลือกหมอ...
             </option>
             {doctor.map((doctorname) => (
-              <option>
+              <option
+                value={JSON.stringify({
+                  name: `${doctorname.FirstName} ${doctorname.LastName}`,
+                  id: doctorname.DocumentID,
+                })}
+              >
                 {doctorname.FirstName} {doctorname.LastName}
               </option>
             ))}

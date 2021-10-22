@@ -10,7 +10,7 @@ import { server } from "../../constants/constant";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
-
+  const [today, settoday] = useState();
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -27,23 +27,11 @@ const ScheduleScreen = () => {
   //   });
   //   setData(nData);
   // }
-
-  // refresh page
   const refreshPage = () => {
     window.location.reload();
   };
-  
 
-  useEffect(() => {
-    axios.get(server.SCHEDULE).then((res) => {
-      console.log(res.data);
-      // setSchedule(res.data);
-    });
-  }, []);
-
-  // console.log(schedule);
-
-  const displayDate = (date) => {
+  const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
       year: "numeric",
       month: "long",
@@ -53,15 +41,35 @@ const ScheduleScreen = () => {
     return result;
   };
 
-  const displayTime = (time) => {
-    const timearray = [];
-    for (let i = 0; i < time.length; i++) {
-      const element = time[i];
-      timearray.push(element);
-    }
-    // console.log(timearray);
-    return timearray;
+  // const getAllTimeTable = () => {
+  //   try {
+  //     axios.get(server.SCHEDULE).then((res) => {
+  //       setSchedule(res.data);
+  //     });
+  //     return schedule;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
+
+  const getToday = async () => {
+    await axios.get(server.SCHEDULE).then((res) => {
+      const data = res.data;
+      const date = new Date().toLocaleDateString("th-TH", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long",
+      });
+      const today = data.filter((data) => displayThaiDate(data.Date) == date);
+      setSchedule(today);
+    });
   };
+
+  useEffect(() => {
+    getToday();
+    showToday();
+  }, []);
 
   // const handleToConfirmDelete = (TimeTableID) => {
   //   const result = setstate({ TimeTableID });
@@ -81,6 +89,27 @@ const ScheduleScreen = () => {
   //   }
   // };
 
+  const displayTime = (time) => {
+    const timearray = [];
+    for (let i = 0; i < time.length; i++) {
+      const element = time[i];
+      timearray.push(element);
+    }
+    // console.log(timearray);
+    return timearray;
+  };
+  // {schedule.reduce((data) => (data.Date))}
+
+  const showToday = () => {
+    const result = new Date().toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    // return result
+    settoday(result);
+  };
   return (
     <div className="content-body ">
       <p class="text-xl mt-3 font-semibold">ตารางเวลาทำการของแพทย์</p>
@@ -157,26 +186,25 @@ const ScheduleScreen = () => {
         </Link> */}
       </div>
       <div className="appointment-content">
-        {/* {schedule.map((data) => ( */}
+        <div className="card-appointment">
+          ตารางเวลาทำการของแพทย์ประจำ{today}
+        </div>
+        {schedule.map((data) => (
           <div className="card-appointment">
             <br></br>
-            {/* <h3>ชื่อแพทย์ : {data.DoctorName}</h3> */}
+            <h3>ชื่อแพทย์ : {data.DoctorName}</h3>
             <br></br>
-            {/* {displayDate(data.Date).map((d)=>(
-              <p>{d}</p>
-            ))} */}
-            {/* <p>{displayDate(data.Date)}</p> */}
+            {/* <p>{displayThaiDate(data.Date)}</p> */}
             <div className="time-item-content">
-              {/* <span className="time-item">
-                {data.Time}
-
+              {/* <span className="time-item"> */}
+              {/* 
                 <CloseIcon
                   width="0.5rem"
                   hieght="0.5rem"
                   className="close"
                   onClick={handleShow}
-                />
-                <Modal show={show} onHide={handleClose}>
+                /> */}
+              {/* <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>คำเตือน</Modal.Title>
                   </Modal.Header>
@@ -202,11 +230,11 @@ const ScheduleScreen = () => {
                       ยืนยันยกเลิกเวลานี้หรือไม่ ?
                     </Button>
                   </Modal.Footer>
-                </Modal>
-              </span> */}
-              {/* {displayTime(data.Time).map((t) => ( */}
+                </Modal> */}
+              {/* </span> */}
+              {displayTime(data.Time).map((t) => (
                 <span className="time-item">
-                  {/* {t} */}
+                  {t}
                   {/* <CloseIcon
                     width="0.5rem"
                     hieght="0.5rem"
@@ -247,10 +275,10 @@ const ScheduleScreen = () => {
                     </Modal.Footer>
                   </Modal>
                 </span>
-              {/* ))} */}
+              ))}
             </div>
           </div>
-        {/* ))} */}
+        ))}
       </div>
     </div>
   );
