@@ -250,9 +250,9 @@ export default function ManageMedicineScreen() {
                                 <label className="leading-loose">
                                   คำอธิบายเกี่ยวกับยา
                                 </label>
-                                <input
+                                <textarea
                                   type="text"
-                                  className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                   placeholder={Redescription}
                                   onChange={handleDescription}
                                 />
@@ -274,12 +274,28 @@ export default function ManageMedicineScreen() {
                                     ประเภท
                                   </label>
                                   <div className="relative focus-within:text-gray-600 text-gray-400">
-                                    <input
+                                    <select
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      placeholder={Retype}
                                       onChange={handleType}
-                                    />
+                                    >
+                                      <option disabled selected value>
+                                        {Retype}
+                                      </option>
+                                      <option
+                                        className="option"
+                                        value="ยาใช้ภายนอก"
+                                      >
+                                        {" "}
+                                        ยาใช้ภายนอก{" "}
+                                      </option>
+                                      <option
+                                        className="option"
+                                        value="ยาใช้ภายใน"
+                                      >
+                                        ยาใช้ภายใน
+                                      </option>
+                                    </select>
                                   </div>
                                 </div>
                               </div>
@@ -419,12 +435,22 @@ export default function ManageMedicineScreen() {
                       <div className="flex flex-col">
                         <label className="leading-loose">ประเภท</label>
                         <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
+                          <select
                             type="text"
                             className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกประเภท"
                             onChange={handleType}
-                          />
+                          >
+                            <option disabled selected value>
+                              กรุณาเลือกประเภท
+                            </option>
+                            <option className="option" value="ยาใช้ภายนอก">
+                              {" "}
+                              ยาใช้ภายนอก{" "}
+                            </option>
+                            <option className="option" value="ยาใช้ภายใน">
+                              ยาใช้ภายใน
+                            </option>
+                          </select>
                         </div>
                       </div>
                     </div>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { TopBar, SideBar } from "./components";
+import { TopBar } from "./components";
 import {
   HomeScreenStaff,
   HomeScreenDoctor,
@@ -38,7 +38,6 @@ function App() {
         <div className="App">
           <TopBar />
           <div className="content">
-            <SideBar />
             {/* Screen Routing */}
             <Switch>
               <Route exact path="/" component={LogIn} />
