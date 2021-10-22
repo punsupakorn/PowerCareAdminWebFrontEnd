@@ -61,7 +61,7 @@ function ProfileScreen() {
               </button>
             </Link>
           </div>
-          <hr className="mt-6 border-b-1 border-blueGray-300" />
+          <hr className="mt-6 mb-6 border-b-1 border-blueGray-300" />
           {/* <form className="mt-6"> */}
           <div className="flex justify-between gap-3">
             <span className="w-1/2">

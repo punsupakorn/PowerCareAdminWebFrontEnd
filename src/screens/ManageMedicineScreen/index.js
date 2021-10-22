@@ -17,14 +17,18 @@ export default function ManageMedicineScreen() {
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState("");
   const [Type, setType] = useState("");
-  const [Stock, setStock] = useState("");
   const [medicine, setMedicine] = useState([]);
   const [state, setstate] = useState();
-
+  const [MedicineID, setMedicineID] = useState("");
   const [ReMedicine, setReMedicine] = useState("");
   const [Redescription, setRedescription] = useState("");
   const [RePrice, setRePrice] = useState("");
   const [Retype, setRetype] = useState("");
+
+  const [PostMedicine, setPostMedicine] = useState("");
+  const [PostDescription, setPostDescription] = useState("");
+  const [PostPrice, setPostPrice] = useState("");
+  const [PostType, setPostType] = useState("");
 
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
@@ -62,11 +66,10 @@ export default function ManageMedicineScreen() {
     try {
       await axios
         .post(server.MANAGE_MEDICINE, {
-          Name: Name,
-          Description: Description,
+          MedicineName: Name,
+          MedicineDescription: Description,
           Price: Price,
           Type: Type,
-          Stock: Stock,
         })
         .then((res) => {
           console.log(res);
@@ -141,10 +144,55 @@ export default function ManageMedicineScreen() {
         setRedescription(data.MedicineDescription);
         setRePrice(data.Price);
         setRetype(data.Type);
+        setMedicineID(MedicineID);
       });
     } catch (error) {
       return error;
     }
+  };
+
+  const handleNewName = (name) => {
+    const data = name.target.value;
+    setPostMedicine(data);
+  };
+
+  const handleNewDescription = (description) => {
+    const data = description.target.value;
+    setPostDescription(data);
+  };
+
+  const handleNewPrice = (price) => {
+    const data = price.target.value;
+    setPostPrice(data);
+  };
+
+  const handleNewType = (type) => {
+    const data = type.target.value;
+    setPostType(data);
+  };
+  const handleEdit = () => {
+    try {
+      // console.log(MedicineID);
+      // console.log(Name);
+      // console.log(Description);
+      // console.log(Price);
+      // console.log(Type);
+      axios
+        .put(server.MANAGE_MEDICINE, {
+          MedicineID: MedicineID,
+          Name: PostMedicine,
+          Description: PostDescription,
+          Price: PostPrice,
+          Type: PostType,
+        });
+        // .then((res) => {
+        //   const data = res.data;
+        //   if (data == true) {
+        //     window.alert("แก้ไขข้อมูลสำเร็จ");
+        //     // history.push("/profile");
+        //   }
+        // });
+    } catch (error) {}
   };
 
   return (
@@ -243,7 +291,7 @@ export default function ManageMedicineScreen() {
                                   type="text"
                                   className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                   placeholder={ReMedicine}
-                                  onChange={handleName}
+                                  onChange={handleNewName}
                                 />
                               </div>
                               <div className="flex flex-col">
@@ -254,7 +302,7 @@ export default function ManageMedicineScreen() {
                                   type="text"
                                   className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                   placeholder={Redescription}
-                                  onChange={handleDescription}
+                                  onChange={handleNewDescription}
                                 />
                               </div>
                               <div className="flex items-center space-x-4">
@@ -265,7 +313,7 @@ export default function ManageMedicineScreen() {
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                       placeholder={RePrice}
-                                      onChange={handlePrice}
+                                      onChange={handleNewPrice}
                                     />
                                   </div>
                                 </div>
@@ -277,7 +325,7 @@ export default function ManageMedicineScreen() {
                                     <select
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      onChange={handleType}
+                                      onChange={handleNewType}
                                     >
                                       <option disabled selected value>
                                         {Retype}
@@ -311,7 +359,7 @@ export default function ManageMedicineScreen() {
                               borderColor: "#818CF8",
                               backgroundColor: "#818CF8",
                             }}
-                            onClick={handleSubmit}
+                            onClick={handleEdit}
                           >
                             ยืนยันการแก้ไข
                           </Button>
