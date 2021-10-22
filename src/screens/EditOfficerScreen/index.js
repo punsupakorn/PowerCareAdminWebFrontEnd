@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router";
 import { server } from "../../constants/constant";
@@ -26,6 +26,25 @@ function EditOfficerScreen() {
     state_Position,
     state_Email,
   } = location.state;
+
+  const getOfficerProfile = () => {
+    try {
+      axios
+        .get(
+          `${server.EDIT_OFFICER}/getprofile/${state_Position}/${state_DocumentID}`
+        )
+        .then((res) => {
+          const data = res.data;
+          setFirstName(data.FirstName);
+          setLastName(data.LastName);
+          setPhone(data.Phone);
+        });
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getOfficerProfile();
+  }, []);
 
   const checkFirstName = (firstname) => {
     const data = firstname.target.value;
@@ -70,34 +89,39 @@ function EditOfficerScreen() {
   };
 
   const handleSubmitData = () => {
-    let user = {
-      firstname: FirstName,
-      lastname: LastName,
-      phone: Phone,
-    };
-
-    let data = Object.values(user).every((value) => value);
-    if (data == false) {
-      window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
-    } else {
-      try {
-        axios
-          .put(server.EDIT_OFFICER, {
-            FirstName: FirstName,
-            LastName: LastName,
-            Phone: Phone,
-            Position: state_Position,
-            DocumentID: state_DocumentID,
-          })
-          .then((res) => {
-            const data = res.data;
-            if (data == true) {
-              window.alert("แก้ไขข้อมูลสำเร็จ");
-              history.push("/profile");
-            }
-          });
-      } catch (error) {}
-    }
+    // let user = {
+    //   firstname: FirstName,
+    //   lastname: LastName,
+    //   phone: Phone,
+    // };
+    // let data = Object.values(user).every((value) => value);
+    // if (!regThaiChar.test(FirstName)) {
+    //   window.alert("โปรดกรอกชื่อจริงเป็นภาษาไทย");
+    // } else if (!regThaiChar.test(LastName)) {
+    //   window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
+    // }
+    // if (!regPhoneNumber.test(Phone)) {
+    //   window.alert("โปรดกรอกหมายเลขโทรศัพท์เป็นตัวเลข");
+    // } else
+    // else {
+    try {
+      axios
+        .put(server.EDIT_OFFICER, {
+          FirstName: FirstName,
+          LastName: LastName,
+          Phone: Phone,
+          Position: state_Position,
+          DocumentID: state_DocumentID,
+        })
+        .then((res) => {
+          const data = res.data;
+          if (data == true) {
+            window.alert("แก้ไขข้อมูลสำเร็จ");
+            history.push("/profile");
+          }
+        });
+    } catch (error) {}
+    // }
   };
 
   const handleSubmitPassword = () => {
@@ -157,6 +181,7 @@ function EditOfficerScreen() {
                   ชื่อจริง
                 </label>
                 <input
+                  value={FirstName}
                   type="text"
                   name="FirstName"
                   placeholder={state_FirstName}
@@ -193,12 +218,12 @@ function EditOfficerScreen() {
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
             />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              ตำแหน่งงาน
+              ตำแหน่งงาน (ไม่สามารถแก้ไขได้)
             </label>
             <input
               disabled
-              // value={Position}
-              placeholder={state_Position}
+              value={state_Position}
+              // placeholder={state_Position}
               id="position"
               name="Position"
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
@@ -206,14 +231,14 @@ function EditOfficerScreen() {
               required
             />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              อีเมลล์{" "}
+              อีเมลล์ (ไม่สามารถแก้ไขได้)
             </label>
             <input
               disabled
-              // value={email}
+              value={state_Email}
               type="email"
               name="Email"
-              placeholder={state_Email}
+              // placeholder={state_Email}
               // onChange={checkEmail}
               required
               className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
