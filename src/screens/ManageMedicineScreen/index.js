@@ -413,7 +413,7 @@ export default function ManageMedicineScreen() {
                       <label className="leading-loose">
                         คำอธิบายเกี่ยวกับยา
                       </label>
-                      <input
+                      <textarea
                         type="text"
                         className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="กรุณากรอกคำอธิบาย"
