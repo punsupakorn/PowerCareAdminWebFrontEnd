@@ -83,7 +83,7 @@ const AddOfficerScreen = () => {
   //   }
   // };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     let user = {
       firstname: FirstName,
       lastname: LastName,
@@ -109,70 +109,41 @@ const AddOfficerScreen = () => {
       } else if (!regThaiChar.test(LastName)) {
         window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
       } else {
-        // isEmailExist(Email);
         try {
-          await axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
-            setexist(res.data);
-          });
-
-          if (exist == false) {
-            window.alert(
-              "ลงทะเบียนผิดพลาด เนื่องจากอีเมล์นี้มีบัญชีผู้ใช้ในระบบแล้ว"
-            );
-          } else {
-            await axios
-              .post(server.ADD_OFFICER, {
-                FirstName: FirstName,
-                LastName: LastName,
-                Phone: Phone,
-                Position: Position,
-                Email: Email,
-                Password: Password,
-              })
-              .then((res) => {
-                const profile = res.data;
-                history.push({
-                  pathname: `/confirmaddofficer`,
-                  state: {
-                    firstname: profile.FirstName,
-                    lastname: profile.LastName,
-                    phone: profile.Phone,
-                    position: profile.Position,
-                    email: profile.Email,
-                  },
+          axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
+            const data = res.data;
+            if (data == false) {
+              window.alert(
+                "ลงทะเบียนผิดพลาด เนื่องจากอีเมล์นี้มีบัญชีผู้ใช้ในระบบแล้ว"
+              );
+            } else {
+              axios
+                .post(server.ADD_OFFICER, {
+                  FirstName: FirstName,
+                  LastName: LastName,
+                  Phone: Phone,
+                  Position: Position,
+                  Email: Email,
+                  Password: Password,
+                })
+                .then((res) => {
+                  const profile = res.data;
+                  history.push({
+                    pathname: `/confirmaddofficer`,
+                    state: {
+                      firstname: profile.FirstName,
+                      lastname: profile.LastName,
+                      phone: profile.Phone,
+                      position: profile.Position,
+                      email: profile.Email,
+                    },
+                  });
                 });
-              });
-          }
-        } catch (error) {}
-        console.log(exist);
-
-        // if (exist !== true) {
-
-        //   refreshPage();
-        // } else {
-        //   axios
-        //     .post(server.ADD_OFFICER, {
-        //       FirstName: FirstName,
-        //       LastName: LastName,
-        //       Phone: Phone,
-        //       Position: Position,
-        //       Email: Email,
-        //       Password: Password,
-        //     })
-        //     .then((res) => {
-        //       const profile = res.data;
-        //       history.push({
-        //         pathname: `/confirmaddofficer`,
-        //         state: {
-        //           firstname: profile.FirstName,
-        //           lastname: profile.LastName,
-        //           phone: profile.Phone,
-        //           position: profile.Position,
-        //           email: profile.Email,
-        //         },
-        //       });
-        //     });
-        // }
+            }
+          });
+        } catch (error) {
+          return error;
+        }
       }
     } catch (error) {
       return error;
