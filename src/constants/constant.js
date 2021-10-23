@@ -13,4 +13,5 @@ export const server = {
   EDIT_OFFICER: `${apiURL}EditOfficer`,
   MANAGE_MEDICINE: `${apiURL}ManageMedicine`,
   PROFILE: `${apiURL}Profile`,
+  
 };

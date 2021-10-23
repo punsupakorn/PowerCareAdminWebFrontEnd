@@ -88,21 +88,21 @@ const AppointmentScreen = () => {
       if (data == false) {
         window.alert("โปรดกรอกชื่อแพทย์และวันที่ให้ครบ");
       } else {
-        axios.get(`${server.APPOINTMENT}/check/${id}/${date}`).then((res) => {
-          console.log(res.data);
-        });
-        // axios
-        //   .post(server.APPOINTMENT, {
-        //     doctor: name,
-        //     date: date,
-        //     time: timeList,
-        //     id: id,
-        //   })
-        //   .then((res) => {
-        //     console.log(res);
-        //   });
-        // window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
-        // refreshPage();
+        // axios.get(`${server.APPOINTMENT}/check/${id}/${date}`).then((res) => {
+        //   console.log(res.data);
+        // });
+        axios
+          .post(server.APPOINTMENT, {
+            doctor: name,
+            date: date,
+            time: timeList,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
+        refreshPage();
       }
     } catch (error) {}
   };

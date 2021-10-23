@@ -44,6 +44,35 @@
   padding: 0.5rem 2rem;
 }
 
+.card-appointment-text{
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  border-radius: 8px;
+  background-color: #a5b4fc;
+  color: white;
+  padding: 1rem 1rem;
+  width: 90%;
+  align-self: center;
+
+}
+
+.card-appointment-add {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: start;
+  width: 30%;
+  padding: 0.5rem 2rem;
+  align-self: center;
+  text-align: add;
+  cursor: pointer;
+}
+
 .time-item-content {
   display: flex;
   flex-wrap: wrap;
