@@ -8,8 +8,10 @@ import Edit from "../../icons/edit";
 import Delete from "../../icons/delete";
 import { server } from "../../constants/constant";
 import { Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import { Modal, Pagination } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import "./ManageMedicineScreen.css";
+import ReactPaginate from "react-paginate";
 
 export default function ManageMedicineScreen() {
   // const [modalOpen, setModalOpen] = useState(false);
@@ -30,11 +32,51 @@ export default function ManageMedicineScreen() {
   const [PostPrice, setPostPrice] = useState("");
   const [PostType, setPostType] = useState("");
 
-  const getMedicine = () => {
-    axios.get(server.MEDICINE).then((res) => {
-      setMedicine(res.data);
-    });
+  const [offset, setOffset] = useState(0);
+  // const [data, setData] = useState([]);
+  const [perPage] = useState(2);
+  const [pageCount, setPageCount] = useState(0);
+
+  // ------------  medicine ยังไม่มี paginate ------------ 
+  // const getMedicine = () => {
+  //   axios.get(server.MEDICINE).then((res) => {
+  //     setMedicine(res.data);
+  //   });
+  // };
+  // ------------  medicine ยังไม่มี paginate ------------ 
+
+  // Pagination
+  const getMedicine = async () => {
+    const res = await axios.get(server.MEDICINE);
+    const data = res.data;
+
+    // ------------  ก้อนนี้ต้อง map ข้อมูลกับของเรา ------------ 
+    // const slice = data.slice(offset, offset + perPage);
+    // const postData = slice.map((med) => (
+    //   <div key ={med.medicine}/>
+    //   // <div key={med.id}>
+    //   //   <p>{med.title}</p>
+    //   //   <img src={med.thumbnailUrl} alt="" />
+    //   // </div>
+    // ));
+    // setMedicine(postData);
+
+     // ------------  ก้อนนี้ต้อง map ข้อมูลกับของเรา ------------ 
+    
+    setPageCount(Math.ceil(data.length / perPage));
+    setMedicine(res.data);
   };
+
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setOffset(selectedPage + 5);
+  };
+
+  useEffect(() => {
+    getMedicine();
+  }, [offset]);
+
+  // -------------------
 
   useEffect(() => {
     getMedicine();
@@ -108,18 +150,18 @@ export default function ManageMedicineScreen() {
   // const [searchInput, setSearchInput] = useState(null);
   // const [searched, setSearched] = useState(false);
   // data
-  const [data, setData] = useState([medicine]);
-  // table
-  const [indexTable, setIndexTable] = useState(0);
-  const [numOfRow, setNumOfRow] = useState(10);
-  const numOfTable = Math.ceil(data.length / numOfRow);
-  const numberStartData = indexTable * numOfRow;
-  const dataLength = +numOfRow;
-  const numberEndData =
-    numberStartData + dataLength > data.length
-      ? data.length
-      : numberStartData + dataLength;
-  if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
+  // const [data, setData] = useState([medicine]);
+  // // table
+  // const [indexTable, setIndexTable] = useState(0);
+  // const [numOfRow, setNumOfRow] = useState(10);
+  // const numOfTable = Math.ceil(data.length / numOfRow);
+  // const numberStartData = indexTable * numOfRow;
+  // const dataLength = +numOfRow;
+  // const numberEndData =
+  //   numberStartData + dataLength > data.length
+  //     ? data.length
+  //     : numberStartData + dataLength;
+  // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
 
   // refresh page
   function refreshPage() {
@@ -198,6 +240,7 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const skincare = data.filter((data) => data.Type == "ผลิตภัณฑ์บำรุงผิว");
+      
       setMedicine(skincare);
     });
   };
@@ -205,16 +248,20 @@ export default function ManageMedicineScreen() {
   const getCleanFace = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
-      const cleanface = data.filter((data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า");
-      setMedicine(cleanface); 
+      const cleanface = data.filter(
+        (data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
+      );
+      setMedicine(cleanface);
     });
   };
 
   const getHeal = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
-      const heal = data.filter((data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน");
-      setMedicine(heal); 
+      const heal = data.filter(
+        (data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+      );
+      setMedicine(heal);
     });
   };
 
@@ -222,7 +269,7 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const supply = data.filter((data) => data.Type == "ผลิตภัณฑ์เสริมอาหาร");
-      setMedicine(supply); 
+      setMedicine(supply);
     });
   };
 
@@ -230,7 +277,7 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const medi = data.filter((data) => data.Type == "ยารักษาโรค");
-      setMedicine(medi); 
+      setMedicine(medi);
     });
   };
 
@@ -245,7 +292,7 @@ export default function ManageMedicineScreen() {
   return (
     <div className="content-body">
       <div className="medicine-content">
-        <p className="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
+        <p className="text-xl mt-3 font-semibold">ผลิตภัณฑ์ทั้งหมด</p>
 
         <div class=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
           {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
@@ -260,8 +307,7 @@ export default function ManageMedicineScreen() {
             />
             <div class="title py-2  px-2 color-white">ยาและผลิตภัณฑ์</div>
           </label>
-          
-          
+
           <label
             class=" ml-10 flex radio p-2 cursor-pointer"
             onClick={getSkincare}
@@ -274,10 +320,7 @@ export default function ManageMedicineScreen() {
             <div class="title py-2  px-2 color-white">ผลิตภัณฑ์บำรุงผิว</div>
           </label>
 
-          <label
-            class="flex radio p-2 cursor-pointer"
-            onClick = {getCleanFace}
-          >
+          <label class="flex radio p-2 cursor-pointer" onClick={getCleanFace}>
             <input
               class="my-auto transform scale-125"
               type="radio"
@@ -288,10 +331,7 @@ export default function ManageMedicineScreen() {
             </div>
           </label>
 
-          <label
-            class="flex radio p-2 cursor-pointer"
-            onClick = {getHeal}
-          >
+          <label class="flex radio p-2 cursor-pointer" onClick={getHeal}>
             <input
               class="my-auto transform scale-125"
               type="radio"
@@ -302,10 +342,7 @@ export default function ManageMedicineScreen() {
             </div>
           </label>
 
-          <label
-            class="flex radio p-2 cursor-pointer"
-            onClick = {getSupply}
-          >
+          <label class="flex radio p-2 cursor-pointer" onClick={getSupply}>
             <input
               class="my-auto transform scale-125"
               type="radio"
@@ -314,10 +351,7 @@ export default function ManageMedicineScreen() {
             <div class="title py-2 px-2 color-white">ผลิตภัณ์เสริมอาหาร</div>
           </label>
 
-          <label
-            class="flex radio p-2 cursor-pointer"
-            onClick = {getMedi}
-          >
+          <label class="flex radio p-2 cursor-pointer" onClick={getMedi}>
             <input
               class="my-auto transform scale-125 "
               type="radio"
@@ -517,13 +551,28 @@ export default function ManageMedicineScreen() {
           </div>
         </div>
 
-        <TableController
+        {/* <TableController
           indexTable={indexTable}
           setIndexTable={setIndexTable}
           numOfTable={numOfTable}
           setNumOfRow={setNumOfRow}
           numOfRow={numOfRow}
+        /> */}
+
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
         />
+
         <div className="px-2 ">
           <Link to="/">
             <Button

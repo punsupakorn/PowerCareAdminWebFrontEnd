@@ -134,7 +134,7 @@ export default function MedicineScreen() {
         price={item.price}
         key={key}
         index={numberStartData + key}
-        amount={item.amount}
+        // amount={item.amount}
         numberinstock={item.numberinstock}
       />
     ));
