@@ -15,17 +15,22 @@ export default function WorkingScreen() {
   const [working, setWorking] = useState([]);
   const [patient, setpatient] = useState("");
 
+  const getWorking = () => {
+    try {
+      axios.get(server.WORKING).then((res) => {
+        const data = res.data;
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          setWorking(element);
+        }
+        console.log(working)
+        // setWorking(res.data);
+      });
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    axios.get(server.WORKING).then((res) => {
-      // console.log(res.data);
-      const data = res.data.arr;
-      for (let i = 0; i < data.length; i++) {
-        const element = data[i];
-        setWorking(element);
-      }
-      
-      // setWorking(res.data);
-    });
+    getWorking();
   }, []);
 
   const refreshPage = () => {
@@ -113,7 +118,7 @@ export default function WorkingScreen() {
               <p></p>
               <p>{working.Date}</p>
               <p>{working.Time}</p>
-              <p>{working.UserID}</p>
+              <p>{working.UserName}</p>
               <p></p>
 
               <div className="menu-row">
