@@ -159,36 +159,27 @@ const ScheduleScreen = () => {
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
       </Link> */}
-      <div className="button-officelist ">
-        <Link to="/appointment">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-              color: "white",
-            }}
-          >
-            เพิ่มตารางเวลาทำการของแพทย์
-          </Button>
-        </Link>{" "}
-        {/* <Link to="/calendar">
-          <Button
-            variant="secondary"
-            style={{
-              borderColor: "#a5b4fe",
-              backgroundColor: "#a5b4fe",
-              color: "white",
-            }}
-          >
-            ปฏิทินเวลาการทำนัด
-          </Button>{" "}
-        </Link> */}
+
+      <div className="card-appointment-text ">
+        ตารางเวลาทำการของแพทย์ประจำ {today}
       </div>
+
       <div className="appointment-content">
-        <div className="card-appointment">
-          ตารางเวลาทำการของแพทย์ประจำ{today}
+        <div className="card-appointment-add ">
+          <Link to="/appointment">
+            {/* <Button */}
+              {/* variant="secondary"
+              style={{
+                borderColor: "#818CF8",
+                backgroundColor: "#818CF8",
+                color: "white",
+              }}
+            > */}
+              <center>เพิ่มตารางเวลาทำการของแพทย์</center>
+            {/* </Button> */}
+          </Link>{" "}
         </div>
+
         {schedule.map((data) => (
           <div className="card-appointment">
             <br></br>
@@ -196,42 +187,7 @@ const ScheduleScreen = () => {
             <br></br>
             {/* <p>{displayThaiDate(data.Date)}</p> */}
             <div className="time-item-content">
-              {/* <span className="time-item"> */}
-              {/* 
-                <CloseIcon
-                  width="0.5rem"
-                  hieght="0.5rem"
-                  className="close"
-                  onClick={handleShow}
-                /> */}
-              {/* <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>คำเตือน</Modal.Title>
-                  </Modal.Header>
-
-                  <center>
-                    <Modal.Body>
-                      {" "}
-                      คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?
-                    </Modal.Body>
-                  </center>
-                  <Modal.Footer>
-                    <Button
-                      variant="secondary"
-                      onClick={handleClose}
-                      style={{
-                        borderColor: "#bdbdbd",
-                        backgroundColor: "#bdbdbd",
-                      }}
-                    >
-                      ย้อนกลับ
-                    </Button>
-                    <Button variant="danger" onClick={handleClose}>
-                      ยืนยันยกเลิกเวลานี้หรือไม่ ?
-                    </Button>
-                  </Modal.Footer>
-                </Modal> */}
-              {/* </span> */}
+             
               {displayTime(data.Time).map((t) => (
                 <span className="time-item">
                   {t}

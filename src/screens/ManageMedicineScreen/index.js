@@ -10,21 +10,16 @@ import { server } from "../../constants/constant";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { regPhoneNumber } from "../../regex";
 
 export default function ManageMedicineScreen() {
-  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
-  const [medicine, setMedicine] = useState([]);
   // const [modalOpen, setModalOpen] = useState(false);
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState("");
   const [Type, setType] = useState("");
-
+  const [medicine, setMedicine] = useState([]);
   const [state, setstate] = useState();
-
   const [MedicineID, setMedicineID] = useState("");
-
   const [ReMedicine, setReMedicine] = useState("");
   const [Redescription, setRedescription] = useState("");
   const [RePrice, setRePrice] = useState("");
@@ -35,46 +30,6 @@ export default function ManageMedicineScreen() {
   const [PostPrice, setPostPrice] = useState("");
   const [PostType, setPostType] = useState("");
 
-  // for search
-  const [searchInput, setSearchInput] = useState(null);
-  const [searched, setSearched] = useState(false);
-  // data
-  const [data, setData] = useState(mockup);
-  //  Modal delete
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  // Modal add
-  const [lgShow, setLgShow] = useState(false);
-  // Modal Edit
-  const [smShow, setSmShow] = useState(false);
-  // table
-  const [indexTable, setIndexTable] = useState(0);
-  const [numOfRow, setNumOfRow] = useState(10);
-  const numOfTable = Math.ceil(data.length / numOfRow);
-  const numberStartData = indexTable * numOfRow;
-  const dataLength = +numOfRow;
-  const numberEndData =
-    numberStartData + dataLength > data.length
-      ? data.length
-      : numberStartData + dataLength;
-  if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
-
-  // refresh page
-  function refreshPage() {
-    window.location.reload();
-  }
-
-  // function search
-  function search(text) {
-    let nData = [];
-    data.forEach((item, key) => {
-      if (item.name.search(text) != -1) nData.push(item);
-    });
-    setData(nData);
-  }
-
-  //// ตารางยา ////
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
@@ -85,7 +40,6 @@ export default function ManageMedicineScreen() {
     getMedicine();
   }, []);
 
-  //// สำหรับเพิ่มยา ////
   const handleName = (e) => {
     const name = e.target.value;
     setName(name);
@@ -104,47 +58,35 @@ export default function ManageMedicineScreen() {
   const handleType = (e) => {
     const type = e.target.value;
     setType(type);
-    const result = regPhoneNumber.test(Type);
-    return result;
   };
 
-  const handleSubmitNewMicine = async () => {
+  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+
+  const handleSubmit = async () => {
     try {
-      let medicine = {
-        MedicineName: Name,
-        MedicineDescription: Description,
-        Price: Price,
-        Type: Type,
-      };
-      let data = Object.values(medicine).every((value) => value);
-      try {
-        if (data == false) {
-          window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
-        } else if (!regPhoneNumber.test(Price)) {
-          window.alert("โปรดกรอกราคาผลิตภัณฑ์ยาเป็นตัวเลข");
-        } else {
-          await axios
-            .post(server.MANAGE_MEDICINE, {
-              MedicineName: Name,
-              MedicineDescription: Description,
-              Price: Price,
-              Type: Type,
-            })
-            .then((res) => {
-              console.log(res);
-            });
-          window.alert("เพิ่มยาสำเร็จ");
-          refreshPage();
-        }
-      } catch (error) {
-        return error;
-      }
-    } catch (error) {
-      return error;
-    }
+      await axios
+        .post(server.MANAGE_MEDICINE, {
+          MedicineName: Name,
+          MedicineDescription: Description,
+          Price: Price,
+          Type: Type,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+      window.alert("เพื่มยาสำเร็จ");
+      refreshPage();
+    } catch (error) {}
   };
+  //  Modal delete
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // Modal add
+  const [lgShow, setLgShow] = useState(false);
+  // Modal Edit
+  const [smShow, setSmShow] = useState(false);
 
-  //// ลบยา ////
   const handleToConfirmDelete = (MedicineID) => {
     setstate({ MedicineID });
     handleShow();
@@ -162,12 +104,41 @@ export default function ManageMedicineScreen() {
     }
   };
 
-  /// แก้ไขยาใหม่ ////
+  // for search
+  // const [searchInput, setSearchInput] = useState(null);
+  // const [searched, setSearched] = useState(false);
+  // data
+  const [data, setData] = useState([medicine]);
+  // table
+  const [indexTable, setIndexTable] = useState(0);
+  const [numOfRow, setNumOfRow] = useState(10);
+  const numOfTable = Math.ceil(data.length / numOfRow);
+  const numberStartData = indexTable * numOfRow;
+  const dataLength = +numOfRow;
+  const numberEndData =
+    numberStartData + dataLength > data.length
+      ? data.length
+      : numberStartData + dataLength;
+  if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
 
-  const showOldMedicine = (MedicineID) => {
+  // refresh page
+  function refreshPage() {
+    window.location.reload();
+  }
+  // function search
+  // function search(text) {
+  //   let nData = [];
+  //   data.forEach((item, key) => {
+  //     if (item.name.search(text) != -1) nData.push(item);
+  //   });
+  //   setData(nData);
+  // }
+
+  const EditMedicine = (MedicineID) => {
     try {
       setSmShow(true);
       axios.get(`${server.MANAGE_MEDICINE}/${MedicineID}`).then((res) => {
+        // console.log(res.data);
         const data = res.data;
         setReMedicine(data.MedicineName);
         setRedescription(data.MedicineDescription);
@@ -180,91 +151,160 @@ export default function ManageMedicineScreen() {
     }
   };
 
-  const handleNewName = (e) => {
-    const data = e.target.value;
+  const handleNewName = (name) => {
+    const data = name.target.value;
     setPostMedicine(data);
   };
 
-  const handleNewDescription = (e) => {
-    const data = e.target.value;
+  const handleNewDescription = (description) => {
+    const data = description.target.value;
     setPostDescription(data);
   };
 
-  const handleNewPrice = (e) => {
-    const data = e.target.value;
+  const handleNewPrice = (price) => {
+    const data = price.target.value;
     setPostPrice(data);
   };
 
-  const handleNewType = (e) => {
-    const data = e.target.value;
+  const handleNewType = (type) => {
+    const data = type.target.value;
     setPostType(data);
   };
-
   const handleEdit = () => {
     try {
-      axios
-        .put(server.MANAGE_MEDICINE, {
-          MedicineID: MedicineID,
-          MedicineName: PostMedicine,
-          MedicineDescription: PostDescription,
-          Price: PostPrice,
-          Type: PostType,
-        })
-        .then((res) => {
-          const data = res.data;
-          if (data == true) {
-            window.alert("แก้ไขข้อมูลสำเร็จ");
-            refreshPage();
-          }
-        });
-    } catch (error) {
-      return error;
-    }
+      // console.log(MedicineID);
+      // console.log(Name);
+      // console.log(Description);
+      // console.log(Price);
+      // console.log(Type);
+      axios.put(server.MANAGE_MEDICINE, {
+        MedicineID: MedicineID,
+        Name: PostMedicine,
+        Description: PostDescription,
+        Price: PostPrice,
+        Type: PostType,
+      });
+      // .then((res) => {
+      //   const data = res.data;
+      //   if (data == true) {
+      //     window.alert("แก้ไขข้อมูลสำเร็จ");
+      //     // history.push("/profile");
+      //   }
+      // });
+    } catch (error) {}
   };
+
+  const getSkincare = () => {
+    const skincare = medicine.filter((med) => med.Type == "ผลิตภัณฑ์บำรุงผิว");
+    setMedicine(skincare);
+  };
+
+  const getCleanFace = () => {
+    const cleanface = medicine.filter(
+      (med) => med.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
+    );
+    setMedicine(cleanface);
+  };
+
+  const getHeal = () => {
+    const heal = medicine.filter(
+      (med) => med.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+    );
+    setMedicine(heal);
+  };
+
+  const getSupply = () => {
+    const supply = medicine.filter((med) => med.Type == "ผลิตภัณฑ์เสริมอาหาร");
+    setMedicine(supply);
+  };
+
+  const getMedi = () => {
+    const medi = medicine.filter((med) => med.Type == "ยารักษาโรค");
+    setMedicine(medi);
+  };
+
+  // const getMedi = () => {
+  //   axios.get(server.MANAGE_MEDICINE).then((res) => {
+  //     const data = res.data;
+  //     const type = data.filter((data) => data.Type == "ยารักษาโรค");
+  //     setType(type);
+  //   });
+  // };
 
   return (
     <div className="content-body">
       <div className="medicine-content">
-        <div className="search-bar-container">
-          {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-          <p className="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
-          <div className="search-bar-conten">
-            <div className="p-12 h-12">
-              <div className="bg-white flex items-center rounded-full shadow h-12">
-                <input
-                  className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-600 leading-tight focus:outline-none"
-                  id="search"
-                  type="text"
-                  placeholder="Search"
-                />
-                <div className="p-4">
-                  <button className="bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
-                    {searched ? (
-                      <span onClick={refreshPage}>
-                        <CloseIcon
-                          width="1rem"
-                          hieght="1rem"
-                          className="close"
-                          // value={i}
-                        />
-                      </span>
-                    ) : (
-                      <SearchIcon
-                        width="1.5rem"
-                        hieght="1.5rem"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          // search(searchInput);
-                          setSearched(true);
-                        }}
-                      />
-                    )}
-                  </button>
-                </div>
-              </div>
+        <p className="text-xl mt-3 font-semibold">ยาและผลิตภัณฑ์</p>
+
+        <div class=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
+          {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
+          <label
+            class=" ml-10 flex radio p-2 cursor-pointer"
+            onClick={getSkincare}
+          >
+            <input
+              class="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2  px-2 color-white">ผลิตภัณฑ์บำรุงผิว</div>
+          </label>
+
+          <label
+            class="flex radio p-2 cursor-pointer"
+            onClick = {getCleanFace}
+          >
+            <input
+              class="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2 px-2 color-white ">
+              ผลิตภัณฑ์ทำความสะอาดผิวหน้า
             </div>
-          </div>
+          </label>
+
+          <label
+            class="flex radio p-2 cursor-pointer"
+            onClick = {getHeal}
+          >
+            <input
+              class="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2 px-2 color-white">
+              ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+            </div>
+          </label>
+
+          <label
+            class="flex radio p-2 cursor-pointer"
+            onClick = {getSupply}
+          >
+            <input
+              class="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2 px-2 color-white">ผลิตภัณ์เสริมอาหาร</div>
+          </label>
+
+          <label
+            class="flex radio p-2 cursor-pointer"
+            onClick = {getMedi}
+          >
+            <input
+              class="my-auto transform scale-125 "
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2 px-2 color-white">ยารักษาโรค</div>
+          </label>
         </div>
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
 
         <div className="table-content">
           {/* header table */}
@@ -292,7 +332,7 @@ export default function ManageMedicineScreen() {
                   <div className="menu-row">
                     <Edit
                       {...iconOption}
-                      onClick={() => showOldMedicine(med.MedicineID)}
+                      onClick={() => EditMedicine(med.MedicineID)}
                     />
 
                     <Modal
@@ -359,16 +399,34 @@ export default function ManageMedicineScreen() {
                                       </option>
                                       <option
                                         className="option"
-                                        value="ยาใช้ภายนอก"
+                                        value="ผลิตภัณฑ์บำรุงผิว"
                                       >
                                         {" "}
-                                        ยาใช้ภายนอก{" "}
+                                        ผลิตภัณฑ์บำรุงผิว{" "}
                                       </option>
                                       <option
                                         className="option"
-                                        value="ยาใช้ภายใน"
+                                        value="ผลิตภัณฑ์ทำความสะอาดหน้า"
                                       >
-                                        ยาใช้ภายใน
+                                        ผลิตภัณฑ์ทำความสะอาดหน้า
+                                      </option>
+                                      <option
+                                        className="option"
+                                        value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                      >
+                                        ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                      </option>
+                                      <option
+                                        className="option"
+                                        value="ผลิตภัณฑ์เสริมอาหาร"
+                                      >
+                                        ผลิตภัณฑ์เสริมอาหาร
+                                      </option>
+                                      <option
+                                        className="option"
+                                        value="ยารักษาโรค"
+                                      >
+                                        ยารักษาโรค
                                       </option>
                                     </select>
                                   </div>
@@ -379,18 +437,18 @@ export default function ManageMedicineScreen() {
                         </Modal.Body>
                       </center>
                       <Modal.Footer>
-                        {/* <Link to="medicine"> */}
-                        <Button
-                          variant="primary"
-                          style={{
-                            borderColor: "#818CF8",
-                            backgroundColor: "#818CF8",
-                          }}
-                          onClick={handleEdit}
-                        >
-                          ยืนยันการแก้ไข
-                        </Button>
-                        {/* </Link> */}
+                        <Link to="medicine">
+                          <Button
+                            variant="primary"
+                            style={{
+                              borderColor: "#818CF8",
+                              backgroundColor: "#818CF8",
+                            }}
+                            onClick={handleEdit}
+                          >
+                            ยืนยันการแก้ไข
+                          </Button>
+                        </Link>
                       </Modal.Footer>
                     </Modal>
                     <Delete
@@ -518,12 +576,33 @@ export default function ManageMedicineScreen() {
                             <option disabled selected value>
                               กรุณาเลือกประเภท
                             </option>
-                            <option className="option" value="ยาใช้ภายนอก">
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์บำรุงผิว"
+                            >
                               {" "}
-                              ยาใช้ภายนอก{" "}
+                              ผลิตภัณฑ์บำรุงผิว{" "}
                             </option>
-                            <option className="option" value="ยาใช้ภายใน">
-                              ยาใช้ภายใน
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                            >
+                              ผลิตภัณฑ์ทำความสะอาดหน้า
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                            >
+                              ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์เสริมอาหาร"
+                            >
+                              ผลิตภัณฑ์เสริมอาหาร
+                            </option>
+                            <option className="option" value="ยารักษาโรค">
+                              ยารักษาโรค
                             </option>
                           </select>
                         </div>
@@ -534,153 +613,21 @@ export default function ManageMedicineScreen() {
               </Modal.Body>
             </center>
             <Modal.Footer>
-              <Button
-                variant="primary"
-                style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-                onClick={handleSubmitNewMicine}
-              >
-                เพิ่มยา
-              </Button>
+              <Link to="medicine">
+                <Button
+                  variant="primary"
+                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+                  onClick={handleSubmit}
+                >
+                  เพิ่มยา
+                </Button>
+              </Link>
             </Modal.Footer>
           </Modal>
+          {/* </Link> */}
         </div>
       </div>
+      {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}
     </div>
   );
 }
-
-//////////////////////// Mockup Data //////
-
-const mockup = [
-  {
-    id: "C001",
-    name: "ยา A",
-    price: 100,
-    numberinstock: "2",
-  },
-  // {
-  //   id: "C002",
-  //   name: "ยา B",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C003",
-  //   name: "ยา C",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C004",
-  //   name: "ยา D",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C005",
-  //   name: "ยา E",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C006",
-  //   name: "ยา F",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C007",
-  //   name: "ยา G",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C008",
-  //   name: "ยา H",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C009",
-  //   name: "ยา I",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C010",
-  //   name: "ยา J",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C011",
-  //   name: "ยา K",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C012",
-  //   name: "ยา L",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C013",
-  //   name: "ยา M",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C014",
-  //   name: "ยา N",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C015",
-  //   name: "ยา O",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C016",
-  //   name: "ยา P",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C017",
-  //   name: "ยา Q",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C018",
-  //   name: "ยา R",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C019",
-  //   name: "ยา S",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C020",
-  //   name: "ยา T",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C021",
-  //   name: "ยา U",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C022",
-  //   name: "ยา V",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C023",
-  //   name: "ยา W",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C024",
-  //   name: "ยา X",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C025",
-  //   name: "ยา Y",
-  //   price: 100,
-  // },
-  // {
-  //   id: "C026",
-  //   name: "ยา Z",
-  //   price: 100,
-  // },
-];
