@@ -195,32 +195,43 @@ export default function ManageMedicineScreen() {
   };
 
   const getSkincare = () => {
-    const skincare = medicine.filter((med) => med.Type == "ผลิตภัณฑ์บำรุงผิว");
-    setMedicine(skincare);
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const skincare = data.filter((data) => data.Type == "ผลิตภัณฑ์บำรุงผิว");
+      setMedicine(skincare);
+    });
   };
 
   const getCleanFace = () => {
-    const cleanface = medicine.filter(
-      (med) => med.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
-    );
-    setMedicine(cleanface);
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const cleanface = data.filter((data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า");
+      setMedicine(cleanface); 
+    });
   };
 
   const getHeal = () => {
-    const heal = medicine.filter(
-      (med) => med.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
-    );
-    setMedicine(heal);
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const heal = data.filter((data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน");
+      setMedicine(heal); 
+    });
   };
 
   const getSupply = () => {
-    const supply = medicine.filter((med) => med.Type == "ผลิตภัณฑ์เสริมอาหาร");
-    setMedicine(supply);
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const supply = data.filter((data) => data.Type == "ผลิตภัณฑ์เสริมอาหาร");
+      setMedicine(supply); 
+    });
   };
 
   const getMedi = () => {
-    const medi = medicine.filter((med) => med.Type == "ยารักษาโรค");
-    setMedicine(medi);
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const medi = data.filter((data) => data.Type == "ยารักษาโรค");
+      setMedicine(medi); 
+    });
   };
 
   // const getMedi = () => {
@@ -238,6 +249,19 @@ export default function ManageMedicineScreen() {
 
         <div class=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
           {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
+          <label
+            class=" ml-10 flex radio p-2 cursor-pointer"
+            onClick={getMedicine}
+          >
+            <input
+              class="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div class="title py-2  px-2 color-white">ยาและผลิตภัณฑ์</div>
+          </label>
+          
+          
           <label
             class=" ml-10 flex radio p-2 cursor-pointer"
             onClick={getSkincare}
