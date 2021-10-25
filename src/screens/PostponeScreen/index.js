@@ -49,7 +49,7 @@ function PostponeScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-black font-medium my-4">เลื่อนนัด</h3>
+            <p class="text-xl mt-3 font-semibold">เลื่อนนัด</p>
             <div
               className="
           flex
