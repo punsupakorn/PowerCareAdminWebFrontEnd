@@ -105,7 +105,7 @@ export default function WorkingScreen() {
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
             <p></p>
-            <p>ดูข้อมูล/ลบข้อมูล</p>
+            <p>ดูข้อมูล/เลื่อนนัด/ลบ</p>
             {/* end header */}
           </div>
           <div className="body-table">

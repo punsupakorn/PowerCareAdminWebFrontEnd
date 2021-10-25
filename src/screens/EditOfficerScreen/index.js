@@ -124,6 +124,8 @@ function EditOfficerScreen() {
     // }
   };
 
+  console.log(FirstName, LastName, Phone);
+
   const handleSubmitPassword = () => {
     let password = {
       oldPasseord: oldPassword,
@@ -196,7 +198,7 @@ function EditOfficerScreen() {
                 </label>
                 <input
                   type="text"
-                  // value={lastname}
+                  value={LastName}
                   name="LastName"
                   placeholder={state_LastName}
                   onChange={checkLastName}
@@ -209,7 +211,7 @@ function EditOfficerScreen() {
               หมายเลขโทรศัพท์{" "}
             </label>
             <input
-              // value={phone}
+              value={Phone}
               type="tel"
               name="Phone"
               placeholder={state_Phone}

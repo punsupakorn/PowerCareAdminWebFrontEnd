@@ -133,13 +133,13 @@ function SummaryPostponeScreen() {
          }>
            บันทึกผล</Button>
           </Link>{" "}
-          {/* <Link to="/postpone"> */}
+          <Link to="/working">
             <Button variant="secondary"
              style={
               { borderColor: "#bdbdbd",
                 backgroundColor: "#bdbdbd" }
            }>ยกเลิก</Button>
-          {/* </Link> */}
+          </Link>
         </div>
       </div>
       {/* end */}
