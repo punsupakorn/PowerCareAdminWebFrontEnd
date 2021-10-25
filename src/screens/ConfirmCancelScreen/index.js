@@ -32,10 +32,6 @@ function ConfirmCancelScreen() {
   // const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [Appointmentid, setAppointmentid] = useState(appointmentID);
-  const [Time, setTime] = useState(time);
-  const [TimeTableid, setTimeTableid] = useState(timetableID);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -55,12 +51,14 @@ function ConfirmCancelScreen() {
 
   const handleDelete = () => {
     try {
-      // console.log(appointmentID, timetableID, time);
+      //  console.log(appointmentID, timetableID, time);
       axios
         .delete(server.CONFIRM_CANCEL, {
-          AppointmentID: Appointmentid,
-          TimeTableID: TimeTableid,
-          Time: Time,
+          data: {
+            AppointmentID: appointmentID,
+            TimeTableID: timetableID,
+            Time: time,
+          },
         })
         .then(history.push("/working"));
       handleClose();
