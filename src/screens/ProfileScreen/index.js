@@ -20,16 +20,17 @@ function ProfileScreen() {
   const getProfile = () => {
     try {
       axios.get(`${server.PROFILE}/${currentUser.uid}`).then((res) => {
-        const data = res.data;
-        setfirstname(data.FirstName);
-        setlastname(data.LastName);
-        setposition(data.Position);
-        setemail(data.Email);
-        setphone(data.Phone);
-        setdocumentid(data.DocumentID);
+        setfirstname(res.data.FirstName);
+        setlastname(res.data.LastName);
+        setposition(res.data.Position);
+        setemail(res.data.Email);
+        setphone(res.data.Phone);
+        setdocumentid(res.data.DocumentID);
         // console.log(res.data);
       });
-    } catch (error) {}
+    } catch (error) {
+      return error;
+    }
   };
 
   useEffect(() => {
