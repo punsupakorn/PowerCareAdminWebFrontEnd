@@ -9,9 +9,9 @@ export const server = {
   USER: `${apiURL}User`,
   USER_DETAIL: `${apiURL}UserDetail`,
   WORKING: `${apiURL}Working`,
+  WORKING_DETAIL: `${apiURL}WorkingDetail`,
   MEDICINE: `${apiURL}Medicine`,
   EDIT_OFFICER: `${apiURL}EditOfficer`,
   MANAGE_MEDICINE: `${apiURL}ManageMedicine`,
   PROFILE: `${apiURL}Profile`,
-  
 };

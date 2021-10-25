@@ -1,18 +1,58 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./ConfirmCancelScreen.css";
-import React, { useState } from "react";
+import React from "react";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
+import { useState, useEffect } from "react";
 // import { Modal } from "../../components";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
-import { Modal } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 function ConfirmCancelScreen() {
+  const location = useLocation();
+  const { appointmentID, userID, username, date, time, symtoms, doctorname } =
+    location.state;
+  const [address, setaddress] = useState("");
+  const [phone, setphone] = useState("");
+  const [sex, setsex] = useState("");
+  const [email, setemail] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
   // const [modalOpen, setModalOpen] = useState(false);
- const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true); 
+  const handleShow = () => setShow(true);
+
+  const getWorkingDetail = () => {
+    try {
+      axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
+        setaddress(res.data.Address);
+        setphone(res.data.Phone);
+        setsex(res.data.Sex);
+        setemail(res.data.Email);
+        setdateofbirth(res.data.DateOfBirth);
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+
+  useEffect(() => {
+    getWorkingDetail();
+  }, []);
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
 
   return (
     <div className="content-body">
@@ -31,21 +71,9 @@ function ConfirmCancelScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className="text-gray-500 ml-4">รหัสผู้ป่วย : A001</p>
-            </div>
-            <div
-              className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-          border-b-2 border-gray-200
-        "
-            >
               <p className="text-gray-500 ml-4">
-                ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                2542
+                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
+                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
               </p>
             </div>
             <div
@@ -59,8 +87,8 @@ function ConfirmCancelScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                กรุงเทพ 10600
+                <b>ที่อยู่ : </b>
+                {address}
               </p>
             </div>
             <div
@@ -74,7 +102,7 @@ function ConfirmCancelScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                เบอร์โทร : 083-046-3915 E-mail : -
+                <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
             </div>
             <div
@@ -87,8 +115,8 @@ function ConfirmCancelScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className="text-gray-600 ml-4">
-                ข้อมูลทำนัด : วันที่ 1/1/64 เวลา 10.30-11.00 น.
+              <p className="text-gray-500 ml-4">
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -101,46 +129,65 @@ function ConfirmCancelScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className=" text-gray-500 ml-4">แพทย์ที่พบ : สมรวย ฉลาดแฉลม</p>
+              <p className=" text-gray-500 ml-4">
+                <b>แพทย์ที่พบ :</b> {doctorname}
+              </p>
+            </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>อาการเบื่องต้น :</b> {symtoms}
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div className="mb-2 ">
-              <Button variant="danger" onClick={handleShow} className=" button-back">
-     ยกเลิกการทำนัด
-      </Button>{' '}
-      <Button variant="secondary" className=" button-back"
-      style={
-        { borderColor: "#bdbdbd",
-          backgroundColor: "#bdbdbd" }
-     } >
-        ย้อนกลับ
-      </Button>
-     
-      <Modal show={show} onHide={handleClose} >
-        <Modal.Header closeButton>
-          <Modal.Title>คำเตือน</Modal.Title>
-        </Modal.Header>
-        
-        <center><Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body></center>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}
-          style={
-            { borderColor: "#bdbdbd",
-              backgroundColor: "#bdbdbd" }
-         }>
+        <Button variant="danger" onClick={handleShow} className=" button-back">
+          ยกเลิกการทำนัด
+        </Button>{" "}
+        <Link to="/working">
+          <Button
+            variant="secondary"
+            className=" button-back"
+            style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+          >
             ย้อนกลับ
           </Button>
-          <Button variant="danger" onClick={handleClose}
-          style={
-            { borderColor: "danger",
-              backgroundColor: "danger" }
-         }>
-            ยืนยันยกเลิกการทำนัด
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        </Link>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>คำเตือน</Modal.Title>
+          </Modal.Header>
+
+          <center>
+            <Modal.Body>คุณต้องการยกเลิกการทำนัดนี้หรือไม่ ?</Modal.Body>
+          </center>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
+            <Button
+              variant="danger"
+              onClick={handleClose}
+              style={{ borderColor: "danger", backgroundColor: "danger" }}
+            >
+              ยืนยันยกเลิกการทำนัด
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
       {/* {modalOpen && <Modal setOpenModal={setModalOpen} />} */}
     </div>

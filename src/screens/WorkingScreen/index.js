@@ -23,7 +23,7 @@ export default function WorkingScreen() {
           const element = data[i];
           setWorking(element);
         }
-        console.log(working)
+        console.log(working);
         // setWorking(res.data);
       });
     } catch (error) {}
@@ -122,19 +122,58 @@ export default function WorkingScreen() {
               <p></p>
 
               <div className="menu-row">
-                <Link to={`/workingdetail/&id=${working.AppointmentID}`}>
+                <Link
+                  to={{
+                    pathname: `/workingdetail`,
+                    state: {
+                      // appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
                   <Add
                     {...iconOption}
                     // onClick={() => console.log("Click function add " + item.id)}
                   />
                 </Link>
-                <Link to="/postpone">
+                <Link
+                  to={{
+                    pathname: `/postpone`,
+                    state: {
+                      // appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
                   <Edit
                     {...iconOption}
                     // onClick={() => console.log("Click function edit ")}
                   />
                 </Link>
-                <Link to="/confirmcancel">
+                <Link
+                  to={{
+                    pathname: `/confirmcancel`,
+                    state: {
+                      appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
                   <Delete
                     {...iconOption}
                     // onClick={() => handleData(working.AppointmentID)}

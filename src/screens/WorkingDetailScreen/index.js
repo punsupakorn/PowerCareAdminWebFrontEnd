@@ -1,9 +1,47 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./WorkingDetailScreen.css";
 import { Button } from "react-bootstrap";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
+import { useState, useEffect } from "react";
+import { data } from "autoprefixer";
 
 function WorkingDetailScreen() {
+  const location = useLocation();
+  const { userID, username, date, time, symtoms, doctorname } = location.state;
+  const [address, setaddress] = useState("");
+  const [phone, setphone] = useState("");
+  const [sex, setsex] = useState("");
+  const [email, setemail] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
+  const getWorkingDetail = () => {
+    try {
+      axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
+        setaddress(res.data.Address);
+        setphone(res.data.Phone);
+        setsex(res.data.Sex);
+        setemail(res.data.Email);
+        setdateofbirth(res.data.DateOfBirth);
+      });
+    } catch (error) {
+      return error;
+    }
+  };
 
+  useEffect(() => {
+    getWorkingDetail();
+  }, []);
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
 
   return (
     <div className="content-body">
@@ -23,8 +61,8 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                2542
+                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
+                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
               </p>
             </div>
             <div
@@ -38,8 +76,8 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                กรุงเทพ 10600
+                <b>ที่อยู่ : </b>
+                {address}
               </p>
             </div>
             <div
@@ -53,7 +91,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                เบอร์โทร : 083-046-3915 E-mail : -
+                <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
             </div>
             <div
@@ -67,7 +105,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ข้อมูลทำนัด : วันที่ 1/1/64 เวลา 10.30-11.00 น.
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -80,7 +118,23 @@ function WorkingDetailScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className=" text-gray-500 ml-4">แพทย์ที่พบ : สมรวย ฉลาดแฉลม</p>
+              <p className=" text-gray-500 ml-4">
+                <b>แพทย์ที่พบ :</b> {doctorname}
+              </p>
+            </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>อาการเบื่องต้น :</b> {symtoms}
+              </p>
             </div>
             {/* <input
                   type="text"

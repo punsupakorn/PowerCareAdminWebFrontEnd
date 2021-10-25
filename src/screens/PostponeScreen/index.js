@@ -1,10 +1,48 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./PostponeScreen.css";
-import { useState } from "react";
-import { Button } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
 
 function PostponeScreen() {
-  const [date, setDate] = useState();
+  const location = useLocation();
+  const { userID, username, date, time, symtoms, doctorname } = location.state;
+  const [address, setaddress] = useState("");
+  const [phone, setphone] = useState("");
+  const [sex, setsex] = useState("");
+  const [email, setemail] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
+  // const [date, setDate] = useState();
+
+  const getWorkingDetail = () => {
+    try {
+      axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
+        setaddress(res.data.Address);
+        setphone(res.data.Phone);
+        setsex(res.data.Sex);
+        setemail(res.data.Email);
+        setdateofbirth(res.data.DateOfBirth);
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+
+  useEffect(() => {
+    getWorkingDetail();
+  }, []);
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -14,58 +52,46 @@ function PostponeScreen() {
             <h3 className="text-black font-medium my-4">เลื่อนนัด</h3>
             <div
               className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
-            >
-              <p className="text-gray-500 ml-4"> รหัสผู้ป่วย : A001</p>
-            </div>
-            <div
-              className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
             >
               <p className="text-gray-500 ml-4">
-                ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                2542
+                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
+                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
               </p>
             </div>
             <div
               className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
             >
               <p className="text-gray-500 ml-4">
-                ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                กรุงเทพ 10600
+                <b>ที่อยู่ : </b>
+                {address}
               </p>
             </div>
             <div
               className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
             >
               <p className="text-gray-500 ml-4">
-                เบอร์โทร : 083-046-3915 E-mail : -
+                <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
             </div>
             <div
@@ -79,7 +105,7 @@ function PostponeScreen() {
       "
             >
               <p className="text-red-500 ml-4">
-                <b> วันที่ทำนัดเดิม : 1/1/64</b>
+                <b> วันที่ทำนัดเดิม : {displayThaiDate(date)}</b>
               </p>
             </div>
             <div
@@ -93,7 +119,7 @@ function PostponeScreen() {
       "
             >
               <p className="text-red-500 ml-4">
-                <b> เวลาที่ทำนัดเดิม : 10.30-11.00</b>
+                <b> เวลาที่ทำนัดเดิม : {time}</b>
               </p>
             </div>
             <div
@@ -105,8 +131,8 @@ function PostponeScreen() {
         py-3
       "
             >
-               <p className="text-black ml-4">
-                 กรุณากรอกวัน และเวลาที่ต้องการทำนัดใหม่
+              <p className="text-black ml-4">
+                กรุณาเลือกวัน และเวลาที่ต้องการทำนัดใหม่
               </p>
             </div>
             <div className=" -m-2 text-center">
@@ -120,9 +146,9 @@ function PostponeScreen() {
                     placeholder="เลือกวันที่ทำนัด"
                     type="date"
                     value={date}
-                    onChange={(e) => {
-                      setDate(e.target.value);
-                    }}
+                    // onChange={(e) => {
+                    //   setDate(e.target.value);
+                    // }}
                   ></input>
                 </div>
               </div>
@@ -133,17 +159,15 @@ function PostponeScreen() {
                   <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     เวลาทำนัดใหม่ :
                   </span>
-                  <select
-                    className="inline-flex  px-3"
-                  >
+                  <select className="inline-flex  px-3">
                     <option disabled selected value>
-                  {" "}
-                  เลือกเวลาการทำนัด
-                </option>
-                <option className="option" value="Doctor">
-                  {" "}
-                  11.00-12.00{" "}
-                </option>
+                      {" "}
+                      เลือกเวลาการทำนัด
+                    </option>
+                    <option className="option" value="Doctor">
+                      {" "}
+                      11.00-12.00{" "}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -151,8 +175,8 @@ function PostponeScreen() {
           </div>
         </div>
         <div className="px-4 ">
-        <Link to="/summarypostpone">
-          {/* <button
+          <Link to="/summarypostpone">
+            {/* <button
             className="
           button-done
           w-45
@@ -166,22 +190,20 @@ function PostponeScreen() {
               
             ถัดไป
           </button> */}
-          <Button variant="primary" 
-          style={
-            { borderColor: "#818CF8",
-              backgroundColor: "#818CF8" }
-         }>
-           ถัดไป
-          </Button>
+            <Button
+              variant="primary"
+              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+            >
+              ถัดไป
+            </Button>
           </Link>{" "}
           <Link to="/working">
-             <Button variant="secondary" 
-              style={
-                { borderColor: "#bdbdbd",
-                  backgroundColor: "#bdbdbd" }
-             }>
-           ย้อนกลับ
-          </Button>
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
           </Link>
         </div>
       </div>
