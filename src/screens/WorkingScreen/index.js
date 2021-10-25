@@ -19,12 +19,12 @@ export default function WorkingScreen() {
     try {
       axios.get(server.WORKING).then((res) => {
         const data = res.data;
-        for (let i = 0; i < data.length; i++) {
-          const element = data[i];
-          setWorking(element);
-        }
-        console.log(working);
-        // setWorking(res.data);
+        // for (let i = 0; i < data.length; i++) {
+        //   const element = data[i];
+        //   setWorking(element);
+        // }
+        // console.log(working);
+        setWorking(res.data);
       });
     } catch (error) {}
   };
@@ -112,76 +112,79 @@ export default function WorkingScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {/* {working.map((working) => ( */}
-            <div className="table-grid-working">
-              <p></p>
-              <p></p>
-              <p>{working.Date}</p>
-              <p>{working.Time}</p>
-              <Link
-                  to={{
-                    pathname: `/workingdetail`,
-                    state: {
-                      // appointmentID: working.AppointmentID,
-                      userID: working.UserID,
-                      username: working.UserName,
-                      date: working.Date,
-                      time: working.Time,
-                      symtoms: working.Initial_Symptoms,
-                      doctorname: working.DoctorName,
-                    },
-                  }}
-                ><p className= "working-name">{working.UserName}</p>
-                </Link>
-              <p></p>
+            {working.map((working) => (
+              <div className="table-grid-working">
+                <p></p>
+                <p></p>
+                <p>{working.Date}</p>
+                <p>{working.Time}</p>
+                <p>{working.UserName}</p>
+                <p></p>
 
-              <div className="menu-row">
-
-                  {/* <Add
-                    {...iconOption}
-                    // onClick={() => console.log("Click function add " + item.id)}
-                  /> */}
-                <Link
-                  to={{
-                    pathname: `/postpone`,
-                    state: {
-                      // appointmentID: working.AppointmentID,
-                      userID: working.UserID,
-                      username: working.UserName,
-                      date: working.Date,
-                      time: working.Time,
-                      symtoms: working.Initial_Symptoms,
-                      doctorname: working.DoctorName,
-                    },
-                  }}
-                >
-                  <Edit
-                    {...iconOption}
-                    // onClick={() => console.log("Click function edit ")}
-                  />
-                </Link>
-                <Link
-                  to={{
-                    pathname: `/confirmcancel`,
-                    state: {
-                      appointmentID: working.AppointmentID,
-                      userID: working.UserID,
-                      username: working.UserName,
-                      date: working.Date,
-                      time: working.Time,
-                      symtoms: working.Initial_Symptoms,
-                      doctorname: working.DoctorName,
-                    },
-                  }}
-                >
-                  <Delete
-                    {...iconOption}
-                    // onClick={() => handleData(working.AppointmentID)}
-                  />
-                </Link>
+                <div className="menu-row">
+                  <Link
+                    to={{
+                      pathname: `/workingdetail`,
+                      state: {
+                        // appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symtoms: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        timetableid: working.TimeTableID,
+                      },
+                    }}
+                  >
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
+                  </Link>
+                  <Link
+                    to={{
+                      pathname: `/postpone`,
+                      state: {
+                        // appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symtoms: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        timetableid: working.TimeTableID,
+                      },
+                    }}
+                  >
+                    <Edit
+                      {...iconOption}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                  </Link>
+                  <Link
+                    to={{
+                      pathname: `/confirmcancel`,
+                      state: {
+                        appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symtoms: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        timetableID: working.TimeTableID,
+                      },
+                    }}
+                  >
+                    <Delete
+                      {...iconOption}
+                      // onClick={() => handleData(working.AppointmentID)}
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
-            {/* ))} */}
+            ))}
           </div>
         </div>
       </div>

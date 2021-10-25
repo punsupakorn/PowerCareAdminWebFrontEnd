@@ -6,15 +6,24 @@ import axios from "axios";
 import { server } from "../../constants/constant";
 import { useState, useEffect } from "react";
 // import { Modal } from "../../components";
-
+import { useHistory } from "react-router";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 
 function ConfirmCancelScreen() {
+  const history = useHistory();
   const location = useLocation();
-  const { appointmentID, userID, username, date, time, symtoms, doctorname } =
-    location.state;
+  const {
+    appointmentID,
+    userID,
+    username,
+    date,
+    time,
+    symtoms,
+    doctorname,
+    timetableID,
+  } = location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
   const [sex, setsex] = useState("");
@@ -22,6 +31,10 @@ function ConfirmCancelScreen() {
   const [dateofbirth, setdateofbirth] = useState("");
   // const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(false);
+
+  const [Appointmentid, setAppointmentid] = useState(appointmentID);
+  const [Time, setTime] = useState(time);
+  const [TimeTableid, setTimeTableid] = useState(timetableID);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,6 +51,20 @@ function ConfirmCancelScreen() {
     } catch (error) {
       return error;
     }
+  };
+
+  const handleDelete = () => {
+    try {
+      // console.log(appointmentID, timetableID, time);
+      axios
+        .delete(server.CONFIRM_CANCEL, {
+          AppointmentID: Appointmentid,
+          TimeTableID: TimeTableid,
+          Time: Time,
+        })
+        .then(history.push("/working"));
+      handleClose();
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -181,7 +208,7 @@ function ConfirmCancelScreen() {
             </Button>
             <Button
               variant="danger"
-              onClick={handleClose}
+              onClick={handleDelete}
               style={{ borderColor: "danger", backgroundColor: "danger" }}
             >
               ยืนยันยกเลิกการทำนัด
