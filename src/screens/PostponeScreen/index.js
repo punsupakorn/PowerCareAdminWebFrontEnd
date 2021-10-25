@@ -141,15 +141,16 @@ function PostponeScreen() {
                   <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     วันที่ทำนัดใหม่ :
                   </span>
-                  <input
-                    class="inline-flex  px-3"
-                    placeholder="เลือกวันที่ทำนัด"
-                    type="date"
-                    value={date}
-                    // onChange={(e) => {
-                    //   setDate(e.target.value);
-                    // }}
-                  ></input>
+                  <select className="inline-flex  px-3">
+                    <option disabled selected value>
+                      {" "}
+                      เลือกวันที่การทำนัด
+                    </option>
+                    <option className="option" value="">
+                      {" "}
+                      11.00-12.00{" "}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
