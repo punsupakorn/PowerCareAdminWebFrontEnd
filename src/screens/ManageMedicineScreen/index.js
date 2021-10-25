@@ -33,9 +33,11 @@ export default function ManageMedicineScreen() {
   const [PostType, setPostType] = useState("");
 
   const [offset, setOffset] = useState(0);
-  // const [data, setData] = useState([]);
-  const [perPage] = useState(2);
+  // const [data, setMedicine] = useState([]);
+  const [perPage] = useState(5);
   const [pageCount, setPageCount] = useState(0);
+
+  // const [currentPage , setCurrentPage] = useState();
 
   // ------------  medicine ยังไม่มี paginate ------------ 
   // const getMedicine = () => {
@@ -46,9 +48,9 @@ export default function ManageMedicineScreen() {
   // ------------  medicine ยังไม่มี paginate ------------ 
 
   // Pagination
-  const getMedicine = async () => {
-    const res = await axios.get(server.MEDICINE);
-    const data = res.data;
+  // const getMedicine = async () => {
+  //   const res = await axios.get(server.MEDICINE);
+  //   const data = res.data;
 
     // ------------  ก้อนนี้ต้อง map ข้อมูลกับของเรา ------------ 
     // const slice = data.slice(offset, offset + perPage);
@@ -61,26 +63,28 @@ export default function ManageMedicineScreen() {
     // ));
     // setMedicine(postData);
 
+
      // ------------  ก้อนนี้ต้อง map ข้อมูลกับของเรา ------------ 
     
-    setPageCount(Math.ceil(data.length / perPage));
-    setMedicine(res.data);
-  };
+  //   setPageCount(Math.ceil(data.length / perPage));
+  //   setMedicine(res.data);
+  // };
 
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
-    setOffset(selectedPage + 5);
+    setOffset(selectedPage + 1);
   };
 
+
   useEffect(() => {
-    getMedicine();
+    getMedicine()
   }, [offset]);
 
   // -------------------
 
-  useEffect(() => {
-    getMedicine();
-  }, []);
+  // useEffect(() => {
+  //   getMedicine();
+  // }, []);
 
   const handleName = (e) => {
     const name = e.target.value;
@@ -150,7 +154,7 @@ export default function ManageMedicineScreen() {
   // const [searchInput, setSearchInput] = useState(null);
   // const [searched, setSearched] = useState(false);
   // data
-  // const [data, setData] = useState([medicine]);
+  // const [data, setMedicine] = useState([medicine]);
   // // table
   // const [indexTable, setIndexTable] = useState(0);
   // const [numOfRow, setNumOfRow] = useState(10);
@@ -173,7 +177,7 @@ export default function ManageMedicineScreen() {
   //   data.forEach((item, key) => {
   //     if (item.name.search(text) != -1) nData.push(item);
   //   });
-  //   setData(nData);
+  //   setMedicine(nData);
   // }
 
   const EditMedicine = (MedicineID) => {
@@ -240,18 +244,348 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const skincare = data.filter((data) => data.Type == "ผลิตภัณฑ์บำรุงผิว");
-      
-      setMedicine(skincare);
+      const slice = skincare.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
     });
   };
 
   const getCleanFace = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
-      const cleanface = data.filter(
-        (data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
+      const cleanface = data.filter((data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
       );
-      setMedicine(cleanface);
+      const slice = cleanface.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
     });
   };
 
@@ -261,7 +595,173 @@ export default function ManageMedicineScreen() {
       const heal = data.filter(
         (data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
       );
-      setMedicine(heal);
+      const slice = heal.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
     });
   };
 
@@ -269,7 +769,173 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const supply = data.filter((data) => data.Type == "ผลิตภัณฑ์เสริมอาหาร");
-      setMedicine(supply);
+      const slice = supply.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
     });
   };
 
@@ -277,7 +943,173 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const medi = data.filter((data) => data.Type == "ยารักษาโรค");
-      setMedicine(medi);
+      const slice = medi.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
     });
   };
 
@@ -288,6 +1120,178 @@ export default function ManageMedicineScreen() {
   //     setType(type);
   //   });
   // };
+
+  const getMedicine = async() => {
+    const res = await axios.get(server.MEDICINE);
+    const data = res.data;
+              const slice = data.slice(offset, offset + perPage)
+              const postData = slice.map(med => <div className="table-grid">
+              <p> </p>
+              <p>{med.MedicineName}</p>
+              <p>{med.Price}</p>
+              <p>{med.MedicineDescription}</p>
+              <p>{med.Type}</p>
+              <div className="menu-row">
+                <Edit
+                  {...iconOption}
+                  onClick={() => EditMedicine(med.MedicineID)}
+                />
+        
+                <Modal
+                  size="md"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-lg"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title id="example-modal-sizes-title-lg">
+                      {" "}
+                      แก้ไขยาและผลิตภัณฑ์
+                    </Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      <div className="divide-y divide-gray-200">
+                        <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                          <div className="flex flex-col">
+                            <label className="leading-loose">ชื่อยา</label>
+                            <input
+                              type="text"
+                              className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={ReMedicine}
+                              onChange={handleNewName}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label className="leading-loose">
+                              คำอธิบายเกี่ยวกับยา
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                              placeholder={Redescription}
+                              onChange={handleNewDescription}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex flex-col">
+                              <label className="leading-loose">ราคา</label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <input
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  placeholder={RePrice}
+                                  onChange={handleNewPrice}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
+                              <label className="leading-loose">
+                                ประเภท
+                              </label>
+                              <div className="relative focus-within:text-gray-600 text-gray-400">
+                                <select
+                                  type="text"
+                                  className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                  onChange={handleNewType}
+                                >
+                                  <option disabled selected value>
+                                    {Retype}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์บำรุงผิว"
+                                  >
+                                    {" "}
+                                    ผลิตภัณฑ์บำรุงผิว{" "}
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                                  >
+                                    ผลิตภัณฑ์ทำความสะอาดหน้า
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                                  >
+                                    ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ผลิตภัณฑ์เสริมอาหาร"
+                                  >
+                                    ผลิตภัณฑ์เสริมอาหาร
+                                  </option>
+                                  <option
+                                    className="option"
+                                    value="ยารักษาโรค"
+                                  >
+                                    ยารักษาโรค
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Link to="medicine">
+                      <Button
+                        variant="primary"
+                        style={{
+                          borderColor: "#818CF8",
+                          backgroundColor: "#818CF8",
+                        }}
+                        onClick={handleEdit}
+                      >
+                        ยืนยันการแก้ไข
+                      </Button>
+                    </Link>
+                  </Modal.Footer>
+                </Modal>
+                <Delete
+                  {...iconOption}
+                  onClick={handleShow}
+                  onClick={() => handleToConfirmDelete(med.MedicineID)}
+                />
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>คำเตือน</Modal.Title>
+                  </Modal.Header>
+        
+                  <center>
+                    <Modal.Body>
+                      คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
+                    </Modal.Body>
+                  </center>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClose}
+                      style={{
+                        borderColor: "#bdbdbd",
+                        backgroundColor: "#bdbdbd",
+                      }}
+                    >
+                      ย้อนกลับ
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(state.MedicineID)}
+                    >
+                      ตกลง
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            </div>)
+              setMedicine(postData)
+              setPageCount(Math.ceil(data.length / perPage))
+}
 
   return (
     <div className="content-body">
@@ -380,172 +1384,7 @@ export default function ManageMedicineScreen() {
             {/* body table */}
             {/* {rowData} */}
             <div>
-              {medicine.map((med) => (
-                <div className="table-grid">
-                  <p> </p>
-                  <p>{med.MedicineName}</p>
-                  <p>{med.Price}</p>
-                  <p>{med.MedicineDescription}</p>
-                  <p>{med.Type}</p>
-                  <div className="menu-row">
-                    <Edit
-                      {...iconOption}
-                      onClick={() => EditMedicine(med.MedicineID)}
-                    />
-
-                    <Modal
-                      size="md"
-                      show={smShow}
-                      onHide={() => setSmShow(false)}
-                      aria-labelledby="example-modal-sizes-title-lg"
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title id="example-modal-sizes-title-lg">
-                          {" "}
-                          แก้ไขยาและผลิตภัณฑ์
-                        </Modal.Title>
-                      </Modal.Header>
-
-                      <center>
-                        <Modal.Body>
-                          <div className="divide-y divide-gray-200">
-                            <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                              <div className="flex flex-col">
-                                <label className="leading-loose">ชื่อยา</label>
-                                <input
-                                  type="text"
-                                  className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                  placeholder={ReMedicine}
-                                  onChange={handleNewName}
-                                />
-                              </div>
-                              <div className="flex flex-col">
-                                <label className="leading-loose">
-                                  คำอธิบายเกี่ยวกับยา
-                                </label>
-                                <textarea
-                                  type="text"
-                                  className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                  placeholder={Redescription}
-                                  onChange={handleNewDescription}
-                                />
-                              </div>
-                              <div className="flex items-center space-x-4">
-                                <div className="flex flex-col">
-                                  <label className="leading-loose">ราคา</label>
-                                  <div className="relative focus-within:text-gray-600 text-gray-400">
-                                    <input
-                                      type="text"
-                                      className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      placeholder={RePrice}
-                                      onChange={handleNewPrice}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="flex flex-col">
-                                  <label className="leading-loose">
-                                    ประเภท
-                                  </label>
-                                  <div className="relative focus-within:text-gray-600 text-gray-400">
-                                    <select
-                                      type="text"
-                                      className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      onChange={handleNewType}
-                                    >
-                                      <option disabled selected value>
-                                        {Retype}
-                                      </option>
-                                      <option
-                                        className="option"
-                                        value="ผลิตภัณฑ์บำรุงผิว"
-                                      >
-                                        {" "}
-                                        ผลิตภัณฑ์บำรุงผิว{" "}
-                                      </option>
-                                      <option
-                                        className="option"
-                                        value="ผลิตภัณฑ์ทำความสะอาดหน้า"
-                                      >
-                                        ผลิตภัณฑ์ทำความสะอาดหน้า
-                                      </option>
-                                      <option
-                                        className="option"
-                                        value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
-                                      >
-                                        ผลิตภัณฑ์แก้แพ้ ผื่นคัน
-                                      </option>
-                                      <option
-                                        className="option"
-                                        value="ผลิตภัณฑ์เสริมอาหาร"
-                                      >
-                                        ผลิตภัณฑ์เสริมอาหาร
-                                      </option>
-                                      <option
-                                        className="option"
-                                        value="ยารักษาโรค"
-                                      >
-                                        ยารักษาโรค
-                                      </option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Modal.Body>
-                      </center>
-                      <Modal.Footer>
-                        <Link to="medicine">
-                          <Button
-                            variant="primary"
-                            style={{
-                              borderColor: "#818CF8",
-                              backgroundColor: "#818CF8",
-                            }}
-                            onClick={handleEdit}
-                          >
-                            ยืนยันการแก้ไข
-                          </Button>
-                        </Link>
-                      </Modal.Footer>
-                    </Modal>
-                    <Delete
-                      {...iconOption}
-                      onClick={handleShow}
-                      onClick={() => handleToConfirmDelete(med.MedicineID)}
-                    />
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>คำเตือน</Modal.Title>
-                      </Modal.Header>
-
-                      <center>
-                        <Modal.Body>
-                          คุณต้องการลบผลิตภัณฑ์ยานี้หรือไม่ ?
-                        </Modal.Body>
-                      </center>
-                      <Modal.Footer>
-                        <Button
-                          variant="secondary"
-                          onClick={handleClose}
-                          style={{
-                            borderColor: "#bdbdbd",
-                            backgroundColor: "#bdbdbd",
-                          }}
-                        >
-                          ย้อนกลับ
-                        </Button>
-                        <Button
-                          variant="danger"
-                          onClick={() => handleDelete(state.MedicineID)}
-                        >
-                          ตกลง
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
-                </div>
-              ))}
+              {medicine}
             </div>
             {/* end body table */}
           </div>

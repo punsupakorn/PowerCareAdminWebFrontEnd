@@ -13,6 +13,7 @@
 .search-bar-conten {
   display: flex;
   align-self: flex-end;
+  /* float: left; */
   margin-right: calc(10% - 2rem);
   align-items: center;
   justify-content: flex-end;
@@ -58,6 +59,7 @@
   align-self: center;
 
 }
+
 
 .card-appointment-add {
   background-color: white;

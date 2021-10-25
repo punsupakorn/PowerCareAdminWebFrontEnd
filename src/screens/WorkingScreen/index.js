@@ -105,7 +105,7 @@ export default function WorkingScreen() {
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
             <p></p>
-            <p>ดูข้อมูล/เลื่อนนัด/ลบ</p>
+            <p>เลื่อนนัด/ลบ</p>
             {/* end header */}
           </div>
           <div className="body-table">
@@ -118,11 +118,7 @@ export default function WorkingScreen() {
               <p></p>
               <p>{working.Date}</p>
               <p>{working.Time}</p>
-              <p>{working.UserName}</p>
-              <p></p>
-
-              <div className="menu-row">
-                <Link
+              <Link
                   to={{
                     pathname: `/workingdetail`,
                     state: {
@@ -135,12 +131,16 @@ export default function WorkingScreen() {
                       doctorname: working.DoctorName,
                     },
                   }}
-                >
-                  <Add
+                ><p className= "working-name">{working.UserName}</p>
+                </Link>
+              <p></p>
+
+              <div className="menu-row">
+
+                  {/* <Add
                     {...iconOption}
                     // onClick={() => console.log("Click function add " + item.id)}
-                  />
-                </Link>
+                  /> */}
                 <Link
                   to={{
                     pathname: `/postpone`,

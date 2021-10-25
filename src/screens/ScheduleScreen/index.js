@@ -114,47 +114,53 @@ const ScheduleScreen = () => {
     <div className="content-body ">
       <p class="text-xl mt-3 font-semibold">ตารางเวลาทำการของแพทย์</p>
       <div className="search-bar-conten">
-        {/* <input
-          type="text"
-          className="search-bar"
-          placeholder="ค้นหา..."
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
-        /> */}
-        <div className="p-12 h-12 item-left">
-          <div className="bg-white flex items-center rounded-full shadow h-12">
-            <input
-              className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-600 leading-tight focus:outline-none"
-              id="search"
-              type="text"
-              placeholder="Search"
-            />
-            <div className="p-4">
-              <button className="bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
-                {searched ? (
-                  <span onClick={refreshPage}>
-                    <CloseIcon
-                      width="1rem"
-                      hieght="1rem"
-                      className="close"
-                      // value={i}
+          <div className="p-12 h-12 ">
+            <div className="bg-white flex items-center rounded-full shadow h-12">
+              <input
+                className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
+                id="search"
+                type="text"
+                placeholder="Search"
+              />
+              <div className="  p-4">
+                <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+                  {searched ? (
+                    <span onClick={refreshPage}>
+                      <CloseIcon
+                        width="1rem"
+                        hieght="1rem"
+                        className="close"
+                        // value={i}
+                      />
+                    </span>
+                  ) : (
+                    <SearchIcon
+                      width="1.5rem"
+                      hieght="1.5rem"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        // search(searchInput);
+                        setSearched(true);
+                      }}
                     />
-                  </span>
-                ) : (
-                  <SearchIcon
-                    width="1.5rem"
-                    hieght="1.5rem"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      // search(searchInput);
-                      setSearched(true);
-                    }}
-                  />
-                )}
-              </button>
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
         </div>
+        <Link to="/appointment">
+            <Button
+              variant="secondary"
+              style={{
+                borderColor: "#818CF8",
+                backgroundColor: "#818CF8",
+                color: "white",
+                float: "right"
+              }}
+            >
+              เพิ่มตารางเวลาทำการของแพทย์
+            </Button>
+          </Link>{" "}
       </div>
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
@@ -165,20 +171,6 @@ const ScheduleScreen = () => {
       </div>
 
       <div className="appointment-content">
-        <div className="card-appointment-add ">
-          <Link to="/appointment">
-            {/* <Button */}
-              {/* variant="secondary"
-              style={{
-                borderColor: "#818CF8",
-                backgroundColor: "#818CF8",
-                color: "white",
-              }}
-            > */}
-              <center>เพิ่มตารางเวลาทำการของแพทย์</center>
-            {/* </Button> */}
-          </Link>{" "}
-        </div>
 
         {schedule.map((data) => (
           <div className="card-appointment">
