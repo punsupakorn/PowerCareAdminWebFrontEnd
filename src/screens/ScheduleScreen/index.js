@@ -167,7 +167,7 @@ const ScheduleScreen = () => {
       </Link> */}
 
       <div className="card-appointment-text ">
-        ตารางเวลาทำการของแพทย์ประจำ {today}
+        ตารางเวลาทำการของแพทย์ : {today}
       </div>
 
       <div className="appointment-content">

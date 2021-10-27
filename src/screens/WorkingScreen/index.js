@@ -129,6 +129,8 @@ export default function WorkingScreen() {
                         time: working.Time,
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
+                        doctorid: working.DoctorID,
+                       
                       },
                     }}
                   >
@@ -141,13 +143,15 @@ export default function WorkingScreen() {
                     to={{
                       pathname: `/postpone`,
                       state: {
-                        // appointmentID: working.AppointmentID,
+                        appointmentID: working.AppointmentID,
                         userID: working.UserID,
                         username: working.UserName,
                         date: working.Date,
                         time: working.Time,
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
+                        doctorid: working.DoctorID,
+                        oldtimetableid: working.TimeTableID,
                       },
                     }}
                   >
@@ -167,6 +171,7 @@ export default function WorkingScreen() {
                         time: working.Time,
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
+                        doctorid: working.DoctorID,
                       },
                     }}
                   >

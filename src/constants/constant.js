@@ -15,4 +15,6 @@ export const server = {
   MANAGE_MEDICINE: `${apiURL}ManageMedicine`,
   PROFILE: `${apiURL}Profile`,
   CONFIRM_CANCEL: `${apiURL}ConfirmCancel`,
+  POSTPONE: `${apiURL}Postpone`,
+  SUMMARY_POSTPONE: `${apiURL}SummaryPostpone`,
 };

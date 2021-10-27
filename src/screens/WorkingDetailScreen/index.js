@@ -29,6 +29,10 @@ function WorkingDetailScreen() {
     }
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     getWorkingDetail();
   }, []);

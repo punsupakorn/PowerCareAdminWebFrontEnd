@@ -5,16 +5,32 @@ import { Button } from "react-bootstrap";
 import { useLocation } from "react-router";
 import axios from "axios";
 import { server } from "../../constants/constant";
+import { useHistory } from "react-router";
 
 function PostponeScreen() {
   const location = useLocation();
-  const { userID, username, date, time, symtoms, doctorname } = location.state;
+  const {
+    appointmentID,
+    userID,
+    username,
+    date,
+    time,
+    symtoms,
+    doctorname,
+    doctorid,
+    oldtimetableid,
+  } = location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
   const [sex, setsex] = useState("");
   const [email, setemail] = useState("");
   const [dateofbirth, setdateofbirth] = useState("");
-  // const [date, setDate] = useState();
+  const [newDateSlot, setNewDateSlot] = useState([]);
+  const [timeslot, settimeslot] = useState([]);
+  const [newdate, setnewdate] = useState("");
+  const [newtime, setnewtime] = useState("");
+  const [newtimetableid, setnewtimetableid] = useState("");
+  const history = useHistory();
 
   const getWorkingDetail = () => {
     try {
@@ -30,9 +46,65 @@ function PostponeScreen() {
     }
   };
 
+  const getNewDate = () => {
+    try {
+      axios.get(`${server.POSTPONE}/date/${doctorid}`).then((res) => {
+        setNewDateSlot(res.data);
+      });
+    } catch (error) {}
+  };
+
+  const getTimeSlot = (TimeTableID) => {
+    try {
+      axios.get(`${server.POSTPONE}/time/${TimeTableID}`).then((res) => {
+        settimeslot(res.data);
+      });
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getWorkingDetail();
+    getNewDate();
   }, []);
+
+  const handleDate = (e) => {
+    const date = e.target.value;
+    const data = JSON.parse(date);
+    setnewdate(data.date);
+    setnewtimetableid(data.timetableid);
+    getTimeSlot(data.timetableid);
+  };
+
+  const handleTime = (e) => {
+    const time = e.target.value;
+    const data = JSON.parse(time);
+    setnewtime(data.time);
+  };
+
+  const checkData = () => {
+    let slot = {
+      newdate: newdate,
+      newtime: newtime,
+    };
+
+    let data = Object.values(slot).every((value) => value);
+    if (data == false) {
+      window.alert("โปรดกรอกวันและเวลาที่ต้องการให้ครบ");
+    } else {
+      history.push({
+        pathname: `/summarypostpone`,
+        state: {
+          appointmentID: appointmentID,
+          olddate: date,
+          newdate: newdate,
+          time: time,
+          newtime: newtime,
+          oldtimetableid: oldtimetableid,
+          newtimetableid: newtimetableid,
+        },
+      });
+    }
+  };
 
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
@@ -96,6 +168,34 @@ function PostponeScreen() {
             </div>
             <div
               className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>แพทย์ที่พบ :</b> {doctorname}
+              </p>
+            </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>อาการเบื้องต้น :</b> {symtoms}
+              </p>
+            </div>
+            <div
+              className="
         flex
         justify-between
         items-center
@@ -141,15 +241,23 @@ function PostponeScreen() {
                   <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     วันที่ทำนัดใหม่ :
                   </span>
-                  <select className="inline-flex  px-3">
+                  <select className="inline-flex  px-3" onChange={handleDate}>
                     <option disabled selected value>
                       {" "}
                       เลือกวันที่การทำนัด
                     </option>
-                    <option className="option" value="">
-                      {" "}
-                      11.00-12.00{" "}
-                    </option>
+                    {newDateSlot.map((date) => (
+                      <option
+                        className="option"
+                        value={JSON.stringify({
+                          timetableid: `${date.TimeTableID}`,
+                          date: `${date.Date}`,
+                        })}
+                      >
+                        {" "}
+                        {displayThaiDate(date.Date)}{" "}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -160,15 +268,22 @@ function PostponeScreen() {
                   <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
                     เวลาทำนัดใหม่ :
                   </span>
-                  <select className="inline-flex  px-3">
+                  <select className="inline-flex  px-3" onChange={handleTime}>
                     <option disabled selected value>
                       {" "}
                       เลือกเวลาการทำนัด
                     </option>
-                    <option className="option" value="Doctor">
-                      {" "}
-                      11.00-12.00{" "}
-                    </option>
+                    {timeslot.map((time) => (
+                      <option
+                        className="option"
+                        value={JSON.stringify({
+                          time: `${time}`,
+                        })}
+                      >
+                        {" "}
+                        {time}{" "}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -176,28 +291,28 @@ function PostponeScreen() {
           </div>
         </div>
         <div className="px-4 ">
-          <Link to="/summarypostpone">
-            {/* <button
-            className="
-          button-done
-          w-45
-          bg-blue-200
-          text-white
-          px-3
-          py-2
-          rounded-md
-        "
+          {/* <Link
+            to={{
+              pathname: `/summarypostpone`,
+              state: {
+                appointmentID: appointmentID,
+                olddate: date,
+                newdate: newdate,
+                time: time,
+                newtime: newtime,
+                oldtimetableid: oldtimetableid,
+                newtimetableid: newtimetableid,
+              },
+            }}
+          > */}
+          <Button
+            onClick={checkData}
+            variant="primary"
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
           >
-              
             ถัดไป
-          </button> */}
-            <Button
-              variant="primary"
-              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-            >
-              ถัดไป
-            </Button>
-          </Link>{" "}
+          </Button>
+          {/* </Link> */}{" "}
           <Link to="/working">
             <Button
               variant="secondary"
