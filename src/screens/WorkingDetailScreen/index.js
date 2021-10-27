@@ -133,7 +133,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>อาการเบื่องต้น :</b> {symtoms}
+                <b>อาการเบื้องต้น :</b> {symtoms}
               </p>
             </div>
             {/* <input
