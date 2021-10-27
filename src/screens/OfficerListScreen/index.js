@@ -184,8 +184,8 @@ const OfficerListScreen = () => {
         </div>
       </div>
       <div className="working-content">
-        <div className="table-content">
-          <div className="table-grid header">
+        <div className="table-content-officerlist">
+          <div className="table-grid-officerlist header">
             {/* header table */}
             <p>ชื่อ</p>
             <p>นามสกุล</p>
@@ -195,10 +195,10 @@ const OfficerListScreen = () => {
             <p>ลบข้อมูล</p>
             {/* end header */}
           </div>
-          <div className="body-table">
+          <div className="body-table-officerlist">
             {/* body table */}
             {officer.map((officerlist) => (
-              <div className="table-grid">
+              <div className="table-grid-officerlist content-officerlist">
                 <p>{officerlist.FirstName}</p>
                 <p>{officerlist.LastName}</p>
                 <p>{officerlist.Position}</p>

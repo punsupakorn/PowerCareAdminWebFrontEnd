@@ -10,6 +10,7 @@ import { Button } from "react-bootstrap";
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
 import { server } from "../../constants/constant";
+
 export default function WorkingScreen() {
   const [searched, setSearched] = useState(false);
   const [working, setWorking] = useState([]);
@@ -19,12 +20,12 @@ export default function WorkingScreen() {
     try {
       axios.get(server.WORKING).then((res) => {
         const data = res.data;
-        // for (let i = 0; i < data.length; i++) {
-        //   const element = data[i];
-        //   setWorking(element);
-        // }
-        // console.log(working);
-        setWorking(res.data);
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          setWorking(element);
+        }
+        console.log(working);
+        // setWorking(res.data);
       });
     } catch (error) {}
   };
@@ -63,9 +64,10 @@ export default function WorkingScreen() {
               <input
                 className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
                 id="search"
-                type="text"
+                type="date"
                 placeholder="Search"
               />
+
               <div className="  p-4">
                 <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
                   {searched ? (
@@ -96,95 +98,86 @@ export default function WorkingScreen() {
       </div>
 
       <div className="working-content">
-        <div className="table-content">
+        <div className="table-content-working">
           <div className="table-grid-working header">
             {/* header table */}
-            <p></p>
-            <p></p>
             <p>วันที่</p>
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
-            <p></p>
-            <p>เลื่อนนัด/ลบ</p>
+            <p>ดูข้อมูล/เลื่อนนัด/ลบ</p>
             {/* end header */}
           </div>
-          <div className="body-table">
+          <div className="body-table-working">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {working.map((working) => (
-              <div className="table-grid-working">
-                <p></p>
-                <p></p>
-                <p>{working.Date}</p>
-                <p>{working.Time}</p>
-                <p>{working.UserName}</p>
-                <p></p>
+            {/* {working.map((working) => ( */}
+            <div className="table-grid-working">
+              <p>{working.Date}</p>
+              <p>{working.Time}</p>
+              <p>{working.UserName}</p>
 
-                <div className="menu-row">
-                  <Link
-                    to={{
-                      pathname: `/workingdetail`,
-                      state: {
-                        // appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        timetableid: working.TimeTableID,
-                      },
-                    }}
-                  >
-                    <Add
-                      {...iconOption}
-                      // onClick={() => console.log("Click function add " + item.id)}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/postpone`,
-                      state: {
-                        // appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        timetableid: working.TimeTableID,
-                      },
-                    }}
-                  >
-                    <Edit
-                      {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/confirmcancel`,
-                      state: {
-                        appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        timetableID: working.TimeTableID,
-                      },
-                    }}
-                  >
-                    <Delete
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
-                    />
-                  </Link>
-                </div>
+              <div className="menu-row">
+                <Link
+                  to={{
+                    pathname: `/workingdetail`,
+                    state: {
+                      // appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
+                  <Add
+                    {...iconOption}
+                    // onClick={() => console.log("Click function add " + item.id)}
+                  />
+                </Link>
+                <Link
+                  to={{
+                    pathname: `/postpone`,
+                    state: {
+                      // appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
+                  <Edit
+                    {...iconOption}
+                    // onClick={() => console.log("Click function edit ")}
+                  />
+                </Link>
+                <Link
+                  to={{
+                    pathname: `/confirmcancel`,
+                    state: {
+                      appointmentID: working.AppointmentID,
+                      userID: working.UserID,
+                      username: working.UserName,
+                      date: working.Date,
+                      time: working.Time,
+                      symtoms: working.Initial_Symptoms,
+                      doctorname: working.DoctorName,
+                    },
+                  }}
+                >
+                  <Delete
+                    {...iconOption}
+                    // onClick={() => handleData(working.AppointmentID)}
+                  />
+                </Link>
               </div>
-            ))}
+            </div>
+            {/* ))} */}
           </div>
         </div>
       </div>

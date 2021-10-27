@@ -41,34 +41,44 @@
   color: white;
 }
 
-.table-content {
-  text-align: start;
+.table-content-medicine {
+  text-align: center;
   overflow: scroll;
+  margin-top: 5px;
 }
 
-.table-grid {
+.table-grid-medicine {
   display: grid;
-  grid-template-columns: 10% 30% 20% 20% calc(20% - 4rem);
+  /* grid-template-columns: 10% 30% 20% 20% calc(20% - 4rem); */
+  grid-template-columns: 20% 15% 40% calc(20% );
   grid-gap: 1rem;
+}
+
+.content-medicine{
+  text-align: start;
+}
+
+.text-med{
+  text-align: center;
 }
 
 .table-grid:not(:first-child) {
   margin-top: 1rem;
 }
 
-.table-grid.header,
-.body-table {
-  background-color: #a5c3df;
+.table-grid-medicine.header,
+.body-table-medicine {
+  background-color: #C7D2FE;
   padding: 1rem;
   margin-bottom: 2px;
   border-radius: 8px;
   min-width: 40rem;
 }
 
-.body-table {
+.body-table-medicine {
   display: flex;
   flex-direction: column;
-  background-color: #ccdbea;
+  background-color: #EEF2FF;
 }
 .menu-row {
   display: flex;

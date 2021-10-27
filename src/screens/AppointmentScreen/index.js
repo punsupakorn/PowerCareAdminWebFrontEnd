@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./AppointmentScreen.css";
 import axios from "axios";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";

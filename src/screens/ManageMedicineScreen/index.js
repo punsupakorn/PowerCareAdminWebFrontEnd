@@ -1125,12 +1125,12 @@ export default function ManageMedicineScreen() {
     const res = await axios.get(server.MEDICINE);
     const data = res.data;
               const slice = data.slice(offset, offset + perPage)
-              const postData = slice.map(med => <div className="table-grid">
-              <p> </p>
-              <p>{med.MedicineName}</p>
-              <p>{med.Price}</p>
+              const postData = slice.map(med => <div className="table-grid-managemedicine content-medicine">
+
+              <p >{med.MedicineName}</p>
+              <p className ="text-med" >{med.Price}</p>
               <p>{med.MedicineDescription}</p>
-              <p>{med.Type}</p>
+              <p >{med.Type}</p>
               <div className="menu-row">
                 <Edit
                   {...iconOption}
@@ -1368,10 +1368,10 @@ export default function ManageMedicineScreen() {
         {/* </div> */}
         {/* </div> */}
 
-        <div className="table-content">
+        <div className="table-content-managemedicine">
           {/* header table */}
-          <div className="table-grid header">
-            <p></p>
+          <div className="table-grid-managemedicine  header">
+            {/* <p></p> */}
             <p>ชื่อยา</p>
             <p>ราคา</p>
             <p>คำอธิบาย</p>
@@ -1380,7 +1380,7 @@ export default function ManageMedicineScreen() {
           </div>
           {/* end header */}
 
-          <div className="body-table">
+          <div className="body-table-managemedicine">
             {/* body table */}
             {/* {rowData} */}
             <div>

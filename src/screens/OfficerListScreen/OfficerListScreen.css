@@ -37,23 +37,27 @@
   }
   
   
-  .table-content {
-    text-align: start;
+  .table-content-officerlist {
+    text-align: center;
     overflow: scroll;
   }
   
-  .table-grid {
+  .table-grid-officerlist {
     display: grid;
-    grid-template-columns: 10% 12% 10% 28% 15%  15%calc(10% - 1rem);
+    grid-template-columns: 10% 10% 10% 30% 15%  15%calc(10% - 1rem);
     grid-gap: 1rem;
   }
+
+  .content-officerlist{
+    text-align: start;
+  }
   
-  .table-grid:not(:first-child) {
+  .table-grid-officerlist:not(:first-child) {
     margin-top: 1rem;
   }
 
-  .table-grid.header,
-  .body-table {
+  .table-grid-officerlist.header,
+  .body-table-officerlist {
     background-color: #C7D2FE;
     padding: 1rem;
     margin-bottom: 2px;
@@ -61,10 +65,10 @@
     min-width: 40rem;
   }
   
-  .body-table {
+  .body-table-officerlist {
     display: flex;
     flex-direction: column;
-    background-color: #C7D2FE;
+    background-color: #EEF2FF;
   }
   .menu-row {
     display: flex;

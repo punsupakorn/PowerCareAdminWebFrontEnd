@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
-import { InputNumber, TableController } from "../../components";
+// import { InputNumber, TableController } from "../../components";
 import "./MedicineScreen.css";
 import CloseIcon from "../../icons/close-icon";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -98,12 +98,12 @@ export default function MedicineScreen() {
     return (
       <div>
         {medicine.map((med) => (
-          <div className="table-grid">
-            <p> </p>
+          <div className="table-grid-medicine content-medicine">
+
             <p>{med.MedicineName}</p>
-            <p>{med.Price}</p>
+            <p className ="text-med" >{med.Price}</p>
             <p>{med.MedicineDescription}</p>
-            <p>{med.Type}</p>
+            <p lassName ="text-med" >{med.Type}</p>
             <p></p>
           </div>
         ))}
@@ -133,9 +133,9 @@ export default function MedicineScreen() {
         name={item.name}
         price={item.price}
         key={key}
-        index={numberStartData + key}
+        // index={numberStartData + key}
         // amount={item.amount}
-        numberinstock={item.numberinstock}
+        // numberinstock={item.numberinstock}
       />
     ));
 
@@ -202,33 +202,33 @@ export default function MedicineScreen() {
           </div>
         </div>
 
-        <div className="table-content">
+        <div className="table-content-medicine">
           {/* header table */}
-          <div className="table-grid header">
-            <p></p>
+          <div className="table-grid-medicine header">
+            {/* <p></p> */}
             <p>ชื่อยา</p>
             <p>ราคา</p>
             <p>คำอธิบาย</p>
             <p>ประเภท</p>
-            <p></p>
+            {/* <p></p> */}
           </div>
           {/* end header */}
 
-          <div className="body-table">
+          <div className="body-table-medicine">
             {/* body table */}
             {rowData}
             {/* end body table */}
           </div>
         </div>
 
-        <TableController
+        {/* <TableController
           indexTable={indexTable}
           setIndexTable={setIndexTable}
           numOfTable={numOfTable}
           setNumOfRow={setNumOfRow}
           numOfRow={numOfRow}
-        />
-        <div className="px-2 ">
+        /> */}
+        <div className="px-2 mt-3 ">
           <Link to="/">
             <Button
               variant="secondary"

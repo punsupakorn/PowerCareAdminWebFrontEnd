@@ -119,7 +119,7 @@ const ScheduleScreen = () => {
               <input
                 className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
                 id="search"
-                type="text"
+                type="date"
                 placeholder="Search"
               />
               <div className="  p-4">

@@ -9,6 +9,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { server } from "../../constants/constant";
 import axios from "axios";
+import "./UserScreen.css"
 
 export default function UserScreen() {
   const [searched, setSearched] = useState(false);
@@ -98,10 +99,9 @@ export default function UserScreen() {
         </div>
       </div>
       <div className="working-content">
-        <div className="table-content">
-          <div className="table-grid header">
+        <div className="table-content-user">
+          <div className="table-grid-user header">
             {/* header table */}
-            <p></p>
             <p>ชื่อ</p>
             <p>นามสกุล</p>
             <p>อีเมลล์ </p>
@@ -109,16 +109,15 @@ export default function UserScreen() {
             <p>ดูข้อมูลคนไข้</p>
             {/* end header */}
           </div>
-          <div className="body-table">
+          <div className="body-table-user">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
             {user.map((data) => (
-              <div className="table-grid">
-                <p></p>
+              <div className="table-grid-user content-user">
                 <p>{data.FirstName}</p>
                 <p>{data.LastName}</p>
                 <p>{data.Email}</p>
-                <p>{data.Phone}</p>
+                <p className ="text-user">{data.Phone}</p>
 
                 <div className="menu-row">
                   <Link
