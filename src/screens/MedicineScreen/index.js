@@ -75,6 +75,45 @@ export default function MedicineScreen() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const getSkincare = () => {
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const skincare = data.filter((data) => data.Type == "ผลิตภัณฑ์บำรุงผิว");
+      setMedicine(skincare);
+    });
+  };
+
+  const getCleanFace = () => {
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const cleanface = data.filter((data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า");
+      setMedicine(cleanface); 
+    });
+  };
+
+  const getHeal = () => {
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const heal = data.filter((data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน");
+      setMedicine(heal); 
+    });
+  };
+
+  const getSupply = () => {
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const supply = data.filter((data) => data.Type == "ผลิตภัณฑ์เสริมอาหาร");
+      setMedicine(supply); 
+    });
+  };
+
+  const getMedi = () => {
+    axios.get(server.MEDICINE).then((res) => {
+      const data = res.data;
+      const medi = data.filter((data) => data.Type == "ยารักษาโรค");
+      setMedicine(medi); 
+    });
+  };
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -103,7 +142,7 @@ export default function MedicineScreen() {
             <p>{med.MedicineName}</p>
             <p className ="text-med" >{med.Price}</p>
             <p>{med.MedicineDescription}</p>
-            <p lassName ="text-med" >{med.Type}</p>
+            <p className ="text-med" >{med.Type}</p>
             <p></p>
           </div>
         ))}
@@ -201,6 +240,73 @@ export default function MedicineScreen() {
             </div>
           </div>
         </div>
+        
+        <div className=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
+          {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
+          <label
+            className=" ml-10 flex radio p-2 cursor-pointer"
+            onClick={getMedicine}
+          >
+            <input
+              className="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2  px-2 color-white">ยาและผลิตภัณฑ์</div>
+          </label>
+
+          <label
+            className=" ml-10 flex radio p-2 cursor-pointer"
+            onClick={getSkincare}
+          >
+            <input
+              className="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2  px-2 color-white">ผลิตภัณฑ์บำรุงผิว</div>
+          </label>
+
+          <label className="flex radio p-2 cursor-pointer" onClick={getCleanFace}>
+            <input
+              className="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2 px-2 color-white ">
+              ผลิตภัณฑ์ทำความสะอาดผิวหน้า
+            </div>
+          </label>
+
+          <label className="flex radio p-2 cursor-pointer" onClick={getHeal}>
+            <input
+              className="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2 px-2 color-white">
+              ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+            </div>
+          </label>
+
+          <label className="flex radio p-2 cursor-pointer" onClick={getSupply}>
+            <input
+              className="my-auto transform scale-125"
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2 px-2 color-white">ผลิตภัณ์เสริมอาหาร</div>
+          </label>
+
+          <label className="flex radio p-2 cursor-pointer" onClick={getMedi}>
+            <input
+              className="my-auto transform scale-125 "
+              type="radio"
+              name="sfg"
+            />
+            <div className="title py-2 px-2 color-white">ยารักษาโรค</div>
+          </label>
+        </div>
 
         <div className="table-content-medicine">
           {/* header table */}
@@ -237,7 +343,6 @@ export default function MedicineScreen() {
               ย้อนกลับ
             </Button>
           </Link>{" "}
-         
         </div>
       </div>
       {/* {modalOpen && <AddMedicineScreen setOpenModal={setModalOpen} />} */}

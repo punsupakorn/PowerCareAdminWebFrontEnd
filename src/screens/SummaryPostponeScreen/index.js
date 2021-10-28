@@ -1,16 +1,59 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./SummaryPostponeScreen.css";
 import { Button } from "react-bootstrap";
-
+import { useLocation } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
 function SummaryPostponeScreen() {
+  const location = useLocation();
+  const {
+    appointmentID,
+    olddate,
+    time,
+    newdate,
+    newtime,
+    oldtimetableid,
+    newtimetableid,
+  } = location.state;
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
+  const editAppointment = () => {
+    try {
+      axios
+        .put(server.SUMMARY_POSTPONE, {
+          AppointmentID: appointmentID,
+          OldTimeTableID: oldtimetableid,
+          NewTimeTableID: newtimetableid,
+          Date: newdate,
+          OldTime: time,
+          NewTime: newtime,
+        })
+        .then((res) => {
+          const data = res.data;
+          // if (data == true) {
+          //   window.alert("แก้ไขข้อมูลสำเร็จ");
+          //   history.push("/profile");
+          // }
+        });
+    } catch (error) {}
+  };
   return (
     <div className="content-body">
       <div className="mt-2">
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <p class="text-xl mt-3 font-semibold">สรุปข้อมูลการนัด</p>
-            <div
+            <p class="text-xl mt-3 font-semibold">สรุปข้อมูลการเลื่อนนัด</p>
+            {/* <div
               className="
           flex
           justify-between
@@ -21,8 +64,8 @@ function SummaryPostponeScreen() {
         "
             >
               <p className="text-gray-500 ml-4">รหัสผู้ป่วย : A001</p>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className="
           flex
           justify-between
@@ -33,8 +76,8 @@ function SummaryPostponeScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ชื่อ-สกุล : สมชาย ใจดี เพศ : ชาย วัน/เดือน/ปีเกิด : 9 กันยายน
-                2542
+                ชื่อ-สกุล : {username} เพศ : {sex} วัน/เดือน/ปีเกิด :{" "}
+                {displayThaiDate(dateofbirth)}
               </p>
             </div>
             <div
@@ -48,8 +91,8 @@ function SummaryPostponeScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                ที่อยู่ : 1047 ถนนตากสิน ซอยตากสิน 22 แขวงบุคคโล เขตธนบุรี
-                กรุงเทพ 10600
+                <b>ที่อยู่ : </b>
+                {address}
               </p>
             </div>
             <div
@@ -63,10 +106,36 @@ function SummaryPostponeScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                เบอร์โทร : 083-046-3915 E-mail : -
+                เบอร์โทร : {phone} E-mail : {email}
               </p>
             </div>
             <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">แพทย์ที่พบ : {doctorname}</p>
+            </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>อาการเบื้องต้น :</b> {symtoms}
+              </p>
+            </div> */}
+            {/* <div
               className="
           flex
           justify-between
@@ -79,18 +148,62 @@ function SummaryPostponeScreen() {
               <p className="text-gray-600 ml-4">
                 <b>ข้อมูลทำนัด : วันที่ 1/1/64 เวลา 10.30-11.00 น. </b>
               </p>
+            </div> */}
+            <div
+              className="
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
+            >
+              <p className="text-red-500 ml-4">
+                <b> วันที่ทำนัดเดิม : {displayThaiDate(olddate)}</b>
+              </p>
             </div>
             <div
               className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-          border-b-2 border-gray-200
-        "
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
             >
-              <p className=" text-gray-500 ml-4">แพทย์ที่พบ : สมรวย ฉลาดแฉลม</p>
+              <p className="text-red-500 ml-4">
+                <b> เวลาที่ทำนัดเดิม : {time}</b>
+              </p>
+            </div>
+            <div
+              className="
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
+            >
+              <p className="text-red-500 ml-4">
+                <b> วันที่ทำนัดใหม่ : {displayThaiDate(newdate)}</b>
+              </p>
+            </div>
+            <div
+              className="
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
+            >
+              <p className="text-red-500 ml-4">
+                <b> เวลาที่ทำนัดใหม่ : {newtime}</b>
+              </p>
             </div>
           </div>
         </div>
@@ -125,15 +238,16 @@ function SummaryPostponeScreen() {
             </button>
           </Link> */}
           <br />
-          <Link to="/postpone">
-            <Button
-              variant="primary "
-              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-            >
-              บันทึกผล
-            </Button>
-          </Link>{" "}
-          <Link to="/postpone">
+          {/* <Link to="/postpone"> */}
+          <Button
+            onClick={editAppointment}
+            variant="primary "
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+          >
+            บันทึกผล
+          </Button>
+          {/* </Link> */}{" "}
+          <Link to="/working">
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
