@@ -13,19 +13,6 @@ import { server } from "../../constants/constant";
 import "./UserDetailScreen.css";
 import { TableController } from "../../components";
 export default function UserDetailScreen() {
-  // for search
-  // data
-  // table
-  // const [indexTable, setIndexTable] = useState(0);
-  // const [numOfRow, setNumOfRow] = useState(10);
-  // const numOfTable = Math.ceil(data.length / numOfRow);
-  // const numberStartData = indexTable * numOfRow;
-  // const dataLength = +numOfRow;
-  // const numberEndData =
-  //   numberStartData + dataLength > data.length
-  //     ? data.length
-  //     : numberStartData + dataLength;
-  // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [phone, setphone] = useState("");
@@ -33,7 +20,7 @@ export default function UserDetailScreen() {
   const [sex, setsex] = useState("");
   const [dateOfBirth, setdateOfBirth] = useState("");
   const [address, setaddress] = useState("");
-  const [appointment, setappointment] = useState([]);
+
   const [show, setShow] = useState(false);
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const location = useLocation();
@@ -46,43 +33,20 @@ export default function UserDetailScreen() {
     try {
       axios.get(`${server.USER_DETAIL}/${userid}`).then((res) => {
         const data = res.data;
-        const user = data.user;
-        const appointment = data.appointment;
-        setappointment(appointment);
-        setfirstname(user.FirstName);
-        setlastname(user.LastName);
-        setsex(user.Sex);
-        setdateOfBirth(user.DateOfBirth);
-        setaddress(user.Address);
-        setphone(user.Phone);
-        setemail(user.Email);
+        setfirstname(data.FirstName);
+        setlastname(data.LastName);
+        setsex(data.Sex);
+        setdateOfBirth(data.DateOfBirth);
+        setaddress(data.Address);
+        setphone(data.Phone);
+        setemail(data.Email);
       });
     } catch (error) {}
   };
 
   useEffect(() => {
     getUserProfile();
-  }, []);
-
-  const displayThaiDate = (date) => {
-    const result = new Date(date).toLocaleDateString("th-TH", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    });
-    return result;
-  };
-
-  const showShortThaiDate = (date) => {
-    const result = new Date(date).toLocaleDateString("th-TH", {
-      year: "2-digit",
-      month: "2-digit",
-      day: "numeric",
-      // weekday: "short",
-    });
-    return result;
-  };
+  });
 
   return (
     <div className="content-body">
@@ -105,7 +69,7 @@ export default function UserDetailScreen() {
                 <p className="text-gray-500 ml-4">
                   <b>ชื่อ-สกุล :</b> {firstname} {lastname} <b>เพศ : </b>
                   {sex} <b>วัน/เดือน/ปีเกิด : </b>
-                  {displayThaiDate(dateOfBirth)}
+                  {dateOfBirth}
                 </p>
               </div>
               <div
@@ -148,7 +112,7 @@ export default function UserDetailScreen() {
               <p>วันที่</p>
               <p>เวลา</p>
               <p>แพทย์ที่พบ</p>
-              {/* <p>เบอร์โทรศัพท์</p> */}
+              <p>เบอร์โทรศัพท์</p>
               <p>สถานะ</p>
               <p>ดูข้อมูล/ลบข้อมูล</p>
 
@@ -156,77 +120,75 @@ export default function UserDetailScreen() {
             </div>
             <div className="body-table">
               {/* body table */}
-              {appointment.map((app) => (
-                <div className="table-grid-userdetail">
-                  <p>{showShortThaiDate(app.Date)}</p>
-                  <p>{app.Time}</p>
-                  <p>{app.DoctorName}</p>
-                  {/* <p>{app.Phone}</p> */}
-                  <p>{app.Status}</p>
+              {/* {officer.map((officerlist) => ( */}
+              <div className="table-grid-userdetail">
+                <p>17-08-64</p>
+                <p>10.00-11.00</p>
+                <p>ดาริส ปิณฑรัตนวิบูลย์</p>
+                <p>093849586</p>
+                <p>เสร็จสิ้น</p>
 
-                  <div className="menu-row">
-                    <Link
-                      to={{
-                        pathname: `/usersummary`,
-                        state: {
-                          // appointmentid: app.AppointmentID,
-                          date: app.Date,
-                          time: app.Time,
-                          doctorname: app.DoctorName,
-                          status: app.Status,
-                          userid: userid,
-                        },
-                      }}
-                    >
-                      <Edit
-                        {...iconOption}
-                        // onClick={() => console.log("Click function edit ")}
-                      />
-                    </Link>
-                    {/* <Delete
+                <div className="menu-row">
+                  <Link
+                    to={{
+                      pathname: `/usersummary`,
+                      state: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        sex: sex,
+                        address: address,
+                        phone: phone,
+                        dateOfBirth: dateOfBirth,
+                        email: email,
+                      },
+                    }}
+                  >
+                    <Edit
                       {...iconOption}
-                      onClick={handleShow}
-                      // onClick={() =>
-                      //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                      // }
-                    /> */}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                  </Link>
+                  <Delete
+                    {...iconOption}
+                    onClick={handleShow}
+                    // onClick={() =>
+                    //   handleDelete(officerlist.DocumentID, officerlist.Position)
+                    // }
+                  />
 
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>คำเตือน</Modal.Title>
-                      </Modal.Header>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>คำเตือน</Modal.Title>
+                    </Modal.Header>
 
-                      <center>
-                        <Modal.Body>
-                          คุณต้องการลบคนไข้ท่านนี้หรือไม่ ?
-                        </Modal.Body>
-                      </center>
-                      <Modal.Footer>
-                        <Button
-                          variant="secondary"
-                          onClick={handleClose}
-                          style={{
-                            borderColor: "#bdbdbd",
-                            backgroundColor: "#bdbdbd",
-                          }}
-                        >
-                          ย้อนกลับ
-                        </Button>
-                        <Button
-                          variant="danger"
-                          onClick={handleClose}
-                          style={{
-                            borderColor: "danger",
-                            backgroundColor: "danger",
-                          }}
-                        >
-                          ยืนยันลบคนไข้
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
+                    <center>
+                      <Modal.Body>คุณต้องการลบข้อมูลคนไข้ท่านนี้หรือไม่ ?</Modal.Body>
+                    </center>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={handleClose}
+                        style={{
+                          borderColor: "#bdbdbd",
+                          backgroundColor: "#bdbdbd",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={handleClose}
+                        style={{
+                          borderColor: "danger",
+                          backgroundColor: "danger",
+                        }}
+                      >
+                        ยืนยันลบคนไข้
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
