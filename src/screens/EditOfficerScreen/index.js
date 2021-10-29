@@ -90,39 +90,39 @@ function EditOfficerScreen() {
   };
 
   const handleSubmitData = () => {
-    // let user = {
-    //   firstname: FirstName,
-    //   lastname: LastName,
-    //   phone: Phone,
-    // };
-    // let data = Object.values(user).every((value) => value);
-    // if (!regThaiChar.test(FirstName)) {
-    //   window.alert("โปรดกรอกชื่อจริงเป็นภาษาไทย");
-    // } else if (!regThaiChar.test(LastName)) {
-    //   window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
-    // }
-    // if (!regPhoneNumber.test(Phone)) {
-    //   window.alert("โปรดกรอกหมายเลขโทรศัพท์เป็นตัวเลข");
-    // } else
-    // else {
-    try {
-      axios
-        .put(server.EDIT_OFFICER, {
-          FirstName: FirstName,
-          LastName: LastName,
-          Phone: Phone,
-          Position: state_Position,
-          DocumentID: state_DocumentID,
-        })
-        .then((res) => {
-          const data = res.data;
-          if (data == true) {
-            window.alert("แก้ไขข้อมูลสำเร็จ");
-            history.push("/profile");
-          }
-        });
-    } catch (error) {}
-    // }
+    let user = {
+      firstname: FirstName,
+      lastname: LastName,
+      phone: Phone,
+    };
+    let data = Object.values(user).every((value) => value);
+    if (data == false) {
+      window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+    } else if (!regThaiChar.test(FirstName)) {
+      window.alert("โปรดกรอกชื่อจริงเป็นภาษาไทย");
+    } else if (!regThaiChar.test(LastName)) {
+      window.alert("โปรดกรอกนามสกุลเป็นภาษาไทย");
+    } else if (!regPhoneNumber.test(Phone)) {
+      window.alert("โปรดกรอกหมายเลขโทรศัพท์เป็นตัวเลข");
+    } else {
+      try {
+        axios
+          .put(server.EDIT_OFFICER, {
+            FirstName: FirstName,
+            LastName: LastName,
+            Phone: Phone,
+            Position: state_Position,
+            DocumentID: state_DocumentID,
+          })
+          .then((res) => {
+            const data = res.data;
+            if (data == true) {
+              window.alert("แก้ไขข้อมูลสำเร็จ");
+              history.push("/profile");
+            }
+          });
+      } catch (error) {}
+    }
   };
 
   console.log(FirstName, LastName, Phone);

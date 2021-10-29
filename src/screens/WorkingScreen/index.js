@@ -130,7 +130,7 @@ export default function WorkingScreen() {
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
-                       
+                        status: working.Status,
                       },
                     }}
                   >

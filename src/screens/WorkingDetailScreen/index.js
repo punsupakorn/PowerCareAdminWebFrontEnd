@@ -9,7 +9,8 @@ import { data } from "autoprefixer";
 
 function WorkingDetailScreen() {
   const location = useLocation();
-  const { userID, username, date, time, symtoms, doctorname } = location.state;
+  const { userID, username, date, time, symtoms, doctorname, status } =
+    location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
   const [sex, setsex] = useState("");
@@ -138,6 +139,20 @@ function WorkingDetailScreen() {
             >
               <p className=" text-gray-500 ml-4">
                 <b>อาการเบื้องต้น :</b> {symtoms}
+              </p>
+            </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>สถานะการทำนัด :</b> {status}
               </p>
             </div>
             {/* <input
