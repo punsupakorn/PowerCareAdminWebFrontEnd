@@ -20,7 +20,7 @@ export default function UserDetailScreen() {
   const [sex, setsex] = useState("");
   const [dateOfBirth, setdateOfBirth] = useState("");
   const [address, setaddress] = useState("");
-
+  const [appointment, setappointment] = useState([]);
   const [show, setShow] = useState(false);
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const location = useLocation();
@@ -29,24 +29,45 @@ export default function UserDetailScreen() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
+  const displayShortThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric",
+      // weekday: "short",
+    });
+    return result;
+  };
+
   const getUserProfile = () => {
     try {
       axios.get(`${server.USER_DETAIL}/${userid}`).then((res) => {
         const data = res.data;
-        setfirstname(data.FirstName);
-        setlastname(data.LastName);
-        setsex(data.Sex);
-        setdateOfBirth(data.DateOfBirth);
-        setaddress(data.Address);
-        setphone(data.Phone);
-        setemail(data.Email);
+        setfirstname(data.user.FirstName);
+        setlastname(data.user.LastName);
+        setsex(data.user.Sex);
+        setdateOfBirth(data.user.DateOfBirth);
+        setaddress(data.user.Address);
+        setphone(data.user.Phone);
+        setemail(data.user.Email);
+        setappointment(data.appointment);
       });
     } catch (error) {}
   };
 
   useEffect(() => {
     getUserProfile();
-  });
+  }, []);
 
   return (
     <div className="content-body">
@@ -69,7 +90,7 @@ export default function UserDetailScreen() {
                 <p className="text-gray-500 ml-4">
                   <b>ชื่อ-สกุล :</b> {firstname} {lastname} <b>เพศ : </b>
                   {sex} <b>วัน/เดือน/ปีเกิด : </b>
-                  {dateOfBirth}
+                  {displayThaiDate(dateOfBirth)}
                 </p>
               </div>
               <div
@@ -112,83 +133,84 @@ export default function UserDetailScreen() {
               <p>วันที่</p>
               <p>เวลา</p>
               <p>แพทย์ที่พบ</p>
-              <p>เบอร์โทรศัพท์</p>
+              {/* <p>เบอร์โทรศัพท์</p> */}
               <p>สถานะ</p>
-              <p>ดูข้อมูล/ลบข้อมูล</p>
+              <p>ดูข้อมูล</p>
 
               {/* end header */}
             </div>
             <div className="body-table">
               {/* body table */}
-              {/* {officer.map((officerlist) => ( */}
-              <div className="table-grid-userdetail">
-                <p>17-08-64</p>
-                <p>10.00-11.00</p>
-                <p>ดาริส ปิณฑรัตนวิบูลย์</p>
-                <p>093849586</p>
-                <p>เสร็จสิ้น</p>
+              {appointment.map((app) => (
+                <div className="table-grid-userdetail">
+                  <p>{displayShortThaiDate(app.Date)}</p>
+                  <p>{app.Time}</p>
+                  <p>{app.DoctorName}</p>
+                  {/* <p>{093849586}</p> */}
+                  <p>{app.Status}</p>
 
-                <div className="menu-row">
-                  <Link
-                    to={{
-                      pathname: `/usersummary`,
-                      state: {
-                        firstname: firstname,
-                        lastname: lastname,
-                        sex: sex,
-                        address: address,
-                        phone: phone,
-                        dateOfBirth: dateOfBirth,
-                        email: email,
-                      },
-                    }}
-                  >
-                    <Edit
+                  <div className="menu-row">
+                    <Link
+                      to={{
+                        pathname: `/usersummary`,
+                        state: {
+                          userid: app.UserID,
+                          date: app.Date,
+                          time: app.Time,
+                          doctorname: app.DoctorName,
+                          status: app.Status,
+                        },
+                      }}
+                    >
+                      <Edit
+                        {...iconOption}
+                        // onClick={() => console.log("Click function edit ")}
+                      />
+                    </Link>
+                    {/* <Delete
                       {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                  </Link>
-                  <Delete
-                    {...iconOption}
-                    onClick={handleShow}
-                    // onClick={() =>
-                    //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                    // }
-                  />
+                      onClick={handleShow}
+                      // onClick={() =>
+                      //   handleDelete(officerlist.DocumentID, officerlist.Position)
+                      // }
+                    /> */}
 
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>คำเตือน</Modal.Title>
-                    </Modal.Header>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>คำเตือน</Modal.Title>
+                      </Modal.Header>
 
-                    <center>
-                      <Modal.Body>คุณต้องการลบข้อมูลคนไข้ท่านนี้หรือไม่ ?</Modal.Body>
-                    </center>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={handleClose}
-                        style={{
-                          borderColor: "#bdbdbd",
-                          backgroundColor: "#bdbdbd",
-                        }}
-                      >
-                        ย้อนกลับ
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={handleClose}
-                        style={{
-                          borderColor: "danger",
-                          backgroundColor: "danger",
-                        }}
-                      >
-                        ยืนยันลบคนไข้
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                      <center>
+                        <Modal.Body>
+                          คุณต้องการลบข้อมูลคนไข้ท่านนี้หรือไม่ ?
+                        </Modal.Body>
+                      </center>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={handleClose}
+                          style={{
+                            borderColor: "#bdbdbd",
+                            backgroundColor: "#bdbdbd",
+                          }}
+                        >
+                          ย้อนกลับ
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={handleClose}
+                          style={{
+                            borderColor: "danger",
+                            backgroundColor: "danger",
+                          }}
+                        >
+                          ยืนยันลบคนไข้
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
