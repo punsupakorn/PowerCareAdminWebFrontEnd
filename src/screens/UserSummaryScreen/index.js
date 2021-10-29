@@ -6,8 +6,8 @@ import { useLocation } from "react-router";
 
 function UserSummaryScreen() {
   const location = useLocation();
-  const { firstname, lastname, sex, address, phone, dateOfBirth, email } =
-    location.state;
+  const { userid, date, time, doctorname, status } = location.state;
+  console.log(date, time, doctorname);
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -16,7 +16,7 @@ function UserSummaryScreen() {
           <div className="flex flex-col justify-center items-center">
             <p class="text-xl mt-3 font-semibold">ข้อมูลอาการคนไข้</p>
 
-            <div
+            {/* <div
               className="
         flex
         justify-between
@@ -57,7 +57,7 @@ function UserSummaryScreen() {
               <p className="text-gray-500 ml-4">
               <b>เบอร์โทรศัพท์ :</b> {phone} <b>E-mail :</b> {email}
               </p>
-            </div>
+            </div> */}
             <div
               className="
         flex
@@ -69,7 +69,10 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> ข้อมูล ณ วันที่ 1/1/64 เวลา 10.30-11.00 </b>
+                <b>
+                  {" "}
+                  ข้อมูล ณ วันที่ {date} เวลา {time}{" "}
+                </b>
               </p>
             </div>
             <div
@@ -83,7 +86,21 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> แพทย์ที่พบ : สมรวย ฉลาดแฉลม </b>
+                <b> แพทย์ที่พบ : {doctorname} </b>
+              </p>
+            </div>
+            <div
+              className="
+        flex
+        justify-between
+        items-center
+        w-full
+        py-3
+        border-b-2 border-gray-200
+      "
+            >
+              <p className="text-gray-500 ml-4">
+                <b> สถานะการทำนัด : {status} </b>
               </p>
             </div>
             <div
@@ -120,7 +137,14 @@ function UserSummaryScreen() {
           </div>
         </div>
         <div className="px-4 mt-4 ">
-          <Link to="/userdetail">
+          <Link
+            to={{
+              pathname: `/userdetail`,
+              state: {
+                userid: userid,
+              },
+            }}
+          >
             <Button
               variant="secondary"
               style={{

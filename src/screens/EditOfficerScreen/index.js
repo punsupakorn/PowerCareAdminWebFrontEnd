@@ -34,10 +34,11 @@ function EditOfficerScreen() {
           `${server.EDIT_OFFICER}/getprofile/${state_Position}/${state_DocumentID}`
         )
         .then((res) => {
-          const data = res.data;
-          setFirstName(data.FirstName);
-          setLastName(data.LastName);
-          setPhone(data.Phone);
+          console.log(res.data);
+          // const data = res.data;
+          // setFirstName(data.FirstName);
+          // setLastName(data.LastName);
+          // setPhone(data.Phone);
         });
     } catch (error) {}
   };

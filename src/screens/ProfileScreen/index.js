@@ -35,7 +35,7 @@ function ProfileScreen() {
 
   useEffect(() => {
     getProfile();
-  });
+  },[]);
   return (
     <div className="content-body">
       <div className="grid min-h-screen place-items-center ">
