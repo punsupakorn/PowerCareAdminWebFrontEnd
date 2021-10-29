@@ -13,21 +13,6 @@ import { server } from "../../constants/constant";
 import "./UserDetailScreen.css";
 import { TableController } from "../../components";
 export default function UserDetailScreen() {
-  // for search
-  // data
-  // table
-  // const [indexTable, setIndexTable] = useState(0);
-  // const [numOfRow, setNumOfRow] = useState(10);
-  // const numOfTable = Math.ceil(data.length / numOfRow);
-  // const numberStartData = indexTable * numOfRow;
-  // const dataLength = +numOfRow;
-  // const numberEndData =
-  //   numberStartData + dataLength > data.length
-  //     ? data.length
-  //     : numberStartData + dataLength;
-  // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
-
-  // อันใหม่
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [phone, setphone] = useState("");
@@ -44,28 +29,6 @@ export default function UserDetailScreen() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getUserProfile = () => {
-    try {
-      axios.get(`${server.USER_DETAIL}/${userid}`).then((res) => {
-        const data = res.data;
-        const user = data.user;
-        const appointment = data.appointment;
-        setappointment(appointment);
-        setfirstname(user.FirstName);
-        setlastname(user.LastName);
-        setsex(user.Sex);
-        setdateOfBirth(user.DateOfBirth);
-        setaddress(user.Address);
-        setphone(user.Phone);
-        setemail(user.Email);
-      });
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    getUserProfile();
-  }, []);
-
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
       year: "numeric",
@@ -76,15 +39,35 @@ export default function UserDetailScreen() {
     return result;
   };
 
-  const showShortThaiDate = (date) => {
+  const displayShortThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
-      year: "2-digit",
+      year: "numeric",
       month: "2-digit",
       day: "numeric",
       // weekday: "short",
     });
     return result;
   };
+
+  const getUserProfile = () => {
+    try {
+      axios.get(`${server.USER_DETAIL}/${userid}`).then((res) => {
+        const data = res.data;
+        setfirstname(data.user.FirstName);
+        setlastname(data.user.LastName);
+        setsex(data.user.Sex);
+        setdateOfBirth(data.user.DateOfBirth);
+        setaddress(data.user.Address);
+        setphone(data.user.Phone);
+        setemail(data.user.Email);
+        setappointment(data.appointment);
+      });
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   return (
     <div className="content-body">
@@ -152,7 +135,7 @@ export default function UserDetailScreen() {
               <p>แพทย์ที่พบ</p>
               {/* <p>เบอร์โทรศัพท์</p> */}
               <p>สถานะ</p>
-              <p>ดูข้อมูล/ลบข้อมูล</p>
+              <p>ดูข้อมูล</p>
 
               {/* end header */}
             </div>
@@ -160,10 +143,10 @@ export default function UserDetailScreen() {
               {/* body table */}
               {appointment.map((app) => (
                 <div className="table-grid-userdetail">
-                  <p>{showShortThaiDate(app.Date)}</p>
+                  <p>{displayShortThaiDate(app.Date)}</p>
                   <p>{app.Time}</p>
                   <p>{app.DoctorName}</p>
-                  {/* <p>{app.Phone}</p> */}
+                  {/* <p>{093849586}</p> */}
                   <p>{app.Status}</p>
 
                   <div className="menu-row">
@@ -171,12 +154,11 @@ export default function UserDetailScreen() {
                       to={{
                         pathname: `/usersummary`,
                         state: {
-                          // appointmentid: app.AppointmentID,
+                          userid: app.UserID,
                           date: app.Date,
                           time: app.Time,
                           doctorname: app.DoctorName,
                           status: app.Status,
-                          userid: userid,
                         },
                       }}
                     >
@@ -200,7 +182,7 @@ export default function UserDetailScreen() {
 
                       <center>
                         <Modal.Body>
-                          คุณต้องการลบคนไข้ท่านนี้หรือไม่ ?
+                          คุณต้องการลบข้อมูลคนไข้ท่านนี้หรือไม่ ?
                         </Modal.Body>
                       </center>
                       <Modal.Footer>
