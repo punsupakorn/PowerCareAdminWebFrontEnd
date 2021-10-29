@@ -26,6 +26,8 @@ export default function UserDetailScreen() {
   //     ? data.length
   //     : numberStartData + dataLength;
   // if (indexTable >= numOfTable) setIndexTable(numOfTable - 1);
+
+  // อันใหม่
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [phone, setphone] = useState("");
