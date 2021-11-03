@@ -121,7 +121,6 @@ const AppointmentScreen = () => {
       <div className="schedule-content mt-4">
         <InputSchedule title="เลือกหมอ" invalid>
           <select
-            // value={name}
             name="doctor-select"
             className="doctor-select"
             onChange={handleData}

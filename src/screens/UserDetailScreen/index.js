@@ -20,7 +20,7 @@ export default function UserDetailScreen() {
   const [sex, setsex] = useState("");
   const [dateOfBirth, setdateOfBirth] = useState("");
   const [address, setaddress] = useState("");
-  const [appointment, setappointment] = useState([]);
+  const [appointment, setappointment] = useState([]); 
   const [show, setShow] = useState(false);
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const location = useLocation();
