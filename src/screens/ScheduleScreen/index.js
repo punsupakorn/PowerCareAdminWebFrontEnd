@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { server } from "../../constants/constant";
+import { data } from "autoprefixer";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
@@ -89,6 +90,11 @@ const ScheduleScreen = () => {
   //   }
   // };
 
+  // const searchDate = async (date) => {
+  //   const alldate = await getToday();
+  //   console.log("ALL DATE ", alldate);
+  // };
+
   const displayTime = (time) => {
     const timearray = [];
     for (let i = 0; i < time.length; i++) {
@@ -114,53 +120,56 @@ const ScheduleScreen = () => {
     <div className="content-body ">
       <p class="text-xl mt-3 font-semibold">ตารางเวลาทำการของแพทย์</p>
       <div className="search-bar-conten">
-          <div className="p-12 h-12 ">
-            <div className="bg-white flex items-center rounded-full shadow h-12">
-              <input
-                className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
-                id="search"
-                type="date"
-                placeholder="Search"
-              />
-              <div className="  p-4">
-                <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
-                  {searched ? (
-                    <span onClick={refreshPage}>
-                      <CloseIcon
-                        width="1rem"
-                        hieght="1rem"
-                        className="close"
-                        // value={i}
-                      />
-                    </span>
-                  ) : (
-                    <SearchIcon
-                      width="1.5rem"
-                      hieght="1.5rem"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        // search(searchInput);
-                        setSearched(true);
-                      }}
+        <div className="p-12 h-12 ">
+          <div className="bg-white flex items-center rounded-full shadow h-12">
+            <input
+              className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
+              id="search"
+              type="date"
+              placeholder="Search"
+            />
+            <div className="  p-4">
+              <button
+                className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
+                onChange={data}
+              >
+                {/* {searched ? (
+                  <span onClick={refreshPage}>
+                    <CloseIcon
+                      width="1rem"
+                      hieght="1rem"
+                      className="close"
+                      // value={i}
                     />
-                  )}
-                </button>
-              </div>
+                  </span>
+                ) : ( */}
+                <SearchIcon
+                  width="1.5rem"
+                  hieght="1.5rem"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    // search(searchInput);
+                    // setSearched(true);
+                  }}
+                />
+                {/* )} */}
+              </button>
             </div>
+          </div>
         </div>
         <Link to="/appointment">
-            <Button
-              variant="secondary"
-              style={{
-                borderColor: "#818CF8",
-                backgroundColor: "#818CF8",
-                color: "white",
-                float: "right"
-              }}
-            >
-              เพิ่มตารางเวลาทำการของแพทย์
-            </Button>
-          </Link>{" "}
+          <Button
+            variant="secondary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+              float: "right",
+            }}
+          >
+            เพิ่มตารางเวลาทำการของแพทย์
+          </Button>
+        </Link>{" "}
       </div>
       {/* <Link to="/calendar">
       <button className="btn btn-addappointment"> ปฏิทินเวลา</button>
@@ -171,7 +180,6 @@ const ScheduleScreen = () => {
       </div>
 
       <div className="appointment-content">
-
         {schedule.map((data) => (
           <div className="card-appointment">
             <br></br>
@@ -179,7 +187,6 @@ const ScheduleScreen = () => {
             <br></br>
             {/* <p>{displayThaiDate(data.Date)}</p> */}
             <div className="time-item-content">
-             
               {displayTime(data.Time).map((t) => (
                 <span className="time-item">
                   {t}

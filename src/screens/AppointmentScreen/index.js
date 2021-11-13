@@ -83,7 +83,6 @@ const AppointmentScreen = () => {
     };
 
     let data = Object.values(slot).every((value) => value);
-    console.log(data);
     try {
       if (data == false) {
         window.alert("โปรดกรอกชื่อแพทย์และวันที่ให้ครบ");
@@ -99,10 +98,13 @@ const AppointmentScreen = () => {
             id: id,
           })
           .then((res) => {
-            console.log(res);
+            if (res.data == "exist") {
+              window.alert("ผิดพลาด มีตารางเวลาของแพทย์ที่เลือกอยู่ในระบบแล้ว");
+            } else {
+              window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
+              refreshPage();
+            }
           });
-        window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
-        refreshPage();
       }
     } catch (error) {}
   };
