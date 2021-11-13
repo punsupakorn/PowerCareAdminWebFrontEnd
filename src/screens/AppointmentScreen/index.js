@@ -40,12 +40,6 @@ const AppointmentScreen = () => {
     setid(data.id);
   };
 
-  // const onChooseDate = (e) => {};
-
-  // const onCancelDate = (e) => {};
-
-  // console.log("result : ", date);
-
   // Input Component
   function InputSchedule({ title, children }) {
     return (
@@ -87,9 +81,6 @@ const AppointmentScreen = () => {
       if (data == false) {
         window.alert("โปรดกรอกชื่อแพทย์และวันที่ให้ครบ");
       } else {
-        // axios.get(`${server.APPOINTMENT}/check/${id}/${date}`).then((res) => {
-        //   console.log(res.data);
-        // });
         axios
           .post(server.APPOINTMENT, {
             doctor: name,
@@ -99,7 +90,9 @@ const AppointmentScreen = () => {
           })
           .then((res) => {
             if (res.data == "exist") {
-              window.alert("ผิดพลาด มีตารางเวลาของแพทย์ที่เลือกอยู่ในระบบแล้ว");
+              window.alert(
+                "ผิดพลาด เนื่องจากมีตารางเวลาของแพทย์ที่เลือกอยู่ในระบบแล้ว"
+              );
             } else {
               window.alert("เพิ่มเวลาการแพทย์สำเร็จ");
               refreshPage();
