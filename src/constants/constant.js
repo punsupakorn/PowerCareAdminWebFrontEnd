@@ -1,5 +1,5 @@
 export const apiURL = "http://localhost:8000/";
-// export const apiURL = "http://54.169.100.99:5000/"
+// export const apiURL = "http://54.179.143.178:8000/";
 
 export const server = {
   LOGIN: `${apiURL}Login`,

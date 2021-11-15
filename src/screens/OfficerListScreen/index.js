@@ -17,6 +17,7 @@ const OfficerListScreen = () => {
   const [officer, setOfficer] = useState([]);
   const [searched, setSearched] = useState(false);
   const [state, setstate] = useState();
+  const [dataSearch, setdataSearch] = useState("");
   // const [doctor, setDoctor] = useState([]);
 
   const [show, setShow] = useState(false);
@@ -97,6 +98,32 @@ const OfficerListScreen = () => {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
+  const handleData = (e) => {
+    const data = e.target.value;
+    setdataSearch(data);
+  };
+  const searchOfficer = (message) => {
+    axios.get(server.OFFICER_LIST).then((res) => {
+      const data = res.data;
+      const result = data.find(
+        (data) =>
+          data.FirstName == message ||
+          data.LastName == message ||
+          data.Phone == message ||
+          data.Email == message
+      );
+      if (result !== undefined) {
+        const arr = [];
+        arr.push(result);
+        setOfficer(arr);
+      } else {
+        window.alert("ไม่พบสิ่งที่ต้องการค้นหา");
+      }
+    });
+  };
+
+  // console.log(dataSearch);
+
   return (
     <div className="content-body">
       <div className="head-officerlist">
@@ -109,6 +136,7 @@ const OfficerListScreen = () => {
                 id="search"
                 type="text"
                 placeholder="Search"
+                onChange={handleData}
               />
               <div className="  p-4">
                 <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
@@ -127,8 +155,9 @@ const OfficerListScreen = () => {
                       hieght="1.5rem"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
+                        searchOfficer(dataSearch);
                         // search(searchInput);
-                        setSearched(true);
+                        // setSearched(true);
                       }}
                     />
                   )}
