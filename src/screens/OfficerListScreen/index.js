@@ -159,6 +159,7 @@ const OfficerListScreen = () => {
                         // search(searchInput);
                         // setSearched(true);
                       }}
+                      onsu
                     />
                   )}
                 </button>

@@ -52,7 +52,6 @@ const AddOfficerScreen = () => {
     setEmail(data);
     const result = regEmail.test(Email);
     return result;
-    // console.log(result);
   };
 
   const handlePosition = (e) => {
@@ -72,16 +71,6 @@ const AddOfficerScreen = () => {
     setConfirmPassword(confirmPassword);
     console.log(confirmPassword);
   };
-
-  // const isEmailExist = (Email) => {
-  //   try {
-  //     axios.get(`${server.ADD_OFFICER}/${Email}`).then((res) => {
-  //       setexist(res.data);
-  //     });
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // };
 
   const handleSubmit = () => {
     let user = {
@@ -205,7 +194,7 @@ const AddOfficerScreen = () => {
             id="position"
             name="Position"
             className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-            onClick={handlePosition}
+            onChange={handlePosition}
           >
             <option disabled selected value>
               {" "}
