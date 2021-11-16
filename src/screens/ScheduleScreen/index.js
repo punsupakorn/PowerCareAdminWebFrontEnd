@@ -11,7 +11,7 @@ import { data } from "autoprefixer";
 
 const ScheduleScreen = () => {
   const [schedule, setSchedule] = useState([]);
-  const [today, settoday] = useState();
+  const [today, settoday] = useState("");
   // for search
   const [searchInput, setSearchInput] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -19,6 +19,7 @@ const ScheduleScreen = () => {
   const [state, setstate] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [date, setdate] = useState("");
 
   // function search
   // function search(text) {
@@ -116,6 +117,43 @@ const ScheduleScreen = () => {
     // return result
     settoday(result);
   };
+
+  const handleDate = (e) => {
+    const data = e.target.value;
+    setdate(data);
+  };
+
+  const searchDate = (dateSearch) => {
+    try {
+      axios.get(server.SCHEDULE).then((res) => {
+        const data = res.data;
+        const today = data.filter(
+          (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
+        );
+        if (today[0] == undefined) {
+          window.alert("ไม่พบตารางปฏิบัติการ");
+        } else {
+          setSchedule(today);
+          settoday(displayThaiDate(date));
+        }
+      });
+      // axios.get(server.SCHEDULE).then((res) => {
+      //   const data = res.data;
+      //   const date = new Date().toLocaleDateString("th-TH", {
+      //     year: "numeric",
+      //     month: "long",
+      //     day: "numeric",
+      //     weekday: "long",
+      //   });
+      //   const today = data.filter((data) => displayThaiDate(data.Date) == date);
+      //   setSchedule(today);
+
+      // console.log(displayThaiDate(dateSearch));
+    } catch (error) {}
+  };
+
+  // console.log(today);
+
   return (
     <div className="content-body ">
       <p class="text-xl mt-3 font-semibold">ตารางเวลาทำการของแพทย์</p>
@@ -127,13 +165,11 @@ const ScheduleScreen = () => {
               id="search"
               type="date"
               placeholder="Search"
+              onChange={handleDate}
             />
             <div className="  p-4">
-              <button
-                className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
-                onChange={data}
-              >
-                {/* {searched ? (
+              <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+                {searched ? (
                   <span onClick={refreshPage}>
                     <CloseIcon
                       width="1rem"
@@ -142,17 +178,16 @@ const ScheduleScreen = () => {
                       // value={i}
                     />
                   </span>
-                ) : ( */}
-                <SearchIcon
-                  width="1.5rem"
-                  hieght="1.5rem"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    // search(searchInput);
-                    // setSearched(true);
-                  }}
-                />
-                {/* )} */}
+                ) : (
+                  <SearchIcon
+                    width="1.5rem"
+                    hieght="1.5rem"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      searchDate(date);
+                    }}
+                  />
+                )}
               </button>
             </div>
           </div>
