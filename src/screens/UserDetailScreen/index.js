@@ -128,12 +128,9 @@ export default function UserDetailScreen() {
         <div className="working-content">
           <div className="table-content">
             <div className="table-grid-userdetail header">
-              {/* header table */}
-
               <p>วันที่</p>
               <p>เวลา</p>
               <p>แพทย์ที่พบ</p>
-              {/* <p>เบอร์โทรศัพท์</p> */}
               <p>สถานะ</p>
               <p>ดูข้อมูล</p>
 
@@ -212,6 +209,16 @@ export default function UserDetailScreen() {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="px-2 mt-3 ">
+          <Link to="/user">
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
+          </Link>{" "}
           </div>
         </div>
       </div>

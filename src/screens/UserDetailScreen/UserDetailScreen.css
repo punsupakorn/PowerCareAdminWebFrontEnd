@@ -29,13 +29,12 @@
   
   .table-content {
     margin-top: 2rem;
-    text-align: start;
-    overflow: scroll;
+    text-align: center;
   }
   
   .table-grid-userdetail {
     display: grid;
-    grid-template-columns: 10% 12% 20% 15%  15%  15%calc(10% - 1rem);
+    grid-template-columns: 15% 20% 25% 20%  calc(10%);
     grid-gap: 1rem;
   }
   

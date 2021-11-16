@@ -306,6 +306,16 @@ const OfficerListScreen = () => {
               </div>
             ))}
           </div>
+          <div className="px-2 mt-3 ">
+          <Link to="/user">
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              กลับสู่หน้าหลัก
+            </Button>
+          </Link>{" "}
+          </div>
         </div>
       </div>
     </div>

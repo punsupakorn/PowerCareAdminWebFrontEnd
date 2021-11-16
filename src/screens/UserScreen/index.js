@@ -15,6 +15,8 @@ export default function UserScreen() {
   const [searched, setSearched] = useState(false);
   const [user, setuser] = useState([]);
   const [show, setShow] = useState(false);
+  const [datauserSearch, setdatauserSearch] = useState("");
+ 
   // const [state, setstate] = useState("");
 
   const handleClose = () => setShow(false);
@@ -57,6 +59,30 @@ export default function UserScreen() {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
+  const handleuserData = (e) => {
+    const data = e.target.value;
+    setdatauserSearch(data);
+  };
+
+  const searchUser = (message) => {
+    axios.get(server.USER).then((res) => {
+      const data = res.data;
+      const result = data.find(
+        (data) =>
+          data.FirstName == message ||
+          data.LastName == message ||
+          data.Phone == message ||
+          data.Email == message
+      );
+      if (result !== undefined) {
+        const arr = [];
+        arr.push(result);
+        setuser(arr);
+      } else {
+        window.alert("ไม่พบสิ่งที่ต้องการค้นหา");
+      }
+    });
+  }; 
   return (
     <div className="content-body">
       <div className="head-officerlist">
@@ -69,9 +95,14 @@ export default function UserScreen() {
                 id="search"
                 type="text"
                 placeholder="Search"
+                onChange={handleuserData}
               />
               <div className="  p-4">
-                <button className="  bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+                <button 
+                onClick={() => {
+                  searchUser(datauserSearch);
+                }}
+                className="  bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
                   {searched ? (
                     <span onClick={refreshPage}>
                       <CloseIcon
@@ -86,10 +117,6 @@ export default function UserScreen() {
                       width="1.5rem"
                       hieght="1.5rem"
                       style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        // search(searchInput);
-                        setSearched(true);
-                      }}
                     />
                   )}
                 </button>
@@ -172,6 +199,16 @@ export default function UserScreen() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="px-2 mt-3 ">
+          <Link to="/">
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              กลับสู่หน้าหลัก
+            </Button>
+          </Link>{" "}
           </div>
         </div>
       </div>

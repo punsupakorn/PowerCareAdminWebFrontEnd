@@ -234,7 +234,125 @@ export default function ManageMedicineScreen() {
     <div className="content-body">
       <div className="medicine-content">
         <p className="text-xl mt-3 font-semibold">ผลิตภัณฑ์ทั้งหมด</p>
+        <div className=" px-2 mt-3 ">
+        <Button
+            variant="primary"
+            onClick={() => setLgShow(true)}
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" , float: "right"}}
+          >
+            เพิ่มยา
+          </Button>
+          <Modal
+            size="md"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg">
+                {" "}
+                เพิ่มยา
+              </Modal.Title>
+            </Modal.Header>
 
+            <center>
+              <Modal.Body>
+                <div className="divide-y divide-gray-200">
+                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                    <div className="flex flex-col">
+                      <label className="leading-loose">ชื่อยา</label>
+                      <input
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกชื่อยา"
+                        onChange={handleName}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="leading-loose">
+                        คำอธิบายเกี่ยวกับยา
+                      </label>
+                      <textarea
+                        type="text"
+                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="กรุณากรอกคำอธิบาย"
+                        onChange={handleDescription}
+                      />
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ราคา</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <input
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            placeholder="กรอกราคา"
+                            onChange={handlePrice}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="leading-loose">ประเภท</label>
+                        <div className="relative focus-within:text-gray-600 text-gray-400">
+                          <select
+                            type="text"
+                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                            onChange={handleType}
+                          >
+                            <option disabled selected value>
+                              กรุณาเลือกประเภท
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์บำรุงผิว"
+                            >
+                              {" "}
+                              ผลิตภัณฑ์บำรุงผิว{" "}
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์ทำความสะอาดหน้า"
+                            >
+                              ผลิตภัณฑ์ทำความสะอาดหน้า
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+                            >
+                              ผลิตภัณฑ์แก้แพ้ ผื่นคัน
+                            </option>
+                            <option
+                              className="option"
+                              value="ผลิตภัณฑ์เสริมอาหาร"
+                            >
+                              ผลิตภัณฑ์เสริมอาหาร
+                            </option>
+                            <option className="option" value="ยารักษาโรค">
+                              ยารักษาโรค
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal.Body>
+            </center>
+            <Modal.Footer>
+            
+              <Link to="medicine">
+                <Button
+                  variant="primary"
+                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+                  onClick={handleSubmit}
+                >
+                  เพิ่มยา
+                </Button>
+              </Link>
+            </Modal.Footer>
+          </Modal>
+          {/* </Link> */}
+          </div>
         <div class=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
           {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
           <label
@@ -494,131 +612,15 @@ export default function ManageMedicineScreen() {
         </div>
 
         <div className="px-2 mt-3 ">
-          <Link to="/">
+          <Link to="/homescreenAdmin">
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
             >
-              ย้อนกลับ
+              กลับสู่หน้าหลัก
             </Button>
           </Link>{" "}
-          <Button
-            variant="primary"
-            onClick={() => setLgShow(true)}
-            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-          >
-            เพิ่มยา
-          </Button>
-          <Modal
-            size="md"
-            show={lgShow}
-            onHide={() => setLgShow(false)}
-            aria-labelledby="example-modal-sizes-title-lg"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-lg">
-                {" "}
-                เพิ่มยา
-              </Modal.Title>
-            </Modal.Header>
-
-            <center>
-              <Modal.Body>
-                <div className="divide-y divide-gray-200">
-                  <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="flex flex-col">
-                      <label className="leading-loose">ชื่อยา</label>
-                      <input
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกชื่อยา"
-                        onChange={handleName}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="leading-loose">
-                        คำอธิบายเกี่ยวกับยา
-                      </label>
-                      <textarea
-                        type="text"
-                        className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="กรุณากรอกคำอธิบาย"
-                        onChange={handleDescription}
-                      />
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ราคา</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <input
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            placeholder="กรอกราคา"
-                            onChange={handlePrice}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="leading-loose">ประเภท</label>
-                        <div className="relative focus-within:text-gray-600 text-gray-400">
-                          <select
-                            type="text"
-                            className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                            onChange={handleType}
-                          >
-                            <option disabled selected value>
-                              กรุณาเลือกประเภท
-                            </option>
-                            <option
-                              className="option"
-                              value="ผลิตภัณฑ์บำรุงผิว"
-                            >
-                              {" "}
-                              ผลิตภัณฑ์บำรุงผิว{" "}
-                            </option>
-                            <option
-                              className="option"
-                              value="ผลิตภัณฑ์ทำความสะอาดหน้า"
-                            >
-                              ผลิตภัณฑ์ทำความสะอาดหน้า
-                            </option>
-                            <option
-                              className="option"
-                              value="ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
-                            >
-                              ผลิตภัณฑ์แก้แพ้ ผื่นคัน
-                            </option>
-                            <option
-                              className="option"
-                              value="ผลิตภัณฑ์เสริมอาหาร"
-                            >
-                              ผลิตภัณฑ์เสริมอาหาร
-                            </option>
-                            <option className="option" value="ยารักษาโรค">
-                              ยารักษาโรค
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Modal.Body>
-            </center>
-            <Modal.Footer>
-            
-              <Link to="medicine">
-                <Button
-                  variant="primary"
-                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-                  onClick={handleSubmit}
-                >
-                  เพิ่มยา
-                </Button>
-              </Link>
-            </Modal.Footer>
-          </Modal>
-          {/* </Link> */}
+          
         </div>
       </div>
     </div>
