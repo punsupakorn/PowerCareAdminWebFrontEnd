@@ -137,18 +137,6 @@ const ScheduleScreen = () => {
           settoday(displayThaiDate(date));
         }
       });
-      // axios.get(server.SCHEDULE).then((res) => {
-      //   const data = res.data;
-      //   const date = new Date().toLocaleDateString("th-TH", {
-      //     year: "numeric",
-      //     month: "long",
-      //     day: "numeric",
-      //     weekday: "long",
-      //   });
-      //   const today = data.filter((data) => displayThaiDate(data.Date) == date);
-      //   setSchedule(today);
-
-      // console.log(displayThaiDate(dateSearch));
     } catch (error) {}
   };
 
