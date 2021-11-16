@@ -168,7 +168,12 @@ const ScheduleScreen = () => {
               onChange={handleDate}
             />
             <div className="  p-4">
-              <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+              <button
+                onClick={() => {
+                  searchDate(date);
+                }}
+                className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
+              >
                 {searched ? (
                   <span onClick={refreshPage}>
                     <CloseIcon
@@ -183,9 +188,6 @@ const ScheduleScreen = () => {
                     width="1.5rem"
                     hieght="1.5rem"
                     style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      searchDate(date);
-                    }}
                   />
                 )}
               </button>
