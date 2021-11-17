@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./MedicineDetailScreen.css";
+import "./SummaryTreatmentScreen.css";
 import { Button } from "react-bootstrap";
 
-function MedicineDetailScreen() {
+function SummaryTreatmentScreen() {
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -104,4 +104,4 @@ function MedicineDetailScreen() {
   );
 }
 
-export default MedicineDetailScreen;
+export default SummaryTreatmentScreen;

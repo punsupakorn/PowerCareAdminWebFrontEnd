@@ -67,19 +67,17 @@ export default function UserScreen() {
   const searchUser = (message) => {
     axios.get(server.USER).then((res) => {
       const data = res.data;
-      const result = data.find(
+      const result = data.filter(
         (data) =>
           data.FirstName == message ||
           data.LastName == message ||
           data.Phone == message ||
           data.Email == message
       );
-      if (result !== undefined) {
-        const arr = [];
-        arr.push(result);
-        setuser(arr);
-      } else {
+      if (result[0] == undefined) {
         window.alert("ไม่พบสิ่งที่ต้องการค้นหา");
+      } else {
+        setuser(result);
       }
     });
   }; 

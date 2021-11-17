@@ -105,19 +105,21 @@ const OfficerListScreen = () => {
   const searchOfficer = (message) => {
     axios.get(server.OFFICER_LIST).then((res) => {
       const data = res.data;
-      const result = data.find(
+      const result = data.filter(
         (data) =>
           data.FirstName == message ||
           data.LastName == message ||
           data.Phone == message ||
           data.Email == message
       );
-      if (result !== undefined) {
-        const arr = [];
-        arr.push(result);
-        setOfficer(arr);
-      } else {
+      // console.log(result);
+      if (result[0] == undefined) {
         window.alert("ไม่พบสิ่งที่ต้องการค้นหา");
+      } else {
+       
+        // const arr = [];
+        // arr.push(result);
+        setOfficer(result);
       }
     });
   };
@@ -307,7 +309,7 @@ const OfficerListScreen = () => {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-          <Link to="/user">
+          <Link to="/">
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}

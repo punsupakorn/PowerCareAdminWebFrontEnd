@@ -10,7 +10,7 @@ import {
   WorkingScreen,
   WorkingDetailScreen,
   MedicineScreen,
-  MedicineDetailScreen,
+  SummaryTreatmentScreen,
   OfficerListScreen,
   CalendarScreen,
   PostponeScreen,
@@ -50,8 +50,8 @@ function App() {
               <Route path="/medicine">
                 <MedicineScreen />
               </Route>
-              <Route path="/medicinedetail">
-                <MedicineDetailScreen />
+              <Route path="/summarytreatment">
+                <SummaryTreatmentScreen/>
               </Route>
               <Route path="/officerlistscreen">
                 <OfficerListScreen />

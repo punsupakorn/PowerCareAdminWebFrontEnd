@@ -187,7 +187,7 @@ function SummaryPostponeScreen() {
         border-b-2 border-gray-200
       "
             >
-              <p className="text-red-500 ml-4">
+              <p className="text-green-500 ml-4">
                 <b> วันที่ทำนัดใหม่ : {displayThaiDate(newdate)}</b>
               </p>
             </div>
@@ -201,42 +201,13 @@ function SummaryPostponeScreen() {
         border-b-2 border-gray-200
       "
             >
-              <p className="text-red-500 ml-4">
+              <p className="text-green-500 ml-4">
                 <b> เวลาที่ทำนัดใหม่ : {newtime}</b>
               </p>
             </div>
           </div>
         </div>
         <div className="px-4 ">
-          {/* <button
-            className="
-          button-done
-          w-45
-          bg-blue-200
-          text-white
-          px-3
-          py-2
-          rounded-md
-        "
-          >
-            บันทึกผล
-          </button>
-          <Link to="/postpone">
-            <button
-              className="
-          button-back
-          w-30
-          bg-gray-400
-          text-white
-          px-2
-          py-2
-          margin-left-2vh
-          rounded-md
-        "
-            >
-              ย้อนกลับ
-            </button>
-          </Link> */}
           <br />
           {/* <Link to="/postpone"> */}
           <Button

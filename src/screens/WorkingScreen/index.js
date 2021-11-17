@@ -96,7 +96,10 @@ export default function WorkingScreen() {
           </div>
         </div>
       </div>
-
+      <div className="search-bar-container">
+        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+        <p class="text-xl mt-3 ml-20 font-semibold text-red-500"> สถานะ : ไม่สำเร็จ </p>
+      </div>
       <div className="working-content">
         <div className="table-content-working">
           <div className="table-grid-working header">
@@ -104,7 +107,7 @@ export default function WorkingScreen() {
             <p>วันที่</p>
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
-            <p>ดูข้อมูล/เลื่อนนัด/ลบ</p>
+            <p>ดูข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table-working">
@@ -139,11 +142,42 @@ export default function WorkingScreen() {
                       // onClick={() => console.log("Click function add " + item.id)}
                     />
                   </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="search-bar-container">
+        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+        <p class="text-xl mt-3 ml-20 font-semibold text-green-500"> สถานะ : สำเร็จ </p>
+      </div>
+      <div className="working-content">
+        <div className="table-content-working">
+          <div className="table-grid-working header">
+            {/* header table */}
+            <p>วันที่</p>
+            <p>เวลา</p>
+            <p>ชื่อคนไข้</p>
+            <p>ดูข้อมูล</p>
+            {/* end header */}
+          </div>
+          <div className="body-table-working">
+            {/* body table */}
+            {/* {officer.map((officerlist) => ( */}
+
+            {working.map((working) => (
+              <div className="table-grid-working">
+                <p>{working.Date}</p>
+                <p>{working.Time}</p>
+                <p>{working.UserName}</p>
+
+                <div className="menu-row">
                   <Link
                     to={{
-                      pathname: `/postpone`,
+                      pathname: `/workingdetail`,
                       state: {
-                        appointmentID: working.AppointmentID,
+                        // appointmentID: working.AppointmentID,
                         userID: working.UserID,
                         username: working.UserName,
                         date: working.Date,
@@ -151,33 +185,13 @@ export default function WorkingScreen() {
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
-                        oldtimetableid: working.TimeTableID,
+                        status: working.Status,
                       },
                     }}
                   >
-                    <Edit
+                    <Add
                       {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/confirmcancel`,
-                      state: {
-                        appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        doctorid: working.DoctorID,
-                      },
-                    }}
-                  >
-                    <Delete
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
+                      // onClick={() => console.log("Click function add " + item.id)}
                     />
                   </Link>
                 </div>
@@ -185,14 +199,14 @@ export default function WorkingScreen() {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-          <Link to="/">
-            <Button
-              variant="secondary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-            >
-              กลับสู่หน้าหลัก
-            </Button>
-          </Link>{" "}
+            <Link to="/">
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                กลับสู่หน้าหลัก
+              </Button>
+            </Link>{" "}
           </div>
         </div>
       </div>

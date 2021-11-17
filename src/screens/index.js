@@ -7,7 +7,7 @@ export { default as EditOfficerScreen } from "./EditOfficerScreen";
 export { default as WorkingScreen } from "./WorkingScreen";
 export { default as WorkingDetailScreen } from "./WorkingDetailScreen";
 export { default as MedicineScreen } from "./MedicineScreen";
-export { default as MedicineDetailScreen} from "./MedicineDetailScreen";
+export { default as SummaryTreatmentScreen} from "./SummaryTreatmentScreen";
 export { default as OfficerListScreen } from "./OfficerListScreen";
 export { default as CalendarScreen} from "./CalendarScreen";
 export { default as PostponeScreen} from "./PostponeScreen";
