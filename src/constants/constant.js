@@ -1,5 +1,5 @@
-//export const apiURL = "http://localhost:8000/";
- export const apiURL = "https://powercare-admin-back.herokuapp.com/";
+export const apiURL = "http://localhost:8000/";
+//  export const apiURL = "https://powercare-admin-back.herokuapp.com/";
 
 export const server = {
   LOGIN: `${apiURL}Login`,
@@ -18,4 +18,5 @@ export const server = {
   CONFIRM_CANCEL: `${apiURL}ConfirmCancel`,
   POSTPONE: `${apiURL}Postpone`,
   SUMMARY_POSTPONE: `${apiURL}SummaryPostpone`,
+  WORKING_DOCTOR: `${apiURL}WorkingDoctor`,
 };

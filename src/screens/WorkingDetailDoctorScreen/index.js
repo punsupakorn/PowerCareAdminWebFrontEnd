@@ -14,6 +14,7 @@ function WorkingDetailDoctorScreen() {
   const [sex, setsex] = useState("");
   const [email, setemail] = useState("");
   const [dateofbirth, setdateofbirth] = useState("");
+  
   const getWorkingDetail = () => {
     try {
       axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
@@ -28,9 +29,9 @@ function WorkingDetailDoctorScreen() {
     }
   };
 
-  // useEffect(() => {
-  //   getWorkingDetail();
-  // }, []);
+  useEffect(() => {
+    getWorkingDetail();
+  }, []);
 
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
@@ -59,7 +60,7 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "} 
+                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
                 <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
               </p>
             </div>
@@ -88,7 +89,7 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                <b>เบอร์โทร :</b> {phone}  <b>E-mail :</b> {email}
+                <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
             </div>
             <div
@@ -102,7 +103,7 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-              <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -115,7 +116,9 @@ function WorkingDetailDoctorScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className=" text-gray-500 ml-4"><b>แพทย์ที่พบ :</b> {doctorname}</p>
+              <p className=" text-gray-500 ml-4">
+                <b>แพทย์ที่พบ :</b> {doctorname}
+              </p>
             </div>
             <div
               className="
@@ -127,7 +130,9 @@ function WorkingDetailDoctorScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className=" text-gray-500 ml-4"><b>อาการเบื้องต้น:</b> {symtoms}</p>
+              <p className=" text-gray-500 ml-4">
+                <b>อาการเบื้องต้น:</b> {symtoms}
+              </p>
             </div>
             <div
               className="
@@ -139,7 +144,9 @@ function WorkingDetailDoctorScreen() {
           border-b-2 border-gray-200
         "
             >
-              <p className=" text-gray-500 ml-4"><b>สถานะการทำนัด:</b> {status}</p>
+              <p className=" text-gray-500 ml-4">
+                <b>สถานะการทำนัด:</b> {status}
+              </p>
             </div>
             <div
               className="
@@ -163,7 +170,7 @@ function WorkingDetailDoctorScreen() {
           <br />
 
           <div
-              className="
+            className="
           flex
           justify-between
           items-center
@@ -171,37 +178,34 @@ function WorkingDetailDoctorScreen() {
           py-3
           mt-2
         "
-            >
-              <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
-            </div>
-
-            <div className="medicine-content">
-
-
-        <div className="table-content-medicine">
-          {/* header table */}
-          <div className="table-grid-medicine header">
-            <p>ชื่อยา</p>
-            <p>ประเภท</p>
-            <p>จำนวน</p>
-            <p>ราคา</p>
+          >
+            <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
           </div>
-          {/* end header */}
 
-          <div className="body-table-medicine">
+          <div className="medicine-content">
+            <div className="table-content-medicine">
+              {/* header table */}
+              <div className="table-grid-medicine header">
+                <p>ชื่อยา</p>
+                <p>ประเภท</p>
+                <p>จำนวน</p>
+                <p>ราคา</p>
+              </div>
+              {/* end header */}
+
+              <div className="body-table-medicine">
                 <div className="table-grid-medicine content-medicine">
                   <p></p>
-                  <p className ="text-med" > </p>
+                  <p className="text-med"> </p>
                   <p></p>
-                  <p className ="text-med" ></p>
-
+                  <p className="text-med"></p>
                 </div>
               </div>
+            </div>
           </div>
-        </div>
 
-            <div
-              className="
+          <div
+            className="
           flex
           justify-between
           items-center
@@ -209,9 +213,9 @@ function WorkingDetailDoctorScreen() {
           py-3
           mt-2
         "
-            >
-              <p className=" text-black ml-4 font-bold">ค่าบริการเพิ่มเติม: </p>
-            </div>
+          >
+            <p className=" text-black ml-4 font-bold">ค่าบริการเพิ่มเติม: </p>
+          </div>
         </div>
         <div className="px-2 ">
           {/* <Link to="/medicinedetail">
