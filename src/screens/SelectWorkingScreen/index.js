@@ -36,7 +36,7 @@ const SelectWorkingScreen= () => {
         
 
           <div className="mt-2">
-            <Link to="/workingdetaildoctor">
+            <Link to="/workingdetail">
             <Button
               variant="secondary"
               className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
