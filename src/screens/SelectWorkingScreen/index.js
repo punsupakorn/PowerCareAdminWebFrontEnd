@@ -1,9 +1,8 @@
 
 import { useState, useEffect } from "react";
 // import "./AppointmentScreen.css";
-import axios from "axios";
-import SearchIcon from "../../icons/search-icon";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SelectWorkingScreen= () => {
   
@@ -37,7 +36,7 @@ const SelectWorkingScreen= () => {
         
 
           <div className="mt-2">
-            {/* <Link to="/confirmaddofficer"> */}
+            <Link to="/workingdetaildoctor">
             <Button
               variant="secondary"
               className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
@@ -45,9 +44,8 @@ const SelectWorkingScreen= () => {
             >
               ค้นหาแพทย์
             </Button>
-            {/* </Link> */}
+            </Link>
           </div>
-          {/* </form> */}
         </div>
       </div>
     </div>

@@ -180,7 +180,9 @@ function WorkingDetailScreen() {
             </Link>
           </div> */}
         </div>
-        <div className="px-2 ">
+
+      </div>
+      <div className="px-2 ">
           {/* <Link to="/medicinedetail">
             <Button
               variant="primary"
@@ -198,7 +200,6 @@ function WorkingDetailScreen() {
             </Button>
           </Link>
         </div>
-      </div>
       {/* end */}
     </div>
   );

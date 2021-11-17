@@ -28,9 +28,9 @@ function WorkingDetailDoctorScreen() {
     }
   };
 
-  useEffect(() => {
-    getWorkingDetail();
-  }, []);
+  // useEffect(() => {
+  //   getWorkingDetail();
+  // }, []);
 
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
@@ -214,15 +214,15 @@ function WorkingDetailDoctorScreen() {
             </div>
         </div>
         <div className="px-2 ">
-          <Link to="/medicinedetail">
+          {/* <Link to="/medicinedetail">
             <Button
               variant="primary"
               style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
             >
               บันทึกผล
             </Button>
-          </Link>{" "}
-          <Link to="/working">
+          </Link>{" "} */}
+          <Link to="/workingdoctor">
             <Button
               variant="primary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
