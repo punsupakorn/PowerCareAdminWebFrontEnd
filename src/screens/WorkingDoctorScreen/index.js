@@ -7,11 +7,11 @@ import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import "./WorkingScreen.css";
+// import "./WorkingScreen.css";
 import { TableController } from "../../components";
 import { server } from "../../constants/constant";
 
-export default function WorkingScreen() {
+export default function WorkingDoctorScreen() {
   const [searched, setSearched] = useState(false);
   const [working, setWorking] = useState([]);
   const [patient, setpatient] = useState("");
@@ -98,10 +98,6 @@ export default function WorkingScreen() {
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-black"> ชื่อแพทย์ :  </p>
-      </div>
-      <div className="search-bar-container">
-        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-black"> ประจำวัน :  </p>
       </div>
       <div className="search-bar-container">
@@ -131,7 +127,7 @@ export default function WorkingScreen() {
                 <div className="menu-row">
                   <Link
                     to={{
-                      pathname: `/workingdetail`,
+                      pathname: `/workingdetaildoctor`,
                       state: {
                         // appointmentID: working.AppointmentID,
                         userID: working.UserID,
@@ -144,51 +140,11 @@ export default function WorkingScreen() {
                         status: working.Status,
                       },
                     }}
+                    // to = "/workingdetaildoctor"
                   >
                     <Add
                       {...iconOption}
                       // onClick={() => console.log("Click function add " + item.id)}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/postpone`,
-                      state: {
-                        appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        doctorid: working.DoctorID,
-                        oldtimetableid: working.TimeTableID,
-                      },
-                    }}
-                  >
-                    <Edit
-                      {...iconOption}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: `/confirmcancel`,
-                      state: {
-                        appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        doctorid: working.DoctorID,
-                      },
-                    }}
-                  >
-                    <Delete
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
                     />
                   </Link>
                 </div>

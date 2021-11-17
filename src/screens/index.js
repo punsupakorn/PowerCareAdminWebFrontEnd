@@ -20,8 +20,11 @@ export { default as ConfirmAddOfficer} from "./ConfirmAddOfficer";
 export { default as GiveMedicineScreen} from "./GiveMedicineScreen";
 export { default as HomeScreenAdmin} from "./HomeScreenAdmin";
 export { default as ManageMedicineScreen} from "./ManageMedicineScreen";
-export { default as WorkingDetailStaffScreen } from "./WorkingDetailStaffScreen";
+export { default as WorkingDetailDoctorScreen} from "./WorkingDetailDoctorScreen";
 export { default as ConfirmEditOfficerScreen } from "./ConfirmEditOfficerScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
+export { default as SelectWorkingScreen } from "./SelectWorkingScreen";
+export { default as WorkingDoctorScreen } from "./WorkingDoctorScreen";
+
 
 

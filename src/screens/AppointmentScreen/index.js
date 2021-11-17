@@ -34,10 +34,12 @@ const AppointmentScreen = () => {
   }, []);
 
   const handleData = (e) => {
-    const name = e.target.value;
-    const data = JSON.parse(name);
-    setName(data.name);
-    setid(data.id);
+    e.preventDefault();
+    const data = e.target.value;
+    const d = JSON.parse(data);
+    const name = `${d.FirstName} ${d.LastName}`
+    setName(name);
+    setid(d.DocumentID);
   };
 
   // Input Component
@@ -114,10 +116,12 @@ const AppointmentScreen = () => {
 
       {/* Input Doctor */}
       <div className="schedule-content mt-4">
+        
         <InputSchedule title="เลือกหมอ" invalid>
           <select
             name="doctor-select"
             className="doctor-select"
+            //value={name}
             onChange={handleData}
           >
             <option value="" disabled selected>
@@ -125,15 +129,17 @@ const AppointmentScreen = () => {
             </option>
             {doctor.map((doctorname) => (
               <option
-                value={JSON.stringify({
-                  name: `${doctorname.FirstName} ${doctorname.LastName}`,
-                  id: doctorname.DocumentID,
-                })}
+                // value={JSON.stringify({
+                //   name: `${doctorname.FirstName} ${doctorname.LastName}`,
+                //   id: doctorname.DocumentID,
+                // })}
+               value={JSON.stringify(doctorname)}
               >
                 {doctorname.FirstName} {doctorname.LastName}
               </option>
             ))}
           </select>
+          {/* <div>{name}</div> */}
           <h3 style={{ position: "absolute", right: "3rem", top: "4rem" }}>
             ▼
           </h3>

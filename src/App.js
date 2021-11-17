@@ -23,9 +23,11 @@ import {
   GiveMedicineScreen,
   HomeScreenAdmin,
   ManageMedicineScreen,
-  WorkingDetailStaffScreen,
+  WorkingDetailDoctorScreen,
   ConfirmEditOfficerScreen,
   ProfileScreen,
+  SelectWorkingScreen,
+  WorkingDoctorScreen,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -107,8 +109,8 @@ function App() {
               <Route path="/managemedicine">
                 <ManageMedicineScreen />
               </Route>
-              <Route path="/workingdetailstaff">
-                <WorkingDetailStaffScreen />
+              <Route path="/workingdetaildoctor">
+                <WorkingDetailDoctorScreen />
               </Route>
               <Route path="/confirmeditofficer">
                 <ConfirmEditOfficerScreen />
@@ -116,6 +118,13 @@ function App() {
               <Route path="/profile">
                 <ProfileScreen />
               </Route>
+              <Route path="/selectworking">
+                <SelectWorkingScreen />
+              </Route>
+              <Route path="/workingdoctor">
+                <WorkingDoctorScreen/>
+              </Route>
+              
             </Switch>
           </div>
         </div>
