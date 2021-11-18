@@ -20,4 +20,5 @@ export const server = {
   SUMMARY_POSTPONE: `${apiURL}SummaryPostpone`,
   WORKING_DOCTOR: `${apiURL}WorkingDoctor`,
   SELECT_WORKING: `${apiURL}SelectWorking`,
+  HOMESCREEN_DOCTOR: `${apiURL}HomescreenDoctor`,
 };

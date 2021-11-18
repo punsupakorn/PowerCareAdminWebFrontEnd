@@ -1,11 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./HomeScreenDoctor.css";
 import CalendarInlineIcon from "../../icons/calendar-inline";
 import { AuthContext } from "../../Auth";
+import { server } from "../../constants/constant";
+import axios from "axios";
 
 const HomeScreenDoctor = () => {
   const { currentUser } = useContext(AuthContext);
+  const [uid, setuid] = useState("");
+
+  const getProfileDoctor = () => {
+    axios.get(`${server.HOMESCREEN_DOCTOR}/${currentUser.uid}`).then((res) => {
+      console.log(res.data);
+      if (res.data == false) {
+        window.alert("คุณไม่มีสิทธิ์เข้าถึง");
+      } else {
+        setuid(res.data.DocumentID);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getProfileDoctor();
+  }, []);
 
   return (
     <div className="content-body">
@@ -38,7 +56,7 @@ const HomeScreenDoctor = () => {
                   to={{
                     pathname: `/workingdoctor`,
                     state: {
-                      id: currentUser.uid,
+                      id: uid,
                     },
                   }}
                 >
