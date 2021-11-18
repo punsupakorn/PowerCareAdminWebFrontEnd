@@ -9,6 +9,7 @@ import axios from "axios";
 const HomeScreenDoctor = () => {
   const { currentUser } = useContext(AuthContext);
   const [uid, setuid] = useState("");
+  const [doctorname, setdoctorname] = useState("");
 
   const getProfileDoctor = () => {
     axios.get(`${server.HOMESCREEN_DOCTOR}/${currentUser.uid}`).then((res) => {

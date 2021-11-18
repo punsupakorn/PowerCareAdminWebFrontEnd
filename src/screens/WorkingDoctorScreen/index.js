@@ -51,8 +51,6 @@ export default function WorkingDoctorScreen() {
     } catch (error) {}
   };
 
-  // console.log(doctorName);
-
   const showToday = () => {
     const result = new Date().toLocaleDateString("th-TH", {
       year: "numeric",

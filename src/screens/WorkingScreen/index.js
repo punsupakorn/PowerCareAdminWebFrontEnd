@@ -10,27 +10,66 @@ import { Button } from "react-bootstrap";
 import "./WorkingScreen.css";
 import { TableController } from "../../components";
 import { server } from "../../constants/constant";
+import { useLocation } from "react-router";
 
 export default function WorkingScreen() {
   const [searched, setSearched] = useState(false);
-  const [working, setWorking] = useState([]);
-  const [patient, setpatient] = useState("");
+  // const [working, setWorking] = useState([]);
+  // const [patient, setpatient] = useState("");
+  const location = useLocation();
+  const { doctorId } = location.state;
+  const [today, settoday] = useState("");
+  const [successAppointment, setsuccessAppointment] = useState([]);
+  const [unsuccessAppointment, setunsuccessAppointment] = useState([]);
+  const [date, setdate] = useState("");
+
+  const handleDate = (e) => {
+    const data = e.target.value;
+    setdate(data);
+  };
+
+  const showToday = () => {
+    const result = new Date().toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    // return result
+    settoday(result);
+  };
 
   const getWorking = () => {
     try {
       axios.get(server.WORKING).then((res) => {
         const data = res.data;
-        // for (let i = 0; i < data.length; i++) {
-        //   const element = data[i];
-        //   setWorking(element);
-        // }
-        // console.log(working);
-        setWorking(data);
+        const date = new Date().toLocaleDateString("th-TH", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "long",
+        });
+        const unsuccess = data.filter(
+          (data) =>
+            data.DoctorID == doctorId &&
+            displayThaiDate(data.Date) == date &&
+            data.Status == "ไม่สำเร็จ"
+        );
+        const success = data.filter(
+          (data) =>
+            data.DoctorID == doctorId &&
+            displayThaiDate(data.Date) == date &&
+            data.Status == "สำเร็จ"
+        );
+        setsuccessAppointment(success);
+        setunsuccessAppointment(unsuccess);
+        // setWorking(data);
       });
     } catch (error) {}
   };
 
   useEffect(() => {
+    showToday();
     getWorking();
   }, []);
 
@@ -40,19 +79,53 @@ export default function WorkingScreen() {
 
   // get
 
-  // const handleData = (AppointmentID) => {
-  //   try {
-  //     axios
-  //       .post(server.WORKING, {
-  //         AppointmentID: AppointmentID,
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-  //       });
-  //   } catch (error) {}
-  // };
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+
+  const searchDate = (dateSearch) => {
+    try {
+      axios.get(server.WORKING).then((res) => {
+        const data = res.data;
+        const today = data.filter(
+          (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
+        );
+        console.log(today);
+        // if (today[0] == undefined) {
+        //   window.alert("ไม่พบตารางปฏิบัติการ");
+        // } else {
+        //   settoday(displayThaiDate(today));
+        // const success = today.filter((data) => data.Status == "สำเร็จ");
+        // const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
+        // setsuccessAppointment(success);
+        // setunsuccessAppointment(unsuccess);
+        // }
+      });
+      // axios.get(`${server.WORKING_DOCTOR}/${id}`).then((res) => {
+      //   const data = res.data;
+      //   const today = data.filter(
+      //     (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
+      //   );
+      //   if (today[0] == undefined) {
+      //     window.alert("ไม่พบตารางปฏิบัติการ");
+      //   } else {
+      //     settoday(displayThaiDate(date));
+      //     const success = today.filter((data) => data.Status == "สำเร็จ");
+      //     const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
+      //     setsuccessAppointment(success);
+      //     setunsuccessAppointment(unsuccess);
+      //   }
+      // });
+    } catch (error) {}
+  };
 
   return (
     <div className="content-body">
@@ -62,6 +135,7 @@ export default function WorkingScreen() {
           <div className="p-12 h-12 ">
             <div className="bg-white flex items-center rounded-full shadow h-12">
               <input
+                onChange={handleDate}
                 className="rounded-l-full w-full  h-12 py-4 px-4 text-gray-400 leading-tight focus:outline-none"
                 id="search"
                 type="date"
@@ -69,9 +143,14 @@ export default function WorkingScreen() {
               />
 
               <div className="  p-4">
-                <button className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+                <button
+                  onClick={() => {
+                    searchDate(date);
+                  }}
+                  className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
+                >
                   {searched ? (
-                    <span onClick={refreshPage}>
+                    <span >
                       <CloseIcon
                         width="1rem"
                         hieght="1rem"
@@ -98,15 +177,21 @@ export default function WorkingScreen() {
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-black"> ชื่อแพทย์ :  </p>
+        <p class="text-xl mt-3 ml-20 font-semibold text-black"> ชื่อแพทย์ : </p>
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-black"> ประจำวัน :  </p>
+        <p class="text-xl mt-3 ml-20 font-semibold text-black">
+          {" "}
+          ประจำวัน : {today}
+        </p>
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-red-500"> สถานะ : ไม่สำเร็จ </p>
+        <p class="text-xl mt-3 ml-20 font-semibold text-red-500">
+          {" "}
+          สถานะ : ไม่สำเร็จ{" "}
+        </p>
       </div>
       <div className="working-content">
         <div className="table-content-working">
@@ -122,7 +207,7 @@ export default function WorkingScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {working.map((working) => (
+            {unsuccessAppointment.map((working) => (
               <div className="table-grid-working">
                 <p>{working.Date}</p>
                 <p>{working.Time}</p>
@@ -199,7 +284,10 @@ export default function WorkingScreen() {
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-green-500"> สถานะ : สำเร็จ </p>
+        <p class="text-xl mt-3 ml-20 font-semibold text-green-500">
+          {" "}
+          สถานะ : สำเร็จ{" "}
+        </p>
       </div>
       <div className="working-content">
         <div className="table-content-working">
@@ -215,7 +303,7 @@ export default function WorkingScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {working.map((working) => (
+            {successAppointment.map((working) => (
               <div className="table-grid-working">
                 <p>{working.Date}</p>
                 <p>{working.Time}</p>
