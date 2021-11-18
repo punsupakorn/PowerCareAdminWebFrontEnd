@@ -125,7 +125,7 @@ const AppointmentScreen = () => {
             onChange={handleData}
           >
             <option value="" disabled selected>
-              เลือกหมอ...
+            กรุณาเลือกแพทย์...
             </option>
             {doctor.map((doctorname) => (
               <option
