@@ -60,7 +60,7 @@ const SelectWorkingScreen = () => {
           <div className="mt-2">
             <Link
               to={{
-                pathname: `/workingdetail`,
+                pathname: `/working`,
                 state: {
                   doctorId: id,
                 },
