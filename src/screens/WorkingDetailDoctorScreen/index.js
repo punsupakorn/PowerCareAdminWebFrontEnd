@@ -32,7 +32,7 @@ function WorkingDetailDoctorScreen() {
   const [description, setdescription] = useState("");
   const [otherservice, setotherservice] = useState("");
   const [price, setprice] = useState("");
-  const [resultotherservice, setresultotherservice] = useState("");
+  const [resultotherservice, setresultotherservice] = useState([]);
 
   const getWorkingDetail = () => {
     try {
@@ -113,7 +113,7 @@ function WorkingDetailDoctorScreen() {
   const handleOtherserviceDescription = (e) => {
     const data = e.target.value;
     setotherservice(data);
-    setresultotherservice({ name: otherservice, price: price });
+    setresultotherservice(JSON.stringify({ name: otherservice, price: price }));
   };
 
   const handleOtherServicePrice = (e) => {
@@ -450,6 +450,9 @@ function WorkingDetailDoctorScreen() {
                 description: description,
                 otherservice: otherservice,
                 medicine: choosemedicine,
+                date : date,
+                time : time,
+                doctorname : doctorname
               },
             }}
           >
@@ -465,7 +468,6 @@ function WorkingDetailDoctorScreen() {
             </Button>
           </Link>
         </div>
-
       </div>
       {/* end */}
     </div>

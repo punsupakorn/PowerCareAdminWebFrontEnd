@@ -6,15 +6,34 @@ import { useLocation } from "react-router";
 
 function UserSummaryScreen() {
   const location = useLocation();
-  // const { userid, date, time, doctorname, status } = location.state;
-  // console.log(date, time, doctorname);
+  const {
+    appointmentid,
+    userid,
+    description,
+    otherservice,
+    medicine,
+    date,
+    time,
+    doctorname,
+  } = location.state;
+  // console.log(appointmentid, userid, description, medicine, otherservice);
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
   return (
     <div className="content-body">
       <div className="mt-2">
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <p class="text-xl mt-3 font-semibold">ข้อมูลอาการคนไข้</p>
+            <p class="text-xl mt-3 font-semibold">สรุปข้อมูลการรักษาคนไข้</p>
             <div
               className="
         flex
@@ -28,10 +47,7 @@ function UserSummaryScreen() {
               <p className="text-gray-500 ml-4">
                 <b>
                   {" "}
-                  ข้อมูล ณ วันที่
-                  {/* {date}  */}
-                  เวลา
-                  {/* {time} */}{" "}
+                  ข้อมูล ณ วันที่ {displayThaiDate(date)} รอบเวลา {time}{" "}
                 </b>
               </p>
             </div>
@@ -46,7 +62,7 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> แพทย์ที่พบ :{/* {doctorname}  */}</b>
+                <b> แพทย์ที่พบ :{doctorname} </b>
               </p>
             </div>
             <div
@@ -60,23 +76,7 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> สถานะการทำนัด :{/* {status}  */}</b>
-              </p>
-            </div>
-            <div
-              className="
-        flex
-        justify-between
-        items-center
-        w-full
-        py-3
-        border-b-2 border-gray-200
-      "
-            >
-              <p className="text-gray-500 ml-4">
-                <b>สรุปผลอาการ :</b> นายศุภากร สองห้องนายศุภากร สองห้องนายศุภากร
-                สองห้องนายศุภากร สองห้องนายศุภากร สองห้องนายศุภากร นายศุภากร
-                สองห้องนายศุภากร สองห้องนายศุภากร สองห้อง
+                <b>สรุปผลอาการ :</b> {description}
               </p>
             </div>
           </div>
@@ -204,16 +204,16 @@ function UserSummaryScreen() {
               },
             }}
           >
-              <Button
-                style={{
-                  borderColor: "#818CF8",
-                  backgroundColor: "#818CF8",
-                  color: "white",
-                }}
-              >
-               บันทึกผล
-              </Button>
-            </Link>{" "}
+            <Button
+              style={{
+                borderColor: "#818CF8",
+                backgroundColor: "#818CF8",
+                color: "white",
+              }}
+            >
+              บันทึกผล
+            </Button>
+          </Link>{" "}
         </div>
       </div>
       {/* end */}
