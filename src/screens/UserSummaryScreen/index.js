@@ -6,8 +6,8 @@ import { useLocation } from "react-router";
 
 function UserSummaryScreen() {
   const location = useLocation();
-  const { userid, date, time, doctorname, status } = location.state;
-  console.log(date, time, doctorname);
+  // const { userid, date, time, doctorname, status } = location.state;
+  // console.log(date, time, doctorname);
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -71,7 +71,11 @@ function UserSummaryScreen() {
               <p className="text-gray-500 ml-4">
                 <b>
                   {" "}
-                  ข้อมูล ณ วันที่ {date} เวลา {time}{" "}
+                  ข้อมูล ณ วันที่ 
+                  {/* {date}  */}
+                  เวลา 
+                  {/* {time} */}
+                  {" "}
                 </b>
               </p>
             </div>
@@ -86,7 +90,9 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> แพทย์ที่พบ : {doctorname} </b>
+                <b> แพทย์ที่พบ : 
+                  {/* {doctorname}  */}
+                  </b>
               </p>
             </div>
             <div
@@ -100,7 +106,9 @@ function UserSummaryScreen() {
       "
             >
               <p className="text-gray-500 ml-4">
-                <b> สถานะการทำนัด : {status} </b>
+                <b> สถานะการทำนัด : 
+                  {/* {status}  */}
+                  </b>
               </p>
             </div>
             <div
@@ -140,7 +148,7 @@ function UserSummaryScreen() {
             to={{
               pathname: `/userdetail`,
               state: {
-                userid: userid,
+                // userid: userid,
               },
             }}
           >
