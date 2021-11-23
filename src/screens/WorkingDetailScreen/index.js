@@ -163,41 +163,125 @@ function WorkingDetailScreen() {
                 <b>สถานะการทำนัด :</b> {status}
               </p>
             </div>
-            {/* <input
-                  type="text"
-                  id="code"
-                  className="w-full py-2 border mt-3 border-gray-300 rounded-md"
-                /> */}
-            {/* <br /> <h5>สรุปผลอาการ : </h5> <br />
-            <textarea
-              className="form-control Detail"
-              placeholder="กรุณากรอกอาการคนไข้..."
-              rows="5"
-              cols="50"
-            ></textarea> */}
           </div>
-          <br />
-          {/* <div className="px-2 py-2 ">
-            <Link to="/givemedicine">
-              <Button
-                variant="primary"
-                style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-              >
-                เพิ่มยา
-              </Button>{" "}
-            </Link>
-          </div> */}
+          
+        <div className="mt-2">
+          <div
+            className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          mt-2
+        "
+          >
+            <p className=" text-black ml-4 font-bold">ค่าบริการยา: </p>
+          </div>
+          <div className="flex justify-center my-6">
+            <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
+              <div className="flex-1">
+                <table className="w-full text-sm lg:text-base" cellSpacing={0}>
+                  <thead>
+                    <tr className="h-12 ">
+                      <th className="hidden text-center md:table-cell">
+                        ชื่อยา
+                      </th>
+                      <th className="hidden text-center md:table-cell">
+                        ประเภท
+                      </th>
+                      <th className="lg:text-center text-left pl-5 lg:pl-0">
+                        <span className="lg:hidden" title="Quantity">
+                          Qtd
+                        </span>
+                        <span className="hidden lg:inline">จำนวน</span>
+                      </th>
+                      <th className="hidden text-center md:table-cell"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* {choosemedicine.map((medicine) => ( */}
+                    <tr>
+                      {/* <tr key={medicine.MedicineName}> */}
+                      <td>
+                        <p className="mb-2"></p>
+                        {/* <p className="mb-2 ">{medicine.MedicineName}</p> */}
+                      </td>
+                      <td className="hidden text-center md:table-cell">
+                        <span className="text-sm lg:text-base font-medium">
+                          {/* {medicine.Type} */}
+                        </span>
+                      </td>
+                      <td className="text-center">
+                        <span className="text-sm lg:text-base font-medium">
+                          {/* {medicine.Price} */}
+                        </span>
+                      </td>
+                      <td className="text-center">
+                        <span
+                          // onClick={() =>
+                          //   handleDeleteMedicine(medicine.MedicineID)
+                          // }
+                          className="text-sm lg:text-base font-medium"
+                        ></span>
+                      </td>
+                    </tr>
+                    {/* ))} */}
+                  </tbody>
+                </table>
+                {/* <hr className="pb-6 mt-6" /> */}
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          mt-2
+        "
+          >
+            <p className=" text-black ml-4 font-bold">ค่าบริการเพิ่มเติม: </p>
+          </div>
+
+          <div className="flex justify-center my-6">
+            <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
+              <div className="flex-1">
+                <table className="w-full text-sm lg:text-base" cellSpacing={0}>
+                  <thead>
+                    <tr className="h-12 ">
+                      <th className="hidden text-center md:table-cell">
+                        รายละเอียด
+                      </th>
+                      <th className="hidden text-center md:table-cell">ราคา</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span className="text-sm lg:text-base font-medium">ค่ารักเอ็ง</span>
+                      </td>
+                      <td className="justify-center  md:flex">
+                        <div className="w-20 h-10">
+                          <div className="relative flex flex-row w-full h-8">
+                            <span className="text-sm lg:text-base font-medium">100</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
       <div className="px-2 ">
-        {/* <Link to="/medicinedetail">
-            <Button
-              variant="primary"
-              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-            >
-              บันทึกผล
-            </Button>
-          </Link>{" "} */}
+
         <Link
           to={{
             pathname: `/working`,
