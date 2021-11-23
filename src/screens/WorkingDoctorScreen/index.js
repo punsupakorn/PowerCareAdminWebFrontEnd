@@ -190,7 +190,7 @@ export default function WorkingDoctorScreen() {
                     to={{
                       pathname: `/workingdetaildoctor`,
                       state: {
-                        // appointmentID: working.AppointmentID,
+                        appointmentID: working.AppointmentID,
                         userID: working.UserID,
                         username: working.UserName,
                         date: working.Date,

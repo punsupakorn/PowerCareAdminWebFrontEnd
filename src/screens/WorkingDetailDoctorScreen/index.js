@@ -10,8 +10,17 @@ import SearchIcon from "../../icons/search-icon";
 function WorkingDetailDoctorScreen() {
   const [searched, setSearched] = useState(false);
   const location = useLocation();
-  const { userID, username, date, time, symtoms, doctorname, status } =
-    location.state;
+  const {
+    appointmentID,
+    userID,
+    username,
+    date,
+    time,
+    symtoms,
+    doctorname,
+    status,
+  } = location.state;
+
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
   const [sex, setsex] = useState("");
@@ -20,7 +29,10 @@ function WorkingDetailDoctorScreen() {
   const [medicine, setmedicine] = useState([]);
   const [choosemedicine, setchoosemedicine] = useState([]);
   const [quantity, setquantity] = useState("");
-  const [pricePerMedicine, setpricePerMedicine] = useState("");
+  const [description, setdescription] = useState("");
+  const [otherservice, setotherservice] = useState("");
+  const [price, setprice] = useState("");
+  const [resultotherservice, setresultotherservice] = useState("");
 
   const getWorkingDetail = () => {
     try {
@@ -81,19 +93,36 @@ function WorkingDetailDoctorScreen() {
     setquantity(data);
   };
 
-  const calculatePrice = (MedicineID) => {
-    const index = choosemedicine.findIndex(
-      (med) => med.MedicineID == MedicineID
-    );
+  // const calculatePrice = (MedicineID) => {
+  //   const index = choosemedicine.findIndex(
+  //     (med) => med.MedicineID == MedicineID
+  //   );
 
-    
-    const oldPrice = choosemedicine[index].Price;
-    const newPrice = oldPrice * quantity;
-    console.log(newPrice)
-    
-  
+  //   const oldPrice = choosemedicine[index].Price;
+  //   const newPrice = oldPrice * quantity;
+  //   console.log(newPrice);
+  // };
+
+  // console.log(choosemedicine);
+
+  const handleDescription = (e) => {
+    const data = e.target.value;
+    setdescription(data);
   };
 
+  const handleOtherserviceDescription = (e) => {
+    const data = e.target.value;
+    setotherservice(data);
+    setresultotherservice({ name: otherservice, price: price });
+  };
+
+  const handleOtherServicePrice = (e) => {
+    const data = e.target.value;
+    setprice(data);
+    setresultotherservice({ name: otherservice, price: price });
+  };
+
+  console.log(resultotherservice);
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -186,7 +215,7 @@ function WorkingDetailDoctorScreen() {
                 <b>อาการเบื้องต้น:</b> {symtoms}
               </p>
             </div>
-            <div
+            {/* <div
               className="
           flex
           justify-between
@@ -199,7 +228,7 @@ function WorkingDetailDoctorScreen() {
               <p className=" text-gray-500 ml-4">
                 <b>สถานะการทำนัด:</b> {status}
               </p>
-            </div>
+            </div> */}
             <div
               className="
           flex
@@ -213,6 +242,7 @@ function WorkingDetailDoctorScreen() {
               <p className=" text-black ml-4 font-bold">สรุปผลอาการ: </p>
             </div>
             <textarea
+              onChange={handleDescription}
               className="form-control Detail"
               placeholder="กรุณากรอกอาการคนไข้..."
               rows="5"
@@ -279,8 +309,10 @@ function WorkingDetailDoctorScreen() {
                       <th className="hidden text-center md:table-cell">
                         ประเภท
                       </th>
- 
-                      <th className="hidden text-center md:table-cell">ราคา / ต่อหน่วย</th>
+
+                      <th className="hidden text-center md:table-cell">
+                        ราคา / ต่อหน่วย
+                      </th>
                       <th className="lg:text-center text-left pl-5 lg:pl-0">
                         <span className="lg:hidden" title="Quantity">
                           Qtd
@@ -312,9 +344,9 @@ function WorkingDetailDoctorScreen() {
                               <input
                                 type="number"
                                 onChange={handleQuantity}
-                                onClick={() =>
-                                  calculatePrice(medicine.MedicineID)
-                                }
+                                // onClick={() =>
+                                //   calculatePrice(medicine.MedicineID)
+                                // }
                                 defaultValue={1}
                                 className="w-full rounded-md font-semibold text-center h-8 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
                               />
@@ -361,13 +393,16 @@ function WorkingDetailDoctorScreen() {
                       <th className="hidden text-center md:table-cell">
                         รายละเอียด
                       </th>
-                      <th className="hidden text-center md:table-cell">ราคา</th>
+                      <th className="hidden text-center md:table-cell">
+                        ราคา (บาท)
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>
                         <input
+                          onChange={handleOtherserviceDescription}
                           type="text"
                           placeholder="กรุณากรอกรายละเอียด"
                           className="w-full rounded-md font-semibold text-center h-10 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
@@ -377,6 +412,7 @@ function WorkingDetailDoctorScreen() {
                         <div className="w-20 h-10">
                           <div className="relative flex flex-row w-full h-8">
                             <input
+                              onChange={handleOtherServicePrice}
                               type="text"
                               defaultValue={0}
                               className="w-full rounded-md font-semibold h-10 text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
@@ -406,7 +442,18 @@ function WorkingDetailDoctorScreen() {
               บันทึกผล
             </Button>
           </Link>{" "} */}
-          <Link to="/usersummary">
+          <Link
+            to={{
+              pathname: `/usersummary`,
+              state: {
+                appointmentid: appointmentID,
+                userid: userID,
+                description: description,
+                otherservice: otherservice,
+                medicine: choosemedicine,
+              },
+            }}
+          >
             <Button
               variant="primary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
