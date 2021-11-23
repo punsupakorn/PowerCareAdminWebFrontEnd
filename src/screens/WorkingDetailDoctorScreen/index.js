@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { server } from "../../constants/constant";
+import { apiURL, server } from "../../constants/constant";
 import { useLocation } from "react-router";
 import Delete from "../../icons/delete";
 import SearchIcon from "../../icons/search-icon";
@@ -17,6 +17,10 @@ function WorkingDetailDoctorScreen() {
   const [sex, setsex] = useState("");
   const [email, setemail] = useState("");
   const [dateofbirth, setdateofbirth] = useState("");
+  const [medicine, setmedicine] = useState([]);
+  const [choosemedicine, setchoosemedicine] = useState([]);
+  const [quantity, setquantity] = useState("");
+  const [pricePerMedicine, setpricePerMedicine] = useState("");
 
   const getWorkingDetail = () => {
     try {
@@ -32,8 +36,23 @@ function WorkingDetailDoctorScreen() {
     }
   };
 
+  const getMedicine = () => {
+    try {
+      axios.get(`${server.WORKING_DETAIL_DOCTOR}`).then((res) => {
+        setmedicine(res.data);
+      });
+    } catch (error) {}
+  };
+
+  const handleMedicine = async (e) => {
+    const med = e.target.value;
+    const data = await JSON.parse(med);
+    setchoosemedicine([...choosemedicine, data.medicine]);
+  };
+
   useEffect(() => {
     getWorkingDetail();
+    getMedicine();
   }, []);
 
   const displayThaiDate = (date) => {
@@ -46,8 +65,34 @@ function WorkingDetailDoctorScreen() {
     return result;
   };
 
+  const handleDeleteMedicine = (MedicineID) => {
+    const index = choosemedicine.findIndex(
+      (med) => med.MedicineID == MedicineID
+    );
+    const arr = choosemedicine.splice(index, 1);
+    const array = choosemedicine.filter((x) => x.MedicineID !== arr.MedicineID);
+    setchoosemedicine(array);
+  };
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+
+  const handleQuantity = (e) => {
+    const data = e.target.value;
+    setquantity(data);
+  };
+
+  const calculatePrice = (MedicineID) => {
+    const index = choosemedicine.findIndex(
+      (med) => med.MedicineID == MedicineID
+    );
+
+    
+    const oldPrice = choosemedicine[index].Price;
+    const newPrice = oldPrice * quantity;
+    console.log(newPrice)
+    
+  
+  };
 
   return (
     <div className="content-body">
@@ -191,7 +236,7 @@ function WorkingDetailDoctorScreen() {
             <div className="p-2">
               <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
                 <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
-                  กรุณาเลือกยาที่ต้องการ : 
+                  กรุณาเลือกยาที่ต้องการ :
                 </span>
 
                 <select
@@ -199,22 +244,26 @@ function WorkingDetailDoctorScreen() {
                   id="position"
                   name="Position"
                   className="inline-flex  px-3 "
-                  // onChange={handlePosition}
+                  onChange={handleMedicine}
                 >
                   <option disabled selected value>
                     {" "}
                     โปรดเลือกยา
                   </option>
-                  <option className="option" value="แพทย์">
-                    {" "}
-                    พาราเซตามอลลี 
-                  </option>
+                  {medicine.map((medicine) => (
+                    <option
+                      className="option"
+                      value={JSON.stringify({ medicine })}
+                    >
+                      {medicine.MedicineName}{" "}
+                    </option>
+                  ))}
                 </select>
                 <SearchIcon
-                      width="1.5rem"
-                      hieght="1.5rem"
-                      style={{ cursor: "pointer" }}
-                    />
+                  width="1.5rem"
+                  hieght="1.5rem"
+                  style={{ cursor: "pointer" }}
+                />
               </div>
             </div>
           </div>
@@ -241,37 +290,48 @@ function WorkingDetailDoctorScreen() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <p className="mb-2 ">พาราเซตามอลลี</p>
-                      </td>
-                      <td className="hidden text-center md:table-cell">
-                        <span className="text-sm lg:text-base font-medium">
-                          ยากิน
-                        </span>
-                      </td>
-                      <td className="justify-center  md:flex">
-                        <div className="w-20 h-10">
-                          <div className="relative flex flex-row w-full h-8">
-                            <input
-                              type="number"
-                              defaultValue={0}
-                              className="w-full rounded-md font-semibold text-center h-8 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
-                            />
+                    {choosemedicine.map((medicine) => (
+                      <tr key={medicine.MedicineName}>
+                        <td>
+                          <p className="mb-2 ">{medicine.MedicineName}</p>
+                        </td>
+                        <td className="hidden text-center md:table-cell">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Type}
+                          </span>
+                        </td>
+                        <td className="justify-center  md:flex">
+                          <div className="w-20 h-10">
+                            <div className="relative flex flex-row w-full h-8">
+                              <input
+                                type="number"
+                                onChange={handleQuantity}
+                                onClick={() =>
+                                  calculatePrice(medicine.MedicineID)
+                                }
+                                defaultValue={1}
+                                className="w-full rounded-md font-semibold text-center h-8 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
+                              />
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <span className="text-sm lg:text-base font-medium">
-                          200
-                        </span>
-                      </td>
-                      <td className="text-center">
-                        <span className="text-sm lg:text-base font-medium">
-                          <Delete {...iconOption} />
-                        </span>
-                      </td>
-                    </tr>
+                        </td>
+                        <td className="text-center">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Price}
+                          </span>
+                        </td>
+                        <td className="text-center">
+                          <span
+                            onClick={() =>
+                              handleDeleteMedicine(medicine.MedicineID)
+                            }
+                            className="text-sm lg:text-base font-medium"
+                          >
+                            <Delete {...iconOption} />
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
                 {/* <hr className="pb-6 mt-6" /> */}
@@ -306,11 +366,11 @@ function WorkingDetailDoctorScreen() {
                   <tbody>
                     <tr>
                       <td>
-                      <input
-                              type="text"
-                              placeholder="กรุณากรอกรายละเอียด"
-                              className="w-full rounded-md font-semibold text-center h-10 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
-                            />
+                        <input
+                          type="text"
+                          placeholder="กรุณากรอกรายละเอียด"
+                          className="w-full rounded-md font-semibold text-center h-10 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
+                        />
                       </td>
                       <td className="justify-center  md:flex">
                         <div className="w-20 h-10">
