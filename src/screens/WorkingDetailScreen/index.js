@@ -9,8 +9,16 @@ import { data } from "autoprefixer";
 
 function WorkingDetailScreen() {
   const location = useLocation();
-  const { userID, username, date, time, symtoms, doctorname, status } =
-    location.state;
+  const {
+    userID,
+    username,
+    date,
+    time,
+    symtoms,
+    doctorname,
+    status,
+    doctorid,
+  } = location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
   const [sex, setsex] = useState("");
@@ -180,10 +188,9 @@ function WorkingDetailScreen() {
             </Link>
           </div> */}
         </div>
-
       </div>
       <div className="px-2 ">
-          {/* <Link to="/medicinedetail">
+        {/* <Link to="/medicinedetail">
             <Button
               variant="primary"
               style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
@@ -191,15 +198,22 @@ function WorkingDetailScreen() {
               บันทึกผล
             </Button>
           </Link>{" "} */}
-          <Link to="/working">
-            <Button
-              variant="primary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-            >
-              ย้อนกลับ
-            </Button>
-          </Link>
-        </div>
+        <Link
+          to={{
+            pathname: `/working`,
+            state: {
+              doctorId: doctorid,
+            },
+          }}
+        >
+          <Button
+            variant="primary"
+            style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+          >
+            ย้อนกลับ
+          </Button>
+        </Link>
+      </div>
       {/* end */}
     </div>
   );

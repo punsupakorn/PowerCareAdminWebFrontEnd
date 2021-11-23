@@ -22,6 +22,21 @@ export default function WorkingScreen() {
   const [successAppointment, setsuccessAppointment] = useState([]);
   const [unsuccessAppointment, setunsuccessAppointment] = useState([]);
   const [date, setdate] = useState("");
+  const [fnamedoctor, setfnamedoctor] = useState("");
+  const [lnamedoctor, setlnamedoctor] = useState("");
+
+  const getDoctorName = () => {
+    try {
+      axios
+        .post(`${server.WORKING}`, {
+          DoctorID: doctorId,
+        })
+        .then((res) => {
+          setfnamedoctor(res.data.FirstName);
+          setlnamedoctor(res.data.LastName);
+        });
+    } catch (error) {}
+  };
 
   const handleDate = (e) => {
     const data = e.target.value;
@@ -37,6 +52,16 @@ export default function WorkingScreen() {
     });
     // return result
     settoday(result);
+  };
+
+  const displayShortThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric",
+      // weekday: "short",
+    });
+    return result;
   };
 
   const getWorking = () => {
@@ -71,6 +96,7 @@ export default function WorkingScreen() {
   useEffect(() => {
     showToday();
     getWorking();
+    getDoctorName();
   }, []);
 
   const refreshPage = () => {
@@ -98,16 +124,15 @@ export default function WorkingScreen() {
         const today = data.filter(
           (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
         );
-        console.log(today);
-        // if (today[0] == undefined) {
-        //   window.alert("ไม่พบตารางปฏิบัติการ");
-        // } else {
-        //   settoday(displayThaiDate(today));
-        // const success = today.filter((data) => data.Status == "สำเร็จ");
-        // const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
-        // setsuccessAppointment(success);
-        // setunsuccessAppointment(unsuccess);
-        // }
+        if (today[0] == undefined) {
+          window.alert("ไม่พบตารางปฏิบัติการ");
+        } else {
+          settoday(displayThaiDate(date));
+          const success = today.filter((data) => data.Status == "สำเร็จ");
+          const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
+          setsuccessAppointment(success);
+          setunsuccessAppointment(unsuccess);
+        }
       });
       // axios.get(`${server.WORKING_DOCTOR}/${id}`).then((res) => {
       //   const data = res.data;
@@ -150,7 +175,7 @@ export default function WorkingScreen() {
                   className=" bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
                 >
                   {searched ? (
-                    <span >
+                    <span>
                       <CloseIcon
                         width="1rem"
                         hieght="1rem"
@@ -165,7 +190,7 @@ export default function WorkingScreen() {
                       style={{ cursor: "pointer" }}
                       onClick={() => {
                         // search(searchInput);
-                        setSearched(true);
+                        // setSearched(true);
                       }}
                     />
                   )}
@@ -177,7 +202,10 @@ export default function WorkingScreen() {
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
-        <p class="text-xl mt-3 ml-20 font-semibold text-black"> ชื่อแพทย์ : </p>
+        <p class="text-xl mt-3 ml-20 font-semibold text-black">
+          {" "}
+          ชื่อแพทย์ : {fnamedoctor} {lnamedoctor}
+        </p>
       </div>
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
@@ -209,7 +237,7 @@ export default function WorkingScreen() {
 
             {unsuccessAppointment.map((working) => (
               <div className="table-grid-working">
-                <p>{working.Date}</p>
+                <p>{displayShortThaiDate(working.Date)}</p>
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
 
@@ -227,6 +255,8 @@ export default function WorkingScreen() {
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
                         status: working.Status,
+                        fnamedoctor: fnamedoctor,
+                        lnamedoctor: lnamedoctor,
                       },
                     }}
                   >
