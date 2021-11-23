@@ -252,6 +252,7 @@ export default function WorkingDoctorScreen() {
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
                         status: working.Status,
+                        id: id,
                       },
                     }}
                   >
@@ -265,14 +266,14 @@ export default function WorkingDoctorScreen() {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-          <Link to="/">
-            <Button
-              variant="secondary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-            >
-              กลับสู่หน้าหลัก
-            </Button>
-          </Link>{" "}
+            <Link to="/">
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                กลับสู่หน้าหลัก
+              </Button>
+            </Link>{" "}
           </div>
         </div>
       </div>

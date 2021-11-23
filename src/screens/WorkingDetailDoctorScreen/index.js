@@ -6,9 +6,12 @@ import { apiURL, server } from "../../constants/constant";
 import { useLocation } from "react-router";
 import Delete from "../../icons/delete";
 import SearchIcon from "../../icons/search-icon";
+import { AuthContext } from "../../Auth";
+import React, { useContext } from "react";
 
 function WorkingDetailDoctorScreen() {
   const [searched, setSearched] = useState(false);
+  const { currentUser } = useContext(AuthContext);
   const location = useLocation();
   const {
     appointmentID,
@@ -19,6 +22,7 @@ function WorkingDetailDoctorScreen() {
     symtoms,
     doctorname,
     status,
+    id,
   } = location.state;
 
   const [address, setaddress] = useState("");
@@ -433,14 +437,6 @@ function WorkingDetailDoctorScreen() {
           </div>
         </div>
         <div className="px-2 ">
-          {/* <Link to="/medicinedetail">
-            <Button
-              variant="primary"
-              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-            >
-              บันทึกผล
-            </Button>
-          </Link>{" "} */}
           <Link
             to={{
               pathname: `/usersummary`,
@@ -458,15 +454,19 @@ function WorkingDetailDoctorScreen() {
           >
             <Button
               variant="primary"
-              style={{
-                borderColor: "#818CF8",
-                backgroundColor: "#818CF8",
-                color: "white",
-              }}
+              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
             >
               ถัดไป
             </Button>
-          </Link>
+          </Link>{" "}
+          <Link to={{ pathname: `/workingdoctor`, state: { id: id } }}>
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ย้อนกลับ
+            </Button>
+          </Link>{" "}
         </div>
       </div>
       {/* end */}
