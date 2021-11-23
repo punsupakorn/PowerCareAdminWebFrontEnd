@@ -279,13 +279,14 @@ function WorkingDetailDoctorScreen() {
                       <th className="hidden text-center md:table-cell">
                         ประเภท
                       </th>
+ 
+                      <th className="hidden text-center md:table-cell">ราคา / ต่อหน่วย</th>
                       <th className="lg:text-center text-left pl-5 lg:pl-0">
                         <span className="lg:hidden" title="Quantity">
                           Qtd
                         </span>
                         <span className="hidden lg:inline">จำนวน</span>
                       </th>
-                      <th className="hidden text-center md:table-cell">ราคา</th>
                       <th className="hidden text-center md:table-cell"></th>
                     </tr>
                   </thead>
@@ -298,6 +299,11 @@ function WorkingDetailDoctorScreen() {
                         <td className="hidden text-center md:table-cell">
                           <span className="text-sm lg:text-base font-medium">
                             {medicine.Type}
+                          </span>
+                        </td>
+                        <td className="text-center">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Price}
                           </span>
                         </td>
                         <td className="justify-center  md:flex">
@@ -314,11 +320,6 @@ function WorkingDetailDoctorScreen() {
                               />
                             </div>
                           </div>
-                        </td>
-                        <td className="text-center">
-                          <span className="text-sm lg:text-base font-medium">
-                            {medicine.Price}
-                          </span>
                         </td>
                         <td className="text-center">
                           <span
