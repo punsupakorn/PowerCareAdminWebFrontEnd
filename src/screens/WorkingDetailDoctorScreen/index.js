@@ -448,7 +448,8 @@ function WorkingDetailDoctorScreen() {
                 medicine: choosemedicine,
                 date : date,
                 time : time,
-                doctorname : doctorname
+                doctorname : doctorname,
+                symtoms:symtoms
               },
             }}
           >

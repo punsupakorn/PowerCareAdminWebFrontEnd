@@ -15,6 +15,7 @@ function UserSummaryScreen() {
     date,
     time,
     doctorname,
+    symtoms
   } = location.state;
   // console.log(appointmentid, userid, description, medicine, otherservice);
 
@@ -214,6 +215,26 @@ function UserSummaryScreen() {
               บันทึกผล
             </Button>
           </Link>{" "}
+          <Link
+            to={{
+              pathname: `/workingdetaildoctor`,
+              state: {
+                appointmentID: appointmentid,
+                userID: userid,
+                date: date,
+                time: time,
+                doctorname: doctorname,
+                symtoms: symtoms,
+              },
+            }}
+          >
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              ยกเลิก
+            </Button>
+          </Link>
         </div>
       </div>
       {/* end */}
