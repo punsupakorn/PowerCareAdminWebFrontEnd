@@ -165,6 +165,7 @@ export default function UserScreen() {
                       pathname: `/userdetail`,
                       state: {
                         userid: data.UserID,
+                        dataSearch: dataSearch,
                       },
                     }}
                   >

@@ -20,11 +20,11 @@ export default function UserDetailScreen() {
   const [sex, setsex] = useState("");
   const [dateOfBirth, setdateOfBirth] = useState("");
   const [address, setaddress] = useState("");
-  const [appointment, setappointment] = useState([]); 
+  const [appointment, setappointment] = useState([]);
   const [show, setShow] = useState(false);
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const location = useLocation();
-  const { userid } = location.state;
+  const { userid, dataSearch } = location.state;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -211,14 +211,21 @@ export default function UserDetailScreen() {
             </div>
           </div>
           <div className="px-2 mt-3 ">
-          <Link to="/user">
-            <Button
-              variant="secondary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            <Link
+              to={{
+                pathname: `/user`,
+                state: {
+                  dataSearch: dataSearch,
+                },
+              }}
             >
-              ย้อนกลับ
-            </Button>
-          </Link>{" "}
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                ย้อนกลับ
+              </Button>
+            </Link>{" "}
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ const SelectUserScreen = () => {
       <div className="grid min-h-screen place-items-center  ">
         <div className="w-11/12 p-12 bg-indigo-100 sm:w-8/12 md:w-1/2 lg:w-5/12">
           <h1 className="text-xl font-semibold">
-            กรุณาเลือกคนไข้ที่ต้องการค้นหา
+            กรุณากรอกข้อมูลคนไข้ที่ต้องการค้นหา
           </h1>
           <hr className="mt-6 border-b-1 border-blueGray-300" />
           {/* <form className="mt-6"> */}
@@ -69,6 +69,14 @@ const SelectUserScreen = () => {
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
               >
                 ค้นหาคนไข้
+              </Button>
+            </Link>
+            <Link to="/">
+              <Button
+                variant="secondary"
+                className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
+              >
+                กลับสู่หน้าหลัก
               </Button>
             </Link>
           </div>
