@@ -23,6 +23,7 @@ function ConfirmCancelScreen() {
     symtoms,
     doctorname,
     timetableID,
+    doctorid,
   } = location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
@@ -179,7 +180,14 @@ function ConfirmCancelScreen() {
         <Button variant="danger" onClick={handleShow} className=" button-back">
           ยกเลิกการทำนัด
         </Button>{" "}
-        <Link to="/working">
+        <Link
+          to={{
+            pathname: `/working`,
+            state: {
+              doctorId: doctorid,
+            },
+          }}
+        >
           <Button
             variant="secondary"
             className=" button-back"

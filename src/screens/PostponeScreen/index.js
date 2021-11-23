@@ -101,6 +101,7 @@ function PostponeScreen() {
           newtime: newtime,
           oldtimetableid: oldtimetableid,
           newtimetableid: newtimetableid,
+          doctorId: doctorid,
         },
       });
     }
@@ -313,7 +314,14 @@ function PostponeScreen() {
             ถัดไป
           </Button>
           {/* </Link> */}{" "}
-          <Link to="/working">
+          <Link
+            to={{
+              pathname: `/working`,
+              state: {
+                doctorId: doctorid,
+              },
+            }}
+          >
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}

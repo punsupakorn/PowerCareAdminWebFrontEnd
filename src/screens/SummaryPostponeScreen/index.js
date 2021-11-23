@@ -14,6 +14,7 @@ function SummaryPostponeScreen() {
     newtime,
     oldtimetableid,
     newtimetableid,
+    doctorId,
   } = location.state;
 
   const displayThaiDate = (date) => {
@@ -218,7 +219,14 @@ function SummaryPostponeScreen() {
             บันทึกผล
           </Button>
           {/* </Link> */}{" "}
-          <Link to="/working">
+          <Link
+            to={{
+              pathname: `/working`,
+              state: {
+                doctorId: doctorId,
+              },
+            }}
+          >
             <Button
               variant="secondary"
               style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
