@@ -9,27 +9,41 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { server } from "../../constants/constant";
 import axios from "axios";
-import "./UserScreen.css"
+import { useLocation } from "react-router";
+import "./UserScreen.css";
 
 export default function UserScreen() {
   const [searched, setSearched] = useState(false);
   const [user, setuser] = useState([]);
   const [show, setShow] = useState(false);
   const [datauserSearch, setdatauserSearch] = useState("");
- 
+  const location = useLocation();
+  const { dataSearch } = location.state;
   // const [state, setstate] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getAllOfficer = () => {
+  const getSearchResult = () => {
     axios.get(server.USER).then((res) => {
-      setuser(res.data);
+      const data = res.data;
+      const result = data.filter(
+        (data) =>
+          data.FirstName == dataSearch ||
+          data.LastName == dataSearch ||
+          data.Phone == dataSearch ||
+          data.Email == dataSearch
+      );
+      if (result[0] == undefined) {
+        window.alert("ไม่พบสิ่งที่ต้องการค้นหา");
+      } else {
+        setuser(result);
+      }
     });
   };
 
   useEffect(() => {
-    getAllOfficer();
+    getSearchResult();
   }, []);
 
   const refreshPage = () => {
@@ -80,7 +94,7 @@ export default function UserScreen() {
         setuser(result);
       }
     });
-  }; 
+  };
   return (
     <div className="content-body">
       <div className="head-officerlist">
@@ -96,11 +110,12 @@ export default function UserScreen() {
                 onChange={handleuserData}
               />
               <div className="  p-4">
-                <button 
-                onClick={() => {
-                  searchUser(datauserSearch);
-                }}
-                className="  bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center">
+                <button
+                  onClick={() => {
+                    searchUser(datauserSearch);
+                  }}
+                  className="  bg-indigo-200 text-white rounded-full p-2 hover:bg-indigo-300 focus:outline-none w-9 h-9 flex items-center justify-center"
+                >
                   {searched ? (
                     <span onClick={refreshPage}>
                       <CloseIcon
@@ -142,7 +157,7 @@ export default function UserScreen() {
                 <p>{data.FirstName}</p>
                 <p>{data.LastName}</p>
                 <p>{data.Email}</p>
-                <p className ="text-user">{data.Phone}</p>
+                <p className="text-user">{data.Phone}</p>
 
                 <div className="menu-row">
                   <Link
@@ -199,14 +214,14 @@ export default function UserScreen() {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-          <Link to="/">
-            <Button
-              variant="secondary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-            >
-              กลับสู่หน้าหลัก
-            </Button>
-          </Link>{" "}
+            <Link to="/">
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                กลับสู่หน้าหลัก
+              </Button>
+            </Link>{" "}
           </div>
         </div>
       </div>

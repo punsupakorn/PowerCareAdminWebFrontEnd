@@ -5,30 +5,35 @@ import { Link } from "react-router-dom";
 import { server } from "../../constants/constant";
 import axios from "axios";
 
-
 const SelectUserScreen = () => {
-//   const [doctor, setdoctor] = useState([]);
-//   const [id, setid] = useState("");
+  const [data, setdata] = useState("");
+  //   const [doctor, setdoctor] = useState([]);
+  //   const [id, setid] = useState("");
 
-//   useEffect(() => {
-//     getDoctor();
-//   }, []);
+  const handleData = (e) => {
+    const data = e.target.value;
+    setdata(data);
+  };
 
-//   const getDoctor = () => {
-//     try {
-//       axios.get(server.SELECT_WORKING).then((res) => {
-//         // console.log(res.data);
-//         const data = res.data;
-//         setdoctor(data);
-//       });
-//     } catch (error) {}
-//   };
-//   // console.log(doctor);
+  //   useEffect(() => {
+  //     getDoctor();
+  //   }, []);
 
-//   const handleID = (e) => {
-//     const id = e.target.value;
-//     setid(id);
-//   };
+  //   const getDoctor = () => {
+  //     try {
+  //       axios.get(server.SELECT_WORKING).then((res) => {
+  //         // console.log(res.data);
+  //         const data = res.data;
+  //         setdoctor(data);
+  //       });
+  //     } catch (error) {}
+  //   };
+  //   // console.log(doctor);
+
+  //   const handleID = (e) => {
+  //     const id = e.target.value;
+  //     setid(id);
+  //   };
 
   return (
     <div className="content-body">
@@ -46,17 +51,18 @@ const SelectUserScreen = () => {
             id="position"
             name="Position"
             className="block w-full p-3 mt-3 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
-            // onChange={handleID}
+            onChange={handleData}
           />
 
           <div className="mt-2">
-            <Link to ="/"
-            //   to={{
-            //     pathname: `/working`,
-            //     state: {
-            //       doctorId: id,
-            //     },
-            //   }}
+            <Link
+              to={{
+                pathname: `/user`,
+                state: {
+                  dataSearch: data,
+                  // doctorId: id,
+                },
+              }}
             >
               <Button
                 variant="secondary"
