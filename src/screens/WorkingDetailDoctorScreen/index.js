@@ -428,7 +428,6 @@ function WorkingDetailDoctorScreen() {
                     </tr>
                   </tbody>
                 </table>
-                {/* <hr className="pb-6 mt-6" /> */}
               </div>
             </div>
           </div>
@@ -456,12 +455,17 @@ function WorkingDetailDoctorScreen() {
           >
             <Button
               variant="primary"
-              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              style={{
+                borderColor: "#818CF8",
+                backgroundColor: "#818CF8",
+                color: "white",
+              }}
             >
               ถัดไป
             </Button>
           </Link>
         </div>
+
       </div>
       {/* end */}
     </div>

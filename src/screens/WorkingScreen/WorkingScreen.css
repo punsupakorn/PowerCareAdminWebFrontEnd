@@ -44,10 +44,6 @@
   text-align: start;
 }
 
-/* .text-med{
-  text-align: center;
-} */
-
 .table-grid-working:not(:first-child) {
   margin-top: 1rem;
 }

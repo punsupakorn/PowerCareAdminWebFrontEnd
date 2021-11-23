@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Add from "../../icons/add-paper";
-import Edit from "../../icons/edit";
 import CloseIcon from "../../icons/close-icon";
-import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-// import "./WorkingScreen.css";
-import { TableController } from "../../components";
+import "./WorkingDoctorScreen.css";
 import { apiURL, server } from "../../constants/constant";
 import { useLocation, useHistory } from "react-router";
 
@@ -165,9 +162,9 @@ export default function WorkingDoctorScreen() {
           สถานะ : ไม่สำเร็จ{" "}
         </p>
       </div>
-      <div className="working-content">
-        <div className="table-content-working">
-          <div className="table-grid-working header">
+      <div className="working-doctor-content">
+        <div className="table-content-working-doctor">
+          <div className="table-grid-working-doctor header">
             {/* header table */}
             {/* <p>วันที่</p> */}
             <p>เวลา</p>
@@ -180,7 +177,7 @@ export default function WorkingDoctorScreen() {
             {/* {officer.map((officerlist) => ( */}
 
             {unsuccessAppointment.map((working) => (
-              <div className="table-grid-working">
+              <div className="table-grid-working-doctor">
                 {/* <p>{working.Date}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
@@ -221,9 +218,9 @@ export default function WorkingDoctorScreen() {
           สถานะ : สำเร็จ{" "}
         </p>
       </div>
-      <div className="working-content">
-        <div className="table-content-working">
-          <div className="table-grid-working header">
+      <div className="working-doctor-content">
+        <div className="table-content-working-doctor">
+          <div className="table-grid-working-doctor header">
             {/* header table */}
             {/* <p>วันที่</p> */}
             <p>เวลา</p>
@@ -231,12 +228,12 @@ export default function WorkingDoctorScreen() {
             <p>ดูข้อมูล</p>
             {/* end header */}
           </div>
-          <div className="body-table-working">
+          <div className="body-table-working-doctor">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
             {successAppointment.map((working) => (
-              <div className="table-grid-working">
+              <div className="table-grid-working-doctor">
                 {/* <p>{working.Date}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
@@ -268,14 +265,14 @@ export default function WorkingDoctorScreen() {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-            <Link to="/">
-              <Button
-                variant="secondary"
-                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
-              >
-                กลับสู่หน้าหลัก
-              </Button>
-            </Link>{" "}
+          <Link to="/">
+            <Button
+              variant="secondary"
+              style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+            >
+              กลับสู่หน้าหลัก
+            </Button>
+          </Link>{" "}
           </div>
         </div>
       </div>
