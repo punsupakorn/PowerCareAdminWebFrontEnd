@@ -169,7 +169,7 @@ export default function WorkingDoctorScreen() {
             {/* <p>วันที่</p> */}
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
-            <p>ดูข้อมูล</p>
+            <p>กรอกข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table-working">

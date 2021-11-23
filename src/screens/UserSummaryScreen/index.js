@@ -15,7 +15,8 @@ function UserSummaryScreen() {
     date,
     time,
     doctorname,
-    symtoms
+    symtoms,
+    price,
   } = location.state;
   // console.log(appointmentid, userid, description, medicine, otherservice);
 
@@ -180,12 +181,12 @@ function UserSummaryScreen() {
                   <tbody>
                     <tr>
                       <td>
-                        <span className="text-sm lg:text-base font-medium"></span>
+                        <span className="text-sm lg:text-base font-medium">{otherservice}</span>
                       </td>
                       <td className="justify-center  md:flex">
                         <div className="w-20 h-10">
                           <div className="relative flex flex-row w-full h-8">
-                            <span className="text-sm lg:text-base font-medium"></span>
+                            <span className="text-sm lg:text-base font-medium">{price}</span>
                           </div>
                         </div>
                       </td>

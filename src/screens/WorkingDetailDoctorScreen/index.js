@@ -32,11 +32,13 @@ function WorkingDetailDoctorScreen() {
   const [dateofbirth, setdateofbirth] = useState("");
   const [medicine, setmedicine] = useState([]);
   const [choosemedicine, setchoosemedicine] = useState([]);
-  const [quantity, setquantity] = useState("");
+  const [quantity, setquantity] = useState([]);
   const [description, setdescription] = useState("");
   const [otherservice, setotherservice] = useState("");
   const [price, setprice] = useState("");
   const [resultotherservice, setresultotherservice] = useState([]);
+  // const [medicineID, setmedicineID] = useState("");
+  // const [medicineResult, setmedicineResult] = useState("")
 
   const getWorkingDetail = () => {
     try {
@@ -64,6 +66,7 @@ function WorkingDetailDoctorScreen() {
     const med = e.target.value;
     const data = await JSON.parse(med);
     setchoosemedicine([...choosemedicine, data.medicine]);
+    // setmedicineID(data.medicine.MedicineID);
   };
 
   useEffect(() => {
@@ -92,10 +95,12 @@ function WorkingDetailDoctorScreen() {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
-  const handleQuantity = (e) => {
-    const data = e.target.value;
-    setquantity(data);
-  };
+  // const handleQuantity = (e) => {
+  //   // const data = e.target.value;
+  //   // setquantity(data);
+  // };
+
+  // console.log(medicineResult)
 
   // const calculatePrice = (MedicineID) => {
   //   const index = choosemedicine.findIndex(
@@ -126,7 +131,7 @@ function WorkingDetailDoctorScreen() {
     setresultotherservice({ name: otherservice, price: price });
   };
 
-  console.log(resultotherservice);
+  // console.log(resultotherservice);
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -266,7 +271,7 @@ function WorkingDetailDoctorScreen() {
           >
             <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
           </div>
-          <div className=" m-2 text-center">
+          {/* <div className=" m-2 text-center">
             <div className="p-2">
               <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
                 <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
@@ -300,7 +305,7 @@ function WorkingDetailDoctorScreen() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="flex justify-center my-6">
             <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
               <div className="flex-1">
@@ -315,7 +320,7 @@ function WorkingDetailDoctorScreen() {
                       </th>
 
                       <th className="hidden text-center md:table-cell">
-                        ราคา / ต่อหน่วย
+                        ราคาต่อหน่วย
                       </th>
                       <th className="lg:text-center text-left pl-5 lg:pl-0">
                         <span className="lg:hidden" title="Quantity">
@@ -327,7 +332,7 @@ function WorkingDetailDoctorScreen() {
                     </tr>
                   </thead>
                   <tbody>
-                    {choosemedicine.map((medicine) => (
+                    {medicine.map((medicine) => (
                       <tr key={medicine.MedicineName}>
                         <td>
                           <p className="mb-2 ">{medicine.MedicineName}</p>
@@ -347,10 +352,7 @@ function WorkingDetailDoctorScreen() {
                             <div className="relative flex flex-row w-full h-8">
                               <input
                                 type="number"
-                                onChange={handleQuantity}
-                                // onClick={() =>
-                                //   calculatePrice(medicine.MedicineID)
-                                // }
+                                // onChange={handleQuantity}
                                 defaultValue={1}
                                 className="w-full rounded-md font-semibold text-center h-8 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
                               />
@@ -446,10 +448,11 @@ function WorkingDetailDoctorScreen() {
                 description: description,
                 otherservice: otherservice,
                 medicine: choosemedicine,
-                date : date,
-                time : time,
-                doctorname : doctorname,
-                symtoms:symtoms
+                date: date,
+                time: time,
+                doctorname: doctorname,
+                symtoms: symtoms,
+                price: price,
               },
             }}
           >
