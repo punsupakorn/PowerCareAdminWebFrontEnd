@@ -336,12 +336,12 @@ export default function WorkingScreen() {
             ))}
           </div>
           <div className="px-2 mt-3 ">
-            <Link to="/">
+            <Link to="/selectworking">
               <Button
                 variant="secondary"
                 style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
               >
-                กลับสู่หน้าหลัก
+                ย้อนกลับ
               </Button>
             </Link>{" "}
           </div>

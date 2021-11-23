@@ -25,6 +25,8 @@ export { default as ConfirmEditOfficerScreen } from "./ConfirmEditOfficerScreen"
 export { default as ProfileScreen } from "./ProfileScreen";
 export { default as SelectWorkingScreen } from "./SelectWorkingScreen";
 export { default as WorkingDoctorScreen } from "./WorkingDoctorScreen";
+export { default as SelectUserScreen} from "./SelectUserScreen";
+
 
 
 

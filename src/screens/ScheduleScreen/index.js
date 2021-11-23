@@ -201,7 +201,7 @@ const ScheduleScreen = () => {
       </Link> */}
 
       <div className="card-appointment-text ">
-        ตารางเวลาทำการของแพทย์ : {today}
+        ตารางเวลาทำการที่ยังว่างของแพทย์ : {today}
       </div>
 
       <div className="appointment-content">
@@ -260,6 +260,16 @@ const ScheduleScreen = () => {
           </div>
         ))}
       </div>
+      <div className="px-2 mt-3">
+      <Link to="/">
+              <Button
+                variant="secondary"
+                style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
+              >
+                กลับสู่หน้าหลัก
+              </Button>
+            </Link>{" "}
+            </div>
     </div>
   );
 };

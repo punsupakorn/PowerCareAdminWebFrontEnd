@@ -28,6 +28,7 @@ import {
   ProfileScreen,
   SelectWorkingScreen,
   WorkingDoctorScreen,
+  SelectUserScreen,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -124,6 +125,11 @@ function App() {
               <Route path="/workingdoctor">
                 <WorkingDoctorScreen/>
               </Route>
+              <Route path="/selectuser">
+                <SelectUserScreen/>
+              </Route>
+
+
               
             </Switch>
           </div>
