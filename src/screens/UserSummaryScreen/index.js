@@ -198,13 +198,13 @@ function UserSummaryScreen() {
           </div>
         </div>
         <div className="px-4 mt-4 ">
-          <Link
-            to={{
-              pathname: `/userdetail`,
-              state: {
-                // userid: userid,
-              },
-            }}
+          <Link to="/confirmusersummary"
+            // to={{
+            //   pathname: `/userdetail`,
+            //   state: {
+            //     // userid: userid,
+            //   },
+            // }}
           >
             <Button
               style={{
