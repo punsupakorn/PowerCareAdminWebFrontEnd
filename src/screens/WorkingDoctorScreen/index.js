@@ -196,6 +196,7 @@ export default function WorkingDoctorScreen() {
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
                         status: working.Status,
+                        id: id,
                       },
                     }}
                     // to = "/workingdetaildoctor"
