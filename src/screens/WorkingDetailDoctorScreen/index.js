@@ -306,7 +306,7 @@ function WorkingDetailDoctorScreen() {
               </div>
             </div>
           </div> */}
-          <div className="flex justify-center my-6">
+          {/* <div className="flex justify-center my-6">
             <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
               <div className="flex-1">
                 <table className="w-full text-sm lg:text-base" cellSpacing={0}>
@@ -373,10 +373,127 @@ function WorkingDetailDoctorScreen() {
                     ))}
                   </tbody>
                 </table>
-                {/* <hr className="pb-6 mt-6" /> */}
               </div>
             </div>
-          </div>
+          </div> */}
+
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg p-6">
+                <p class="text-xl font-semibold text-indigo-400">รายการยา</p>
+                <div className="flex justify-center my-6">
+                  <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
+                    <div className="flex-1">
+                      <table
+                        className="w-full text-sm lg:text-base"
+                        cellSpacing={0}
+                      >
+                        <thead>
+                          <tr className="h-12 ">
+                            <th className="hidden text-center md:table-cell">
+                              ชื่อยา
+                            </th>
+                            {/* <th className="hidden text-center md:table-cell">
+                        ประเภท
+                      </th>
+
+                      <th className="hidden text-center md:table-cell">
+                        ราคาต่อหน่วย
+                      </th> */}
+                            <th className="lg:text-center text-left pl-5 lg:pl-0">
+                              <span className="lg:hidden" title="Quantity">
+                                Qtd
+                              </span>
+                              <span className="hidden lg:inline">
+                                ราคาต่อหน่วย
+                              </span>
+                            </th>
+                            <th className="hidden text-center md:table-cell"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {medicine.map((medicine) => (
+                            <tr key={medicine.MedicineName}>
+                              <td className="text-left">
+                                <p className="mb-2 ">{medicine.MedicineName}</p>
+                              </td>
+                              <td className="text-center">
+                                <span className="text-sm lg:text-base font-medium">
+                                  {medicine.Price}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {/* <hr className="pb-6 mt-6" /> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg p-6">
+                <p class="text-xl font-semibold text-indigo-400">
+                  รายการยาที่ได้เลือกไว้
+                </p>
+                <div className="flex justify-center my-6">
+                  <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
+                    <div className="flex-1">
+                      <table
+                        className="w-full text-sm lg:text-base"
+                        cellSpacing={0}
+                      >
+                        <thead>
+                          <tr className="h-12 ">
+                            <th className="hidden text-center md:table-cell">
+                              ชื่อยา
+                            </th>
+                            {/* <th className="hidden text-center md:table-cell">
+                        ประเภท
+                      </th>
+
+                      <th className="hidden text-center md:table-cell">
+                        ราคาต่อหน่วย
+                      </th> */}
+                            <th className="lg:text-center text-left pl-5 lg:pl-0">
+                              <span className="lg:hidden" title="Quantity">
+                                Qtd
+                              </span>
+                              <span className="hidden lg:inline">
+                                ราคาต่อหน่วย
+                              </span>
+                            </th>
+                            <th className="hidden text-center md:table-cell"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {medicine.map((medicine) => (
+                            <tr key={medicine.MedicineName}>
+                              <td className="text-left">
+                                <p className="mb-2 ">{medicine.MedicineName}</p>
+                              </td>
+                              <td className="text-center">
+                                <span className="text-sm lg:text-base font-medium">
+                                  {medicine.Price}
+                                </span>
+                              </td>
+                              <td className="text-center">
+                                <span className="text-sm lg:text-base font-medium">
+                                  <Delete {...iconOption} />
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {/* <hr className="pb-6 mt-6" /> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div
             className="
           flex
@@ -438,6 +555,7 @@ function WorkingDetailDoctorScreen() {
             </div>
           </div>
         </div>
+
         <div className="px-2 ">
           <Link
             to={{
