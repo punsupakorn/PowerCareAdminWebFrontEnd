@@ -134,7 +134,7 @@ function WorkingDetailScreen() {
                   ส่งข้อมูลคนไข้
                 </Button>
               </Link>{" "}
-              <Link to="/workingdetail">
+              <Link to="/workingdetailsummary">
                 <Button
                   variant="primary"
                   style={{

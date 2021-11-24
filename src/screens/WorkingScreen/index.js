@@ -245,22 +245,23 @@ export default function WorkingScreen() {
 
                 <div className="menu-row">
                   <Link
-                    to={{
-                      pathname: `/workingdetail`,
-                      state: {
-                        // appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        doctorid: working.DoctorID,
-                        status: working.Status,
-                        fnamedoctor: fnamedoctor,
-                        lnamedoctor: lnamedoctor,
-                      },
-                    }}
+                  to ="/pushvdo"
+                    // to={{
+                    //   pathname: `/workingdetail`,
+                    //   state: {
+                    //     // appointmentID: working.AppointmentID,
+                    //     userID: working.UserID,
+                    //     username: working.UserName,
+                    //     date: working.Date,
+                    //     time: working.Time,
+                    //     symtoms: working.Initial_Symptoms,
+                    //     doctorname: working.DoctorName,
+                    //     doctorid: working.DoctorID,
+                    //     status: working.Status,
+                    //     fnamedoctor: fnamedoctor,
+                    //     lnamedoctor: lnamedoctor,
+                    //   },
+                    // }}
                   >
                     <Add
                       {...iconOption}
@@ -314,6 +315,66 @@ export default function WorkingScreen() {
           </div>
         </div>
       </div>
+      
+      <div className="search-bar-container">
+        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+        <p class="text-xl mt-3 ml-20 font-semibold text-blue-500">
+          {" "}
+          สถานะ : ดำเนินการ{" "}
+        </p>
+      </div>
+      <div className="working-content">
+        <div className="table-content-working">
+          <div className="table-grid-working header">
+            {/* header table */}
+            <p>วันที่</p>
+            <p>เวลา</p>
+            <p>ชื่อคนไข้</p>
+            <p>ดูข้อมูล</p>
+            {/* end header */}
+          </div>
+          <div className="body-table-working">
+            {/* body table */}
+            {/* {officer.map((officerlist) => ( */}
+
+            {unsuccessAppointment.map((working) => (
+              <div className="table-grid-working">
+                <p>{displayShortThaiDate(working.Date)}</p>
+                <p>{working.Time}</p>
+                <p>{working.UserName}</p>
+
+                <div className="menu-row">
+                  <Link to ="/workingdetail"
+                    // to={{
+                    //   pathname: `/workingdetail`,
+                    //   state: {
+                    //     // appointmentID: working.AppointmentID,
+                    //     userID: working.UserID,
+                    //     username: working.UserName,
+                    //     date: working.Date,
+                    //     time: working.Time,
+                    //     symtoms: working.Initial_Symptoms,
+                    //     doctorname: working.DoctorName,
+                    //     doctorid: working.DoctorID,
+                    //     status: working.Status,
+                    //     fnamedoctor: fnamedoctor,
+                    //     lnamedoctor: lnamedoctor,
+                    //   },
+                    // }}
+                  >
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-green-500">
@@ -342,21 +403,21 @@ export default function WorkingScreen() {
                 <p>{working.UserName}</p>
 
                 <div className="menu-row">
-                  <Link
-                    to={{
-                      pathname: `/workingdetail`,
-                      state: {
-                        appointmentID: working.AppointmentID,
-                        userID: working.UserID,
-                        username: working.UserName,
-                        date: working.Date,
-                        time: working.Time,
-                        symtoms: working.Initial_Symptoms,
-                        doctorname: working.DoctorName,
-                        doctorid: working.DoctorID,
-                        status: working.Status,
-                      },
-                    }}
+                  <Link to ="/workingdetailsummary"
+                    // to={{
+                    //   pathname: `/workingdetail`,
+                    //   state: {
+                    //     appointmentID: working.AppointmentID,
+                    //     userID: working.UserID,
+                    //     username: working.UserName,
+                    //     date: working.Date,
+                    //     time: working.Time,
+                    //     symtoms: working.Initial_Symptoms,
+                    //     doctorname: working.DoctorName,
+                    //     doctorid: working.DoctorID,
+                    //     status: working.Status,
+                    //   },
+                    // }}
                   >
                     <Add
                       {...iconOption}
