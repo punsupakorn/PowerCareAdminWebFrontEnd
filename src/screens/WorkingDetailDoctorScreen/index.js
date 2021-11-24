@@ -557,6 +557,19 @@ function WorkingDetailDoctorScreen() {
         </div>
 
         <div className="px-2 ">
+        <Link to="/confirmusersummary">
+            <Button
+              style={{
+                borderColor: "#818CF8",
+                backgroundColor: "#818CF8",
+                color: "white",
+              }}
+            >
+              บันทึกผล
+            </Button>
+          </Link>{" "}
+  
+
           <Link
             to={{
               pathname: `/usersummary`,

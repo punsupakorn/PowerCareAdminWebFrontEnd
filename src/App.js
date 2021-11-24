@@ -30,6 +30,7 @@ import {
   WorkingDoctorScreen,
   SelectUserScreen,
   ConfirmUserSummaryScreen,
+  PushSummaryScreen ,
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -132,9 +133,11 @@ function App() {
               <Route path="/confirmusersummary">
                 <ConfirmUserSummaryScreen/>
               </Route>
-              
+              <Route path="/pushsummary">
+                <PushSummaryScreen />
+              </Route>
 
-              
+            
             </Switch>
           </div>
         </div>
