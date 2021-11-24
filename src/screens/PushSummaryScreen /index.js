@@ -123,7 +123,7 @@ function WorkingDetailScreen() {
             </section>
 
             <div className="px-2 mt-4">
-              <Link to="/addofficer">
+              <Link to="/">
                 <Button
                   variant="primary"
                   style={{
@@ -134,7 +134,7 @@ function WorkingDetailScreen() {
                   ส่งข้อมูลคนไข้
                 </Button>
               </Link>{" "}
-              <Link to="/homescreenadmin">
+              <Link to="/workingdetail">
                 <Button
                   variant="primary"
                   style={{
@@ -142,7 +142,7 @@ function WorkingDetailScreen() {
                     backgroundColor: "#bdbdbd",
                   }}
                 >
-                  กลับสู่หน้าหลัก
+                  ย้อนกลับ
                 </Button>
               </Link>
             </div>

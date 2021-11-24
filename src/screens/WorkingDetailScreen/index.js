@@ -331,13 +331,13 @@ function WorkingDetailScreen() {
               className="
           flex
           justify-between
-          items-center
+          items-right
           w-full
           py-3
           mt-2
         "
             >
-              <p className=" text-black ml-4 font-bold">
+              <p className=" text-black ml-4 font-bold ">
                 ราคารวมทั้งสิ้นเป็นเงิน : {totalprice} บาท{" "}
               </p>
             </div>
@@ -345,6 +345,17 @@ function WorkingDetailScreen() {
         </div>
       </div>
       <div className="px-2 ">
+      <Link to="/pushsummary">
+                <Button
+                  variant="primary"
+                  style={{
+                    borderColor: "#818CF8",
+                    backgroundColor: "#818CF8",
+                  }}
+                >
+                  ถัดไป
+                </Button>
+              </Link>{" "}
         <Link
           to={{
             pathname: `/working`,
