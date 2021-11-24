@@ -51,6 +51,7 @@ function WorkingDetailScreen() {
           AppointmentID: appointmentID,
         })
         .then((res) => {
+          // console.log(res);
           const data = res.data[0];
           setdescription(data.Description);
           settotalprice(data.TotalPrice);
@@ -345,17 +346,17 @@ function WorkingDetailScreen() {
         </div>
       </div>
       <div className="px-2 ">
-      <Link to="/pushsummary">
-                <Button
-                  variant="primary"
-                  style={{
-                    borderColor: "#818CF8",
-                    backgroundColor: "#818CF8",
-                  }}
-                >
-                  ถัดไป
-                </Button>
-              </Link>{" "}
+        <Link to="/pushsummary">
+          <Button
+            variant="primary"
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+            }}
+          >
+            ถัดไป
+          </Button>
+        </Link>{" "}
         <Link
           to={{
             pathname: `/working`,
