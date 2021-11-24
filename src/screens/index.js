@@ -27,6 +27,9 @@ export { default as SelectWorkingScreen } from "./SelectWorkingScreen";
 export { default as WorkingDoctorScreen } from "./WorkingDoctorScreen";
 export { default as SelectUserScreen} from "./SelectUserScreen";
 export { default as ConfirmUserSummaryScreen} from "./ConfirmUserSummaryScreen";
+export { default as PushSummaryScreen } from "./PushSummaryScreen ";
+
+
 
 
 
