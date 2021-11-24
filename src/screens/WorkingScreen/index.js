@@ -122,7 +122,9 @@ export default function WorkingScreen() {
       axios.get(server.WORKING).then((res) => {
         const data = res.data;
         const today = data.filter(
-          (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
+          (data) =>
+            data.DoctorID == doctorId &&
+            displayThaiDate(data.Date) == displayThaiDate(dateSearch)
         );
         if (today[0] == undefined) {
           window.alert("ไม่พบตารางปฏิบัติการ");
