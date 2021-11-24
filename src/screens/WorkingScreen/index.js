@@ -344,7 +344,7 @@ export default function WorkingScreen() {
                     to={{
                       pathname: `/workingdetail`,
                       state: {
-                        // appointmentID: working.AppointmentID,
+                        appointmentID: working.AppointmentID,
                         userID: working.UserID,
                         username: working.UserName,
                         date: working.Date,
