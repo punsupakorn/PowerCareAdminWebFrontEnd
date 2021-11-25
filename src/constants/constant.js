@@ -1,5 +1,5 @@
-// export const apiURL = "http://localhost:8000/";
-  export const apiURL = "https://powercare-admin-back.herokuapp.com/";
+export const apiURL = "http://localhost:8000/";
+// export const apiURL = "https://powercare-admin-back.herokuapp.com/";
 
 export const server = {
   LOGIN: `${apiURL}Login`,
@@ -21,6 +21,6 @@ export const server = {
   WORKING_DOCTOR: `${apiURL}WorkingDoctor`,
   SELECT_WORKING: `${apiURL}SelectWorking`,
   HOMESCREEN_DOCTOR: `${apiURL}HomescreenDoctor`,
-  WORKING_DETAIL_DOCTOR:`${apiURL}WorkingDetailDoctor`,
-  PUSH_VDO:`${apiURL}PushVdo`
+  WORKING_DETAIL_DOCTOR: `${apiURL}WorkingDetailDoctor`,
+  PUSH_VDO: `${apiURL}PushVdo`,
 };

@@ -195,7 +195,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>ช่องทางการวีดีโอคอล :</b>
+                <b>ช่องทางการ Video Call : </b>
                 <a href={meetingLink} target="_blank">
                   {meetingLink}
                 </a>
