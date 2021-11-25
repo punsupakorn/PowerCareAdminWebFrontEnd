@@ -36,7 +36,7 @@ export default function WorkingDoctorScreen() {
         });
         const unsuccess = data.filter(
           (data) =>
-            displayThaiDate(data.Date) == date && data.Status == "ไม่สำเร็จ"
+            displayThaiDate(data.Date) == date && data.Status == "รอพบแพทย์"
         );
         const success = data.filter(
           (data) =>
@@ -92,7 +92,7 @@ export default function WorkingDoctorScreen() {
         } else {
           settoday(displayThaiDate(date));
           const success = today.filter((data) => data.Status == "สำเร็จ");
-          const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
+          const unsuccess = today.filter((data) => data.Status =="รอพบแพทย์");
           setsuccessAppointment(success);
           setunsuccessAppointment(unsuccess);
         }
@@ -159,7 +159,7 @@ export default function WorkingDoctorScreen() {
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-red-500">
           {" "}
-          สถานะ : ไม่สำเร็จ{" "}
+          สถานะ : รอพบแพทย์{" "}
         </p>
       </div>
       <div className="working-doctor-content">

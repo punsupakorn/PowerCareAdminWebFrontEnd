@@ -8,79 +8,88 @@ import { useState, useEffect } from "react";
 import { data } from "autoprefixer";
 
 function WorkingDetailScreen() {
-//   const location = useLocation();
-//   const {
-//     appointmentID,
-//     userID,
-//     username,
-//     date,
-//     time,
-//     symtoms,
-//     doctorname,
-//     status,
-//     doctorid,
-//   } = location.state;
-//   const [address, setaddress] = useState("");
-//   const [phone, setphone] = useState("");
-//   const [sex, setsex] = useState("");
-//   const [email, setemail] = useState("");
-//   const [dateofbirth, setdateofbirth] = useState("");
-//   const [description, setdescription] = useState("");
-//   const [totalprice, settotalprice] = useState("");
-//   const [medicine, setmedicine] = useState([]);
-//   const [otherservice, setotherservice] = useState([]);
+  const location = useLocation();
+  const {
+    // appointmentID,
+    userID,
+    username,
+    date,
+    time,
+    symtoms,
+    doctorname,
+    doctorid,
+    status,
+    fnamedoctor,
+    lnamedoctor,
+    doctorId,
+    meetingLink,
+  } = location.state;
+  const [address, setaddress] = useState("");
+  const [phone, setphone] = useState("");
+  const [sex, setsex] = useState("");
+  const [email, setemail] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
+  // const [description, setdescription] = useState("");
+  // const [totalprice, settotalprice] = useState("");
+  // const [medicine, setmedicine] = useState([]);
+  // const [otherservice, setotherservice] = useState([]);
 
-//   const getWorkingDetail = () => {
-//     try {
-//       axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
-//         setaddress(res.data.Address);
-//         setphone(res.data.Phone);
-//         setsex(res.data.Sex);
-//         setemail(res.data.Email);
-//         setdateofbirth(res.data.DateOfBirth);
-//       });
-//     } catch (error) {
-//       return error;
-//     }
-//   };
+  const getWorkingDetail = () => {
+    try {
+      axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
+        setaddress(res.data.Address);
+        setphone(res.data.Phone);
+        setsex(res.data.Sex);
+        setemail(res.data.Email);
+        setdateofbirth(res.data.DateOfBirth);
+      });
+    } catch (error) {
+      return error;
+    }
+  };
 
-//   const getTreatment = () => {
-//     try {
-//       axios
-//         .post(server.WORKING_DETAIL, {
-//           AppointmentID: appointmentID,
-//         })
-//         .then((res) => {
-//           const data = res.data[0];
-//           setdescription(data.Description);
-//           settotalprice(data.TotalPrice);
-//           setmedicine(data.MedicineQuantity);
-//           setotherservice(data.OtherService);
-//         });
-//     } catch (error) {
-//       return error;
-//     }
-//   };
-//   // console.log(medicine)
+  // const openLink = (e) => {
+  //   const data = e.target.value;
+  //   // document.getElementById(data).getAttribute("href");
+  // };
 
-//   const refreshPage = () => {
-//     window.location.reload();
-//   };
+  //   const getTreatment = () => {
+  //     try {
+  //       axios
+  //         .post(server.WORKING_DETAIL, {
+  //           AppointmentID: appointmentID,
+  //         })
+  //         .then((res) => {
+  //           const data = res.data[0];
+  //           setdescription(data.Description);
+  //           settotalprice(data.TotalPrice);
+  //           setmedicine(data.MedicineQuantity);
+  //           setotherservice(data.OtherService);
+  //         });
+  //     } catch (error) {
+  //       return error;
+  //     }
+  //   };
+  //   // console.log(medicine)
 
-//   useEffect(() => {
-//     getWorkingDetail();
-//     getTreatment();
-//   }, []);
+  //   const refreshPage = () => {
+  //     window.location.reload();
+  //   };
 
-//   const displayThaiDate = (date) => {
-//     const result = new Date(date).toLocaleDateString("th-TH", {
-//       year: "numeric",
-//       month: "long",
-//       day: "numeric",
-//       weekday: "long",
-//     });
-//     return result;
-//   };
+  useEffect(() => {
+    getWorkingDetail();
+    // getTreatment();
+  }, []);
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
 
   return (
     <div className="content-body">
@@ -100,11 +109,11 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
-                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)} */}
+                <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
+                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
               </p>
             </div>
-            {/* <div
+            <div
               className="
           flex
           justify-between
@@ -118,8 +127,8 @@ function WorkingDetailScreen() {
                 <b>ที่อยู่ : </b>
                 {address}
               </p>
-            </div> */}
-            {/* <div
+            </div>
+            <div
               className="
           flex
           justify-between
@@ -132,7 +141,7 @@ function WorkingDetailScreen() {
               <p className="text-gray-500 ml-4">
                 <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
-            </div> */}
+            </div>
             <div
               className="
           flex
@@ -144,7 +153,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time} */}
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -158,7 +167,7 @@ function WorkingDetailScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>แพทย์ที่พบ :</b> {doctorname} */}
+                <b>แพทย์ที่พบ :</b> {doctorname}
               </p>
             </div>
             <div
@@ -172,23 +181,9 @@ function WorkingDetailScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>อาการเบื้องต้น :</b> {symtoms} */}
+                <b>อาการเบื้องต้น :</b> {symtoms}
               </p>
             </div>
-            {/* <div
-              className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-          border-b-2 border-gray-200
-        "
-            >
-              <p className=" text-gray-500 ml-4">
-                <b>สถานะการทำนัด :</b> {status}
-              </p>
-            </div> */}
             <div
               className="
           flex
@@ -200,21 +195,23 @@ function WorkingDetailScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>คำวินิฉัยจากแพย์ :</b> {description} */}
+                <b>ช่องทางการวีดีโอคอล :</b>
+                <a href={meetingLink} target="_blank">
+                  {meetingLink}
+                </a>
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className="px-2 mt-3">
-        <Link to="/" // link -> working 
-
-          // to={{
-          //   pathname: `/working`,
-          //   state: {
-          //     doctorId: doctorid,
-          //   },
-          // }}
+        <Link
+          to={{
+            pathname: `/working`,
+            state: {
+              doctorId: doctorId,
+            },
+          }}
         >
           <Button
             variant="primary"

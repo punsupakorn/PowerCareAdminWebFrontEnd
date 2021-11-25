@@ -44,6 +44,8 @@ export default function WorkingScreen() {
     setdate(data);
   };
 
+ 
+
   const showToday = () => {
     const result = new Date().toLocaleDateString("th-TH", {
       year: "numeric",
@@ -344,23 +346,24 @@ export default function WorkingScreen() {
 
                 <div className="menu-row">
                   <Link
-                    to="/workingdetail"
-                    // to={{
-                    //   pathname: `/workingdetail`,
-                    //   state: {
-                    //     // appointmentID: working.AppointmentID,
-                    //     userID: working.UserID,
-                    //     username: working.UserName,
-                    //     date: working.Date,
-                    //     time: working.Time,
-                    //     symtoms: working.Initial_Symptoms,
-                    //     doctorname: working.DoctorName,
-                    //     doctorid: working.DoctorID,
-                    //     status: working.Status,
-                    //     fnamedoctor: fnamedoctor,
-                    //     lnamedoctor: lnamedoctor,
-                    //   },
-                    // }}
+                    to={{
+                      pathname: `/workingdetail`,
+                      state: {
+                        // appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symtoms: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        doctorid: working.DoctorID,
+                        status: working.Status,
+                        fnamedoctor: fnamedoctor,
+                        lnamedoctor: lnamedoctor,
+                        doctorId: doctorId,
+                        meetingLink: working.MeetingLink,
+                      },
+                    }}
                   >
                     <Add
                       {...iconOption}

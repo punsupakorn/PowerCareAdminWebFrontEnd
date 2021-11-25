@@ -401,9 +401,6 @@ function WorkingDetailDoctorScreen() {
                         ราคาต่อหน่วย
                       </th> */}
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
-                              <span className="lg:hidden" title="Quantity">
-                                Qtd
-                              </span>
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
                               </span>
@@ -456,9 +453,6 @@ function WorkingDetailDoctorScreen() {
                         ราคาต่อหน่วย
                       </th> */}
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
-                              <span className="lg:hidden" title="Quantity">
-                                Qtd
-                              </span>
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
                               </span>
@@ -467,7 +461,7 @@ function WorkingDetailDoctorScreen() {
                           </tr>
                         </thead>
                         <tbody>
-                          {choosemedicine.map((medicine) => (
+                          {medicine.map((medicine) => (
                             <tr key={medicine.MedicineName}>
                               <td className="text-left">
                                 <p className="mb-2 ">{medicine.MedicineName}</p>
