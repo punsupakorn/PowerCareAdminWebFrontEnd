@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Success from "../../icons/success";
 
-function WorkingDetailScreen() {
+function PushSummaryScreen () {
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
@@ -174,4 +174,4 @@ function WorkingDetailScreen() {
   );
 }
 
-export default WorkingDetailScreen;
+export default PushSummaryScreen ;
