@@ -27,13 +27,14 @@ function PushVDO() {
 
   const handleLink = (e) => {
     const data = e.target.value;
+    // console.log(data);
     setlinkmeeting(data);
   };
 
   const pushVdo = () => {
     axios.post(server.PUSH_VDO, {
-      appointmentID: appointmentID,
-      userID: userID,
+      appointmentId: appointmentID,
+      userId: userID,
       meetingLink: linkmeeting,
     });
   };
@@ -214,7 +215,7 @@ function PushVDO() {
       ></textarea>
 
       <div className="px-2 mt-3">
-        <Link to="/">
+        {/* <Link to="/"> */}
           {" "}
           {/* link -> pushmessage user */}
           <Button
@@ -227,7 +228,7 @@ function PushVDO() {
           >
             ส่งข้อมูลการติดต่อ
           </Button>
-        </Link>{" "}
+        {/* </Link>{" "} */}
         <Link
           to={{
             pathname: `/working`,

@@ -336,7 +336,7 @@ export default function WorkingScreen() {
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
 
-            {unsuccessAppointment.map((working) => (
+            {waitDoctor.map((working) => (
               <div className="table-grid-working">
                 <p>{displayShortThaiDate(working.Date)}</p>
                 <p>{working.Time}</p>
