@@ -467,7 +467,7 @@ function WorkingDetailDoctorScreen() {
                           </tr>
                         </thead>
                         <tbody>
-                          {medicine.map((medicine) => (
+                          {choosemedicine.map((medicine) => (
                             <tr key={medicine.MedicineName}>
                               <td className="text-left">
                                 <p className="mb-2 ">{medicine.MedicineName}</p>

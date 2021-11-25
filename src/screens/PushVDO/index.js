@@ -23,6 +23,21 @@ function PushVDO() {
   const [doctorname, setdoctorname] = useState("");
   const [symptoms, setsymptoms] = useState("");
 
+  const [linkmeeting, setlinkmeeting] = useState("");
+
+  const handleLink = (e) => {
+    const data = e.target.value;
+    setlinkmeeting(data);
+  };
+
+  const pushVdo = () => {
+    axios.post(server.PUSH_VDO, {
+      appointmentID: appointmentID,
+      userID: userID,
+      meetingLink: linkmeeting,
+    });
+  };
+
   const getAppointment = () => {
     try {
       axios.get(`${server.PUSH_VDO}/${appointmentID}`).then((res) => {
@@ -59,47 +74,6 @@ function PushVDO() {
     });
     return result;
   };
-
-  //   const [totalprice, settotalprice] = useState("");
-  //   const [medicine, setmedicine] = useState([]);
-  //   const [otherservice, setotherservice] = useState([]);
-
-  //   const getWorkingDetail = () => {
-  //     try {
-  //       axios.get(`${server.WORKING_DETAIL}/${userID}`).then((res) => {
-  //         setaddress(res.data.Address);
-  //         setphone(res.data.Phone);
-  //         setsex(res.data.Sex);
-  //         setemail(res.data.Email);
-  //         setdateofbirth(res.data.DateOfBirth);
-  //       });
-  //     } catch (error) {
-  //       return error;
-  //     }
-  //   };
-
-  //   const getTreatment = () => {
-  //     try {
-  //       axios
-  //         .post(server.WORKING_DETAIL, {
-  //           AppointmentID: appointmentID,
-  //         })
-  //         .then((res) => {
-  //           const data = res.data[0];
-  //           setdescription(data.Description);
-  //           settotalprice(data.TotalPrice);
-  //           setmedicine(data.MedicineQuantity);
-  //           setotherservice(data.OtherService);
-  //         });
-  //     } catch (error) {
-  //       return error;
-  //     }
-  //   };
-  //   // console.log(medicine)
-
-  //   const refreshPage = () => {
-  //     window.location.reload();
-  //   };
 
   useEffect(() => {
     getAppointment();
@@ -232,7 +206,7 @@ function PushVDO() {
       </div>
 
       <textarea
-        //   onChange={handleDescription}
+        onChange={handleLink}
         className="form-control Detail"
         placeholder="กรุณากรอกช่องทางการวีดีโอคอล"
         rows="2"
@@ -244,6 +218,7 @@ function PushVDO() {
           {" "}
           {/* link -> pushmessage user */}
           <Button
+            onClick={pushVdo}
             variant="primary"
             style={{
               borderColor: "#818CF8",
