@@ -68,6 +68,7 @@ export default function WorkingScreen() {
   const getWorking = () => {
     try {
       axios.get(server.WORKING).then((res) => {
+        // console.log(res);
         const data = res.data;
         const date = new Date().toLocaleDateString("th-TH", {
           year: "numeric",
