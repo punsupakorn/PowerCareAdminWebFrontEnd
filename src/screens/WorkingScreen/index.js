@@ -24,6 +24,7 @@ export default function WorkingScreen() {
   const [date, setdate] = useState("");
   const [fnamedoctor, setfnamedoctor] = useState("");
   const [lnamedoctor, setlnamedoctor] = useState("");
+  const [waitDoctor, setwaitDoctor] = useState([]);
 
   const getDoctorName = () => {
     try {
@@ -78,7 +79,13 @@ export default function WorkingScreen() {
           (data) =>
             data.DoctorID == doctorId &&
             displayThaiDate(data.Date) == date &&
-            data.Status == "ไม่สำเร็จ"
+            data.Status == "รอดำเนินการ"
+        );
+        const waitdoctor = data.filter(
+          (data) =>
+            data.DoctorID == doctorId &&
+            displayThaiDate(data.Date) == date &&
+            data.Status == "รอพบแพทย์"
         );
         const success = data.filter(
           (data) =>
@@ -87,6 +94,7 @@ export default function WorkingScreen() {
             data.Status == "สำเร็จ"
         );
         setsuccessAppointment(success);
+        setwaitDoctor(waitdoctor);
         setunsuccessAppointment(unsuccess);
         // setWorking(data);
       });
@@ -131,26 +139,15 @@ export default function WorkingScreen() {
         } else {
           settoday(displayThaiDate(date));
           const success = today.filter((data) => data.Status == "สำเร็จ");
-          const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
+          const waitdoctor = today.filter((data) => data.Status == "รอพบแพทย์");
+          const unsuccess = today.filter(
+            (data) => data.Status == "รอดำเนินการ"
+          );
           setsuccessAppointment(success);
           setunsuccessAppointment(unsuccess);
+          setwaitDoctor(waitdoctor);
         }
       });
-      // axios.get(`${server.WORKING_DOCTOR}/${id}`).then((res) => {
-      //   const data = res.data;
-      //   const today = data.filter(
-      //     (data) => displayThaiDate(data.Date) == displayThaiDate(dateSearch)
-      //   );
-      //   if (today[0] == undefined) {
-      //     window.alert("ไม่พบตารางปฏิบัติการ");
-      //   } else {
-      //     settoday(displayThaiDate(date));
-      //     const success = today.filter((data) => data.Status == "สำเร็จ");
-      //     const unsuccess = today.filter((data) => data.Status == "ไม่สำเร็จ");
-      //     setsuccessAppointment(success);
-      //     setunsuccessAppointment(unsuccess);
-      //   }
-      // });
     } catch (error) {}
   };
 
@@ -220,7 +217,7 @@ export default function WorkingScreen() {
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-red-500">
           {" "}
-          สถานะ : ไม่สำเร็จ{" "}
+          สถานะ : รอดำเนินการ{" "}
         </p>
       </div>
       <div className="working-content">
@@ -245,23 +242,24 @@ export default function WorkingScreen() {
 
                 <div className="menu-row">
                   <Link
-                  to ="/pushvdo"
-                    // to={{
-                    //   pathname: `/workingdetail`,
-                    //   state: {
-                    //     // appointmentID: working.AppointmentID,
-                    //     userID: working.UserID,
-                    //     username: working.UserName,
-                    //     date: working.Date,
-                    //     time: working.Time,
-                    //     symtoms: working.Initial_Symptoms,
-                    //     doctorname: working.DoctorName,
-                    //     doctorid: working.DoctorID,
-                    //     status: working.Status,
-                    //     fnamedoctor: fnamedoctor,
-                    //     lnamedoctor: lnamedoctor,
-                    //   },
-                    // }}
+                    // to="/pushvdo"
+                    to={{
+                      pathname: `/pushvdo`,
+                      state: {
+                        appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        doctorId: doctorId,
+                        // username: working.UserName,
+                        // date: working.Date,
+                        // time: working.Time,
+                        // symtoms: working.Initial_Symptoms,
+                        // doctorname: working.DoctorName,
+                        // doctorid: working.DoctorID,
+                        // status: working.Status,
+                        // fnamedoctor: fnamedoctor,
+                        // lnamedoctor: lnamedoctor,
+                      },
+                    }}
                   >
                     <Add
                       {...iconOption}
@@ -315,12 +313,12 @@ export default function WorkingScreen() {
           </div>
         </div>
       </div>
-      
+
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-blue-500">
           {" "}
-          สถานะ : ดำเนินการ{" "}
+          สถานะ : รอพบแพทย์{" "}
         </p>
       </div>
       <div className="working-content">
@@ -344,7 +342,8 @@ export default function WorkingScreen() {
                 <p>{working.UserName}</p>
 
                 <div className="menu-row">
-                  <Link to ="/workingdetail"
+                  <Link
+                    to="/workingdetail"
                     // to={{
                     //   pathname: `/workingdetail`,
                     //   state: {
@@ -374,7 +373,6 @@ export default function WorkingScreen() {
         </div>
       </div>
 
-
       <div className="search-bar-container">
         {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-green-500">
@@ -403,7 +401,8 @@ export default function WorkingScreen() {
                 <p>{working.UserName}</p>
 
                 <div className="menu-row">
-                  <Link to ="/workingdetailsummary"
+                  <Link
+                    to="/workingdetailsummary"
                     // to={{
                     //   pathname: `/workingdetail`,
                     //   state: {
