@@ -30,7 +30,7 @@ import {
   WorkingDoctorScreen,
   SelectUserScreen,
   ConfirmUserSummaryScreen,
-  PushSummaryScreen ,
+//   PushSummaryScreen ,
   PushVDO,
   WorkingDetailSummaryScreen,
 } from "./screens";
