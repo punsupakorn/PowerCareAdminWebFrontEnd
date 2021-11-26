@@ -95,21 +95,22 @@ function WorkingDetailDoctorScreen() {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
-  const handleQuantity = (e) => {
-    const data = e.target.value;
-    setquantity(data);
-  };
+  // const handleQuantity = (e) => {
+  //   // const data = e.target.value;
+  //   // setquantity(data);
+  // };
 
   // console.log(medicineResult)
 
-  const calculatePrice = (MedicineID) => {
-    const index = choosemedicine.findIndex(
-      (med) => med.MedicineID == MedicineID
-    );
-    const oldPrice = choosemedicine[index].Price;
-    const newPrice = oldPrice * quantity;
-    console.log(newPrice);
-  };
+  // const calculatePrice = (MedicineID) => {
+  //   const index = choosemedicine.findIndex(
+  //     (med) => med.MedicineID == MedicineID
+  //   );
+
+  //   const oldPrice = choosemedicine[index].Price;
+  //   const newPrice = oldPrice * quantity;
+  //   console.log(newPrice);
+  // };
 
   // console.log(choosemedicine);
 
@@ -220,10 +221,10 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>อาการเบื้องต้น :</b> {symtoms}
+                <b>อาการเบื้องต้น:</b> {symtoms}
               </p>
             </div>
-            <div
+            {/* <div
               className="
           flex
           justify-between
@@ -234,10 +235,9 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>ช่องทางการวีดีโอคอล :</b> 
-                {/* {status} */}
+                <b>สถานะการทำนัด:</b> {status}
               </p>
-            </div>
+            </div> */}
             <div
               className="
           flex
@@ -271,8 +271,7 @@ function WorkingDetailDoctorScreen() {
           >
             <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
           </div>
-<<<<<<< Updated upstream
-          <div className=" m-2 text-center">
+          {/* <div className=" m-2 text-center">
             <div className="p-2">
               <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
                 <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
@@ -306,8 +305,8 @@ function WorkingDetailDoctorScreen() {
                 />
               </div>
             </div>
-          </div>
-          <div className="flex justify-center my-6">
+          </div> */}
+          {/* <div className="flex justify-center my-6">
             <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
               <div className="flex-1">
                 <table className="w-full text-sm lg:text-base" cellSpacing={0}>
@@ -333,7 +332,7 @@ function WorkingDetailDoctorScreen() {
                     </tr>
                   </thead>
                   <tbody>
-                    {choosemedicine.map((medicine) => (
+                    {medicine.map((medicine) => (
                       <tr key={medicine.MedicineName}>
                         <td>
                           <p className="mb-2 ">{medicine.MedicineName}</p>
@@ -376,12 +375,9 @@ function WorkingDetailDoctorScreen() {
                 </table>
               </div>
             </div>
-          </div>
-=======
->>>>>>> Stashed changes
+          </div> */}
 
-          {/* listtt  */}
-          {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6">
                 <p class="text-xl font-semibold text-indigo-400">รายการยา</p>
@@ -397,6 +393,13 @@ function WorkingDetailDoctorScreen() {
                             <th className="hidden text-center md:table-cell">
                               ชื่อยา
                             </th>
+                            {/* <th className="hidden text-center md:table-cell">
+                        ประเภท
+                      </th>
+
+                      <th className="hidden text-center md:table-cell">
+                        ราคาต่อหน่วย
+                      </th> */}
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
@@ -420,6 +423,7 @@ function WorkingDetailDoctorScreen() {
                           ))}
                         </tbody>
                       </table>
+                      {/* <hr className="pb-6 mt-6" /> */}
                     </div>
                   </div>
                 </div>
@@ -441,6 +445,13 @@ function WorkingDetailDoctorScreen() {
                             <th className="hidden text-center md:table-cell">
                               ชื่อยา
                             </th>
+                            {/* <th className="hidden text-center md:table-cell">
+                        ประเภท
+                      </th>
+
+                      <th className="hidden text-center md:table-cell">
+                        ราคาต่อหน่วย
+                      </th> */}
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
@@ -450,16 +461,10 @@ function WorkingDetailDoctorScreen() {
                           </tr>
                         </thead>
                         <tbody>
-                          {choosemedicine.map((medicine) => (
+                          {medicine.map((medicine) => (
                             <tr key={medicine.MedicineName}>
                               <td className="text-left">
-                                <p
-                                  // onChange={handleQuantity}
-                                  onClick={handleMedicine}
-                                  className="mb-2 "
-                                >
-                                  {medicine.MedicineName}
-                                </p>
+                                <p className="mb-2 ">{medicine.MedicineName}</p>
                               </td>
                               <td className="text-center">
                                 <span className="text-sm lg:text-base font-medium">
@@ -475,14 +480,13 @@ function WorkingDetailDoctorScreen() {
                           ))}
                         </tbody>
                       </table>
+                      {/* <hr className="pb-6 mt-6" /> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section> */}
-
-          {/* list  */}
+          </section>
 
           <div
             className="
@@ -547,11 +551,7 @@ function WorkingDetailDoctorScreen() {
         </div>
 
         <div className="px-2 ">
-<<<<<<< Updated upstream
-          {/* <Link to="/confirmusersummary">
-=======
-        {/* <Link to="/confirmusersummary">
->>>>>>> Stashed changes
+        <Link to="/confirmusersummary">
             <Button
               style={{
                 borderColor: "#818CF8",
@@ -561,12 +561,9 @@ function WorkingDetailDoctorScreen() {
             >
               บันทึกผล
             </Button>
-          </Link>{" "} */}
-<<<<<<< Updated upstream
-=======
+          </Link>{" "}
   
 
->>>>>>> Stashed changes
           <Link
             to={{
               pathname: `/usersummary`,
