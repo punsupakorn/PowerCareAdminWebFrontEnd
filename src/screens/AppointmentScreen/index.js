@@ -129,10 +129,6 @@ const AppointmentScreen = () => {
             </option>
             {doctor.map((doctorname) => (
               <option
-                // value={JSON.stringify({
-                //   name: `${doctorname.FirstName} ${doctorname.LastName}`,
-                //   id: doctorname.DocumentID,
-                // })}
                value={JSON.stringify(doctorname)}
               >
                 {doctorname.FirstName} {doctorname.LastName}

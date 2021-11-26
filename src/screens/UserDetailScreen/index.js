@@ -159,10 +159,10 @@ export default function UserDetailScreen() {
                         },
                       }}
                     >
-                      <Edit
-                        {...iconOption}
-                        // onClick={() => console.log("Click function edit ")}
-                      />
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
                     </Link>
                     {/* <Delete
                       {...iconOption}

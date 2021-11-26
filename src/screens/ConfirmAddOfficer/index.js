@@ -50,7 +50,7 @@ function ConfirmAddOfficer() {
               </div>
             </div>
             <div className="px-2 mt-4">
-              <Link to="/addofficer">
+              {/* <Link to="/addofficer">
                 <Button
                   variant="primary"
                   style={{
@@ -60,8 +60,8 @@ function ConfirmAddOfficer() {
                 >
                   เพิ่มบุคคลากรเพิ่มเติม
                 </Button>
-              </Link>{" "}
-              <Link to="/homescreenadmin">
+              </Link>{" "} */}
+              <Link to="/">
                 <Button
                   variant="primary"
                   style={{

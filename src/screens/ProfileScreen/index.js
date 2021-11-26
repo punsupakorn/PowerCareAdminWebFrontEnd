@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProfileScreen.css";
-import { useLocation } from "react-router";
 import axios from "axios";
 import { server } from "../../constants/constant";
 import { AuthContext } from "../../Auth";
@@ -67,7 +66,7 @@ function ProfileScreen() {
           <div className="flex justify-between gap-3">
             <span className="w-1/2">
               <label className="block text-xs font-semibold text-gray-600 uppercase">
-                ชื่อจริง
+                ชื่อจริง <h className="text-red-600"> * </h>
               </label>
               <input
                 type="text"
@@ -80,7 +79,7 @@ function ProfileScreen() {
             </span>
             <span className="w-1/2">
               <label className="block text-xs font-semibold text-gray-600 uppercase">
-                นามสกุล
+                นามสกุล <h className="text-red-600"> * </h>
               </label>
               <input
                 type="text"
@@ -93,7 +92,7 @@ function ProfileScreen() {
             </span>
           </div>
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            หมายเลขโทรศัพท์{" "}
+            หมายเลขโทรศัพท์{" "}<h className="text-red-600"> * </h>
           </label>
           <input
             type="tel"
@@ -104,7 +103,7 @@ function ProfileScreen() {
             className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
           />
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            ตำแหน่งงาน
+            ตำแหน่งงาน<h className="text-red-600"> * </h>
           </label>
           <input
             value={position}
@@ -115,7 +114,7 @@ function ProfileScreen() {
             readOnly
           />
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            อีเมลล์{" "}
+            อีเมลล์{" "}<h className="text-red-600"> * </h>
           </label>
           <input
             type="email"
@@ -125,19 +124,6 @@ function ProfileScreen() {
             className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
             readOnly
           />
-
-          {/* <div className="mt-2"> */}
-          {/* <Link to="/confirmaddofficer"> */}
-          {/* <button
-                variant="secondary"
-                className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
-                // onClick={handleSubmit}
-              >
-                เพิ่มบุคคลากร
-              </button> */}
-          {/* </Link> */}
-          {/* </div> */}
-          {/* </form> */}
         </div>
       </div>
     </div>

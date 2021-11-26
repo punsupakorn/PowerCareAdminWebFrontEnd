@@ -181,7 +181,7 @@ function EditOfficerScreen() {
             <div className="flex justify-between gap-3">
               <span className="w-1/2">
                 <label className="block text-xs font-semibold text-gray-600 uppercase">
-                  ชื่อจริง
+                  ชื่อจริง <h className="text-red-600"> * </h>
                 </label>
                 <input
                   value={FirstName}
@@ -195,7 +195,7 @@ function EditOfficerScreen() {
               </span>
               <span className="w-1/2">
                 <label className="block text-xs font-semibold text-gray-600 uppercase">
-                  นามสกุล
+                  นามสกุล <h className="text-red-600"> * </h>
                 </label>
                 <input
                   type="text"
@@ -209,7 +209,7 @@ function EditOfficerScreen() {
               </span>
             </div>
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-              หมายเลขโทรศัพท์{" "}
+              หมายเลขโทรศัพท์ <h className="text-red-600"> * </h>
             </label>
             <input
               value={Phone}
@@ -255,7 +255,7 @@ function EditOfficerScreen() {
                 className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray-900shadow-lg "
                 // onClick={handleSubmit}
               >
-                เปลี่ยนรหัสผ่าน
+                เปลี่ยนรหัสผ่าน 
               </Button>
               <Modal
                 size="md"
@@ -274,7 +274,7 @@ function EditOfficerScreen() {
                     <div className="divide-y divide-gray-200">
                       <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                         <div className="flex flex-col">
-                          <label className="leading-loose">รหัสผ่านเดิม</label>
+                          <label className="leading-loose">รหัสผ่านเดิม <h className="text-red-600"> * </h></label>
                           <input
                             type="password"
                             className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
@@ -285,7 +285,7 @@ function EditOfficerScreen() {
                         <div className="flex items-center space-x-4">
                           <div className="flex flex-col">
                             <label className="leading-loose">
-                              รหัสผ่านใหม่
+                              รหัสผ่านใหม่ <h className="text-red-600"> * </h>
                             </label>
                             <div className="relative focus-within:text-gray-600 text-gray-400">
                               <input
@@ -298,7 +298,7 @@ function EditOfficerScreen() {
                           </div>
                           <div className="flex flex-col">
                             <label className="leading-loose">
-                              ยืนยันรหัสผ่าน
+                              ยืนยันรหัสผ่าน<h className="text-red-600"> * </h>
                             </label>
                             <div className="relative focus-within:text-gray-600 text-gray-400">
                               <input

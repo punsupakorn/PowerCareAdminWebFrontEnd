@@ -150,7 +150,7 @@ const AddOfficerScreen = () => {
           <div className="mt-6 flex justify-between gap-3">
             <span className="w-1/2">
               <label className="block text-xs font-semibold text-gray-600 uppercase">
-                ชื่อจริง
+                ชื่อจริง  <h className="text-red-600"> * </h>
               </label>
               <input
                 type="text"
@@ -163,7 +163,7 @@ const AddOfficerScreen = () => {
             </span>
             <span className="w-1/2">
               <label className="block text-xs font-semibold text-gray-600 uppercase">
-                นามสกุล
+                นามสกุล <h className="text-red-600"> * </h>
               </label>
               <input
                 type="text"
@@ -176,7 +176,7 @@ const AddOfficerScreen = () => {
             </span>
           </div>
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            หมายเลขโทรศัพท์{" "}
+            หมายเลขโทรศัพท์{" "} <h className="text-red-600"> * </h>
           </label>
           <input
             type="tel"
@@ -187,7 +187,7 @@ const AddOfficerScreen = () => {
             className="block w-full p-3 mt-2 text-gray-700 bg-white-200 appearance-none focus:outline-none focus:bg-white-300 focus:shadow-inner"
           />
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            ตำแหน่งงาน
+            ตำแหน่งงาน <h className="text-red-600"> * </h>
           </label>
           <select
             required={require}
@@ -198,7 +198,7 @@ const AddOfficerScreen = () => {
           >
             <option disabled selected value>
               {" "}
-              โปรดระบุตำแหน่งงาน
+              โปรดระบุตำแหน่งงาน 
             </option>
             <option className="option" value="แพทย์">
               {" "}
@@ -212,7 +212,7 @@ const AddOfficerScreen = () => {
             </option>
           </select>
           <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
-            อีเมลล์{" "}
+            อีเมลล์{" "} <h className="text-red-600"> * </h>
           </label>
           <input
             type="email"
@@ -226,7 +226,7 @@ const AddOfficerScreen = () => {
           <div className="flex justify-between gap-3">
             <span className="w-1/2">
               <label className="mt-2 block text-xs font-semibold text-gray-600 uppercase">
-                รหัสผ่าน
+                รหัสผ่าน <h className="text-red-600"> * </h>
               </label>
               <input
                 type="password"
@@ -239,7 +239,7 @@ const AddOfficerScreen = () => {
             </span>
             <span className="w-1/2">
               <label className=" mt-2 block text-xs font-semibold text-gray-600 uppercase">
-                ยืนยันรหัสผ่าน
+                ยืนยันรหัสผ่าน <h className="text-red-600"> * </h>
               </label>
               <input
                 type="password"

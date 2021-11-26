@@ -220,10 +220,10 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>อาการเบื้องต้น:</b> {symtoms}
+                <b>อาการเบื้องต้น :</b> {symtoms}
               </p>
             </div>
-            {/* <div
+            <div
               className="
           flex
           justify-between
@@ -234,9 +234,10 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>สถานะการทำนัด:</b> {status}
+                <b>ช่องทางการวีดีโอคอล :</b> 
+                {/* {status} */}
               </p>
-            </div> */}
+            </div>
             <div
               className="
           flex
@@ -270,6 +271,7 @@ function WorkingDetailDoctorScreen() {
           >
             <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
           </div>
+<<<<<<< Updated upstream
           <div className=" m-2 text-center">
             <div className="p-2">
               <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
@@ -375,6 +377,8 @@ function WorkingDetailDoctorScreen() {
               </div>
             </div>
           </div>
+=======
+>>>>>>> Stashed changes
 
           {/* listtt  */}
           {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
@@ -543,7 +547,11 @@ function WorkingDetailDoctorScreen() {
         </div>
 
         <div className="px-2 ">
+<<<<<<< Updated upstream
           {/* <Link to="/confirmusersummary">
+=======
+        {/* <Link to="/confirmusersummary">
+>>>>>>> Stashed changes
             <Button
               style={{
                 borderColor: "#818CF8",
@@ -554,6 +562,11 @@ function WorkingDetailDoctorScreen() {
               บันทึกผล
             </Button>
           </Link>{" "} */}
+<<<<<<< Updated upstream
+=======
+  
+
+>>>>>>> Stashed changes
           <Link
             to={{
               pathname: `/usersummary`,
