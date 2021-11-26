@@ -135,9 +135,9 @@ function App() {
               <Route path="/confirmusersummary">
                 <ConfirmUserSummaryScreen/>
               </Route>
-              <Route path="/pushsummary">
-                <PushSummaryScreen />
-              </Route>
+//               <Route path="/pushsummary">
+//                 <PushSummaryScreen />
+//               </Route>
               <Route path="/pushvdo">
                 <PushVDO />
               </Route>
