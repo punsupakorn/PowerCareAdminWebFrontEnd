@@ -163,12 +163,12 @@ const AppointmentScreen = () => {
         </span>
       </div>
       <div className="px-2 mt-3">
-      <Link to="/">
+      <Link to="/schedule">
               <Button
                 variant="secondary"
                 style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
               >
-                กลับสู่หน้าหลัก
+                ย้อนกลับ
               </Button>
             </Link>{" "}
             </div>
