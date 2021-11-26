@@ -33,8 +33,8 @@ function PushVDO() {
 
   const pushVdo = () => {
     axios.post(server.PUSH_VDO, {
-      appointmentId: appointmentID,
       userId: userID,
+      appointmentId: appointmentID,
       meetingLink: linkmeeting,
     });
   };

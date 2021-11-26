@@ -11,15 +11,17 @@ import { Link } from "react-router-dom";
 import { Modal, Pagination } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "./ManageMedicineScreen.css";
+import { regPhoneNumber } from "../../regex";
 // import ReactPaginate from "react-paginate";
 
 export default function ManageMedicineScreen() {
+  const [medicine, setMedicine] = useState([]);
   // const [modalOpen, setModalOpen] = useState(false);
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState("");
   const [Type, setType] = useState("");
-  const [medicine, setMedicine] = useState([]);
+
   const [state, setstate] = useState();
   const [MedicineID, setMedicineID] = useState("");
   const [ReMedicine, setReMedicine] = useState("");
@@ -32,26 +34,17 @@ export default function ManageMedicineScreen() {
   const [PostPrice, setPostPrice] = useState("");
   const [PostType, setPostType] = useState("");
 
-  // const [offset, setOffset] = useState(0);
-  // // const [data, setMedicine] = useState([]);
-  // const [perPage] = useState(5);
-  // const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    getMedicine();
+  }, []);
 
-  // const [currentPage , setCurrentPage] = useState();
-
-  // ------------  medicine ยังไม่มี paginate ------------ 
   const getMedicine = () => {
     axios.get(server.MEDICINE).then((res) => {
       setMedicine(res.data);
     });
   };
-  // ------------  medicine ยังไม่มี paginate ------------ 
 
-
-  useEffect(() => {
-    getMedicine();
-  }, []);
-
+  //------------------ เพิ่มยา ------------------//
   const handleName = (e) => {
     const name = e.target.value;
     setName(name);
@@ -72,33 +65,37 @@ export default function ManageMedicineScreen() {
     setType(type);
   };
 
-  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
-
   const handleSubmit = async () => {
     try {
-      await axios
-        .post(server.MANAGE_MEDICINE, {
-          MedicineName: Name,
-          MedicineDescription: Description,
-          Price: Price,
-          Type: Type,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      window.alert("เพื่มยาสำเร็จ");
-      refreshPage();
+      const med = {
+        Name: Name,
+        Description: Description,
+        Price: Price,
+        Type: Type,
+      };
+      const data = Object.values(med).every((value) => value);
+      if (data == false) {
+        window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+      } else if (!regPhoneNumber.test(Price)) {
+        window.alert("โปรดกรอกราคาเป็นตัวเลข");
+      } else {
+        await axios
+          .post(server.MANAGE_MEDICINE, {
+            MedicineName: Name,
+            MedicineDescription: Description,
+            Price: Price,
+            Type: Type,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        window.alert("เพื่มยาสำเร็จ");
+        refreshPage();
+      }
     } catch (error) {}
   };
-  //  Modal delete
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  // Modal add
-  const [lgShow, setLgShow] = useState(false);
-  // Modal Edit
-  const [smShow, setSmShow] = useState(false);
 
+  /// ---------- ลบยา ---------- ///
   const handleToConfirmDelete = (MedicineID) => {
     setstate({ MedicineID });
     handleShow();
@@ -116,18 +113,21 @@ export default function ManageMedicineScreen() {
     }
   };
 
+  const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
+
+  //  Modal delete
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // Modal add
+  const [lgShow, setLgShow] = useState(false);
+  // Modal Edit
+  const [smShow, setSmShow] = useState(false);
+
   // refresh page
   function refreshPage() {
     window.location.reload();
   }
-  // function search
-  // function search(text) {
-  //   let nData = [];
-  //   data.forEach((item, key) => {
-  //     if (item.name.search(text) != -1) nData.push(item);
-  //   });
-  //   setMedicine(nData);
-  // }
 
   const EditMedicine = (MedicineID) => {
     try {
@@ -148,47 +148,52 @@ export default function ManageMedicineScreen() {
 
   const handleNewName = (name) => {
     const data = name.target.value;
-    setPostMedicine(data);
+    setReMedicine(data);
   };
 
   const handleNewDescription = (description) => {
     const data = description.target.value;
-    setPostDescription(data);
+    setRedescription(data);
   };
 
   const handleNewPrice = (price) => {
     const data = price.target.value;
-    setPostPrice(data);
+    setRePrice(data);
   };
 
   const handleNewType = (type) => {
     const data = type.target.value;
-    setPostType(data);
+    setRetype(data);
   };
+
   const handleEdit = () => {
     try {
-      // console.log(MedicineID);
-      // console.log(Name);
-      // console.log(Description);
-      // console.log(Price);
-      // console.log(Type);
-      axios.put(server.MANAGE_MEDICINE, {
-        MedicineID: MedicineID,
-        Name: PostMedicine,
-        Description: PostDescription,
-        Price: PostPrice,
-        Type: PostType,
-      });
-      // .then((res) => {
-      //   const data = res.data;
-      //   if (data == true) {
-      //     window.alert("แก้ไขข้อมูลสำเร็จ");
-      //     // history.push("/profile");
-      //   }
-      // });
+      const med = {
+        Name: ReMedicine,
+        Description: Redescription,
+        Price: RePrice,
+        Type: RePrice,
+      };
+      const data = Object.values(med).every((value) => value);
+      if (data == false) {
+        window.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
+      } else if (!regPhoneNumber.test(RePrice)) {
+        window.alert("โปรดกรอกราคาเป็นตัวเลข");
+      } else {
+        axios.put(server.MANAGE_MEDICINE, {
+          MedicineID: MedicineID,
+          Name: ReMedicine,
+          Description: Redescription,
+          Price: RePrice,
+          Type: Retype,
+        });
+        window.alert("แก้ไขข้อมูลสำเร็จ");
+        refreshPage();
+      }
     } catch (error) {}
   };
 
+  /// ---------- Filter ----------- ///
   const getSkincare = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
@@ -200,16 +205,20 @@ export default function ManageMedicineScreen() {
   const getCleanFace = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
-      const cleanface = data.filter((data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า");
-      setMedicine(cleanface); 
+      const cleanface = data.filter(
+        (data) => data.Type == "ผลิตภัณฑ์ทำความสะอาดหน้า"
+      );
+      setMedicine(cleanface);
     });
   };
 
   const getHeal = () => {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
-      const heal = data.filter((data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน");
-      setMedicine(heal); 
+      const heal = data.filter(
+        (data) => data.Type == "ผลิตภัณฑ์แก้แพ้ ผื่นคัน"
+      );
+      setMedicine(heal);
     });
   };
 
@@ -217,7 +226,7 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const supply = data.filter((data) => data.Type == "ผลิตภัณฑ์เสริมอาหาร");
-      setMedicine(supply); 
+      setMedicine(supply);
     });
   };
 
@@ -225,20 +234,23 @@ export default function ManageMedicineScreen() {
     axios.get(server.MEDICINE).then((res) => {
       const data = res.data;
       const medi = data.filter((data) => data.Type == "ยารักษาโรค");
-      setMedicine(medi); 
+      setMedicine(medi);
     });
   };
-
 
   return (
     <div className="content-body">
       <div className="medicine-content">
         <p className="text-xl mt-3 font-semibold">ผลิตภัณฑ์ทั้งหมด</p>
         <div className=" px-2 mt-3 ">
-        <Button
+          <Button
             variant="primary"
             onClick={() => setLgShow(true)}
-            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" , float: "right"}}
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              float: "right",
+            }}
           >
             เพิ่มยา
           </Button>
@@ -339,25 +351,24 @@ export default function ManageMedicineScreen() {
               </Modal.Body>
             </center>
             <Modal.Footer>
-            
-              <Link to="medicine">
-                <Button
-                  variant="primary"
-                  style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-                  onClick={handleSubmit}
-                >
-                  เพิ่มยา
-                </Button>
-              </Link>
+              {/* <Link to="medicine"> */}
+              <Button
+                variant="primary"
+                style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
+                onClick={handleSubmit}
+              >
+                เพิ่มยา
+              </Button>
+              {/* </Link> */}
             </Modal.Footer>
           </Modal>
           {/* </Link> */}
-          </div>
+        </div>
         <div class=" bg-indigo-300  w-full mt-4 main flex border rounded-full overflow-hidden  select-none">
           {/* <div class="title py-3 my-auto px-5 bg-indigo-300 text-white text-sm font-semibold mr-3">Gender</div> */}
           <label
             className=" ml-10 flex radio p-2 cursor-pointer"
-            onClick={getMedicine}
+            // onClick={getMedicine}
           >
             <input
               className="my-auto transform scale-125"
@@ -376,10 +387,15 @@ export default function ManageMedicineScreen() {
               type="radio"
               name="sfg"
             />
-            <div className="title py-2  px-2 color-white">ผลิตภัณฑ์บำรุงผิว</div>
+            <div className="title py-2  px-2 color-white">
+              ผลิตภัณฑ์บำรุงผิว
+            </div>
           </label>
 
-          <label className="flex radio p-2 cursor-pointer" onClick={getCleanFace}>
+          <label
+            className="flex radio p-2 cursor-pointer"
+            onClick={getCleanFace}
+          >
             <input
               className="my-auto transform scale-125"
               type="radio"
@@ -407,7 +423,9 @@ export default function ManageMedicineScreen() {
               type="radio"
               name="sfg"
             />
-            <div className="title py-2 px-2 color-white">ผลิตภัณ์เสริมอาหาร</div>
+            <div className="title py-2 px-2 color-white">
+              ผลิตภัณ์เสริมอาหาร
+            </div>
           </label>
 
           <label className="flex radio p-2 cursor-pointer" onClick={getMedi}>
@@ -444,9 +462,9 @@ export default function ManageMedicineScreen() {
                 <div className="table-grid-managemedicine content-managemedicine">
                   {/* <p> </p> */}
                   <p>{med.MedicineName}</p>
-                  <p className ="text-med" > {med.Price}</p>
+                  <p className="text-med"> {med.Price}</p>
                   <p>{med.MedicineDescription}</p>
-                  <p className ="text-med" >{med.Type}</p>
+                  <p className="text-med">{med.Type}</p>
                   <div className="menu-row">
                     <Edit
                       {...iconOption}
@@ -476,6 +494,7 @@ export default function ManageMedicineScreen() {
                                   type="text"
                                   className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                   placeholder={ReMedicine}
+                                  value={ReMedicine}
                                   onChange={handleNewName}
                                 />
                               </div>
@@ -487,6 +506,7 @@ export default function ManageMedicineScreen() {
                                   type="text"
                                   className="px-4 pl-10 py-4 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                   placeholder={Redescription}
+                                  value={Redescription}
                                   onChange={handleNewDescription}
                                 />
                               </div>
@@ -498,6 +518,7 @@ export default function ManageMedicineScreen() {
                                       type="text"
                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                       placeholder={RePrice}
+                                      value={RePrice}
                                       onChange={handleNewPrice}
                                     />
                                   </div>
@@ -555,23 +576,22 @@ export default function ManageMedicineScreen() {
                         </Modal.Body>
                       </center>
                       <Modal.Footer>
-                        <Link to="medicine">
-                          <Button
-                            variant="primary"
-                            style={{
-                              borderColor: "#818CF8",
-                              backgroundColor: "#818CF8",
-                            }}
-                            onClick={handleEdit}
-                          >
-                            ยืนยันการแก้ไข
-                          </Button>
-                        </Link>
+                        {/* <Link to="medicine"> */}
+                        <Button
+                          variant="primary"
+                          style={{
+                            borderColor: "#818CF8",
+                            backgroundColor: "#818CF8",
+                          }}
+                          onClick={handleEdit}
+                        >
+                          ยืนยันการแก้ไข
+                        </Button>
+                        {/* </Link> */}
                       </Modal.Footer>
                     </Modal>
                     <Delete
                       {...iconOption}
-                      onClick={handleShow}
                       onClick={() => handleToConfirmDelete(med.MedicineID)}
                     />
                     <Modal show={show} onHide={handleClose}>
@@ -620,7 +640,6 @@ export default function ManageMedicineScreen() {
               กลับสู่หน้าหลัก
             </Button>
           </Link>{" "}
-          
         </div>
       </div>
     </div>
