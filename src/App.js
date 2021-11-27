@@ -30,7 +30,7 @@ import {
   WorkingDoctorScreen,
   SelectUserScreen,
   ConfirmUserSummaryScreen,
-  PushSummaryScreen ,
+  PushSummaryScreen,
   PushVDO,
   WorkingDetailSummaryScreen,
 } from "./screens";
@@ -58,7 +58,7 @@ function App() {
                 <MedicineScreen />
               </Route>
               <Route path="/summarytreatment">
-                <SummaryTreatmentScreen/>
+                <SummaryTreatmentScreen />
               </Route>
               <Route path="/officerlistscreen">
                 <OfficerListScreen />
@@ -127,13 +127,13 @@ function App() {
                 <SelectWorkingScreen />
               </Route>
               <Route path="/workingdoctor">
-                <WorkingDoctorScreen/>
+                <WorkingDoctorScreen />
               </Route>
               <Route path="/selectuser">
-                <SelectUserScreen/>
+                <SelectUserScreen />
               </Route>
               <Route path="/confirmusersummary">
-                <ConfirmUserSummaryScreen/>
+                <ConfirmUserSummaryScreen />
               </Route>
               <Route path="/pushsummary">
                 <PushSummaryScreen />
@@ -142,11 +142,8 @@ function App() {
                 <PushVDO />
               </Route>
               <Route path="/workingdetailsummary">
-                <WorkingDetailSummaryScreen/>
+                <WorkingDetailSummaryScreen />
               </Route>
-
-
-              
             </Switch>
           </div>
         </div>

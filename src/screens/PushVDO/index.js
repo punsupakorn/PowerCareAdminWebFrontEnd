@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import "./WorkingDetailScreen.css";
 import { Button } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import axios from "axios";
 import { server } from "../../constants/constant";
 import { useState, useEffect } from "react";
@@ -9,6 +9,7 @@ import { data } from "autoprefixer";
 
 function PushVDO() {
   const location = useLocation();
+  const history = useHistory();
   const { appointmentID, userID, doctorId } = location.state;
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
@@ -32,11 +33,23 @@ function PushVDO() {
   };
 
   const pushVdo = () => {
-    axios.post(server.PUSH_VDO, {
-      userId: userID,
-      appointmentId: appointmentID,
-      meetingLink: linkmeeting,
-    });
+    try {
+      const link = { linkmeeting: linkmeeting };
+      const data = Object.values(link).every((value) => value);
+      if (data == false) {
+        window.alert("โปรดกรอกช่องทางการวีดีโอคอล");
+      } else {
+        axios.post(server.PUSH_VDO, {
+          appointmentId: appointmentID,
+          userId: userID,
+          meetingLink: linkmeeting,
+        });
+        window.alert("ส่งข้อมูลให้ผู้ใช้สำเร็จ");
+        history.push(`/working`, {
+          doctorId: doctorId,
+        });
+      }
+    } catch (error) {}
   };
 
   const getAppointment = () => {
@@ -215,19 +228,17 @@ function PushVDO() {
       ></textarea>
 
       <div className="px-2 mt-3">
-        {/* <Link to="/"> */}
-          {" "}
-          {/* link -> pushmessage user */}
-          <Button
-            onClick={pushVdo}
-            variant="primary"
-            style={{
-              borderColor: "#818CF8",
-              backgroundColor: "#818CF8",
-            }}
-          >
-            ส่งข้อมูลการติดต่อ
-          </Button>
+        {/* <Link to="/"> */} {/* link -> pushmessage user */}
+        <Button
+          onClick={pushVdo}
+          variant="primary"
+          style={{
+            borderColor: "#818CF8",
+            backgroundColor: "#818CF8",
+          }}
+        >
+          ส่งข้อมูลการติดต่อ
+        </Button>
         {/* </Link>{" "} */}{" "}
         <Link
           to={{
