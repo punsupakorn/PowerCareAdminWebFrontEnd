@@ -149,36 +149,28 @@ export default function WorkingDoctorScreen() {
         </div>
       </div>
       <div className="search-bar-container">
-        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
         <p class="text-xl mt-3 ml-20 font-semibold text-black">
           {" "}
           ประจำวัน : {today}{" "}
         </p>
       </div>
-      <div className="search-bar-container">
-        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+      {/* <div className="search-bar-container">
+        
         <p class="text-xl mt-3 ml-20 font-semibold text-red-500">
           {" "}
           สถานะ : รอพบแพทย์{" "}
         </p>
-      </div>
-      <div className="working-doctor-content">
+      </div> */}
+      {/*<div className="working-doctor-content">
         <div className="table-content-working-doctor">
           <div className="table-grid-working-doctor header">
-            {/* header table */}
-            {/* <p>วันที่</p> */}
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
             <p>กรอกข้อมูล</p>
-            {/* end header */}
           </div>
-          <div className="body-table-working">
-            {/* body table */}
-            {/* {officer.map((officerlist) => ( */}
-
+           <div className="body-table-working">
             {unsuccessAppointment.map((working) => (
               <div className="table-grid-working-doctor">
-                {/* <p>{working.Date}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
 
@@ -210,16 +202,16 @@ export default function WorkingDoctorScreen() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
-      </div>
-      <div className="search-bar-container">
-        {/* <h3 style={{ alignSelf: "flex-start" }}> ยา </h3> */}
+      </div>*/}
+      {/* <div className="search-bar-container">
+        
         <p class="text-xl mt-3 ml-20 font-semibold text-green-500">
           {" "}
           สถานะ : สำเร็จ{" "}
         </p>
-      </div>
+      </div> */}
       <div className="working-doctor-content">
         <div className="table-content-working-doctor">
           <div className="table-grid-working-doctor header">
@@ -227,19 +219,52 @@ export default function WorkingDoctorScreen() {
             {/* <p>วันที่</p> */}
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
+            <p>สถานะ</p>
             <p>ดูข้อมูล</p>
             {/* end header */}
           </div>
           <div className="body-table-working-doctor">
             {/* body table */}
             {/* {officer.map((officerlist) => ( */}
-
+            {unsuccessAppointment.map((working) => (
+              <div className="table-grid-working-doctor">
+                <p>{working.Time}</p>
+                <p>{working.UserName}</p>
+                <p>{working.Status}</p>
+                <div className="menu-row">
+                  <Link
+                    to={{
+                      pathname: `/workingdetaildoctor`,
+                      state: {
+                        appointmentID: working.AppointmentID,
+                        userID: working.UserID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symtoms: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        doctorid: working.DoctorID,
+                        status: working.Status,
+                        meetinglink: working.MeetingLink,
+                        id: id,
+                      },
+                    }}
+                    // to = "/workingdetaildoctor"
+                  >
+                    <Add
+                      {...iconOption}
+                      // onClick={() => console.log("Click function add " + item.id)}
+                    />
+                  </Link>
+                </div>
+              </div>
+            ))}
             {successAppointment.map((working) => (
               <div className="table-grid-working-doctor">
                 {/* <p>{working.Date}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
-
+                <p>{working.Status}</p>
                 <div className="menu-row">
                   <Link
                     to="/summarydoctor"

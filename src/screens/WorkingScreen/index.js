@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import SearchIcon from "../../icons/search-icon";
 import Add from "../../icons/add-paper";
 import Edit from "../../icons/edit";
+import Editblind from "../../icons/editblind";
+import Deleteblind from "../../icons/deleteblind";
+
+
 import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
@@ -126,6 +130,7 @@ export default function WorkingScreen() {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
+  // const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const searchDate = (dateSearch) => {
     try {
       axios.get(server.WORKING).then((res) => {
@@ -224,7 +229,7 @@ export default function WorkingScreen() {
       <div className="working-content">
         <div className="table-content-working">
           <div className="table-grid-working header">
-            <p>วันที่</p>
+            {/* <p>วันที่</p> */}
             <p>เวลา</p>
             <p>ชื่อคนไข้</p>
             <p>สถานะ</p>
@@ -233,7 +238,7 @@ export default function WorkingScreen() {
           <div className="body-table-working">
             {unsuccessAppointment.map((working) => (
               <div className="table-grid-working">
-                <p>{displayShortThaiDate(working.Date)}</p>
+                {/* <p>{displayShortThaiDate(working.Date)}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
                 <p>{working.Status}</p>
@@ -309,7 +314,7 @@ export default function WorkingScreen() {
             ))}
             {waitDoctor.map((working) => (
               <div className="table-grid-working">
-                <p>{displayShortThaiDate(working.Date)}</p>
+                {/* <p>{displayShortThaiDate(working.Date)}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
                 <p>{working.Status}</p>
@@ -335,13 +340,23 @@ export default function WorkingScreen() {
                     }}
                   >
                     <Add {...iconOption} />
-                  </Link>
+                    </Link>
+                    <Editblind
+                      {...iconOption }
+                      // style={{ color: "#bdbdbd"}}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                    <Deleteblind
+                      {...iconOption}
+                      // onClick={() => handleData(working.AppointmentID)}
+                    />
+                  
                 </div>
               </div>
             ))}
             {successAppointment.map((working) => (
               <div className="table-grid-working">
-                <p>{working.Date}</p>
+                {/* <p>{working.Date}</p> */}
                 <p>{working.Time}</p>
                 <p>{working.UserName}</p>
                 <p>{working.Status}</p>
@@ -368,6 +383,15 @@ export default function WorkingScreen() {
                       // onClick={() => console.log("Click function add " + item.id)}
                     />
                   </Link>
+                  <Editblind
+                      {...iconOption }
+                      // style={{ color: "#bdbdbd"}}
+                      // onClick={() => console.log("Click function edit ")}
+                    />
+                    <Deleteblind
+                      {...iconOption}
+                      // onClick={() => handleData(working.AppointmentID)}
+                    />
                 </div>
               </div>
             ))}
