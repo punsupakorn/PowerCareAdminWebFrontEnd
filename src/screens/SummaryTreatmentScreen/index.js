@@ -6,13 +6,6 @@ import { Button } from "react-bootstrap";
 function SummaryTreatmentScreen() {
 
 
-
-
-
-
-
-
-
   return (
     <div className="content-body">
       <div className="mt-2">

@@ -34,6 +34,8 @@ import {
   PushVDO,
   WorkingDetailSummaryScreen,
   SummaryDoctorScreen,
+  UserHistoryScreen,
+  UserHistoryDetailScreen
 } from "./screens";
 import { Switch, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Auth";
@@ -148,6 +150,14 @@ function App() {
               <Route path="/summarydoctor">
                 <SummaryDoctorScreen />
               </Route>
+              <Route path="/userhistory">
+                <UserHistoryScreen/>
+              </Route>
+              <Route path="/userhistorydetail">
+                <UserHistoryDetailScreen/>
+              </Route>
+
+              
               
             </Switch>
           </div>
