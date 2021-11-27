@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./SummaryPostponeScreen.css";
 import { Button } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import axios from "axios";
 import { server } from "../../constants/constant";
 function SummaryPostponeScreen() {
+  const history = useHistory();
   const location = useLocation();
   const {
     appointmentID,
@@ -15,7 +16,7 @@ function SummaryPostponeScreen() {
     oldtimetableid,
     newtimetableid,
     doctorId,
-    userID
+    userID,
   } = location.state;
 
   const displayThaiDate = (date) => {
@@ -38,15 +39,18 @@ function SummaryPostponeScreen() {
           Date: newdate,
           OldTime: time,
           NewTime: newtime,
-          olddate:olddate,
-          userID:userID
+          olddate: olddate,
+          userID: userID,
         })
         .then((res) => {
           const data = res.data;
-          // if (data == true) {
-          //   window.alert("แก้ไขข้อมูลสำเร็จ");
-          //   history.push("/profile");
-          // }
+          if (data == true) {
+            window.alert("แก้ไขข้อมูลสำเร็จ");
+            history.push({
+              pathname: `/working`,
+              state: { doctorId: doctorId },
+            });
+          }
         });
     } catch (error) {}
   };

@@ -52,7 +52,6 @@ function ConfirmCancelScreen() {
 
   const handleDelete = () => {
     try {
-      //  console.log(appointmentID, timetableID, time);
       axios
         .delete(server.CONFIRM_CANCEL, {
           data: {
@@ -61,7 +60,16 @@ function ConfirmCancelScreen() {
             Time: time,
           },
         })
-        .then(history.push("/working"));
+        .then((res) => {
+          if (res.data == true) {
+            history.push({
+              pathname: `/working`,
+              state: {
+                doctorId: doctorid,
+              },
+            });
+          }
+        });
       handleClose();
     } catch (error) {}
   };

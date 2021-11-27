@@ -5,7 +5,6 @@ import Edit from "../../icons/edit";
 import Editblind from "../../icons/editblind";
 import Deleteblind from "../../icons/deleteblind";
 
-
 import CloseIcon from "../../icons/close-icon";
 import Delete from "../../icons/delete";
 import { Link } from "react-router-dom";
@@ -300,6 +299,7 @@ export default function WorkingScreen() {
                         time: working.Time,
                         symtoms: working.Initial_Symptoms,
                         doctorname: working.DoctorName,
+                        timetableID: working.TimeTableID,
                         doctorid: working.DoctorID,
                       },
                     }}
@@ -340,17 +340,16 @@ export default function WorkingScreen() {
                     }}
                   >
                     <Add {...iconOption} />
-                    </Link>
-                    <Editblind
-                      {...iconOption }
-                      // style={{ color: "#bdbdbd"}}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                    <Deleteblind
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
-                    />
-                  
+                  </Link>
+                  <Editblind
+                    {...iconOption}
+                    // style={{ color: "#bdbdbd"}}
+                    // onClick={() => console.log("Click function edit ")}
+                  />
+                  <Deleteblind
+                    {...iconOption}
+                    // onClick={() => handleData(working.AppointmentID)}
+                  />
                 </div>
               </div>
             ))}
@@ -384,14 +383,14 @@ export default function WorkingScreen() {
                     />
                   </Link>
                   <Editblind
-                      {...iconOption }
-                      // style={{ color: "#bdbdbd"}}
-                      // onClick={() => console.log("Click function edit ")}
-                    />
-                    <Deleteblind
-                      {...iconOption}
-                      // onClick={() => handleData(working.AppointmentID)}
-                    />
+                    {...iconOption}
+                    // style={{ color: "#bdbdbd"}}
+                    // onClick={() => console.log("Click function edit ")}
+                  />
+                  <Deleteblind
+                    {...iconOption}
+                    // onClick={() => handleData(working.AppointmentID)}
+                  />
                 </div>
               </div>
             ))}
