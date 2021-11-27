@@ -105,7 +105,6 @@ const ScheduleScreen = () => {
     // console.log(timearray);
     return timearray;
   };
-  // {schedule.reduce((data) => (data.Date))}
 
   const showToday = () => {
     const result = new Date().toLocaleDateString("th-TH", {

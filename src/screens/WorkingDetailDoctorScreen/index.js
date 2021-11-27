@@ -224,6 +224,21 @@ function WorkingDetailDoctorScreen() {
                 <b>อาการเบื้องต้น:</b> {symtoms}
               </p>
             </div>
+            <div
+              className="
+          flex
+          justify-between
+          items-center
+          w-full
+          py-3
+          border-b-2 border-gray-200
+        "
+            >
+              <p className=" text-gray-500 ml-4">
+                <b>ช่องทางการ Video Call :</b> {symtoms}
+              </p>
+            </div>
+
             {/* <div
               className="
           flex
@@ -551,17 +566,6 @@ function WorkingDetailDoctorScreen() {
         </div>
 
         <div className="px-2 ">
-        <Link to="/confirmusersummary">
-            <Button
-              style={{
-                borderColor: "#818CF8",
-                backgroundColor: "#818CF8",
-                color: "white",
-              }}
-            >
-              บันทึกผล
-            </Button>
-          </Link>{" "}
   
 
           <Link

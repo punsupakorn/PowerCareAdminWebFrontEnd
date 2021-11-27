@@ -28,7 +28,7 @@ function ConfirmUserSummaryScreen() {
         "
             ></div>
             <div className="px-2 mt-4">
-              <Link to="/homescreenadmin">
+              <Link to="/">
                 <Button
                   variant="primary"
                   style={{

@@ -147,30 +147,24 @@ export default function UserDetailScreen() {
                   <p>{app.Status}</p>
 
                   <div className="menu-row">
-                    <Link
-                      to={{
-                        pathname: `/usersummary`,
-                        state: {
-                          userid: app.UserID,
-                          date: app.Date,
-                          time: app.Time,
-                          doctorname: app.DoctorName,
-                          status: app.Status,
-                        },
-                      }}
+                    <Link to ="summarytreatment"
+
+                      // to={{
+                      //   pathname: `/usersummary`,
+                      //   state: {
+                      //     userid: app.UserID,
+                      //     date: app.Date,
+                      //     time: app.Time,
+                      //     doctorname: app.DoctorName,
+                      //     status: app.Status,
+                      //   },
+                      // }}
                     >
                     <Add
                       {...iconOption}
                       // onClick={() => console.log("Click function add " + item.id)}
                     />
                     </Link>
-                    {/* <Delete
-                      {...iconOption}
-                      onClick={handleShow}
-                      // onClick={() =>
-                      //   handleDelete(officerlist.DocumentID, officerlist.Position)
-                      // }
-                    /> */}
 
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>

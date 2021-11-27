@@ -30,6 +30,9 @@ export { default as ConfirmUserSummaryScreen} from "./ConfirmUserSummaryScreen";
 export { default as PushSummaryScreen } from "./PushSummaryScreen";
 export { default as PushVDO} from "./PushVDO";
 export { default as WorkingDetailSummaryScreen} from "./WorkingDetailSummaryScreen";
+export { default as SummaryDoctorScreen} from "./SummaryDoctorScreen";
+
+
 
 
 
