@@ -15,6 +15,7 @@ function SummaryPostponeScreen() {
     oldtimetableid,
     newtimetableid,
     doctorId,
+    userID
   } = location.state;
 
   const displayThaiDate = (date) => {
@@ -37,6 +38,8 @@ function SummaryPostponeScreen() {
           Date: newdate,
           OldTime: time,
           NewTime: newtime,
+          olddate:olddate,
+          userID:userID
         })
         .then((res) => {
           const data = res.data;
