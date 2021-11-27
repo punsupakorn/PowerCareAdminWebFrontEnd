@@ -1,10 +1,16 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./UserSummaryScreen.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
 
 function UserSummaryScreen() {
+  const history = useHistory();
+  const [total, settotal] = useState(0);
+  // const [state, setstate] = useState(initialState)
+  // const [list, setlist] = useState([])
   const location = useLocation();
   const {
     appointmentid,
@@ -17,8 +23,30 @@ function UserSummaryScreen() {
     doctorname,
     symtoms,
     price,
+    choosemedicine,
   } = location.state;
-  // console.log(appointmentid, userid, description, medicine, otherservice);
+
+  const calculate = () => {
+    let arr = [];
+    let totalCal = 0;
+    for (let i = 0; i < choosemedicine.length; i++) {
+      const element = choosemedicine[i];
+      const totalmedicine = parseInt(element.Price) * element.quantity;
+      arr.push(totalmedicine);
+      console.log(totalmedicine);
+    }
+    arr.push(parseInt(price));
+    console.log(arr);
+    for (let i = 0; i < arr.length; i++) {
+      totalCal += arr[i];
+    }
+    console.log(totalCal);
+    settotal(totalCal);
+  };
+
+  useEffect(() => {
+    calculate();
+  }, []);
 
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
@@ -28,6 +56,28 @@ function UserSummaryScreen() {
       weekday: "long",
     });
     return result;
+  };
+
+  const submitTreatment = () => {
+    try {
+      axios
+        .post(server.USER_SUMMARY, {
+          AppointmentID: appointmentid,
+          Description: description,
+          MedicineQuantity: choosemedicine,
+          TotalPrice: total,
+          UserID: userid,
+          OtherServiceDescription: otherservice,
+          OtherServicePrice: price,
+        })
+        .then((res) => {
+          if (res.data == true) {
+            history.push("/confirmusersummary");
+          } else {
+            window.alert("มีบางอย่างผิดพลาด โปรดลองใหม่อีกครั้ง");
+          }
+        });
+    } catch (error) {}
   };
   return (
     <div className="content-body">
@@ -119,32 +169,36 @@ function UserSummaryScreen() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {choosemedicine.map((medicine) => ( */}
-                    <tr>
-                      {/* <tr key={medicine.MedicineName}> */}
-                      <td>
-                        <p className="mb-2"></p>
-                        {/* <p className="mb-2 ">{medicine.MedicineName}</p> */}
-                      </td>
-                      <td className="hidden text-center md:table-cell">
-                        <span className="text-sm lg:text-base font-medium">
-                          {/* {medicine.Type} */}
-                        </span>
-                      </td>
-                      <td className="text-center">
-                        <span className="text-sm lg:text-base font-medium">
-                          {/* {medicine.Price} */}
-                        </span>
-                      </td>
-                      <td className="text-center">
-                        <span
-                          // onClick={() =>
-                          //   handleDeleteMedicine(medicine.MedicineID)
-                          // }
-                          className="text-sm lg:text-base font-medium"
-                        ></span>
-                      </td>
-                    </tr>
+                    {choosemedicine.map((medicine) => (
+                      <tr>
+                        {/* <tr key={medicine.MedicineName}> */}
+                        <td>
+                          <p className="mb-2"></p>
+                          <p className="mb-2 ">{medicine.MedicineName}</p>
+                        </td>
+                        <td className="hidden text-center md:table-cell">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Type}
+                          </span>
+                        </td>
+                        {/* <td className="text-center">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Price}
+                          </span>
+                        </td> */}
+                        <td className="text-center">
+                          <span
+                            // onClick={() =>
+                            //   handleDeleteMedicine(medicine.MedicineID)
+                            // }
+                            className="text-sm lg:text-base font-medium"
+                          >
+                            {medicine.quantity}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+
                     {/* ))} */}
                   </tbody>
                 </table>
@@ -181,12 +235,16 @@ function UserSummaryScreen() {
                   <tbody>
                     <tr>
                       <td>
-                        <span className="text-sm lg:text-base font-medium">{otherservice}</span>
+                        <span className="text-sm lg:text-base font-medium">
+                          {otherservice}
+                        </span>
                       </td>
                       <td className="justify-center  md:flex">
                         <div className="w-20 h-10">
                           <div className="relative flex flex-row w-full h-8">
-                            <span className="text-sm lg:text-base font-medium">{price}</span>
+                            <span className="text-sm lg:text-base font-medium">
+                              {price}
+                            </span>
                           </div>
                         </div>
                       </td>
@@ -197,25 +255,28 @@ function UserSummaryScreen() {
             </div>
           </div>
         </div>
+        <p>คิดเป็นเงินทั้งสิ้น : {total} บาท</p>
         <div className="px-4 mt-4 ">
-          <Link to="/confirmusersummary"
+          {/* <Link
+            to="/confirmusersummary"
             // to={{
             //   pathname: `/userdetail`,
             //   state: {
             //     // userid: userid,
             //   },
             // }}
+          > */}
+          <Button
+            onClick={submitTreatment}
+            style={{
+              borderColor: "#818CF8",
+              backgroundColor: "#818CF8",
+              color: "white",
+            }}
           >
-            <Button
-              style={{
-                borderColor: "#818CF8",
-                backgroundColor: "#818CF8",
-                color: "white",
-              }}
-            >
-              บันทึกผล
-            </Button>
-          </Link>{" "}
+            บันทึกผล
+          </Button>
+          {/* </Link> */}{" "}
           <Link
             to={{
               pathname: `/workingdetaildoctor`,

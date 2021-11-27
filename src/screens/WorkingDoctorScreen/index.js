@@ -92,7 +92,7 @@ export default function WorkingDoctorScreen() {
         } else {
           settoday(displayThaiDate(date));
           const success = today.filter((data) => data.Status == "สำเร็จ");
-          const unsuccess = today.filter((data) => data.Status =="รอพบแพทย์");
+          const unsuccess = today.filter((data) => data.Status == "รอพบแพทย์");
           setsuccessAppointment(success);
           setunsuccessAppointment(unsuccess);
         }
@@ -196,6 +196,7 @@ export default function WorkingDoctorScreen() {
                         doctorname: working.DoctorName,
                         doctorid: working.DoctorID,
                         status: working.Status,
+                        meetinglink: working.MeetingLink,
                         id: id,
                       },
                     }}
@@ -240,7 +241,8 @@ export default function WorkingDoctorScreen() {
                 <p>{working.UserName}</p>
 
                 <div className="menu-row">
-                  <Link to ="/summarydoctor"
+                  <Link
+                    to="/summarydoctor"
                     // to={{
                     //   pathname: `/workingdetail`,
                     //   state: {

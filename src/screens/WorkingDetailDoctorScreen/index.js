@@ -3,15 +3,17 @@ import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { apiURL, server } from "../../constants/constant";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import Delete from "../../icons/delete";
 import SearchIcon from "../../icons/search-icon";
 import { AuthContext } from "../../Auth";
 import React, { useContext } from "react";
+import { regPhoneNumber } from "../../regex";
 
 function WorkingDetailDoctorScreen() {
   const [searched, setSearched] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const history = useHistory();
   const location = useLocation();
   const {
     appointmentID,
@@ -23,6 +25,7 @@ function WorkingDetailDoctorScreen() {
     doctorname,
     status,
     id,
+    meetinglink,
   } = location.state;
 
   const [address, setaddress] = useState("");
@@ -65,6 +68,8 @@ function WorkingDetailDoctorScreen() {
   const handleMedicine = async (e) => {
     const med = e.target.value;
     const data = await JSON.parse(med);
+    data.medicine["quantity"] = 1;
+    console.log(data);
     setchoosemedicine([...choosemedicine, data.medicine]);
     // setmedicineID(data.medicine.MedicineID);
   };
@@ -73,6 +78,33 @@ function WorkingDetailDoctorScreen() {
     getWorkingDetail();
     getMedicine();
   }, []);
+
+  const handleToUserSummary = () => {
+    if (description == "") {
+      window.alert("จำเป็นต้องกรอกคำแนะนำ");
+    } else if (!regPhoneNumber.test(price)) {
+      window.alert("โปรดกรอกยาเป็นตัวเลข");
+    } else {
+      history.push({
+        pathname: `/usersummary`,
+        state: {
+          appointmentid: appointmentID,
+          userid: userID,
+          description: description,
+          otherservice: otherservice,
+          medicine: choosemedicine,
+          date: date,
+          time: time,
+          doctorname: doctorname,
+          symtoms: symtoms,
+          price: price,
+          choosemedicine: choosemedicine,
+          otherservice: otherservice,
+          price: price,
+        },
+      });
+    }
+  };
 
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
@@ -95,10 +127,9 @@ function WorkingDetailDoctorScreen() {
 
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
 
-  // const handleQuantity = (e) => {
-  //   // const data = e.target.value;
-  //   // setquantity(data);
-  // };
+  const handleQuantity = (data) => {
+    console.log(data);
+  };
 
   // console.log(medicineResult)
 
@@ -122,16 +153,51 @@ function WorkingDetailDoctorScreen() {
   const handleOtherserviceDescription = (e) => {
     const data = e.target.value;
     setotherservice(data);
-    setresultotherservice(JSON.stringify({ name: otherservice, price: price }));
+    //  setresultotherservice(JSON.stringify({ name: otherservice, price: price }));
   };
 
   const handleOtherServicePrice = (e) => {
     const data = e.target.value;
     setprice(data);
-    setresultotherservice({ name: otherservice, price: price });
+    //setresultotherservice({ name: otherservice, price: price });
   };
 
-  // console.log(resultotherservice);
+  const addmed = (id, index) => {
+    // const id = e.target.value;
+    const data = Object.values(choosemedicine).some(
+      (data) => (data.MedicineID = id)
+    );
+    if (data == true) {
+      let items = [...choosemedicine];
+      let item = { ...choosemedicine[index] };
+      item.quantity = choosemedicine[index].quantity + 1;
+      items[index] = item;
+      setchoosemedicine(items);
+    }
+    // setchoosemedicine(choosemedicine);
+    // console.log(index);
+  };
+
+  const delmed = (id, index) => {
+    const data = Object.values(choosemedicine).some(
+      (data) => (data.MedicineID = id)
+    );
+    if (data == true) {
+      let items = [...choosemedicine];
+      let item = { ...choosemedicine[index] };
+      item.quantity = choosemedicine[index].quantity - 1;
+      items[index] = item;
+      if (items[index].quantity == 0) {
+        const arr = choosemedicine.splice(index, 1);
+        const array = choosemedicine.filter(
+          (x) => x.MedicineID !== arr.MedicineID
+        );
+        setchoosemedicine(array);
+      } else {
+        setchoosemedicine(items);
+      }
+    }
+  };
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -151,10 +217,10 @@ function WorkingDetailDoctorScreen() {
             >
               <p className="text-gray-500 ml-4">
                 <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "}
-                <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)}
+                {/* <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)} */}
               </p>
             </div>
-            <div
+            {/* <div
               className="
           flex
           justify-between
@@ -167,8 +233,8 @@ function WorkingDetailDoctorScreen() {
               <p className="text-gray-500 ml-4">
                 <b>ที่อยู่ :</b> {address}
               </p>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className="
           flex
           justify-between
@@ -181,7 +247,7 @@ function WorkingDetailDoctorScreen() {
               <p className="text-gray-500 ml-4">
                 <b>เบอร์โทร :</b> {phone} <b>E-mail :</b> {email}
               </p>
-            </div>
+            </div> */}
             <div
               className="
           flex
@@ -235,7 +301,10 @@ function WorkingDetailDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                <b>ช่องทางการ Video Call :</b> {symtoms}
+                <b>ช่องทางการ Video Call :</b>{" "}
+                <a href={meetinglink} target="_blank">
+                  {meetinglink}
+                </a>
               </p>
             </div>
 
@@ -286,7 +355,7 @@ function WorkingDetailDoctorScreen() {
           >
             <p className=" text-black ml-4 font-bold">จ่ายยา: </p>
           </div>
-          {/* <div className=" m-2 text-center">
+          <div className=" m-2 text-center">
             <div className="p-2">
               <div className=" inline-flex items-center bg-white  text-black rounded-full p-2 ">
                 <span className="postpone-text inline-flex bg-indigo-300 text-white rounded-full h-6 px-3 justify-center items-center">
@@ -320,8 +389,8 @@ function WorkingDetailDoctorScreen() {
                 />
               </div>
             </div>
-          </div> */}
-          {/* <div className="flex justify-center my-6">
+          </div>
+          <div className="flex justify-center my-6">
             <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
               <div className="flex-1">
                 <table className="w-full text-sm lg:text-base" cellSpacing={0}>
@@ -347,7 +416,7 @@ function WorkingDetailDoctorScreen() {
                     </tr>
                   </thead>
                   <tbody>
-                    {medicine.map((medicine) => (
+                    {choosemedicine.map((medicine, i) => (
                       <tr key={medicine.MedicineName}>
                         <td>
                           <p className="mb-2 ">{medicine.MedicineName}</p>
@@ -365,12 +434,25 @@ function WorkingDetailDoctorScreen() {
                         <td className="justify-center  md:flex">
                           <div className="w-20 h-10">
                             <div className="relative flex flex-row w-full h-8">
+                              <button
+                                onClick={() => delmed(medicine.MedicineID, i)}
+                                ƒ
+                                value={medicine.MedicineID}
+                              >
+                                -
+                              </button>
                               <input
-                                type="number"
-                                // onChange={handleQuantity}
-                                defaultValue={1}
+                                // type="number"
+                                disabled
+                                value={medicine.quantity}
                                 className="w-full rounded-md font-semibold text-center h-8 text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
                               />
+                              <button
+                                onClick={() => addmed(medicine.MedicineID, i)}
+                                value={medicine.MedicineID}
+                              >
+                                +
+                              </button>
                             </div>
                           </div>
                         </td>
@@ -390,9 +472,9 @@ function WorkingDetailDoctorScreen() {
                 </table>
               </div>
             </div>
-          </div> */}
+          </div>
 
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+          {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6">
                 <p class="text-xl font-semibold text-indigo-400">รายการยา</p>
@@ -408,13 +490,7 @@ function WorkingDetailDoctorScreen() {
                             <th className="hidden text-center md:table-cell">
                               ชื่อยา
                             </th>
-                            {/* <th className="hidden text-center md:table-cell">
-                        ประเภท
-                      </th>
-
-                      <th className="hidden text-center md:table-cell">
-                        ราคาต่อหน่วย
-                      </th> */}
+                    
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
@@ -438,7 +514,7 @@ function WorkingDetailDoctorScreen() {
                           ))}
                         </tbody>
                       </table>
-                      {/* <hr className="pb-6 mt-6" /> */}
+                  
                     </div>
                   </div>
                 </div>
@@ -460,13 +536,7 @@ function WorkingDetailDoctorScreen() {
                             <th className="hidden text-center md:table-cell">
                               ชื่อยา
                             </th>
-                            {/* <th className="hidden text-center md:table-cell">
-                        ประเภท
-                      </th>
-
-                      <th className="hidden text-center md:table-cell">
-                        ราคาต่อหน่วย
-                      </th> */}
+                       
                             <th className="lg:text-center text-left pl-5 lg:pl-0">
                               <span className="hidden lg:inline">
                                 ราคาต่อหน่วย
@@ -495,13 +565,13 @@ function WorkingDetailDoctorScreen() {
                           ))}
                         </tbody>
                       </table>
-                      {/* <hr className="pb-6 mt-6" /> */}
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <div
             className="
@@ -552,11 +622,11 @@ function WorkingDetailDoctorScreen() {
                           </div>
                         </div>
                       </td>
-                      <td className="text-center">
+                      {/* <td className="text-center">
                         <span className="text-sm lg:text-base font-medium">
                           <Delete {...iconOption} />
                         </span>
-                      </td>
+                      </td> */}
                     </tr>
                   </tbody>
                 </table>
@@ -566,9 +636,7 @@ function WorkingDetailDoctorScreen() {
         </div>
 
         <div className="px-2 ">
-  
-
-          <Link
+          {/* <Link
             to={{
               pathname: `/usersummary`,
               state: {
@@ -582,16 +650,20 @@ function WorkingDetailDoctorScreen() {
                 doctorname: doctorname,
                 symtoms: symtoms,
                 price: price,
+                choosemedicine: choosemedicine,
+                otherservice: otherservice,
+                price: price,
               },
             }}
+          > */}
+          <Button
+            onClick={handleToUserSummary}
+            variant="primary"
+            style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
           >
-            <Button
-              variant="primary"
-              style={{ borderColor: "#818CF8", backgroundColor: "#818CF8" }}
-            >
-              ถัดไป
-            </Button>
-          </Link>{" "}
+            ถัดไป
+          </Button>
+          {/* </Link>{" "} */}{" "}
           <Link to={{ pathname: `/workingdoctor`, state: { id: id } }}>
             <Button
               variant="secondary"
