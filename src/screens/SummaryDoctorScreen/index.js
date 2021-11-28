@@ -59,6 +59,26 @@ function SummaryDoctorScreen() {
           {/* first */}
           <div className="flex flex-col justify-center items-center">
             <p class="text-xl mt-3 font-semibold">อาการคนไข้</p>
+            <Link to="/userdetail">
+            <div
+            className="
+          flex
+          justify-between
+          items-right
+          float
+          w-full
+          py-3
+        "
+          >
+
+            <Button
+            variant="primary"
+            style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc" }}
+          >
+            ประวัติการรักษา
+          </Button>         
+          </div>
+          </Link>
             <div
               className="
           flex
@@ -177,19 +197,7 @@ function SummaryDoctorScreen() {
             </div>
           </div>
 
-          <div
-            className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-        "
-          >
-            <Link to="/userdetail">
-              <p className=" text-black ml-4 font-bold"> ประวัติการรักษา </p>
-            </Link>
-          </div>
+
 
           <div className="mt-2">
             <div
