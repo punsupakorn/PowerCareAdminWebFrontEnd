@@ -157,13 +157,13 @@ function UserSummaryScreen() {
                         ชื่อยา
                       </th>
                       <th className="hidden text-center md:table-cell">
-                        ประเภท
+                        ราคาต่อหน่วย
                       </th>
                       <th className="lg:text-center text-left pl-5 lg:pl-0">
-                        <span className="lg:hidden" title="Quantity">
-                          Qtd
-                        </span>
                         <span className="hidden lg:inline">จำนวน</span>
+                      </th>
+                      <th className="lg:text-center text-left pl-5 lg:pl-0">
+                        <span className="hidden lg:inline">เป็นเงิน</span>
                       </th>
                       <th className="hidden text-center md:table-cell"></th>
                     </tr>
@@ -178,7 +178,7 @@ function UserSummaryScreen() {
                         </td>
                         <td className="hidden text-center md:table-cell">
                           <span className="text-sm lg:text-base font-medium">
-                            {medicine.Type}
+                            {medicine.Price}
                           </span>
                         </td>
                         {/* <td className="text-center">
@@ -187,13 +187,13 @@ function UserSummaryScreen() {
                           </span>
                         </td> */}
                         <td className="text-center">
-                          <span
-                            // onClick={() =>
-                            //   handleDeleteMedicine(medicine.MedicineID)
-                            // }
-                            className="text-sm lg:text-base font-medium"
-                          >
+                          <span className="text-sm lg:text-base font-medium">
                             {medicine.quantity}
+                          </span>
+                        </td>
+                        <td className="text-center">
+                          <span className="text-sm lg:text-base font-medium">
+                            {medicine.Price * medicine.quantity} บาท
                           </span>
                         </td>
                       </tr>
@@ -241,11 +241,9 @@ function UserSummaryScreen() {
                       </td>
                       <td className="justify-center  md:flex">
                         <div className="w-20 h-10">
-                          <div className="relative flex flex-row w-full h-8">
-                            <span className="text-sm lg:text-base font-medium">
-                              {price}
-                            </span>
-                          </div>
+                          <span className="text-sm lg:text-base  text-center font-medium">
+                            {price}
+                          </span>
                         </div>
                       </td>
                     </tr>

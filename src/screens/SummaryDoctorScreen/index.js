@@ -241,15 +241,16 @@ function SummaryDoctorScreen() {
                         <th className="hidden text-center md:table-cell">
                           ชื่อยา
                         </th>
-                        <th className="hidden text-center md:table-cell">
-                          จำนวน
-                        </th>
+
                         <th className="lg:text-center text-left pl-5 lg:pl-0">
                           <span className="hidden lg:inline">ราคาต่อหน่วย</span>
                         </th>
-                        {/* <th className="hidden text-center md:table-cell">
+                        <th className="hidden text-center md:table-cell">
+                          จำนวน
+                        </th>
+                        <th className="hidden text-center md:table-cell">
                           เป็นเงิน
-                        </th> */}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -259,21 +260,22 @@ function SummaryDoctorScreen() {
                             <p className="mb-2"></p>
                             {medicine.MedicineName}
                           </td>
-                          <td className="hidden text-center md:table-cell">
-                            <span className="text-sm lg:text-base font-medium">
-                              {medicine.quantity}
-                            </span>
-                          </td>
                           <td className="text-center">
                             <span className="text-sm lg:text-base font-medium">
                               {medicine.Price} บาท
                             </span>
                           </td>
-                          {/* <td className="text-center">
+                          <td className="hidden text-center md:table-cell">
                             <span className="text-sm lg:text-base font-medium">
-                              {medicine.Price * medicine.Quantity} บาท
+                              {medicine.quantity}
                             </span>
-                          </td> */}
+                          </td>
+
+                          <td className="text-center">
+                            <span className="text-sm lg:text-base font-medium">
+                              {medicine.Price * medicine.quantity} บาท
+                            </span>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -324,12 +326,10 @@ function SummaryDoctorScreen() {
                         </td>
                         <td className="justify-center  md:flex">
                           <div className="w-20 h-10">
-                            <div className="relative flex flex-row w-full h-8">
                               <span className="text-sm lg:text-base font-medium">
                                 {otherserviceprice} บาท
                                 {/* {service.Price} บาท */}
                               </span>
-                            </div>
                           </div>
                         </td>
                       </tr>

@@ -400,17 +400,13 @@ function WorkingDetailDoctorScreen() {
                         ชื่อยา
                       </th>
                       <th className="hidden text-center md:table-cell">
-                        ประเภท
-                      </th>
-
-                      <th className="hidden text-center md:table-cell">
                         ราคาต่อหน่วย
                       </th>
                       <th className="lg:text-center text-left pl-5 lg:pl-0">
-                        <span className="lg:hidden" title="Quantity">
-                          Qtd
-                        </span>
                         <span className="hidden lg:inline">จำนวน</span>
+                      </th>
+                      <th className="lg:text-center text-left pl-5 lg:pl-0">
+                        <span className="hidden lg:inline">เป็นเงิน</span>
                       </th>
                       <th className="hidden text-center md:table-cell"></th>
                     </tr>
@@ -420,11 +416,6 @@ function WorkingDetailDoctorScreen() {
                       <tr key={medicine.MedicineName}>
                         <td>
                           <p className="mb-2 ">{medicine.MedicineName}</p>
-                        </td>
-                        <td className="hidden text-center md:table-cell">
-                          <span className="text-sm lg:text-base font-medium">
-                            {medicine.Type}
-                          </span>
                         </td>
                         <td className="text-center">
                           <span className="text-sm lg:text-base font-medium">
@@ -456,6 +447,12 @@ function WorkingDetailDoctorScreen() {
                             </div>
                           </div>
                         </td>
+                        <td className="text-center">
+                          <span className="text-sm lg:text-base font-medium">
+                          {medicine.Price * medicine.quantity} บาท
+                          </span>
+                        </td>
+
                         <td className="text-center">
                           <span
                             onClick={() =>

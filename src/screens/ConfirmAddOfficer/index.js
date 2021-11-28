@@ -17,7 +17,7 @@ function ConfirmAddOfficer() {
           <div className="mt-8">
           <center><Success /></center>
           <br/>
-            <p className="text-xl  font-semibold my-2">เพิ่มบุคคลากรสำเร็จ</p>
+            <p className="text-xl  font-semibold my-2">เพิ่มบุคลากรสำเร็จ</p>
             <p className="text-l  font-semibold my-2">
               กรุณาตรวจสอบความถูกต้อง
             </p>

@@ -286,12 +286,10 @@ function UserHistoryDetailScreen() {
                         </td>
                         <td className="justify-center  md:flex">
                           <div className="w-20 h-10">
-                            <div className="relative flex flex-row w-full h-8">
                               <span className="text-sm lg:text-base font-medium">
                                 {otherserviceprice}
                                 {/* {service.Price} บาท */}
                               </span>
-                            </div>
                           </div>
                         </td>
                       </tr>
