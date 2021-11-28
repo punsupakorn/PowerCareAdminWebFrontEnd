@@ -413,7 +413,12 @@ function WorkingDetailSummaryScreen() {
           </Button>
         </Link>{" "}
         <Link
-          to="/" // link -> working
+          to={{
+            pathname: `/working`,
+            state: {
+              doctorId: doctorId,
+            },
+          }} // link -> working
           //   to={{
           //     pathname: `/working`,
           //     state: {
