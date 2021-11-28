@@ -361,7 +361,17 @@ export default function WorkingScreen() {
                 <p>{working.Status}</p>
                 <div className="menu-row">
                   <Link
-                    to="/workingdetailsummary"
+                    to={{
+                      pathname: `/workingdetailsummary`,
+                      state: {
+                        appointmentid: working.AppointmentID,
+                        username: working.UserName,
+                        date: working.Date,
+                        time: working.Time,
+                        symptom: working.Initial_Symptoms,
+                      },
+                    }}
+                    // to="/workingdetailsummary"
                     // to={{
                     //   pathname: `/workingdetail`,
                     //   state: {

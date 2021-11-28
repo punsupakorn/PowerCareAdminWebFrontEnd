@@ -24,4 +24,5 @@ export const server = {
   WORKING_DETAIL_DOCTOR: `${apiURL}WorkingDetailDoctor`,
   PUSH_VDO: `${apiURL}PushVdo`,
   USER_SUMMARY: `${apiURL}UserSummary`,
+  SUMMARY_DOCTOR: `${apiURL}SummaryDoctor`,
 };

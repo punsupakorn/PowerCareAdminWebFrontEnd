@@ -267,7 +267,20 @@ export default function WorkingDoctorScreen() {
                 <p>{working.Status}</p>
                 <div className="menu-row">
                   <Link
-                    to="/summarydoctor"
+                    to={{
+                      pathname: `/summarydoctor`,
+                      state: {
+                        appointmentid: working.AppointmentID,
+                        treatmentid: working.TreatmentID,
+                        username: working.UserName,
+                        symptom: working.Initial_Symptoms,
+                        date: working.Date,
+                        time: working.Time,
+                        doctorname: working.DoctorName,
+                        sex: working.Sex,
+                        doctorId : working.DoctorID
+                      },
+                    }}
                     // to={{
                     //   pathname: `/workingdetail`,
                     //   state: {

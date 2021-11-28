@@ -1,9 +1,57 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import User from "../../icons/user";
-
+import { useLocation, useHistory } from "react-router";
+import axios from "axios";
+import { server } from "../../constants/constant";
+import { useState, useEffect } from "react";
 
 function SummaryDoctorScreen() {
+  const [description, setdescription] = useState("");
+  const [medicinequantity, setmedicinequantity] = useState([]);
+  const [otherservicedesc, setotherservicedesc] = useState("");
+  const [otherserviceprice, setotherserviceprice] = useState("");
+  const [totalprice, settotalprice] = useState("");
+  const history = useHistory();
+  const location = useLocation();
+  const {
+    appointmentid,
+    treatmentid,
+    username,
+    symptom,
+    date,
+    time,
+    doctorname,
+    doctorId,
+  } = location.state;
+
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
+  useEffect(() => {
+    getTreatment();
+  }, []);
+
+  const getTreatment = () => {
+    try {
+      axios.get(`${server.SUMMARY_DOCTOR}/${treatmentid}`).then((res) => {
+        const data = res.data;
+        setdescription(data.Description);
+        setmedicinequantity(data.MedicineQuantity);
+        setotherservicedesc(data.OtherServiceDescription);
+        setotherserviceprice(data.OtherServicePrice);
+        settotalprice(data.TotalPrice);
+      });
+    } catch (error) {}
+  };
+
   return (
     <div className="content-body">
       <div className="mt-2">
@@ -22,7 +70,8 @@ function SummaryDoctorScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "} */}
+                <b>ชื่อ-สกุล :</b> {username}
+                {/* <b>เพศ :</b> {sex} */}{" "}
                 {/* <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)} */}
               </p>
             </div>
@@ -66,7 +115,7 @@ function SummaryDoctorScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time} */}
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -80,7 +129,7 @@ function SummaryDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>แพทย์ที่พบ :</b> {doctorname} */}
+                <b>แพทย์ที่พบ :</b> {doctorname}
               </p>
             </div>
             <div
@@ -94,7 +143,7 @@ function SummaryDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>อาการเบื้องต้น :</b> {symtoms} */}
+                <b>อาการเบื้องต้น :</b> {symptom}
               </p>
             </div>
             {/* <div
@@ -122,22 +171,25 @@ function SummaryDoctorScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>คำวินิฉัยจากแพย์ :</b> {description} */}
+                <b>คำแนะนำจากแพทย์ :</b>
+                {description}
               </p>
             </div>
           </div>
 
           <div
-              className="
+            className="
           flex
           justify-between
           items-center
           w-full
           py-3
         "
-            >
-             <Link to ="/userdetail"><p className=" text-black ml-4 font-bold"> ประวัติการรักษา </p></Link>
-            </div>
+          >
+            <Link to="/userdetail">
+              <p className=" text-black ml-4 font-bold"> ประวัติการรักษา </p>
+            </Link>
+          </div>
 
           <div className="mt-2">
             <div
@@ -170,35 +222,35 @@ function SummaryDoctorScreen() {
                         <th className="lg:text-center text-left pl-5 lg:pl-0">
                           <span className="hidden lg:inline">ราคาต่อหน่วย</span>
                         </th>
-                        <th className="hidden text-center md:table-cell">
+                        {/* <th className="hidden text-center md:table-cell">
                           เป็นเงิน
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {medicine.map((medicine) => ( */}
+                      {medicinequantity.map((medicine) => (
                         <tr>
                           <td>
                             <p className="mb-2"></p>
-                            {/* {medicine.MedicineName} */}
+                            {medicine.MedicineName}
                           </td>
                           <td className="hidden text-center md:table-cell">
                             <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Quantity} */}
+                              {medicine.quantity}
                             </span>
                           </td>
                           <td className="text-center">
                             <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Price} */}
+                              {medicine.Price} บาท
                             </span>
                           </td>
-                          <td className="text-center">
+                          {/* <td className="text-center">
                             <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Price * medicine.Quantity} บาท */}
+                              {medicine.Price * medicine.Quantity} บาท
                             </span>
-                          </td>
+                          </td> */}
                         </tr>
-                      {/* ))} */}
+                      ))}
                     </tbody>
                   </table>
                   {/* <hr className="pb-6 mt-6" /> */}
@@ -238,22 +290,24 @@ function SummaryDoctorScreen() {
                     </thead>
                     <tbody>
                       {/* {otherservice.map((service) => ( */}
-                        <tr>
-                          <td>
-                            <span className="text-sm lg:text-base font-medium">
-                              {/* {service.Description} */}
-                            </span>
-                          </td>
-                          <td className="justify-center  md:flex">
-                            <div className="w-20 h-10">
-                              <div className="relative flex flex-row w-full h-8">
-                                <span className="text-sm lg:text-base font-medium">
-                                  {/* {service.Price} บาท */}
-                                </span>
-                              </div>
+                      <tr>
+                        <td>
+                          <span className="text-sm lg:text-base font-medium">
+                            {otherservicedesc}
+                            {/* {service.Description} */}
+                          </span>
+                        </td>
+                        <td className="justify-center  md:flex">
+                          <div className="w-20 h-10">
+                            <div className="relative flex flex-row w-full h-8">
+                              <span className="text-sm lg:text-base font-medium">
+                                {otherserviceprice} บาท
+                                {/* {service.Price} บาท */}
+                              </span>
                             </div>
-                          </td>
-                        </tr>
+                          </div>
+                        </td>
+                      </tr>
                       {/* ))} */}
                     </tbody>
                   </table>
@@ -272,15 +326,21 @@ function SummaryDoctorScreen() {
         "
             >
               <p className=" text-black ml-4 font-bold ">
-                {/* ราคารวมทั้งสิ้นเป็นเงิน : {totalprice} บาท{" "} */}
+                รวมทั้งสิ้นเป็นเงิน : {totalprice} บาท{" "}
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className="px-2 ">
-
-        <Link to="/workingdoctor" >
+        <Link
+          to={{
+            pathname: `/workingdoctor`,
+            state: {
+              id: doctorId,
+            },
+          }}
+        >
           <Button
             variant="primary"
             style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
