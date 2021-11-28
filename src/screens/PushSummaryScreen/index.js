@@ -2,27 +2,46 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { server } from "../../constants/constant";
 // import Success from "../../icons/success";
 import { useLocation, useHistory } from "react-router";
 function PushSummaryScreen() {
   const history = useHistory();
   const location = useLocation();
   const {
+    appointmentid,
     medicinequantity,
     otherserviceprice,
     otherservicedesc,
     username,
     treatmentid,
+    totalprice,
     // appointmentid,
     // treatmentid,
     // username,
     // symptom,
-    // date,
-    // time,
+    date,
+    time,
     // doctorname,
     // doctorId,
   } = location.state;
   console.log(location.state);
+
+  const hadlepushsummary = () => {
+    try {
+      axios.post(server.PUSH_SUMMARY, {
+        treatmentid : treatmentid,
+        appointmentid: appointmentid,
+        medicinequantity: medicinequantity,
+        otherserviceprice: otherserviceprice,
+        otherservicedesc: otherservicedesc,
+        totalprice: totalprice,
+        date: date,
+        time: time,
+      });
+    } catch (error) {}
+  };
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
@@ -34,7 +53,6 @@ function PushSummaryScreen() {
                 className="w-20 h20"
               />
             </center>
-
             <br />
             <p className="text-xl  font-semibold my-2">ข้อมูลสรุปการรักษา</p>
             <p className="text-l  font-semibold my-2">สำหรับคนไข้</p>
@@ -48,7 +66,6 @@ function PushSummaryScreen() {
           border-b-2 border-white
         "
             ></div>
-
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
               <div className="flex justify-center my-6">
                 <div className="flex-1">
@@ -77,24 +94,29 @@ function PushSummaryScreen() {
                           <span className="hidden lg:inline">จำนวน</span>
                         </th>
                         <th className="lg:text-center text-left pl-5 lg:pl-0">
-                          <span className="hidden lg:inline">ราคา</span>
+                          <span className="hidden lg:inline">เป็นเงิน</span>
                         </th>
                         <th className="hidden text-center md:table-cell"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {medicinequantity.map((medicine) => ( 
-                      <tr>
-                        <td className="text-left">
-                          <p className="mb-2 ">{medicine.MedicineName}</p>
-                        </td>
-                        <td className="text-center">
-                          <span className="text-sm lg:text-base font-medium">
-                            {medicine.quantity}
-                          </span>
-                        </td>
-                      </tr> 
-                    ))} 
+                      {medicinequantity.map((medicine) => (
+                        <tr>
+                          <td className="text-left">
+                            <p className="mb-2 ">{medicine.MedicineName}</p>
+                          </td>
+                          <td className="text-center">
+                            <span className="text-sm lg:text-base font-medium">
+                              {medicine.quantity}
+                            </span>
+                          </td>
+                          <td className="text-center">
+                            <span className="text-sm lg:text-base font-medium">
+                              {medicine.quantity * medicine.Price} บาท
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                   <div
@@ -121,7 +143,7 @@ function PushSummaryScreen() {
                           <span className="hidden lg:inline">รายละเอียด</span>
                         </th>
                         <th className="lg:text-center text-left pl-5 lg:pl-0">
-                          <span className="hidden lg:inline">ราคา</span>
+                          <span className="hidden lg:inline">เป็นเงิน</span>
                         </th>
                         <th className="hidden text-center md:table-cell"></th>
                       </tr>
@@ -129,11 +151,11 @@ function PushSummaryScreen() {
                     <tbody>
                       <tr>
                         <td className="text-left">
-                          <p className="mb-2 ">111111111</p>
+                          <p className="mb-2 ">{otherservicedesc}</p>
                         </td>
                         <td className="text-center">
                           <span className="text-sm lg:text-base font-medium">
-                            222222
+                            {otherserviceprice}
                           </span>
                         </td>
                       </tr>
@@ -142,19 +164,20 @@ function PushSummaryScreen() {
                 </div>
               </div>
             </section>
-
+            รวมเป็นเงิน : {totalprice} บาท
             <div className="px-2 mt-4">
-              <Link to="/">
-                <Button
-                  variant="primary"
-                  style={{
-                    borderColor: "#818CF8",
-                    backgroundColor: "#818CF8",
-                  }}
-                >
-                  ส่งข้อมูลคนไข้
-                </Button>
-              </Link>{" "}
+              {/* <Link to="/"> */}
+              <Button
+                onClick={hadlepushsummary}
+                variant="primary"
+                style={{
+                  borderColor: "#818CF8",
+                  backgroundColor: "#818CF8",
+                }}
+              >
+                ส่งข้อมูลคนไข้
+              </Button>
+              {/* </Link> */}{" "}
               <Link to="/workingdetailsummary">
                 <Button
                   variant="primary"

@@ -394,11 +394,16 @@ function WorkingDetailSummaryScreen() {
           to={{
             pathname: `/pushsummary`,
             state: {
+              treatmentid : treatmentid,
+              appointmentid:appointmentid,
               medicinequantity: medicinequantity,
               otherserviceprice: otherserviceprice,
               otherservicedesc: otherservicedesc,
               username: username,
               treatmentid: treatmentid,
+              totalprice: totalprice,
+              date: date,
+              time: time,
             },
           }}
         >
