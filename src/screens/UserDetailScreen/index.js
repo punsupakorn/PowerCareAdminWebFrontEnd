@@ -147,23 +147,29 @@ export default function UserDetailScreen() {
                   <p>{app.Status}</p>
 
                   <div className="menu-row">
-                    <Link to ="summarytreatment"
+                    <Link
+                      // to ="summarytreatment"
 
-                      // to={{
-                      //   pathname: `/usersummary`,
-                      //   state: {
-                      //     userid: app.UserID,
-                      //     date: app.Date,
-                      //     time: app.Time,
-                      //     doctorname: app.DoctorName,
-                      //     status: app.Status,
-                      //   },
-                      // }}
+                      to={{
+                        pathname: `/summarytreatment`,
+                        state: {
+                          username: app.UserName,
+                          // userid: app.UserID,
+                          date: app.Date,
+                          time: app.Time,
+                          doctorname: app.DoctorName,
+                          status: app.Status,
+                          symptom: app.Initial_Symptoms,
+                          treatmentid: app.TreatmentID,
+                          userid: userid,
+                          dataSearch: dataSearch,
+                        },
+                      }}
                     >
-                    <Add
-                      {...iconOption}
-                      // onClick={() => console.log("Click function add " + item.id)}
-                    />
+                      <Add
+                        {...iconOption}
+                        // onClick={() => console.log("Click function add " + item.id)}
+                      />
                     </Link>
 
                     <Modal show={show} onHide={handleClose}>

@@ -365,10 +365,14 @@ export default function WorkingScreen() {
                       pathname: `/workingdetailsummary`,
                       state: {
                         appointmentid: working.AppointmentID,
+                        treatmentid: working.TreatmentID,
                         username: working.UserName,
+                        symptom: working.Initial_Symptoms,
                         date: working.Date,
                         time: working.Time,
-                        symptom: working.Initial_Symptoms,
+                        doctorname: working.DoctorName,
+                        sex: working.Sex,
+                        doctorId : working.DoctorID
                       },
                     }}
                     // to="/workingdetailsummary"

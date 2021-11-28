@@ -1,9 +1,28 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 // import Success from "../../icons/success";
-
-function PushSummaryScreen () {
+import { useLocation, useHistory } from "react-router";
+function PushSummaryScreen() {
+  const history = useHistory();
+  const location = useLocation();
+  const {
+    medicinequantity,
+    otherserviceprice,
+    otherservicedesc,
+    username,
+    treatmentid,
+    // appointmentid,
+    // treatmentid,
+    // username,
+    // symptom,
+    // date,
+    // time,
+    // doctorname,
+    // doctorId,
+  } = location.state;
+  console.log(location.state);
   return (
     <div className="content-body">
       <div className="flex items-center justify-center mt-10">
@@ -64,16 +83,18 @@ function PushSummaryScreen () {
                       </tr>
                     </thead>
                     <tbody>
+                      {medicinequantity.map((medicine) => ( 
                       <tr>
                         <td className="text-left">
-                          <p className="mb-2 ">111111111</p>
+                          <p className="mb-2 ">{medicine.MedicineName}</p>
                         </td>
                         <td className="text-center">
                           <span className="text-sm lg:text-base font-medium">
-                            222222
+                            {medicine.quantity}
                           </span>
                         </td>
-                      </tr>
+                      </tr> 
+                    ))} 
                     </tbody>
                   </table>
                   <div
@@ -86,7 +107,9 @@ function PushSummaryScreen () {
           mt-2
         "
                   >
-                    <p className=" text-black ml-4 font-bold mt-2">ค่าบริการเพิ่มเติม: </p>
+                    <p className=" text-black ml-4 font-bold mt-2">
+                      ค่าบริการเพิ่มเติม:{" "}
+                    </p>
                   </div>
                   <table
                     className="w-full text-sm lg:text-base"
@@ -117,8 +140,6 @@ function PushSummaryScreen () {
                     </tbody>
                   </table>
                 </div>
-
-                
               </div>
             </section>
 
@@ -173,4 +194,4 @@ function PushSummaryScreen () {
   );
 }
 
-export default PushSummaryScreen ;
+export default PushSummaryScreen;

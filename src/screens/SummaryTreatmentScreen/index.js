@@ -1,10 +1,59 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./SummaryTreatmentScreen.css";
 import { Button } from "react-bootstrap";
-
+import axios from "axios";
+import { server } from "../../constants/constant";
+import { useState, useEffect } from "react";
+import { data } from "autoprefixer";
+import { useLocation, useHistory } from "react-router";
 
 function SummaryTreatmentScreen() {
+  const [description, setdescription] = useState("");
+  const [medicinequantity, setmedicinequantity] = useState([]);
+  const [otherservicedesc, setotherservicedesc] = useState("");
+  const [otherserviceprice, setotherserviceprice] = useState("");
+  const [totalprice, settotalprice] = useState("");
+  const history = useHistory();
+  const location = useLocation();
 
+  const {
+    username,
+    date,
+    time,
+    doctorname,
+    status,
+    symptom,
+    treatmentid,
+    userid,
+    dataSearch,
+  } = location.state;
+  // console.log(treatmentid);
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
+  useEffect(() => {
+    getTreatment();
+  }, []);
+
+  const getTreatment = () => {
+    try {
+      axios.get(`${server.SUMMARY_DOCTOR}/${treatmentid}`).then((res) => {
+        const data = res.data;
+        setdescription(data.Description);
+        setmedicinequantity(data.MedicineQuantity);
+        setotherservicedesc(data.OtherServiceDescription);
+        setotherserviceprice(data.OtherServicePrice);
+        settotalprice(data.TotalPrice);
+      });
+    } catch (error) {}
+  };
 
   return (
     <div className="content-body">
@@ -24,7 +73,9 @@ function SummaryTreatmentScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ชื่อ-สกุล :</b> {username} <b>เพศ :</b> {sex}{" "} */}
+                <b>ชื่อ-สกุล :</b> {username}
+                {/* <
+                  b>เพศ :</b> {sex} */}{" "}
                 {/* <b>วัน/เดือน/ปีเกิด :</b> {displayThaiDate(dateofbirth)} */}
               </p>
             </div>
@@ -68,7 +119,7 @@ function SummaryTreatmentScreen() {
         "
             >
               <p className="text-gray-500 ml-4">
-                {/* <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time} */}
+                <b>ข้อมูลทำนัด ณ</b> {displayThaiDate(date)} <b>เวลา</b> {time}
               </p>
             </div>
             <div
@@ -82,7 +133,7 @@ function SummaryTreatmentScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>แพทย์ที่พบ :</b> {doctorname} */}
+                <b>แพทย์ที่พบ :</b> {doctorname}
               </p>
             </div>
             <div
@@ -96,7 +147,7 @@ function SummaryTreatmentScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>อาการเบื้องต้น :</b> {symtoms} */}
+                <b>อาการเบื้องต้น :</b> {symptom}
               </p>
             </div>
             {/* <div
@@ -124,7 +175,7 @@ function SummaryTreatmentScreen() {
         "
             >
               <p className=" text-gray-500 ml-4">
-                {/* <b>คำวินิฉัยจากแพย์ :</b> {description} */}
+                <b>คำแนะนำจากแพทย์ :</b> {description}
               </p>
             </div>
           </div>
@@ -160,42 +211,41 @@ function SummaryTreatmentScreen() {
                         <th className="lg:text-center text-left pl-5 lg:pl-0">
                           <span className="hidden lg:inline">ราคาต่อหน่วย</span>
                         </th>
-                        <th className="hidden text-center md:table-cell">
+                        {/* <th className="hidden text-center md:table-cell">
                           เป็นเงิน
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {medicine.map((medicine) => ( */}
+                      {medicinequantity.map((medicine) => (
                         <tr>
                           <td>
                             <p className="mb-2"></p>
-                            {/* {medicine.MedicineName} */}
+                            {medicine.MedicineName}
                           </td>
                           <td className="hidden text-center md:table-cell">
                             <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Quantity} */}
+                              {medicine.quantity}
                             </span>
                           </td>
                           <td className="text-center">
                             <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Price} */}
+                              {medicine.Price}
                             </span>
                           </td>
-                          <td className="text-center">
-                            <span className="text-sm lg:text-base font-medium">
-                              {/* {medicine.Price * medicine.Quantity} บาท */}
-                            </span>
-                          </td>
+                          {/* <td className="text-center"> */}
+                          {/* <span className="text-sm lg:text-base font-medium"> */}
+                          {/* {medicine.Price * medicine.Quantity} บาท */}
+                          {/* </span> */}
+                          {/* </td> */}
                         </tr>
-                      {/* ))} */}
+                      ))}
                     </tbody>
                   </table>
                   {/* <hr className="pb-6 mt-6" /> */}
                 </div>
               </div>
             </div>
-
             <div
               className="
           flex
@@ -208,7 +258,6 @@ function SummaryTreatmentScreen() {
             >
               <p className=" text-black ml-4 font-bold">ค่าบริการเพิ่มเติม: </p>
             </div>
-
             <div className="flex justify-center my-6">
               <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg rounded-md pin-r pin-y md:w-5/6 lg:w-5/6 ">
                 <div className="flex-1">
@@ -228,29 +277,30 @@ function SummaryTreatmentScreen() {
                     </thead>
                     <tbody>
                       {/* {otherservice.map((service) => ( */}
-                        <tr>
-                          <td>
-                            <span className="text-sm lg:text-base font-medium">
-                              {/* {service.Description} */}
-                            </span>
-                          </td>
-                          <td className="justify-center  md:flex">
-                            <div className="w-20 h-10">
-                              <div className="relative flex flex-row w-full h-8">
-                                <span className="text-sm lg:text-base font-medium">
-                                  {/* {service.Price} บาท */}
-                                </span>
-                              </div>
+                      <tr>
+                        <td>
+                          <span className="text-sm lg:text-base font-medium">
+                            {otherservicedesc}
+                            {/* {service.Description} */}
+                          </span>
+                        </td>
+                        <td className="justify-center  md:flex">
+                          <div className="w-20 h-10">
+                            <div className="relative flex flex-row w-full h-8">
+                              <span className="text-sm lg:text-base font-medium">
+                                {otherserviceprice}
+                              </span>
                             </div>
-                          </td>
-                        </tr>
+                          </div>
+                        </td>
+                      </tr>
                       {/* ))} */}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-
+            คิดเป็นเงินทั้งสิ้น : {totalprice} บาท
             <div
               className="
           flex
@@ -269,8 +319,15 @@ function SummaryTreatmentScreen() {
         </div>
       </div>
       <div className="px-2 ">
-
-        <Link to="/userdetail" >
+        <Link
+          to={{
+            pathname: `/userdetail`,
+            state: {
+              userid: userid,
+              dataSearch: dataSearch,
+            },
+          }}
+        >
           <Button
             variant="primary"
             style={{ borderColor: "#bdbdbd", backgroundColor: "#bdbdbd" }}
