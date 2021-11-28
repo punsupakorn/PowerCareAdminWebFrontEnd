@@ -143,7 +143,7 @@ const AddOfficerScreen = () => {
     <div className="content-body">
       <div className="grid min-h-screen place-items-center ">
         <div className="w-11/12 p-12 bg-indigo-100 sm:w-8/12 md:w-1/2 lg:w-5/12">
-          <h1 className="text-xl font-semibold">เพิ่มบุคคลากร </h1>
+          <h1 className="text-xl font-semibold">เพิ่มบุคลากร </h1>
           <p className="text-xl font-semibold">สำหรับผู้ดูแลระบบ </p>
           <hr className="mt-6 border-b-1 border-blueGray-300" />
           {/* <form className="mt-6"> */}

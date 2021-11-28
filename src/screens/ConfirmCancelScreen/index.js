@@ -94,7 +94,7 @@ function ConfirmCancelScreen() {
         <div className="  mx-auto bg-white rounded-md">
           {/* first */}
           <div className="flex flex-col justify-center items-center">
-            <h6 className="text-black font-medium my-4">ข้อมูลการนัด</h6>
+          <p class="text-xl mt-3 font-semibold">ยกเลิกการทำนัด</p>
             <div
               className="
           flex
@@ -184,7 +184,7 @@ function ConfirmCancelScreen() {
           </div>
         </div>
       </div>
-      <div className="mb-2 ">
+      <div className="mb-2 mt-2">
         <Button variant="danger" onClick={handleShow} className=" button-back">
           ยกเลิกการทำนัด
         </Button>{" "}

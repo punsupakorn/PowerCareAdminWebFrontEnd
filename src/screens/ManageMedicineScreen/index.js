@@ -272,7 +272,8 @@ export default function ManageMedicineScreen() {
                 <div className="divide-y divide-gray-200">
                   <div className="py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="flex flex-col">
-                      <label className="leading-loose">ชื่อยา</label>
+                      <label className="leading-loose">ชื่อยา  <h className="text-red-600"> * </h>
+                      </label>
                       <input
                         type="text"
                         className="px-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
@@ -282,7 +283,7 @@ export default function ManageMedicineScreen() {
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">
-                        คำอธิบายเกี่ยวกับยา
+                        คำอธิบายเกี่ยวกับยา  <h className="text-red-600"> * </h>
                       </label>
                       <textarea
                         type="text"
@@ -293,7 +294,8 @@ export default function ManageMedicineScreen() {
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="flex flex-col">
-                        <label className="leading-loose">ราคา</label>
+                        <label className="leading-loose">ราคา  <h className="text-red-600"> * </h>
+                        </label>
                         <div className="relative focus-within:text-gray-600 text-gray-400">
                           <input
                             type="text"
@@ -304,7 +306,8 @@ export default function ManageMedicineScreen() {
                         </div>
                       </div>
                       <div className="flex flex-col">
-                        <label className="leading-loose">ประเภท</label>
+                        <label className="leading-loose">ประเภท  <h className="text-red-600"> * </h> 
+                        </label>
                         <div className="relative focus-within:text-gray-600 text-gray-400">
                           <select
                             type="text"

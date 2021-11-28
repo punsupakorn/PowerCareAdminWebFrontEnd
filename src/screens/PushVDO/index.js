@@ -188,20 +188,7 @@ function PushVDO() {
                 <b>อาการเบื้องต้น :</b> {symptoms}
               </p>
             </div>
-            {/* <div
-              className="
-          flex
-          justify-between
-          items-center
-          w-full
-          py-3
-          border-b-2 border-gray-200
-        "
-            >
-              <p className=" text-gray-500 ml-4">
-                <b>สถานะการทำนัด :</b> {status}
-              </p>
-            </div> */}
+            
           </div>
         </div>
       </div>
@@ -216,7 +203,7 @@ function PushVDO() {
         mt-2
     "
       >
-        <p className=" text-black ml-4 font-bold ">ช่องทางการวีดีโอคอล: </p>
+        <p className=" text-black ml-4 font-bold ">ช่องทางการวีดีโอคอล <h className="text-red-600"> * </h> </p>
       </div>
 
       <textarea

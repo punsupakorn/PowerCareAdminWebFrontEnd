@@ -332,7 +332,7 @@ function WorkingDetailDoctorScreen() {
           mt-2
         "
             >
-              <p className=" text-black ml-4 font-bold">สรุปผลอาการ: </p>
+              <p className=" text-black ml-4 font-bold">คำแนะนำจากแพทย์ <h className="text-red-600"> * </h></p>
             </div>
             <textarea
               onChange={handleDescription}
