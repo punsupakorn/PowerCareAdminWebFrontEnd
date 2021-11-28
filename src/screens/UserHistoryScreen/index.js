@@ -8,8 +8,11 @@ import axios from "axios";
 import { server } from "../../constants/constant";
 import "../UserDetailScreen/UserDetailScreen.css";
 
-
 export default function UserHistoryScreen() {
+  const [dateappointment, setdateappointment] = useState("");
+  const [timeappointment, settimeappointment] = useState("");
+  const [doctornameapp, setdoctornameapp] = useState("");
+  const [symptoms, setsymptoms] = useState("");
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [phone, setphone] = useState("");
@@ -21,30 +24,26 @@ export default function UserHistoryScreen() {
   const [show, setShow] = useState(false);
   const iconOption = { className: "icon-link", width: "1rem", height: "1rem" };
   const location = useLocation();
-  const { userid, dataSearch } = location.state;
+  const {
+    appointmentid,
+    treatmentid,
+    username,
+    symptom,
+    date,
+    time,
+    doctorname,
+    doctorId,
+    userid,
+  } = location.state;
+
+  // console.log(userid);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const displayThaiDate = (date) => {
-    const result = new Date(date).toLocaleDateString("th-TH", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    });
-    return result;
-  };
-
-  const displayShortThaiDate = (date) => {
-    const result = new Date(date).toLocaleDateString("th-TH", {
-      year: "numeric",
-      month: "2-digit",
-      day: "numeric",
-      // weekday: "short",
-    });
-    return result;
-  };
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   const getUserProfile = () => {
     try {
@@ -66,6 +65,26 @@ export default function UserHistoryScreen() {
     getUserProfile();
   }, []);
 
+  const displayThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
+    return result;
+  };
+
+  const displayShortThaiDate = (date) => {
+    const result = new Date(date).toLocaleDateString("th-TH", {
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric",
+      // weekday: "short",
+    });
+    return result;
+  };
+
   return (
     <div className="content-body">
       <p class="text-xl mt-3 font-semibold">ระเบียนคนไข้</p>
@@ -85,7 +104,8 @@ export default function UserHistoryScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  <b>ชื่อ-สกุล :</b> {firstname} {lastname} <b>เพศ : </b>
+                  <b>ชื่อ-สกุล : </b>
+                  {firstname} {lastname} <b>เพศ : </b>
                   {sex} <b>วัน/เดือน/ปีเกิด : </b>
                   {displayThaiDate(dateOfBirth)}
                 </p>
@@ -101,7 +121,8 @@ export default function UserHistoryScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  <b>ที่อยู่ :</b> {address}
+                  <b>ที่อยู่ : </b>
+                  {address}
                 </p>
               </div>
               <div
@@ -115,7 +136,9 @@ export default function UserHistoryScreen() {
       "
               >
                 <p className="text-gray-500 ml-4">
-                  <b> เบอร์โทรศัพท์ :</b> {phone} <b>E-mail :</b> {email}
+                  <b> เบอร์โทรศัพท์ : </b>
+                  {phone} <b>E-mail : </b>
+                  {email}
                 </p>
               </div>
             </div>
@@ -144,23 +167,27 @@ export default function UserHistoryScreen() {
                   <p>{app.Status}</p>
 
                   <div className="menu-row">
-                    <Link to ="summarytreatment"
-
-                      // to={{
-                      //   pathname: `/usersummary`,
-                      //   state: {
-                      //     userid: app.UserID,
-                      //     date: app.Date,
-                      //     time: app.Time,
-                      //     doctorname: app.DoctorName,
-                      //     status: app.Status,
-                      //   },
-                      // }}
+                    <Link
+                      // to="/userhistorydetail"
+                      to={{
+                        pathname: `/userhistorydetail`,
+                        state: {
+                          appointmentid,
+                          treatmentid,
+                          username,
+                          symptom,
+                          date,
+                          time,
+                          doctorname,
+                          doctorId,
+                          userid,
+                        },
+                      }}
                     >
-                    <Add
-                      {...iconOption}
-                      // onClick={() => console.log("Click function add " + item.id)}
-                    />
+                      <Add
+                        {...iconOption}
+                        // onClick={() => console.log("Click function add " + item.id)}
+                      />
                     </Link>
 
                     <Modal show={show} onHide={handleClose}>
@@ -202,13 +229,22 @@ export default function UserHistoryScreen() {
             </div>
           </div>
           <div className="px-2 mt-3 ">
-            <Link to ="/summarydoctor"
-            //   to={{
-            //     pathname: `/user`,
-            //     state: {
-            //       dataSearch: dataSearch,
-            //     },
-            //   }}
+            <Link
+              to="/summarydoctor"
+              to={{
+                pathname: `summarydoctor`,
+                state: {
+                  appointmentid,
+                  treatmentid,
+                  username,
+                  symptom,
+                  date,
+                  time,
+                  doctorname,
+                  doctorId,
+                  userid,
+                },
+              }}
             >
               <Button
                 variant="secondary"

@@ -7,6 +7,7 @@ import { server } from "../../constants/constant";
 import { useState, useEffect } from "react";
 
 function SummaryDoctorScreen() {
+  // const [appointmetid, setappointmetid] = useState("");
   const [description, setdescription] = useState("");
   const [medicinequantity, setmedicinequantity] = useState([]);
   const [otherservicedesc, setotherservicedesc] = useState("");
@@ -23,6 +24,7 @@ function SummaryDoctorScreen() {
     time,
     doctorname,
     doctorId,
+    userid,
   } = location.state;
 
   const displayThaiDate = (date) => {
@@ -48,6 +50,7 @@ function SummaryDoctorScreen() {
         setotherservicedesc(data.OtherServiceDescription);
         setotherserviceprice(data.OtherServicePrice);
         settotalprice(data.TotalPrice);
+        // setappointmetid(data.AppointmentID);
       });
     } catch (error) {}
   };
@@ -59,9 +62,26 @@ function SummaryDoctorScreen() {
           {/* first */}
           <div className="flex flex-col justify-center items-center">
             <p class="text-xl mt-3 font-semibold">อาการคนไข้</p>
-            <Link to="/userdetail">
-            <div
-            className="
+            <Link
+              to={{
+                pathname: `/userhistory`,
+                state: {
+                  // appointmentid: appointmentid,
+                  userid: userid,
+                  appointmentid: appointmentid,
+                  treatmentid: treatmentid,
+                  username: username,
+                  symptom: symptom,
+                  date: date,
+                  time: time,
+                  doctorname: doctorname,
+                  doctorId: doctorId,
+                  // userid: userid,
+                },
+              }}
+            >
+              <div
+                className="
           flex
           justify-between
           items-right
@@ -69,16 +89,15 @@ function SummaryDoctorScreen() {
           w-full
           py-3
         "
-          >
-
-            <Button
-            variant="primary"
-            style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc" }}
-          >
-            ประวัติการรักษา
-          </Button>         
-          </div>
-          </Link>
+              >
+                <Button
+                  variant="primary"
+                  style={{ borderColor: "#a5b4fc", backgroundColor: "#a5b4fc" }}
+                >
+                  ประวัติการรักษา
+                </Button>
+              </div>
+            </Link>
             <div
               className="
           flex
@@ -196,8 +215,6 @@ function SummaryDoctorScreen() {
               </p>
             </div>
           </div>
-
-
 
           <div className="mt-2">
             <div

@@ -278,7 +278,8 @@ export default function WorkingDoctorScreen() {
                         time: working.Time,
                         doctorname: working.DoctorName,
                         sex: working.Sex,
-                        doctorId : working.DoctorID
+                        doctorId : working.DoctorID,
+                        userid : working.UserID
                       },
                     }}
                     // to={{

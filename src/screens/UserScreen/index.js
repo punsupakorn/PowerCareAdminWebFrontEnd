@@ -49,7 +49,7 @@ export default function UserScreen() {
   const refreshPage = () => {
     window.location.reload();
   };
-
+  console.log(dataSearch);
   // const handleToConfirmDelete = (UserID) => {
   //   setstate(UserID);
   //   handleShow();
