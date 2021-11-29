@@ -60,7 +60,10 @@ export default function UserDetailScreen() {
         setaddress(data.user.Address);
         setphone(data.user.Phone);
         setemail(data.user.Email);
-        setappointment(data.appointment);
+        // setappointment(data.appointment);
+        const app = data.appointment;
+        const success = app.filter((data) => data.Status == "สำเร็จ");
+        setappointment(success);
       });
     } catch (error) {}
   };

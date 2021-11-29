@@ -24,22 +24,31 @@ function PushSummaryScreen() {
     date,
     time,
     // doctorname,
-    // doctorId,
+    doctorId,
   } = location.state;
   console.log(location.state);
 
   const hadlepushsummary = () => {
     try {
-      axios.post(server.PUSH_SUMMARY, {
-        treatmentid : treatmentid,
-        appointmentid: appointmentid,
-        medicinequantity: medicinequantity,
-        otherserviceprice: otherserviceprice,
-        otherservicedesc: otherservicedesc,
-        totalprice: totalprice,
-        date: date,
-        time: time,
-      });
+      axios
+        .post(server.PUSH_SUMMARY, {
+          treatmentid: treatmentid,
+          appointmentid: appointmentid,
+          medicinequantity: medicinequantity,
+          otherserviceprice: otherserviceprice,
+          otherservicedesc: otherservicedesc,
+          totalprice: totalprice,
+          date: date,
+          time: time,
+        })
+        .then(
+          history.push({
+            pathname: `/working`,
+            state: {
+              doctorId: doctorId,
+            },
+          })
+        );
     } catch (error) {}
   };
   return (

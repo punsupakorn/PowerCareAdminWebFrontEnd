@@ -61,10 +61,6 @@ export default function UserHistoryScreen() {
     } catch (error) {}
   };
 
-  useEffect(() => {
-    getUserProfile();
-  }, []);
-
   const displayThaiDate = (date) => {
     const result = new Date(date).toLocaleDateString("th-TH", {
       year: "numeric",
