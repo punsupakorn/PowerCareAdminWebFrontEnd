@@ -358,10 +358,9 @@ function WorkingDetailSummaryScreen() {
                         </td>
                         <td className="justify-center  md:flex">
                           <div className="w-20 h-10">
-                              <span className="text-sm lg:text-base font-medium">
-                                {otherserviceprice} บาท
-                              </span>
-                        
+                            <span className="text-sm lg:text-base font-medium">
+                              {otherserviceprice} บาท
+                            </span>
                           </div>
                         </td>
                       </tr>
@@ -394,8 +393,8 @@ function WorkingDetailSummaryScreen() {
           to={{
             pathname: `/pushsummary`,
             state: {
-              treatmentid : treatmentid,
-              appointmentid:appointmentid,
+              treatmentid: treatmentid,
+              appointmentid: appointmentid,
               medicinequantity: medicinequantity,
               otherserviceprice: otherserviceprice,
               otherservicedesc: otherservicedesc,
@@ -404,6 +403,8 @@ function WorkingDetailSummaryScreen() {
               totalprice: totalprice,
               date: date,
               time: time,
+              doctorname: doctorname,
+              symptom: symptom,
             },
           }}
         >

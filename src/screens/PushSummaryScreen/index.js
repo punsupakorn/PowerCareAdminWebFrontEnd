@@ -20,10 +20,10 @@ function PushSummaryScreen() {
     // appointmentid,
     // treatmentid,
     // username,
-    // symptom,
+    symptom,
     date,
     time,
-    // doctorname,
+    doctorname,
     doctorId,
   } = location.state;
   console.log(location.state);
@@ -187,7 +187,22 @@ function PushSummaryScreen() {
                 ส่งข้อมูลคนไข้
               </Button>
               {/* </Link> */}{" "}
-              <Link to="/workingdetailsummary">
+              <Link
+                to={{
+                  pathname: `workingdetailsummary`,
+                  state: {
+                    appointmentid: appointmentid,
+                    treatmentid: treatmentid,
+                    username: username,
+                    symptom: symptom,
+                    date: date,
+                    time: time,
+                    doctorname: doctorname,
+                    doctorId: doctorId,
+                  },
+                }}
+                // to="/workingdetailsummary"
+              >
                 <Button
                   variant="primary"
                   style={{
