@@ -372,7 +372,7 @@ export default function WorkingScreen() {
                         time: working.Time,
                         doctorname: working.DoctorName,
                         sex: working.Sex,
-                        doctorId : working.DoctorID
+                        doctorId: doctorId,
                       },
                     }}
                     // to="/workingdetailsummary"

@@ -405,6 +405,7 @@ function WorkingDetailSummaryScreen() {
               time: time,
               doctorname: doctorname,
               symptom: symptom,
+              doctorId: doctorId,
             },
           }}
         >
@@ -424,13 +425,7 @@ function WorkingDetailSummaryScreen() {
             state: {
               doctorId: doctorId,
             },
-          }} // link -> working
-          //   to={{
-          //     pathname: `/working`,
-          //     state: {
-          //       doctorId: doctorid,
-          //     },
-          //   }}
+          }}
         >
           <Button
             variant="primary"
