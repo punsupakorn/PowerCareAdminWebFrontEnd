@@ -30,25 +30,25 @@ function PushSummaryScreen() {
 
   const hadlepushsummary = () => {
     try {
-      axios
-        .post(server.PUSH_SUMMARY, {
-          treatmentid: treatmentid,
-          appointmentid: appointmentid,
-          medicinequantity: medicinequantity,
-          otherserviceprice: otherserviceprice,
-          otherservicedesc: otherservicedesc,
-          totalprice: totalprice,
-          date: date,
-          time: time,
+      axios.post(server.PUSH_SUMMARY, {
+        treatmentid: treatmentid,
+        appointmentid: appointmentid,
+        medicinequantity: medicinequantity,
+        otherserviceprice: otherserviceprice,
+        otherservicedesc: otherservicedesc,
+        totalprice: totalprice,
+        date: date,
+        time: time,
+      });
+      window.alert("ส่งข้อมูจสำเร็จ")
+      // .then(
+        history.push({
+          pathname: `/working`,
+          state: {
+            doctorId: doctorId,
+          },
         })
-        .then(
-          history.push({
-            pathname: `/working`,
-            state: {
-              doctorId: doctorId,
-            },
-          })
-        );
+      // );
     } catch (error) {}
   };
   return (
